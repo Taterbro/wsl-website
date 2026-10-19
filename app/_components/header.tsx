@@ -22,7 +22,7 @@ const burgerSpanClass =
   "my-[5px] block h-0.5 w-6 bg-current transition-transform transition-opacity duration-(--transition-normal) ease-(--ease-standard) motion-reduce:transition-none";
 
 const navLinkClass =
-  "relative py-1.5 text-[0.82rem] font-medium tracking-[0.02em] text-inherit opacity-80 transition-opacity duration-(--transition-normal) ease-(--ease-standard) after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-(--transition-normal) after:ease-(--ease-standard) hover:opacity-100 hover:after:scale-x-100 motion-reduce:transition-none max-[760px]:py-[15px] max-[760px]:border-b max-[760px]:border-b-white/10 max-[760px]:text-[1rem] max-[760px]:opacity-100 max-[760px]:after:hidden";
+  "relative py-1.5 text-[0.82rem] font-medium tracking-[0.02em] text-inherit opacity-80 transition-opacity duration-(--transition-normal) ease-(--ease-standard) after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-(--transition-normal) after:ease-(--ease-standard) hover:opacity-100 hover:after:scale-x-100 max-[760px]:py-[15px] max-[760px]:border-b max-[760px]:border-b-white/10 max-[760px]:text-[1rem] max-[760px]:opacity-100 max-[760px]:after:hidden";
 
 export default function Header() {
   const [solid, setSolid] = useState(false);
@@ -39,7 +39,7 @@ export default function Header() {
     <header
       id="siteHead"
       className={cn(
-        "fixed inset-x-0 top-0 z-[120] transition-colors transition-shadow duration-(--transition-slow) ease-(--ease-standard) motion-reduce:transition-none",
+        "fixed inset-x-0 top-0 z-120 transition-colors transition-shadow duration-(--transition-slow) ease-(--ease-standard)",
         solid
           ? "bg-[rgba(232,240,238,0.94)] text-foreground shadow-[0_1px_0_rgba(9,29,42,0.16)] backdrop-blur-[10px]"
           : "text-muted"
@@ -63,7 +63,7 @@ export default function Header() {
           id="nav"
           aria-label="Primary"
           className={cn(
-            "ml-auto flex items-center gap-[clamp(14px,1.7vw,30px)] max-[760px]:fixed max-[760px]:inset-x-0 max-[760px]:top-[78px] max-[760px]:ml-0 max-[760px]:flex-col max-[760px]:items-stretch max-[760px]:gap-0 max-[760px]:bg-sidebar max-[760px]:px-[clamp(20px,5vw,72px)] max-[760px]:pt-[14px] max-[760px]:pb-[26px] max-[760px]:shadow-[0_20px_40px_rgba(0,0,0,0.4)] max-[760px]:transition-transform max-[760px]:duration-(--transition-slow) max-[760px]:ease-(--ease-standard) max-[760px]:motion-reduce:transition-none max-[760px]:-translate-y-[120%]",
+            "ml-auto flex items-center gap-[clamp(14px,1.7vw,30px)] max-[760px]:fixed max-[760px]:inset-x-0 max-[760px]:top-[78px] max-[760px]:ml-0 max-[760px]:flex-col max-[760px]:items-stretch max-[760px]:gap-0 max-[760px]:bg-sidebar max-[760px]:text-sidebar-foreground max-[760px]:px-[clamp(20px,5vw,72px)] max-[760px]:pt-[14px] max-[760px]:pb-[26px] max-[760px]:shadow-[0_20px_40px_rgba(0,0,0,0.4)] max-[760px]:transition-transform max-[760px]:duration-(--transition-slow) max-[760px]:ease-(--ease-standard) max-[760px]:motion-reduce:transition-none max-[760px]:-translate-y-[120%]",
             menuOpen && "max-[760px]:translate-y-0"
           )}
         >

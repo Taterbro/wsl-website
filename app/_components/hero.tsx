@@ -34,7 +34,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-sidebar pb-[clamp(38px,6vw,72px)] text-muted lg:pt-[80px]"
+      className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-sidebar pb-[clamp(38px,6vw,72px)] text-muted pt-[80px]"
     >
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         {CAUSTIC_CLASSES.map((classes) => (
