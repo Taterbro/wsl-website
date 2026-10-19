@@ -18,6 +18,8 @@ const WORK_LINKS: { label: string; href: string }[] = [
   { label: "Partner with us", href: "#partner" },
   { label: "Global markets", href: "#markets" },
   { label: "Insights & newsroom", href: "#insights" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact & global offices", href: "/contact" },
 ];
 
 const ENTITIES: { heading: string; copy: string }[] = [

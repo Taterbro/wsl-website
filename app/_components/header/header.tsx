@@ -3,16 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import Brandmark from "../brand-mark";
-import { NAV_LINKS } from "./constants";
+import { NAV_LINKS, UTILITY_LINKS } from "./constants";
 
 const burgerSpanClass =
   "my-[5px] block h-0.5 w-6 bg-current transition-transform transition-opacity duration-(--transition-normal) ease-(--ease-standard) motion-reduce:transition-none";
 
 const navToggleClass =
-  "relative inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent py-1.5 text-left text-[0.82rem] font-medium tracking-[0.02em] text-inherit opacity-80 transition-opacity duration-(--transition-normal) ease-(--ease-standard) after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-(--transition-normal) after:ease-(--ease-standard) hover:opacity-100 hover:after:scale-x-100 max-[760px]:w-full max-[760px]:py-[15px] max-[760px]:border-b max-[760px]:border-b-white/10 max-[760px]:text-[1rem] max-[760px]:opacity-100 max-[760px]:after:hidden";
+  "relative inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent py-1.5 text-left text-[0.82rem] font-medium tracking-[0.02em] text-inherit opacity-80 transition-opacity duration-(--transition-normal) ease-(--ease-standard) after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-(--transition-normal) after:ease-(--ease-standard) hover:opacity-100 hover:after:scale-x-100 max-[1199px]:w-full max-[1199px]:py-[15px] max-[1199px]:border-b max-[1199px]:border-b-white/10 max-[1199px]:text-[1rem] max-[1199px]:opacity-100 max-[1199px]:after:hidden";
 
 const subLinkClass =
-  "block py-2.5 text-[0.95rem] leading-snug text-popover-foreground opacity-80 transition-colors transition-opacity duration-(--transition-normal) ease-(--ease-standard) hover:text-accent hover:opacity-100 focus-visible:text-accent focus-visible:opacity-100 max-[760px]:rounded-none max-[760px]:border-b max-[760px]:border-b-white/10 max-[760px]:py-[13px] max-[760px]:pl-5 max-[760px]:text-[0.9rem] max-[760px]:text-sidebar-foreground max-[760px]:opacity-100";
+  "block py-2.5 text-[0.95rem] leading-snug text-popover-foreground opacity-80 transition-colors transition-opacity duration-(--transition-normal) ease-(--ease-standard) hover:text-accent hover:opacity-100 focus-visible:text-accent focus-visible:opacity-100 max-[1199px]:rounded-none max-[1199px]:border-b max-[1199px]:border-b-white/10 max-[1199px]:py-[13px] max-[1199px]:pl-5 max-[1199px]:text-[0.9rem] max-[1199px]:text-sidebar-foreground max-[1199px]:opacity-100";
 export default function Header() {
   const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -73,8 +73,8 @@ export default function Header() {
           ref={navRef}
           aria-label="Primary"
           className={cn(
-            "ml-auto flex items-center gap-[clamp(14px,1.7vw,30px)] max-[760px]:fixed max-[760px]:inset-x-0 max-[760px]:top-[78px] max-[760px]:ml-0 max-[760px]:flex-col max-[760px]:items-stretch max-[760px]:gap-0 max-[760px]:bg-sidebar max-[760px]:text-sidebar-foreground max-[760px]:px-[clamp(20px,5vw,72px)] max-[760px]:pt-[14px] max-[760px]:pb-[26px] max-[760px]:shadow-[0_20px_40px_rgba(0,0,0,0.4)] max-[760px]:transition-transform max-[760px]:duration-(--transition-slow) max-[760px]:ease-(--ease-standard) max-[760px]:motion-reduce:transition-none max-[760px]:-translate-y-[120%] max-[760px]:overflow-y-auto max-[760px]:max-h-[calc(100dvh-78px)]",
-            menuOpen && "max-[760px]:translate-y-0"
+            "ml-auto flex items-center gap-[clamp(12px,1.4vw,26px)] max-[1199px]:fixed max-[1199px]:inset-x-0 max-[1199px]:top-[78px] max-[1199px]:ml-0 max-[1199px]:flex-col max-[1199px]:items-stretch max-[1199px]:gap-0 max-[1199px]:bg-sidebar max-[1199px]:text-sidebar-foreground max-[1199px]:px-[clamp(20px,5vw,72px)] max-[1199px]:pt-[14px] max-[1199px]:pb-[26px] max-[1199px]:shadow-[0_20px_40px_rgba(0,0,0,0.4)] max-[1199px]:transition-transform max-[1199px]:duration-(--transition-slow) max-[1199px]:ease-(--ease-standard) max-[1199px]:motion-reduce:transition-none max-[1199px]:-translate-y-[120%] max-[1199px]:overflow-y-auto max-[1199px]:max-h-[calc(100dvh-78px)]",
+            menuOpen && "max-[1199px]:translate-y-0"
           )}
         >
           {NAV_LINKS.map((link) => {
@@ -110,45 +110,57 @@ export default function Header() {
                 {isOpen && (
                   <ul
                     id={`submenu-${link.href.slice(1)}`}
-                    className="animate-nav-submenu absolute inset-x-0 top-full z-50 grid bg-popover text-popover-foreground shadow-[0_24px_40px_rgba(9,29,42,0.14)] max-[760px]:static max-[760px]:bg-transparent max-[760px]:shadow-none"
+                    className="animate-nav-submenu absolute inset-x-0 top-full z-50 bg-popover text-popover-foreground shadow-[0_24px_40px_rgba(9,29,42,0.14)] max-[1199px]:static max-[1199px]:bg-transparent max-[1199px]:shadow-none"
                   >
-                    <li className="overflow-hidden border-t border-border max-[760px]:border-0">
-                      <div className="mx-auto max-w-[1440px] px-[clamp(20px,5vw,72px)] pt-10 pb-12 max-[760px]:max-w-none max-[760px]:p-0">
-                        <div className="flex w-full max-w-[420px] flex-col max-[760px]:max-w-none">
-                          {/* Menu title + accent rule (desktop only; the toggle already shows the label on mobile) */}
-                          <a
-                            href={link.href}
-                            className="mb-5 flex items-center gap-5 text-[1.05rem] font-semibold max-[760px]:hidden"
-                            onClick={() => {
-                              setOpenSubmenu(null);
-                              setMenuOpen(false);
-                            }}
-                          >
-                            <span className="underline underline-offset-[6px]">
-                              {link.label}
-                            </span>
-                            <span
-                              aria-hidden="true"
-                              className="h-px flex-1 bg-accent"
-                            />
-                          </a>
+                    <li className="overflow-hidden border-t border-border max-[1199px]:border-0">
+                      <div className="mx-auto max-w-[1440px] px-[clamp(20px,5vw,72px)] pt-10 pb-12 max-[1199px]:max-w-none max-[1199px]:p-0">
+                        {/* Menu title + accent rule (desktop only; the toggle already shows the label on mobile) */}
+                        <a
+                          href={link.href}
+                          className="mb-7 flex items-center gap-5 text-[1.05rem] font-semibold max-[1199px]:hidden"
+                          onClick={() => {
+                            setOpenSubmenu(null);
+                            setMenuOpen(false);
+                          }}
+                        >
+                          <span className="underline underline-offset-[6px]">
+                            {link.label}
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="h-px flex-1 bg-accent"
+                          />
+                        </a>
 
-                          {/* Vertical sub-links */}
-                          <div className="flex flex-col gap-0.5 pl-4 max-[760px]:pl-0">
-                            {link.subLinks.map((subLink) => (
-                              <a
-                                key={subLink.href}
-                                href={subLink.href}
-                                className={subLinkClass}
-                                onClick={() => {
-                                  setOpenSubmenu(null);
-                                  setMenuOpen(false);
-                                }}
-                              >
-                                {subLink.label}
-                              </a>
-                            ))}
-                          </div>
+                        {/* Link columns */}
+                        <div className="flex flex-wrap gap-x-[clamp(40px,5vw,88px)] gap-y-8 max-[1199px]:flex-col max-[1199px]:gap-y-0">
+                          {link.columns.map((column, columnIndex) => (
+                            <div
+                              key={column.heading ?? columnIndex}
+                              className="flex min-w-0 flex-col max-[1199px]:py-1"
+                            >
+                              {column.heading && (
+                                <h3 className="mb-3.5 font-sans text-[0.72rem] font-bold tracking-[0.08em] text-accent uppercase [font-stretch:110%] max-[1199px]:mt-3 max-[1199px]:mb-1 max-[1199px]:text-[0.68rem]">
+                                  {column.heading}
+                                </h3>
+                              )}
+                              <div className="flex flex-col gap-0.5 max-[1199px]:gap-0">
+                                {column.items.map((item) => (
+                                  <a
+                                    key={item.href}
+                                    href={item.href}
+                                    className={subLinkClass}
+                                    onClick={() => {
+                                      setOpenSubmenu(null);
+                                      setMenuOpen(false);
+                                    }}
+                                  >
+                                    {item.label}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </li>
@@ -157,9 +169,19 @@ export default function Header() {
               </div>
             );
           })}
+          {UTILITY_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="hidden text-[0.82rem] font-medium tracking-[0.02em] text-inherit opacity-60 transition-opacity duration-(--transition-normal) ease-(--ease-standard) hover:opacity-100 max-[1199px]:block max-[1199px]:border-b max-[1199px]:border-b-white/10 max-[1199px]:py-[15px] max-[1199px]:text-[1rem] max-[1199px]:opacity-100"
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
             href="#partner"
-            className="border border-current px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] uppercase opacity-100 transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar max-[760px]:mt-4 max-[760px]:block max-[760px]:py-[15px] max-[760px]:text-center"
+            className="border border-current px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] uppercase opacity-100 transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar max-[1199px]:mt-4 max-[1199px]:block max-[1199px]:py-[15px] max-[1199px]:text-center"
             onClick={() => setMenuOpen(false)}
           >
             Partner With Us
@@ -167,7 +189,7 @@ export default function Header() {
         </nav>
         <button
           type="button"
-          className="ml-auto hidden border-0 bg-none p-2 text-inherit max-[760px]:block"
+          className="ml-auto hidden border-0 bg-none p-2 text-inherit max-[1199px]:block"
           aria-expanded={menuOpen}
           aria-controls="nav"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
