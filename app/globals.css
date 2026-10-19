@@ -58,6 +58,18 @@
 
   /* Investments stage panel */
   --animate-slide-in: slidein 0.5s cubic-bezier(0.25, 0.7, 0.25, 1);
+  --animate-nav-submenu: navsubmenu var(--transition-normal) var(--ease-standard) both;
+}
+
+@keyframes navsubmenu {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes drift1 {
