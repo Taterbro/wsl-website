@@ -95,11 +95,10 @@ export default function WswisStages() {
             aria-selected={active === stage.key}
             aria-controls="wswis-panel"
             tabIndex={active === stage.key ? 0 : -1}
-            onClick={() => select(stage.key)}
             onFocus={() => select(stage.key)}
             className="group relative flex flex-col items-start gap-3.5 border-0 bg-none px-2.5 text-left text-muted focus-visible:outline-offset-[-3px]"
           >
-            <span className="relative z-[2] mt-[27px] h-3.5 w-3.5 rounded-full border-[1.5px] border-accent bg-sidebar-accent transition-[background-color,transform,box-shadow] duration-(--transition-normal) ease-(--ease-standard) group-aria-selected:scale-110 group-aria-selected:bg-accent group-aria-selected:shadow-[0_0_0_6px_rgba(100,216,232,0.16)] motion-reduce:transition-none max-[1080px]:mt-0" />
+            <span className="relative z-[2] mt-[27px] h-3.5 w-3.5 rounded-full border-[1.5px] border-accent bg-sidebar-accent transition-[background-color,transform,box-shadow] duration-(--transition-normal) ease-(--ease-standard) group-aria-selected:scale-110 group-aria-selected:bg-accent group-aria-selected:shadow-[0_0_0_6px_rgba(100,216,232,0.16)] max-[1080px]:mt-0" />
             <span className="text-[0.66rem] font-semibold tracking-[0.12em] text-accent uppercase">
               {stage.no}
             </span>
@@ -116,7 +115,7 @@ export default function WswisStages() {
         key={animCount}
         className={cn(
           "mt-[clamp(36px,5vw,52px)] grid grid-cols-2 gap-px border border-accent/20 bg-accent/20",
-          animCount > 0 && "animate-slide-in motion-reduce:animate-none"
+          animCount > 0 && "animate-slide-in"
         )}
       >
         <div className="bg-sidebar-accent/55 p-[clamp(20px,3vw,32px)]">
@@ -132,9 +131,9 @@ export default function WswisStages() {
             Why it matters
           </h4>
           <p className="max-w-[46ch] text-[0.95rem] leading-[1.6] text-muted/82">
-            Water that stays available through drought, grid failure and
-            growth. Instrumentation turns physical infrastructure into data
-            that can be financed, maintained and expanded with confidence.
+            Water that stays available through drought, grid failure and growth.
+            Instrumentation turns physical infrastructure into data that can be
+            financed, maintained and expanded with confidence.
           </p>
         </div>
       </div>

@@ -87,21 +87,20 @@ export default function ValueStages() {
             aria-selected={active === stage.key}
             aria-controls="valueDetail"
             tabIndex={active === stage.key ? 0 : -1}
-            onClick={() => select(stage.key)}
             onFocus={() => select(stage.key)}
             className={cn(
-              "group relative flex flex-col gap-3.5 border-0 bg-none px-5 pt-[26px] pb-[30px] text-left text-foreground transition-colors duration-(--transition-normal) ease-(--ease-standard) focus-visible:outline-offset-[-3px] aria-selected:bg-background motion-reduce:transition-none",
+              "group relative flex flex-col gap-3.5 border-0 bg-none px-5 pt-[26px] pb-[30px] text-left text-foreground transition-colors duration-(--transition-normal) ease-(--ease-standard) focus-visible:outline-offset-[-3px] cursor-pointer aria-selected:bg-background",
               STEP_BORDERS
             )}
           >
-            <span className="font-sans text-[1.6rem] font-extrabold text-secondary transition-colors duration-(--transition-normal) ease-(--ease-standard) group-aria-selected:text-primary motion-reduce:transition-none [font-stretch:114%]">
+            <span className="font-sans text-[1.6rem] font-extrabold text-secondary transition-colors duration-(--transition-normal) ease-(--ease-standard) group-aria-selected:text-primary [font-stretch:114%]">
               {stage.no}
             </span>
             <span className="font-sans text-[0.98rem] font-bold tracking-[0.03em] uppercase [font-stretch:110%]">
               {stage.label}
             </span>
             <span className="relative h-[3px] overflow-hidden bg-[rgba(9,29,42,0.16)]">
-              <i className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-(--transition-slow) ease-(--ease-standard) group-aria-selected:scale-x-100 motion-reduce:transition-none" />
+              <i className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-(--transition-slow) ease-(--ease-standard) group-aria-selected:scale-x-100" />
             </span>
           </button>
         ))}
@@ -113,7 +112,7 @@ export default function ValueStages() {
         key={animCount}
         className={cn(
           "mt-8 grid min-h-[88px] grid-cols-[auto_1fr] items-start gap-[clamp(20px,4vw,56px)] border-l-2 border-accent pl-[clamp(18px,3vw,32px)]",
-          animCount > 0 && "animate-slide-in motion-reduce:animate-none"
+          animCount > 0 && "animate-slide-in"
         )}
       >
         <span className="font-sans text-[clamp(1.3rem,3vw,2.1rem)] font-extrabold uppercase text-primary [font-stretch:114%]">

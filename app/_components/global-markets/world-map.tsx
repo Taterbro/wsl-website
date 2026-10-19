@@ -163,7 +163,7 @@ export default function WorldMap() {
                 }
               }}
               className={cn(
-                "group cursor-pointer transition-opacity duration-(--transition-fast) ease-(--ease-standard) motion-reduce:transition-none",
+                "group cursor-pointer transition-opacity duration-(--transition-fast) ease-(--ease-standard)",
                 !activeFilter[marker.s] && "pointer-events-none opacity-0"
               )}
             >
@@ -179,7 +179,7 @@ export default function WorldMap() {
                 r={4.2}
                 className={cn(
                   DOT_FILL[marker.s],
-                  "transition-[r,fill,opacity] duration-(--transition-fast) ease-(--ease-standard) group-hover:[r:6] motion-reduce:transition-none"
+                  "transition-[r,fill,opacity] duration-(--transition-fast) ease-(--ease-standard) group-hover:[r:6]"
                 )}
               />
             </g>
@@ -192,7 +192,7 @@ export default function WorldMap() {
               type="button"
               aria-pressed={activeFilter[item.s]}
               onClick={() => toggleStatus(item.s)}
-              className="flex cursor-pointer items-center gap-2.5 border-0 bg-none p-0 text-[0.78rem] tracking-[0.02em] text-muted opacity-55 transition-opacity duration-(--transition-fast) ease-(--ease-standard) hover:opacity-100 aria-pressed:opacity-100 motion-reduce:transition-none"
+              className="flex cursor-pointer items-center gap-2.5 border-0 bg-none p-0 text-[0.78rem] tracking-[0.02em] text-muted opacity-55 transition-opacity duration-(--transition-fast) ease-(--ease-standard) hover:opacity-100 aria-pressed:opacity-100"
             >
               <span
                 className={cn(
@@ -212,8 +212,7 @@ export default function WorldMap() {
         key={selected?.n ?? "default"}
         className={cn(
           "flex min-h-[180px] flex-col justify-center gap-3.5 border border-accent/20 bg-sidebar-accent/50 p-[clamp(20px,3vw,34px)]",
-          selected &&
-            "animate-slide-in motion-reduce:animate-none"
+          selected && "animate-slide-in"
         )}
       >
         <span className="text-[0.72rem] font-semibold tracking-[0.1em] text-chart-4 uppercase">

@@ -79,7 +79,7 @@ export default function Header() {
           ))}
           <a
             href="#partner"
-            className="border border-current px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] uppercase opacity-100 transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar motion-reduce:transition-none max-[760px]:mt-4 max-[760px]:block max-[760px]:py-[15px] max-[760px]:text-center"
+            className="border border-current px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] uppercase opacity-100 transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar max-[760px]:mt-4 max-[760px]:block max-[760px]:py-[15px] max-[760px]:text-center"
             onClick={() => setMenuOpen(false)}
           >
             Partner With Us

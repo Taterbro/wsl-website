@@ -31,7 +31,8 @@ const SECTORS: Sector[] = [
   {
     no: "04",
     title: "Technology, AI & Digital Infrastructure",
-    description: "AI, digital platforms, data systems, automation and digital transformation.",
+    description:
+      "AI, digital platforms, data systems, automation and digital transformation.",
     tag: "Data & automation",
     background:
       "radial-gradient(120% 90% at 80% 0%, rgba(95, 227, 198, 0.32), transparent 60%), linear-gradient(160deg, #0a2a33, #06181f)",

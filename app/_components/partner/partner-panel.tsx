@@ -62,7 +62,7 @@ const ROLES: Role[] = [
 ];
 
 const FIELD_CLASS =
-  "w-full rounded-[2px] border border-accent/20 bg-sidebar/60 px-[14px] py-3 font-sans text-[0.95rem] text-muted transition-colors duration-(--transition-fast) ease-(--ease-standard) focus:border-accent focus:outline-none motion-reduce:transition-none";
+  "w-full rounded-[2px] border border-accent/20 bg-sidebar/60 px-[14px] py-3 font-sans text-[0.95rem] text-muted transition-colors duration-(--transition-fast) ease-(--ease-standard) focus:border-accent focus:outline-none";
 
 interface PartnerPanelProps {
   heading: React.ReactNode;
@@ -124,7 +124,7 @@ export default function PartnerPanel({ heading, lede }: PartnerPanelProps) {
               tabIndex={role === item.role ? 0 : -1}
               onClick={() => setRole(item.role)}
               onFocus={() => setRole(item.role)}
-              className="group flex flex-col gap-1.5 border-0 bg-transparent px-[18px] py-[18px] text-left text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-[rgba(95,227,198,0.08)] aria-selected:bg-accent aria-selected:text-sidebar motion-reduce:transition-none"
+              className="group flex flex-col gap-1.5 border-0 bg-transparent px-[18px] py-[18px] text-left text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-[rgba(95,227,198,0.08)] aria-selected:bg-accent aria-selected:text-sidebar"
             >
               <b className="font-sans text-[0.86rem] font-bold tracking-[0.03em] uppercase [font-stretch:110%]">
                 {item.label}
@@ -146,10 +146,10 @@ export default function PartnerPanel({ heading, lede }: PartnerPanelProps) {
             <div
               ref={doneRef}
               role="status"
-              className="animate-slide-in mb-4 flex items-start gap-3 border-l-2 border-accent bg-accent/16 p-4 text-[0.9rem] text-muted before:mt-1.5 before:h-[9px] before:w-[9px] before:flex-none before:bg-accent before:content-[''] motion-reduce:animate-none"
+              className="animate-slide-in mb-4 flex items-start gap-3 border-l-2 border-accent bg-accent/16 p-4 text-[0.9rem] text-muted before:mt-1.5 before:h-[9px] before:w-[9px] before:flex-none before:bg-accent before:content-['']"
             >
-              Thank you. Your enquiry has been routed to the relevant team,
-              with a named owner and response target.
+              Thank you. Your enquiry has been routed to the relevant team, with
+              a named owner and response target.
             </div>
           )}
           <p className="mb-[22px] max-w-[52ch] text-[0.95rem] text-muted/85">
@@ -256,7 +256,7 @@ export default function PartnerPanel({ heading, lede }: PartnerPanelProps) {
           </p>
           <button
             type="submit"
-            className="mt-5 inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent bg-accent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-sidebar uppercase transition-colors transition-transform duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-px hover:bg-[#7defd2] motion-reduce:transition-none"
+            className="mt-5 inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent bg-accent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-sidebar uppercase transition-colors transition-transform duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-px hover:bg-[#7defd2]"
           >
             Send enquiry
           </button>

@@ -29,8 +29,7 @@ const GRAIN_DATA_URI =
   "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>\")";
 
 const BTN_BASE_CLASS =
-  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition-colors transition-transform duration-(--transition-normal) ease-(--ease-standard) motion-reduce:transition-none";
-
+  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 export default function Hero() {
   return (
     <section
@@ -90,7 +89,7 @@ export default function Hero() {
               className={
                 cta.variant === "glow"
                   ? `${BTN_BASE_CLASS} bg-accent text-sidebar hover:-translate-y-px hover:bg-[#7defd2]`
-                  : `${BTN_BASE_CLASS} border-current bg-transparent hover:bg-current hover:text-sidebar`
+                  : `${BTN_BASE_CLASS} border-current bg-transparent hover:bg-secondary hover:text-sidebar`
               }
             >
               {cta.label}
@@ -103,10 +102,6 @@ export default function Hero() {
         className={`relative z-2 mt-[clamp(40px,6vw,70px)] flex flex-wrap items-end justify-between gap-6 border-t border-accent/20 pt-[18px] text-[0.74rem] tracking-[0.14em] uppercase text-muted/60 ${WRAP_CLASS}`}
       >
         <span>African roots. Global reach.</span>
-        <span className="flex items-center gap-2.5">
-          <i className="block h-[34px] w-px animate-drop bg-linear-to-b from-accent to-transparent motion-reduce:animate-none" />
-          Scroll
-        </span>
       </div>
     </section>
   );

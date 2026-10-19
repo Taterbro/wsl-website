@@ -41,9 +41,12 @@ export default function BusinessRail({
   const scrollBy = (direction: "prev" | "next") => {
     const rail = railRef.current;
     if (!rail) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     rail.scrollBy({
-      left: (direction === "next" ? 1 : -1) * Math.min(rail.clientWidth * 0.8, 360),
+      left:
+        (direction === "next" ? 1 : -1) * Math.min(rail.clientWidth * 0.8, 360),
       behavior: reduce ? "auto" : "smooth",
     });
   };
@@ -60,7 +63,7 @@ export default function BusinessRail({
             type="button"
             aria-label="Scroll sectors left"
             onClick={() => scrollBy("prev")}
-            className="grid h-[46px] w-[46px] place-items-center rounded-[2px] border border-accent/20 bg-transparent text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar motion-reduce:transition-none"
+            className="grid h-[46px] w-[46px] place-items-center rounded-[2px] border border-accent/20 bg-transparent text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar"
           >
             <RailArrow direction="prev" />
           </button>
@@ -68,7 +71,7 @@ export default function BusinessRail({
             type="button"
             aria-label="Scroll sectors right"
             onClick={() => scrollBy("next")}
-            className="grid h-[46px] w-[46px] place-items-center rounded-[2px] border border-accent/20 bg-transparent text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar motion-reduce:transition-none"
+            className="grid h-[46px] w-[46px] place-items-center rounded-[2px] border border-accent/20 bg-transparent text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar"
           >
             <RailArrow direction="next" />
           </button>
@@ -85,11 +88,11 @@ export default function BusinessRail({
             <article
               key={sector.no}
               tabIndex={0}
-              className="group relative flex min-h-[clamp(360px,44vw,470px)] shrink-0 basis-[clamp(250px,26vw,330px)] snap-start flex-col justify-between overflow-hidden border-t-2 border-t-accent/20 bg-sidebar-accent px-6 pt-[26px] pb-6 text-muted transition-colors duration-(--transition-slower) ease-(--ease-standard) hover:bg-primary motion-reduce:transition-none"
+              className="group relative flex min-h-[clamp(360px,44vw,470px)] shrink-0 basis-[clamp(250px,26vw,330px)] snap-start flex-col justify-between overflow-hidden border-t-2 border-t-accent/20 bg-sidebar-accent px-6 pt-[26px] pb-6 text-muted transition-colors duration-(--transition-slower) ease-(--ease-standard) hover:bg-primary"
             >
               <div
                 aria-hidden="true"
-                className="absolute inset-0 scale-[1.04] opacity-50 transition-[opacity,transform] duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-100 group-hover:opacity-[0.72] motion-reduce:transition-none"
+                className="absolute inset-0 scale-[1.04] opacity-50 transition-[opacity,transform] duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-100 group-hover:opacity-[0.72]"
                 style={{ background: sector.background }}
               />
               <span className="relative font-sans text-[0.9rem] font-extrabold tracking-[0.14em] text-accent [font-stretch:112%]">
@@ -102,7 +105,7 @@ export default function BusinessRail({
                 <p className="max-w-[30ch] text-[0.9rem] leading-normal text-muted/78">
                   {sector.description}
                 </p>
-                <span className="mt-5 inline-flex translate-y-1.5 items-center gap-2 text-[0.72rem] font-semibold tracking-[0.08em] uppercase text-accent opacity-0 transition-[opacity,transform] duration-(--transition-normal) ease-(--ease-standard) group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none">
+                <span className="mt-5 inline-flex translate-y-1.5 items-center gap-2 text-[0.72rem] font-semibold tracking-[0.08em] uppercase text-accent opacity-0 transition-[opacity,transform] duration-(--transition-normal) ease-(--ease-standard) group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100">
                   {sector.tag}
                 </span>
               </div>

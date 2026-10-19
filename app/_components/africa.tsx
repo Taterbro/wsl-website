@@ -24,7 +24,7 @@ const INDICATORS: { value: string; label: string; source: string }[] = [
 ];
 
 const BTN_INK_CLASS =
-  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent bg-foreground px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-muted uppercase transition-colors transition-transform duration-(--transition-normal) ease-(--ease-standard) hover:bg-primary motion-reduce:transition-none";
+  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent bg-foreground px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-muted uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-primary";
 
 export default function Africa() {
   return (

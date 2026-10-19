@@ -29,11 +29,11 @@ export default function NewsletterForm() {
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="min-w-0 flex-1 rounded-[2px] border border-accent/20 bg-muted/6 px-[13px] py-[11px] font-sans text-[0.86rem] text-muted transition-colors duration-(--transition-fast) ease-(--ease-standard) placeholder:text-muted/50 focus:border-accent focus:outline-none motion-reduce:transition-none"
+        className="min-w-0 flex-1 rounded-[2px] border border-accent/20 bg-muted/6 px-[13px] py-[11px] font-sans text-[0.86rem] text-muted transition-colors duration-(--transition-fast) ease-(--ease-standard) placeholder:text-muted/50 focus:border-accent focus:outline-none"
       />
       <button
         type="submit"
-        className="rounded-[2px] border-0 bg-accent px-[18px] text-[0.76rem] font-semibold tracking-[0.05em] text-sidebar uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-[#7defd2] motion-reduce:transition-none"
+        className="rounded-[2px] border-0 bg-accent px-[18px] text-[0.76rem] font-semibold tracking-[0.05em] text-sidebar uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-[#7defd2]"
       >
         {subscribed ? "Subscribed" : "Subscribe"}
       </button>

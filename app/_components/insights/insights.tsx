@@ -23,7 +23,7 @@ const LIST_INSIGHTS: {
 ];
 
 const BTN_GHOST_CLASS =
-  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-current bg-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-foreground uppercase transition-colors transition-transform duration-(--transition-normal) ease-(--ease-standard) hover:bg-foreground hover:text-muted motion-reduce:transition-none";
+  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-current bg-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-foreground uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-foreground hover:text-muted";
 
 export default function Insights() {
   return (
@@ -46,7 +46,7 @@ export default function Insights() {
         </div>
         <Reveal>
           <div className="mt-[clamp(30px,4vw,46px)] grid grid-cols-[1.2fr_1fr] gap-px border border-[rgba(9,29,42,0.16)] bg-[rgba(9,29,42,0.16)] max-[1080px]:grid-cols-1">
-            <article className="flex flex-col gap-[14px] bg-background p-[clamp(22px,3vw,38px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary motion-reduce:transition-none">
+            <article className="flex flex-col gap-[14px] bg-background p-[clamp(22px,3vw,38px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary">
               <span className="text-[0.7rem] font-semibold tracking-[0.1em] text-[#855c18] uppercase">
                 Perspective
               </span>
@@ -63,7 +63,7 @@ export default function Insights() {
                 <span>Investment thesis</span>
                 <a
                   href="#insights"
-                  className="text-[0.78rem] font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary motion-reduce:transition-none"
+                  className="text-[0.78rem] font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
                 >
                   Read perspective
                 </a>
@@ -73,7 +73,7 @@ export default function Insights() {
               {LIST_INSIGHTS.map((insight) => (
                 <article
                   key={insight.title}
-                  className="flex flex-col gap-[14px] bg-background p-[clamp(22px,3vw,38px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary motion-reduce:transition-none"
+                  className="flex flex-col gap-[14px] bg-background p-[clamp(22px,3vw,38px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary"
                 >
                   <span className="text-[0.7rem] font-semibold tracking-[0.1em] text-primary uppercase">
                     {insight.cat}
@@ -85,7 +85,7 @@ export default function Insights() {
                     <span>{insight.topic}</span>
                     <a
                       href="#insights"
-                      className="text-[0.78rem] font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary motion-reduce:transition-none"
+                      className="text-[0.78rem] font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
                     >
                       Read
                     </a>

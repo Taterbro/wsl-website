@@ -2,7 +2,7 @@ import Brandmark from "../brand-mark";
 import NewsletterForm from "./newsletter-form";
 
 const LINK_CLASS =
-  "text-[0.86rem] leading-[1.45] text-muted/66 transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent motion-reduce:transition-none";
+  "text-[0.86rem] leading-[1.45] text-muted/66 transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent";
 
 const GROUP_LINKS: { label: string; href: string }[] = [
   { label: "Our story", href: "#group" },
@@ -135,7 +135,7 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent motion-reduce:transition-none"
+                className="transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent"
               >
                 {link.label}
               </a>

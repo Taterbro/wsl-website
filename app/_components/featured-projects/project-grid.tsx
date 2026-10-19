@@ -113,7 +113,7 @@ export default function ProjectGrid() {
             type="button"
             aria-pressed={active === filter.key}
             onClick={() => setActive(filter.key)}
-            className="cursor-pointer rounded-[2px] border border-[rgba(9,29,42,0.16)] bg-transparent px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] text-foreground uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:text-primary aria-pressed:border-foreground aria-pressed:bg-foreground aria-pressed:text-muted motion-reduce:transition-none"
+            className="cursor-pointer rounded-[2px] border border-[rgba(9,29,42,0.16)] bg-transparent px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] text-foreground uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:text-primary aria-pressed:border-foreground aria-pressed:bg-foreground aria-pressed:text-muted"
           >
             {filter.label}
           </button>
@@ -127,7 +127,7 @@ export default function ProjectGrid() {
           >
             <div className="relative aspect-16/10 overflow-hidden">
               <div
-                className="absolute inset-0 scale-[1.03] transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-100 motion-reduce:transition-none"
+                className="absolute inset-0 scale-[1.03] transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-100"
                 style={{ background: project.background }}
               />
               <span className="absolute top-4 left-4 border-l-2 border-accent bg-sidebar/82 px-3 py-[7px] text-[0.66rem] font-semibold tracking-[0.1em] text-muted uppercase">
@@ -150,7 +150,7 @@ export default function ProjectGrid() {
                 </span>
                 <a
                   href="#partner"
-                  className="font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary motion-reduce:transition-none"
+                  className="font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
                 >
                   Request information
                 </a>

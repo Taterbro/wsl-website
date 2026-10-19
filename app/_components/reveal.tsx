@@ -36,10 +36,8 @@ export default function Reveal({ children, className, ...props }: RevealProps) {
     <div
       ref={ref}
       className={cn(
-        "transition-opacity transition-transform duration-(--transition-slower) ease-(--ease-enter) motion-reduce:transition-none",
-        inView
-          ? "translate-y-0 opacity-100"
-          : "translate-y-5 opacity-0 motion-reduce:translate-y-0 motion-reduce:opacity-100",
+        "transition-opacity transition-transform duration-(--transition-slower) ease-(--ease-enter)",
+        inView ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
         className
       )}
       {...props}
