@@ -80,7 +80,7 @@ export default function Businesses() {
     <section
       id="businesses"
       aria-labelledby="businesses-title"
-      className="bg-sidebar py-[clamp(72px,10vw,140px)] text-muted"
+      className="bg-sidebar py-[clamp(72px,10vw,140px)] text-muted max-w-screen overflow-x-hidden"
     >
       <BusinessRail
         title={
