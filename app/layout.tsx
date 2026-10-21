@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Header from "./_components/header/header";
-import Footer from "./_components/footer/footer";
+import Header from "./(home)/_components/header/header";
+import Footer from "./(home)/_components/footer/footer";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],

@@ -5,8 +5,9 @@ const LINK_CLASS =
   "text-[0.86rem] leading-[1.45] text-muted/66 transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent";
 
 const GROUP_LINKS: { label: string; href: string }[] = [
-  { label: "Our story", href: "#group" },
-  { label: "Vision & mission", href: "#group" },
+  { label: "Our story", href: "/about/our-story" },
+  { label: "Vision & mission", href: "/about/vision-mission" },
+  { label: "Group structure", href: "/about/group-structure" },
   { label: "Business platforms", href: "#businesses" },
   { label: "Innovation & WSWIS", href: "#innovation" },
   { label: "Impact & sustainability", href: "#impact" },

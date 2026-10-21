@@ -14,6 +14,7 @@ interface BusinessRailProps {
   title: React.ReactNode;
   lede: string;
   sectors: Sector[];
+  label?: string;
 }
 
 function RailArrow({ direction }: { direction: "prev" | "next" }) {
@@ -35,6 +36,7 @@ export default function BusinessRail({
   title,
   lede,
   sectors,
+  label = "Scrollable list of business platforms",
 }: BusinessRailProps) {
   const railRef = useRef<HTMLDivElement>(null);
 
@@ -81,7 +83,7 @@ export default function BusinessRail({
         <div
           ref={railRef}
           tabIndex={0}
-          aria-label="Scrollable list of business platforms"
+          aria-label={label}
           className="-mx-[clamp(20px,5vw,72px)] flex snap-x snap-mandatory gap-px overflow-x-auto px-[clamp(20px,5vw,72px)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {sectors.map((sector) => (
