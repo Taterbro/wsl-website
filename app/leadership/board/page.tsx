@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import BoardHero from "./_components/board-hero";
 import BoardRoster from "./_components/board-roster";
-import BoardCommittees from "./_components/board-committees";
 import BoardConversion from "./_components/board-conversion";
 
 export const metadata: Metadata = {
@@ -15,7 +14,6 @@ export default function BoardPage() {
     <main>
       <BoardHero />
       <BoardRoster />
-      <BoardCommittees />
       <BoardConversion />
     </main>
   );
