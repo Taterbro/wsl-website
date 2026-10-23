@@ -1,13 +1,17 @@
 ---
 name: waterlight-page-builder
-description: Build a new page for the Waterlight Group Next.js site (e.g. "build the Projects page", "make the WSWIS page", "create the Leadership page") so it feels like the existing homepage and reuses the project's design tokens and shared components. Use when asked to create or scaffold any route under app/<route>/page.tsx, including section indexes, detail pages, galleries, product pages, people pages, conversion pages, and legal pages.
+description: Build a new page for the Waterlight Group Next.js site (e.g. "build the Projects page", "make the WSWIS page", "create the Leadership page", "build the Our Businesses page or a sector page") so it feels like the existing homepage and reuses the project's design tokens and shared components. Use when asked to create or scaffold any route under app/<route>/page.tsx, including section indexes, detail pages, galleries, product pages, people pages, conversion pages, and legal pages.
 ---
 
 # Waterlight page builder
 
 Builds one page of the Waterlight Group website in the App Router, matching the
-existing homepage's visual language without reusing its composition. Default
-design context is `references/design-brief.md` only.
+existing homepage's visual language without reusing its composition.
+
+## References
+
+- `references/design-brief.md`: loaded for every page. Default design context.
+- `references/businesses.md`: loaded ONLY for `/businesses` and `/businesses/<sector>`. Never load it for any other route.
 
 ## Inputs
 
@@ -23,6 +27,12 @@ design context is `references/design-brief.md` only.
 
 Read `references/design-brief.md`. This is the ONLY design context loaded by
 default. Do not load `WSL-DESIGN-DOC.md` in full.
+**Businesses routes:** if the route is `/businesses` or
+`/businesses/<sector>`, also read `references/businesses.md`. Its rules
+override the general rules in steps 3, 6 and 7 wherever they conflict. For
+these routes, do NOT grep the design doc for sector definitions
+(`## 4. Priority Business Platforms`); the sector table in `businesses.md` is
+canonical for names, slugs and capabilities.
 
 If a page needs page-specific content structure (sitemap, project card fields,
 WSWIS flow, sector definitions), grep the doc by heading and read ONLY that
@@ -51,7 +61,7 @@ Shared conventions to match:
 
 - Wrapper: `mx-auto w-full max-w-[1440px] px-[clamp(20px,5vw,72px)]`.
 - Button base: uppercase, `rounded-[2px]`, `font-sans text-[0.8rem]
-  font-semibold tracking-[0.06em]`, transitions via
+font-semibold tracking-[0.06em]`, transitions via
   `duration-(--transition-normal) ease-(--ease-standard)`.
 - Headlines: `font-sans font-extrabold uppercase`, `leading-[0.94]`,
   `tracking-[-0.01em]`, `[font-stretch:11x%]`, clamp font sizes.
@@ -88,8 +98,7 @@ primary goal, and the section order chosen and why. Then build.
 - Show, don't tell. Lead with imagery, diagrams, maps, cards, stats and
   interactive sections. Copy is short: headline, one-line support, labels.
   Long-form copy only if explicitly requested.
-- Every page opens with a strong page-specific visual hero (large type +
-  image/video slot) — smaller than the homepage's full-screen cinematic hero.
+- Every page opens with a strong page-specific visual hero (large type + image/video slot), smaller than the homepage’s full-screen cinematic hero. **Exception: Businesses routes, see `businesses.md`**
 - Placeholders: realistic but obviously fake data. Images via `next/image` with
   a placeholder path under `public/placeholders/` (add a gradient block
   fallback if no asset) and a descriptive `alt`. Mark placeholder data with a
@@ -98,13 +107,13 @@ primary goal, and the section order chosen and why. Then build.
 - Mobile-first, WCAG 2.2 AA: contrast, keyboard nav, alt text, and
   `motion-reduce:` on every animated element.
 - Motion is restrained: subtle parallax, fade/slide on scroll (`Reveal`),
-  count-ups, map transitions.
+  count-ups, map transitions. **Exception: Businesses routes may use richer motion per `businesses.md`**
 - Close with a "Build With Waterlight" conversion section where it fits
   (role-based routes pattern, see `vision-conversion.tsx`).
 
 ### 7. Variation rules
 
-- Do not use the homepage's full-screen cinematic hero on inner pages.
+- Do not use the homepage's full-screen cinematic hero on inner pages.Businesses routes may use a tall immersive header per `businesses.md`, but it must not replicate the homepage hero’s composition or image treatment
 - Choose the layout from the page's purpose; don't default to
   hero → cards → dark section → CTA.
 - A page must not repeat a layout pattern more than once. Mix full-bleed,
@@ -117,6 +126,7 @@ primary goal, and the section order chosen and why. Then build.
 Run lint and type-check (`npm run lint`; `npx tsc --noEmit` if no script),
 fix all errors, and confirm the route renders. Do not claim success if anything
 fails.
+For Businesses pages, confirm every capability from the sector table appears in the rendered page
 
 ### 9. Report back (short)
 
