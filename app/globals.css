@@ -59,6 +59,15 @@
   /* Investments stage panel */
   --animate-slide-in: slidein 0.5s cubic-bezier(0.25, 0.7, 0.25, 1);
   --animate-nav-submenu: navsubmenu var(--transition-normal) var(--ease-standard) both;
+
+  /* Water system flow */
+  --animate-water-flow: waterflow 9s linear infinite;
+}
+
+@keyframes waterflow {
+  to {
+    stroke-dashoffset: -240;
+  }
 }
 
 @keyframes navsubmenu {

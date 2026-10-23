@@ -1,28 +1,26 @@
 import type { Metadata } from "next";
-import WaterHero from "./_components/water-hero";
-import WaterThesis from "./_components/water-thesis";
-import WaterSystem from "./_components/water-system";
-import WaterCapabilities from "./_components/water-capabilities";
-import WaterApplications from "./_components/water-applications";
-import WaterPrinciples from "./_components/water-principles";
-import WaterConversion from "./_components/water-conversion";
+import SectorHero from "./_components/sector-hero";
+import CapabilitySystem from "./_components/capability-system";
+import ProofStrip from "./_components/proof-strip";
+import RoleInPlatform from "./_components/role-in-platform";
+import RelatedSectors from "./_components/related-sectors";
+import VisionConversion from "../../about/vision-mission/_components/vision-conversion";
 
 export const metadata: Metadata = {
-  title: "Water & Smart Infrastructure — Waterlight Group",
+  title: "Water & Smart Infrastructure — Our Businesses — Waterlight Group",
   description:
-    "Solar-powered, instrumented water infrastructure from Waterlight Group: source, treatment, storage, distribution, digital monitoring and predictive maintenance for cities, industry and communities.",
+    "Solar-powered, instrumented water systems built for reliable access. WSWIS integrates treatment, storage, distribution and AI monitoring across municipal, commercial and industrial needs.",
 };
 
 export default function WaterSmartInfrastructurePage() {
   return (
     <main>
-      <WaterHero />
-      <WaterThesis />
-      <WaterSystem />
-      <WaterCapabilities />
-      <WaterApplications />
-      <WaterPrinciples />
-      <WaterConversion />
+      <SectorHero />
+      <CapabilitySystem />
+      <ProofStrip />
+      <RoleInPlatform />
+      <RelatedSectors />
+      <VisionConversion />
     </main>
   );
 }
