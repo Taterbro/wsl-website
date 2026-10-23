@@ -16,14 +16,10 @@ function getReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function getInitialProgress(): number {
-  return getReducedMotion() ? 1 : 0;
-}
-
 export default function ProofStrip() {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
-  const [progress, setProgress] = useState(getInitialProgress);
+  const [progress, setProgress] = useState(0);
   const reduceMotionRef = useRef(getReducedMotion());
 
   useEffect(() => {
