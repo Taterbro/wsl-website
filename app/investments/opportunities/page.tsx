@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { getProjects } from "@/lib/projects";
 import OpportunitiesHero from "./_components/opportunities-hero";
 import OpportunitiesGrid from "./_components/opportunities-grid";
 import OpportunitiesCta from "./_components/opportunities-cta";
@@ -11,11 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default function OpportunitiesPage() {
+  const projects = getProjects();
+
   return (
     <main>
       <OpportunitiesHero />
       <Suspense fallback={<div className="py-16 text-center text-muted-foreground">Loading opportunities…</div>}>
-        <OpportunitiesGrid />
+        <OpportunitiesGrid projects={projects} />
       </Suspense>
       <OpportunitiesCta />
     </main>

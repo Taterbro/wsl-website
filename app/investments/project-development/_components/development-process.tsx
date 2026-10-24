@@ -53,7 +53,7 @@ export default function DevelopmentProcess() {
             to build readiness
           </h2>
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-            We don't just finance — we develop. Each step reduces uncertainty and
+            We don&apos;t just finance — we develop. Each step reduces uncertainty and
             increases bankability.
           </p>
         </Reveal>

@@ -23,7 +23,7 @@ export default function JointVenturesCta() {
             </h2>
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
               Share an approved summary — location, sector, need, status and any
-              existing partners. We'll review and discuss fit.
+              existing partners. We&apos;ll review and discuss fit.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">

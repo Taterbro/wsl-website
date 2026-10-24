@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Brandmark from "../brand-mark";
 import { NAV_LINKS, UTILITY_LINKS } from "./constants";
@@ -55,7 +56,7 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex h-[78px] max-w-[1440px] items-center gap-[clamp(16px,3vw,48px)] px-[clamp(20px,5vw,72px)]">
-        <a
+        <Link
           href="/"
           aria-label="Waterlight Group home"
           className="flex flex-none items-center gap-3"
@@ -67,7 +68,7 @@ export default function Header() {
               Group
             </span>
           </span>
-        </a>
+        </Link>
         <nav
           id="nav"
           ref={navRef}
@@ -180,7 +181,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#partner"
+            href="/partner-with-us"
             className="border border-current px-4 py-[9px] text-[0.76rem] font-semibold tracking-[0.05em] uppercase opacity-100 transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-accent hover:bg-accent hover:text-sidebar max-[1199px]:mt-4 max-[1199px]:block max-[1199px]:py-[15px] max-[1199px]:text-center"
             onClick={() => setMenuOpen(false)}
           >

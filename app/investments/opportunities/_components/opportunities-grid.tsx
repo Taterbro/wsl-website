@@ -2,18 +2,25 @@
 
 import { useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils";
 import { BUSINESS_SECTORS } from "@/lib/businesses";
-import { PROJECTS, getSectorName } from "@/lib/projects";
+import type { Project } from "@/lib/projects";
 import Link from "next/link";
 import Image from "next/image";
 
-const INVESTMENT_SIZES = ["$5-15M", "$10-25M", "$15-40M", "$25-50M", "$50M+"];
-const STAGES = ["Concept", "Development", "Investment Ready", "Financing", "Under Construction", "Operational"];
-const OPPORTUNITY_TYPES = ["Equity", "Debt", "JV", "Technology", "EPC", "PPP"];
-const IMPACT_AREAS = ["Water access", "Energy access", "Food security", "Resilience", "Industrial reliability", "Loss reduction"];
+const INVESTMENT_SIZES = ["$5-15M", "$10-25M", "$15-40M", "$20-45M", "$25-50M", "$30-60M", "$50M+"];
+const STAGES = ["Concept", "Development", "Investment Ready", "Financing", "Construction", "Operational"];
+const OPPORTUNITY_TYPES = ["Equity", "Debt", "JV", "Technology", "EPC", "PPP", "Strategic Partner"];
+const IMPACT_AREAS = ["Water access", "Energy access", "Food security", "Resilience", "Industrial reliability", "Industrial development", "Energy resilience", "Loss reduction"];
 
-export default function OpportunitiesGrid() {
+const SECTOR_NAMES = Object.fromEntries(
+  BUSINESS_SECTORS.map((sector) => [sector.slug, sector.shortName])
+);
+
+interface OpportunitiesGridProps {
+  projects: Project[];
+}
+
+export default function OpportunitiesGrid({ projects }: OpportunitiesGridProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -25,7 +32,7 @@ export default function OpportunitiesGrid() {
   const [type, setType] = useState(searchParams.get("type") || "");
   const [impact, setImpact] = useState(searchParams.get("impact") || "");
 
-  const countries = useMemo(() => Array.from(new Set(PROJECTS.map((p) => p.country))).sort(), []);
+  const countries = useMemo(() => Array.from(new Set(projects.map((p) => p.country))).sort(), [projects]);
 
   const activeCount = [sector, country, size, stage, type, impact].filter(Boolean).length;
 
@@ -56,7 +63,7 @@ export default function OpportunitiesGrid() {
   };
 
   const filtered = useMemo(() => {
-    return PROJECTS.filter((p) => {
+    return projects.filter((p) => {
       if (sector && p.sectorSlug !== sector) return false;
       if (country && p.country !== country) return false;
       if (size && p.investmentSize !== size) return false;
@@ -65,7 +72,7 @@ export default function OpportunitiesGrid() {
       if (impact && !p.impactArea.includes(impact)) return false;
       return true;
     });
-  }, [sector, country, size, stage, type, impact]);
+  }, [projects, sector, country, size, stage, type, impact]);
 
   return (
     <section aria-labelledby="opportunities-grid-title" className="bg-background py-[clamp(56px,8vw,100px)]">
@@ -215,7 +222,7 @@ export default function OpportunitiesGrid() {
               <div className="flex flex-1 flex-col gap-4 p-[clamp(20px,3vw,28px)]">
                 <div>
                   <p className="text-[0.78rem] font-semibold tracking-[0.1em] text-primary/70 uppercase">
-                    {getSectorName(project.sectorSlug)} • {project.country}, {project.region}
+                    {SECTOR_NAMES[project.sectorSlug] ?? project.sectorSlug} • {project.country}, {project.region}
                   </p>
                   <h3 className="mt-2 font-sans text-[1.26rem] font-bold leading-[1.12] [font-stretch:112%]">
                     {project.name}

@@ -16,7 +16,7 @@ const GROUP_LINKS: { label: string; href: string }[] = [
 const WORK_LINKS: { label: string; href: string }[] = [
   { label: "Investment opportunities", href: "#investments" },
   { label: "Project portfolio", href: "#projects" },
-  { label: "Partner with us", href: "#partner" },
+  { label: "Partner with us", href: "/partner-with-us" },
   { label: "Global markets", href: "#markets" },
   { label: "Insights & newsroom", href: "#insights" },
   { label: "Careers", href: "/careers" },

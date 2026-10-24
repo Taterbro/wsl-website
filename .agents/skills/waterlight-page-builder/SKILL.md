@@ -14,6 +14,8 @@ existing homepage's visual language without reusing its composition.
 - `references/businesses.md`: loaded ONLY for `/businesses` and `/businesses/<sector>`. Never load it for any other route.
 - `references/investments.md`: loaded ONLY for `/investments`,
   `/investments/<page>`, and the corridor module on `/global-markets/gcc`.
+- `references/partner-with-us.md`: loaded ONLY for `/partner-with-us` and `/partner-with-us/<type>`. Never load it for any other route.
+- `references/projects.md`: loaded ONLY for `/projects` and `/businesses/<route-name>`. Never load it for any other route.
 
 ## Inputs
 
@@ -36,6 +38,10 @@ these routes, do NOT grep the design doc for sector definitions
 (`## 4. Priority Business Platforms`); the sector table in `businesses.md` is
 canonical for names, slugs and capabilities.
 **Investments routes:** if the route is under `/investments`, also read `references/investments.md`. Its rules override steps 6 and 7 where they conflict. Do NOT grep the design doc for the lifecycle or project fields; `investments.md` is canonical.
+**Partner With Us routes:** if the route is under `/partner-with-us`, also read `references/partner-with-us.md`. Its rules override steps 6 and 7 where they conflict. Do NOT grep the design doc for the form fields; `partner-with-us.md` is canonical.
+**Project routes:** if the route is under `/projects`, also read `references/projects.md`. Its rules override steps 6 and 7 where they conflict. Do NOT grep the design doc for the form fields; `projects.md` is canonical.
+
+- Ensure project pages read through
 
 If a page needs page-specific content structure (sitemap, project card fields,
 WSWIS flow, sector definitions), grep the doc by heading and read ONLY that
@@ -81,7 +87,26 @@ them in the page's local `_components/` folder next to `page.tsx`, in the same
 style as the homepage parts (default export, typed data arrays, `cn` for conditional classes).
 For Investments routes, read project data from `lib/projects.ts` and sector values from `lib/businesses.ts`. If `lib/projects.ts` doesn't exist, create it first, before building any Investments page.
 
+- **Projects routes:** read project data only through the accessors exported
+  by `lib/projects.ts`: `getProjects()`, `getProject(slug)`,
+  `getProjectSlugs()` (for `generateStaticParams`), `getProjectsBySector()`,
+  `getFlagshipProjects()`, `getPipelineProjects()`, `getRelatedProjects()`.
+  Never import or recreate the raw records. New fields extend the existing
+  `Project` schema in `lib/projects.ts`; do not define project data or a
+  second project type anywhere else. `lib/projects.ts` is `server-only`:
+  fetch project data in server components and pass it to client components
+  as props, using `import type` for types. Shared Projects components go in
+  `app/projects/_components/`.
+
 Investments enquiry form lives in app/investments/\_components/ and is reused by all Request access CTAs and the Partner With Us routes.
+
+**Enquiry forms (Investments, Partner With Us, any "Build With Waterlight"
+section):** one shared form engine in `components/enquiry/`, driven by
+`lib/enquiry-routes.ts` (fields, validation, labels, HubSpot mapping per
+route). If either doesn't exist, create them first. Every Request access
+CTA and Partner With Us route reuses this engine. If an Investments-local
+form already exists in `app/investments/_components/`, refactor it onto the
+shared engine and delete the duplicate.
 
 ### 4. Decide the archetype before writing code
 
