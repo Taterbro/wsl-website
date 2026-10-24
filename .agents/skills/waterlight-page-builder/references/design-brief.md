@@ -85,7 +85,7 @@ Parent routes should have an index page that links to their children.
 - Insights: Research | Perspectives | News | Events | Media
 - Leadership: Founder & Group CEO | Board | Executive Leadership |
   Advisory / Investment Committees (only as formally constituted)
-- Partner With Us: Investors | Governments | Financial Institutions |
+- Partner With Us: Investors | Governments | Financial Institutions | Technology Partners | Project Owners | Joint Ventures | Market Entry
   Technology Partners | Project Owners | Market Entry
 - Careers
 - Contact / Global Offices

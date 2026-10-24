@@ -56,7 +56,7 @@ export default function Header() {
     >
       <div className="mx-auto flex h-[78px] max-w-[1440px] items-center gap-[clamp(16px,3vw,48px)] px-[clamp(20px,5vw,72px)]">
         <a
-          href="#top"
+          href="/"
           aria-label="Waterlight Group home"
           className="flex flex-none items-center gap-3"
         >

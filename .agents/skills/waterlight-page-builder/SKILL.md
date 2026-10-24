@@ -12,6 +12,8 @@ existing homepage's visual language without reusing its composition.
 
 - `references/design-brief.md`: loaded for every page. Default design context.
 - `references/businesses.md`: loaded ONLY for `/businesses` and `/businesses/<sector>`. Never load it for any other route.
+- `references/investments.md`: loaded ONLY for `/investments`,
+  `/investments/<page>`, and the corridor module on `/global-markets/gcc`.
 
 ## Inputs
 
@@ -33,6 +35,7 @@ override the general rules in steps 3, 6 and 7 wherever they conflict. For
 these routes, do NOT grep the design doc for sector definitions
 (`## 4. Priority Business Platforms`); the sector table in `businesses.md` is
 canonical for names, slugs and capabilities.
+**Investments routes:** if the route is under `/investments`, also read `references/investments.md`. Its rules override steps 6 and 7 where they conflict. Do NOT grep the design doc for the lifecycle or project fields; `investments.md` is canonical.
 
 If a page needs page-specific content structure (sitemap, project card fields,
 WSWIS flow, sector definitions), grep the doc by heading and read ONLY that
@@ -75,8 +78,10 @@ The homepage is a source of parts, not a template.
 
 Prefer existing components. Only create new ones when nothing fits, and place
 them in the page's local `_components/` folder next to `page.tsx`, in the same
-style as the homepage parts (default export, typed data arrays, `cn` for
-conditional classes).
+style as the homepage parts (default export, typed data arrays, `cn` for conditional classes).
+For Investments routes, read project data from `lib/projects.ts` and sector values from `lib/businesses.ts`. If `lib/projects.ts` doesn't exist, create it first, before building any Investments page.
+
+Investments enquiry form lives in app/investments/\_components/ and is reused by all Request access CTAs and the Partner With Us routes.
 
 ### 4. Decide the archetype before writing code
 
