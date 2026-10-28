@@ -16,6 +16,8 @@ existing homepage's visual language without reusing its composition.
   `/investments/<page>`, and the corridor module on `/global-markets/gcc`.
 - `references/partner-with-us.md`: loaded ONLY for `/partner-with-us` and `/partner-with-us/<type>`. Never load it for any other route.
 - `references/projects.md`: loaded ONLY for `/projects` and `/businesses/<route-name>`. Never load it for any other route.
+- `references/impact.md`: loaded ONLY for `/impact` routes and for any
+  "Impact bridge" module on other pages.
 
 ## Inputs
 
@@ -42,6 +44,10 @@ canonical for names, slugs and capabilities.
 **Project routes:** if the route is under `/projects`, also read `references/projects.md`. Its rules override steps 6 and 7 where they conflict. Do NOT grep the design doc for the form fields; `projects.md` is canonical.
 
 - Ensure project pages read through
+  **Impact routes:** if the route is under `/impact`, or the page includes an
+  Impact bridge, also read `references/impact.md`. Its rules override steps 6
+  and 7 where they conflict. Do NOT grep the design doc for iHEAL or Impact
+  content; `impact.md` is canonical.
 
 If a page needs page-specific content structure (sitemap, project card fields,
 WSWIS flow, sector definitions), grep the doc by heading and read ONLY that
@@ -112,6 +118,10 @@ shared engine and delete the duplicate.
 
 State in 3-4 lines: the page's archetype (from the brief's list), its single
 primary goal, and the section order chosen and why. Then build.
+
+For Impact pages, also state whether the page mentions Waterlight Save
+Initiative and, if so, how it is visually separated from commercial
+entities.
 
 ### 5. Build in the App Router
 

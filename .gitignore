@@ -37,3 +37,5 @@ next-env.d.ts
 
 #docs
 WSL-DESIGN-DOC.md
+wsl-design-2.md
+design-decisions.md
