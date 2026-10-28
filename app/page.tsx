@@ -4,7 +4,6 @@ import Businesses from "./(home)/_components/business-platforms/businesses";
 import Investments from "./(home)/_components/investments/investments";
 import Innovation from "./(home)/_components/innovation/innovation";
 import Africa from "./(home)/_components/africa";
-import GlobalMarkets from "./(home)/_components/global-markets/global_markets";
 import FeaturedProjects from "./(home)/_components/featured-projects/featured-projects";
 import Impact from "./(home)/_components/impact/impact";
 import Insights from "./(home)/_components/insights/insights";
@@ -20,7 +19,7 @@ export default function Home() {
         <Investments />
         <Innovation />
         <Africa />
-        <GlobalMarkets />
+        {/* <GlobalMarkets /> */}
         <FeaturedProjects />
         <Impact />
         <Insights />
