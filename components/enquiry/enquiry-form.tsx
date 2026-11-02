@@ -33,9 +33,9 @@ export default function EnquiryForm({
     }
     return initial;
   });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const statusRef = useRef<HTMLDivElement>(null);
   const honeypotRef = useRef<HTMLInputElement>(null);
@@ -87,7 +87,7 @@ export default function EnquiryForm({
     return Object.keys(nextErrors).length === 0;
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (honeypotRef.current && honeypotRef.current.value) {
       // Bot detected - silently succeed
@@ -188,7 +188,10 @@ export default function EnquiryForm({
           if (field.type === "checkbox") {
             const checked = values[field.name] === "true";
             return (
-              <div key={field.name} className="col-span-2 max-[760px]:col-span-1">
+              <div
+                key={field.name}
+                className="col-span-2 max-[760px]:col-span-1"
+              >
                 <label className="flex items-start gap-3 text-[0.9rem] leading-[1.6]">
                   <input
                     type="checkbox"
@@ -200,14 +203,17 @@ export default function EnquiryForm({
                     }
                     className="mt-1 h-4 w-4 rounded-[2px] border-border"
                     aria-invalid={errors[field.name] ? "true" : "false"}
-                    aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                    aria-describedby={
+                      errors[field.name] ? `${field.name}-error` : undefined
+                    }
                   />
                   <span>
                     {field.label}
                     {field.name === "consent" && config.privacyHref ? (
                       <>
                         {" "}
-                        (<a
+                        (
+                        <a
                           href={config.privacyHref}
                           className="underline decoration-border underline-offset-4 transition-colors hover:text-primary"
                         >
@@ -248,7 +254,9 @@ export default function EnquiryForm({
                   onChange={(e) => setField(field.name, e.target.value)}
                   className={INPUT_CLASS}
                   aria-invalid={errors[field.name] ? "true" : "false"}
-                  aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    errors[field.name] ? `${field.name}-error` : undefined
+                  }
                 >
                   <option value="">Select</option>
                   {(field.options ?? []).map((option) => (
@@ -271,7 +279,10 @@ export default function EnquiryForm({
 
           if (field.type === "textarea") {
             return (
-              <div key={field.name} className="col-span-2 max-[760px]:col-span-1">
+              <div
+                key={field.name}
+                className="col-span-2 max-[760px]:col-span-1"
+              >
                 <label
                   htmlFor={field.name}
                   className="mb-[7px] block text-[0.72rem] font-semibold tracking-[0.08em] uppercase"
@@ -288,7 +299,9 @@ export default function EnquiryForm({
                   onChange={(e) => setField(field.name, e.target.value)}
                   className={cn(INPUT_CLASS, "min-h-[110px] resize-y")}
                   aria-invalid={errors[field.name] ? "true" : "false"}
-                  aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    errors[field.name] ? `${field.name}-error` : undefined
+                  }
                 />
                 {errors[field.name] ? (
                   <p
@@ -322,7 +335,9 @@ export default function EnquiryForm({
                 onChange={(e) => setField(field.name, e.target.value)}
                 className={INPUT_CLASS}
                 aria-invalid={errors[field.name] ? "true" : "false"}
-                aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                aria-describedby={
+                  errors[field.name] ? `${field.name}-error` : undefined
+                }
               />
               {errors[field.name] ? (
                 <p
