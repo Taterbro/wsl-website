@@ -17,6 +17,7 @@ export async function getHomeHero(): Promise<Home> {
   const pages = await cmsGet<HomePage[]>("pages", {
     slug: "home",
     _fields: "acf",
+    acf_format: "standard",
   });
 
   const acf = pages[0]?.acf;
