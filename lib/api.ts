@@ -42,7 +42,8 @@ function buildUrl(path: string, params?: RequestOptions["params"]): string {
   if (isAbsolute) {
     url = new URL(path);
   } else {
-    const pathWithPrefix = /*path.startsWith("/") ? path : `/api/v1/${path}`;*/ `/pages?slug=${path}`;
+    const pathWithPrefix =
+      /*path.startsWith("/") ? path : `/api/v1/${path}`;*/ path;
     url = baseClient
       ? new URL(pathWithPrefix, baseClient)
       : new URL(pathWithPrefix, window.location.origin);
@@ -77,6 +78,8 @@ async function request<T>(
   try {
     // const cookie = await getCookieHeader();
     // const xsrfToken = getXsrfTokenFromCookie();
+    const tempUrl = buildUrl(path, params);
+    console.log("le url is: ", tempUrl);
     const res = await fetch(buildUrl(path, params), {
       method,
       credentials: "include",
