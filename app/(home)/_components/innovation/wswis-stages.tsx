@@ -126,6 +126,7 @@ export default function WswisStages() {
             {activeStage.copy}
           </p>
         </div>
+        {/* TODO: GET rid of this "why it matters" part */}
         <div className="bg-sidebar-accent/55 p-[clamp(20px,3vw,32px)]">
           <h4 className="mb-2.5 font-sans text-[1.05rem] font-bold tracking-[0.03em] text-accent uppercase [font-stretch:112%]">
             Why it matters

@@ -17,18 +17,18 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 ];
 
 const BTN_BASE_CLASS =
-  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
+  "inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-[2px] border border-transparent px-[22px] py-[12px] font-sans text-[0.72rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 export default async function Hero() {
   const data = await getHomeHero();
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-sidebar pb-[clamp(38px,6vw,72px)] text-muted pt-[80px]"
+      className="relative flex min-h-[clamp(520px,min(100svh,56.25vw),840px)] flex-col justify-end overflow-hidden bg-sidebar pb-[clamp(28px,4.5vw,56px)] text-muted pt-[64px]"
     >
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         {data.hero_media ? (
           <video
-            className="absolute inset-0 h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full object-contain object-top md:object-center"
             src={data.hero_media}
             autoPlay
             muted
@@ -41,18 +41,18 @@ export default async function Hero() {
       </div>
 
       <div className={`relative z-2 ${WRAP_CLASS}`}>
-        <div className="mb-[clamp(24px,4vw,44px)] flex flex-wrap items-center gap-[clamp(12px,2vw,26px)] text-[0.72rem] font-semibold tracking-[0.16em] uppercase text-accent max-[760px]:gap-[10px] max-[760px]:text-[0.64rem]">
+        <div className="mb-[clamp(18px,3vw,32px)] flex flex-wrap items-center gap-[clamp(10px,1.6vw,22px)] text-[0.64rem] font-semibold tracking-[0.16em] uppercase text-accent max-[760px]:gap-[9px] max-[760px]:text-[0.58rem]">
           {DESCRIPTOR_WORDS.map((word) => (
             <span
               key={word}
-              className="flex items-center gap-[clamp(12px,2vw,26px)] after:block after:h-[5px] after:w-[5px] after:rounded-full after:bg-chart-4 after:content-[''] last:after:hidden max-[760px]:gap-[10px]"
+              className="flex items-center gap-[clamp(10px,1.6vw,22px)] after:block after:h-[4px] after:w-[4px] after:rounded-full after:bg-chart-4 after:content-[''] last:after:hidden max-[760px]:gap-[9px]"
             >
               {word}
             </span>
           ))}
         </div>
 
-        <h1 className="mb-[clamp(22px,3vw,34px)] max-w-[16ch] font-sans text-[clamp(2.7rem,8.6vw,7.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]">
+        <h1 className="mb-[clamp(16px,2.4vw,28px)] max-w-[16ch] font-sans text-[clamp(2.1rem,6.2vw,5.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]">
           <span className="block overflow-hidden">
             <span
               className={`block translate-y-[105%] animate-rise motion-reduce:translate-y-0`}
@@ -62,7 +62,7 @@ export default async function Hero() {
           </span>
         </h1>
 
-        <p className="mb-[clamp(28px,4vw,40px)] max-w-[60ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/86 opacity-0 animate-fade-in delay-[0.6s] motion-reduce:opacity-100">
+        <p className="mb-[clamp(20px,3vw,32px)] max-w-[60ch] text-[clamp(0.9rem,1.15vw,1.02rem)] leading-[1.5] text-muted/86 opacity-0 animate-fade-in delay-[0.6s] motion-reduce:opacity-100">
           {data?.hero_description || ""}
         </p>
 
@@ -84,7 +84,7 @@ export default async function Hero() {
       </div>
 
       <div
-        className={`relative z-2 mt-[clamp(40px,6vw,70px)] flex flex-wrap items-end justify-between gap-6 border-t border-accent/20 pt-[18px] text-[0.74rem] tracking-[0.14em] uppercase text-muted/60 ${WRAP_CLASS}`}
+        className={`relative z-2 mt-[clamp(28px,4vw,48px)] flex flex-wrap items-end justify-between gap-6 border-t border-accent/20 pt-[16px] text-[0.68rem] tracking-[0.14em] uppercase text-muted/60 ${WRAP_CLASS}`}
       >
         <span>African roots. Global reach.</span>
       </div>
