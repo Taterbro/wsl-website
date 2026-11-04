@@ -70,5 +70,48 @@ export default {
         },
       ],
     },
+    africa: {
+      label: "Africa",
+      fields: [
+        ...CONSTANTS,
+        {
+          name: "indicators",
+          type: "repeater",
+          fields: [
+            {
+              name: "value",
+              type: "text",
+            },
+            {
+              name: "label",
+              type: "textarea",
+            },
+            { name: "source", type: "text" },
+          ],
+        },
+      ],
+    },
+    featured_projects: {
+      label: "Featured Projects",
+      fields: [
+        ...CONSTANTS,
+        {
+          name: "projects",
+          type: "relationship",
+          collection: "project",
+          max: 8,
+        },
+      ],
+    },
+    impact: {
+      label: "Impact",
+      fields: [
+        ...CONSTANTS,
+        {
+          name: "wsi_description",
+          type: "textarea",
+        },
+      ],
+    },
   },
 };

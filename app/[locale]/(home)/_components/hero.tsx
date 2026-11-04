@@ -1,5 +1,3 @@
-import { getHomeHero } from "@/lib/cms/hero";
-
 const WRAP_CLASS = "mx-auto w-full max-w-[1440px] px-[clamp(20px,5vw,72px)]";
 
 const DESCRIPTOR_WORDS = [
@@ -18,8 +16,15 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-[2px] border border-transparent px-[22px] py-[12px] font-sans text-[0.72rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
-export default async function Hero() {
-  const data = await getHomeHero();
+const DUMMY_DATA = {
+  hero_title: "Building Africa's Industrial Future",
+  hero_description:
+    "Waterlight Group invests across industry, infrastructure and innovation to create lasting impact for African communities and global partners.",
+  hero_media: "",
+};
+
+export default function Hero() {
+  const data = DUMMY_DATA;
   return (
     <section
       aria-label="Introduction"

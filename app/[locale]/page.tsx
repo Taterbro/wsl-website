@@ -22,7 +22,7 @@ export default function Home() {
         {/* <GlobalMarkets /> */}
         <FeaturedProjects />
         <Impact />
-        <Insights />
+        {/* <Insights /> */}
         <Partner />
       </main>
     </>

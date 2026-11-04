@@ -1,8 +1,14 @@
-import { getGroupThesis } from "@/lib/cms/homepage/group-thesis";
 import Reveal from "./reveal";
 
-export default async function GroupThesis() {
-  const data = await getGroupThesis();
+const DUMMY_DATA = [
+  { value: "12+", label: "Countries" },
+  { value: "8", label: "Business sectors" },
+  { value: "$2.4B", label: "Assets in pipeline" },
+  { value: "3,500+", label: "People employed" },
+];
+
+export default function GroupThesis() {
+  const data = DUMMY_DATA;
   return (
     <Reveal>
       <section
