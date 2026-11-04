@@ -1,7 +1,4 @@
-const CONSTANTS = [
-  { name: "label", type: "text" },
-  { name: "description", type: "textarea" },
-];
+import { CONSTANTS } from "./constants";
 
 export default {
   page: { slug: "home", label: "Home" },

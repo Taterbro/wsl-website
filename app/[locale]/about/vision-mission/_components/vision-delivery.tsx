@@ -7,8 +7,6 @@ interface Stage {
   no: string;
   name: string;
   copy: string;
-  href: string;
-  link: string;
 }
 
 const STAGES: Stage[] = [
@@ -16,50 +14,36 @@ const STAGES: Stage[] = [
     no: "01",
     name: "Opportunity",
     copy: "Essential-need demand identified in market, with a sponsor, a site, a demand base and a credible route to delivery.",
-    href: "/projects/development-pipeline",
-    link: "Development pipeline",
   },
   {
     no: "02",
     name: "Investment",
     copy: "Capital structured to the asset it funds — equity, debt, joint venture, EPC, PPP or blended finance, matched to risk and return.",
-    href: "/investments",
-    link: "Investment strategy",
   },
   {
     no: "03",
     name: "Innovation",
     copy: "Technology engineered for the context it must survive: climate, grid, skills base, procurement and cost per unit served.",
-    href: "/innovation",
-    link: "Innovation and WSWIS",
   },
   {
     no: "04",
     name: "Infrastructure",
     copy: "Assets built to institutional standards of quality, governance, safety and maintainability, with operating costs modelled before construction.",
-    href: "/businesses/water-smart-infrastructure",
-    link: "Water & smart infrastructure",
   },
   {
     no: "05",
     name: "Enterprise",
     copy: "Operating companies with capable local management — not stalled capital projects, and not handover documents.",
-    href: "/businesses",
-    link: "Our businesses",
   },
   {
     no: "06",
     name: "Impact",
     copy: "Outcomes measured with a stated method, reporting period and named owner. Nothing is published as an achievement until it can be evidenced.",
-    href: "/impact/sustainability",
-    link: "Sustainability",
   },
   {
     no: "07",
     name: "Generational value",
     copy: "Long-horizon value that compounds for partners, communities and the next generation of African industrial and technical leadership.",
-    href: "/about/our-story",
-    link: "Our story",
   },
 ];
 
@@ -154,15 +138,6 @@ export default function VisionDelivery() {
                         <p className="max-w-[62ch] text-[1rem] leading-[1.6] text-muted/80">
                           {stage.copy}
                         </p>
-                        <a
-                          href={stage.href}
-                          className="text-[0.76rem] font-semibold tracking-[0.06em] whitespace-nowrap text-accent uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-muted"
-                        >
-                          {stage.link}
-                          <span aria-hidden="true" className="ml-1.5">
-                            →
-                          </span>
-                        </a>
                       </div>
                     </div>
                   </div>

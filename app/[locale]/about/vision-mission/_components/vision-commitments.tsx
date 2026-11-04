@@ -4,37 +4,31 @@ const COMMITMENTS: {
   no: string;
   title: string;
   copy: string;
-  href: string;
 }[] = [
   {
     no: "01",
     title: "Build before you buy.",
     copy: "We originate and build operating assets, so value is created and managed rather than handed over at completion.",
-    href: "/businesses",
   },
   {
     no: "02",
     title: "Evidence over assertion.",
     copy: "Every published figure carries a method, a reporting period and a named owner. Nothing reaches this site without one.",
-    href: "/impact/sustainability",
   },
   {
     no: "03",
     title: "Africa is the foundation.",
     copy: "The group is African-founded. Capital, technology and expertise move in both directions — never only one way.",
-    href: "/global-markets",
   },
   {
     no: "04",
     title: "Long horizons are permitted.",
     copy: "Infrastructure is designed to outlast the market that financed it, and is held accordingly rather than recycled.",
-    href: "/investments/strategy",
   },
   {
     no: "05",
     title: "Impact stays independent.",
     copy: "Community programmes are carried by the Waterlight Save Initiative, a separate nonprofit — never styled as a commercial subsidiary.",
-    href: "/impact/waterlight-save-initiative",
   },
 ];
 
@@ -77,18 +71,9 @@ export default function VisionCommitments() {
                   <span className="font-sans text-[0.82rem] font-extrabold tracking-[0.16em] text-chart-4 [font-stretch:112%]">
                     {item.no}
                   </span>
-                  <a
-                    href={item.href}
-                    className="group inline-flex items-center gap-2 font-sans text-[clamp(1.05rem,1.7vw,1.45rem)] leading-[1.15] font-extrabold uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring [font-stretch:112%]"
-                  >
+                  <span className="group inline-flex items-center gap-2 font-sans text-[clamp(1.05rem,1.7vw,1.45rem)] leading-[1.15] font-extrabold uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring [font-stretch:112%]">
                     {item.title}
-                    <span
-                      aria-hidden="true"
-                      className="transition-transform duration-(--transition-normal) ease-(--ease-standard) motion-reduce:transition-none group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </a>
+                  </span>
                   <p className="col-start-2 text-[0.95rem] leading-[1.55] text-muted-foreground max-[900px]:col-start-2">
                     {item.copy}
                   </p>

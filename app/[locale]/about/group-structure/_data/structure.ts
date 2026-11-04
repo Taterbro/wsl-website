@@ -13,13 +13,11 @@ export interface GroupEntity {
   role: string;
   mandate: string;
   responsibilities: string[];
-  href?: string;
   independent?: boolean;
 }
 
 export interface SectorRoute {
   sector: string;
-  href: string;
   line: string;
   image: string;
   alt: string;
@@ -55,7 +53,6 @@ export const ENTITIES: GroupEntity[] = [
       "Capital raising and structuring",
       "Strategic partnerships",
     ],
-    href: "/companies/waterlight-africa-investments",
   },
   {
     key: "industries",
@@ -69,7 +66,6 @@ export const ENTITIES: GroupEntity[] = [
       "Production and processing",
       "Delivery and operations",
     ],
-    href: "/companies/waterlight-industries",
   },
   {
     key: "iheal-global",
@@ -83,7 +79,6 @@ export const ENTITIES: GroupEntity[] = [
       "Innovation, research and R&D",
       "Skills and enterprise development",
     ],
-    href: "/companies/waterlight-iheal-global",
   },
   {
     key: "limited",
@@ -97,7 +92,6 @@ export const ENTITIES: GroupEntity[] = [
       "Corporate mandates",
       "Strategic holding activities",
     ],
-    href: "/companies/waterlight-limited",
   },
   {
     key: "save-initiative",
@@ -110,7 +104,6 @@ export const ENTITIES: GroupEntity[] = [
       "Community water and health programmes",
       "Independent development partnerships",
     ],
-    href: "/impact/waterlight-save-initiative",
     independent: true,
   },
 ];
@@ -130,7 +123,6 @@ export const GROUP_FUNCTIONS: string[] = [
 export const SECTOR_ROUTES: SectorRoute[] = [
   {
     sector: "Water & Smart Infrastructure",
-    href: "/businesses/water-smart-infrastructure",
     line: "Solar-powered supply, treatment, storage and monitored distribution — financed through the capital platform, delivered through industrial capability.",
     image: "/placeholders/group-sector-water.png",
     alt: "Placeholder artwork standing in for photography of a solar-powered water treatment plant",
@@ -138,7 +130,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Energy",
-    href: "/businesses/energy",
     line: "Generation and integrated utilities sized for industrial, municipal and commercial demand.",
     image: "/placeholders/group-sector-energy.png",
     alt: "Placeholder artwork standing in for photography of a utility-scale energy installation",
@@ -146,7 +137,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Agriculture & Food Systems",
-    href: "/businesses/agriculture",
     line: "Production, processing and farm-to-market systems that connect rural supply to urban demand.",
     image: "/placeholders/group-sector-agriculture.png",
     alt: "Placeholder artwork standing in for photography of food processing and agricultural production",
@@ -154,7 +144,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Technology, AI & Digital Infrastructure",
-    href: "/businesses/technology-ai",
     line: "Digital infrastructure and applied AI, engineered for the connectivity, skills and cost base of the markets it enters.",
     image: "/placeholders/group-sector-technology.png",
     alt: "Placeholder artwork standing in for photography of data-centre and network infrastructure",
@@ -162,7 +151,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Industrial Development & Manufacturing",
-    href: "/businesses/industry",
     line: "Industrial parks, manufacturing lines and production platforms built to operate at scale.",
     image: "/placeholders/group-sector-industry.png",
     alt: "Placeholder artwork standing in for photography of an industrial manufacturing plant",
@@ -170,7 +158,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Real Estate & Urban Infrastructure",
-    href: "/businesses/real-estate-urban-infrastructure",
     line: "Housing, mixed-use districts and civic infrastructure delivered through structured development vehicles.",
     image: "/placeholders/group-sector-real-estate.png",
     alt: "Placeholder artwork standing in for photography of urban housing and mixed-use construction",
@@ -178,7 +165,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Logistics & Supply Chains",
-    href: "/businesses/logistics",
     line: "Corridors, warehousing and supply-chain infrastructure linking production to market.",
     image: "/placeholders/group-sector-logistics.png",
     alt: "Placeholder artwork standing in for photography of a freight and warehousing corridor",
@@ -186,7 +172,6 @@ export const SECTOR_ROUTES: SectorRoute[] = [
   },
   {
     sector: "Climate & ESG Solutions",
-    href: "/businesses/climate-esg",
     line: "Measurement, adaptation and impact assurance applied across the group’s own portfolio.",
     image: "/placeholders/group-sector-climate.png",
     alt: "Placeholder artwork standing in for photography of climate monitoring and field measurement work",

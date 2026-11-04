@@ -29,8 +29,8 @@ export default function StructureSectors() {
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
                 Eight sectors, three routes through the group: capital and
-                development, industrial delivery, and the people and
-                innovation that keep both running.
+                development, industrial delivery, and the people and innovation
+                that keep both running.
               </p>
             </div>
             <a
@@ -44,14 +44,8 @@ export default function StructureSectors() {
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid grid-cols-4 gap-[clamp(12px,1.4vw,20px)] max-[1180px]:grid-cols-2 max-[680px]:grid-cols-1">
             {SECTOR_ROUTES.map((route) => (
-              <article
-                key={route.href}
-                className="group flex flex-col border border-[rgba(9,29,42,0.16)] bg-background transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary/45"
-              >
-                <a
-                  href={route.href}
-                  className="relative block aspect-[16/10] overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
-                >
+              <article className="group flex flex-col border border-[rgba(9,29,42,0.16)] bg-background transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary/45">
+                <span className="relative block aspect-[16/10] overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
                   <Image
                     src={route.image}
                     alt={route.alt}
@@ -59,15 +53,12 @@ export default function StructureSectors() {
                     sizes="(max-width: 680px) 100vw, (max-width: 1180px) 50vw, 25vw"
                     className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
                   />
-                </a>
+                </span>
                 <div className="flex flex-1 flex-col gap-3 p-[clamp(14px,1.8vw,22px)]">
                   <h3 className="font-sans text-[clamp(0.98rem,1.2vw,1.1rem)] leading-[1.14] font-extrabold uppercase [font-stretch:114%]">
-                    <a
-                      href={route.href}
-                      className="transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-                    >
+                    <span className="transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
                       {route.sector}
-                    </a>
+                    </span>
                   </h3>
                   <p className="flex-1 text-[0.86rem] leading-[1.55] text-muted-foreground">
                     {route.line}
@@ -77,12 +68,9 @@ export default function StructureSectors() {
                       const entity = entityByKey(key);
                       return (
                         <li key={key}>
-                          <a
-                            href={entity.href}
-                            className="inline-flex items-center rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[10px] py-[6px] text-[0.68rem] font-semibold tracking-[0.06em] text-primary uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                          >
+                          <span className="inline-flex items-center rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[10px] py-[6px] text-[0.68rem] font-semibold tracking-[0.06em] text-primary uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
                             {entity.shortName}
-                          </a>
+                          </span>
                         </li>
                       );
                     })}
