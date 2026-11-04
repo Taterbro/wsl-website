@@ -10,7 +10,7 @@ type RequestOptions = {
   raw?: boolean;
   responseType?: "json" | "blob";
 };
-var baseClient: string | undefined;
+let baseClient: string | undefined;
 if (typeof window === "undefined") {
   baseClient = process.env.WORDPRESS_API_URL;
 } else {
