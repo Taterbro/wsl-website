@@ -1,24 +1,22 @@
 import type { Metadata } from "next";
 import FounderHero from "./_components/founder-hero";
-import FounderStatement from "./_components/founder-statement";
-import FounderPriorities from "./_components/founder-priorities";
-import FounderRecord from "./_components/founder-record";
-import FounderConversion from "./_components/founder-conversion";
+import FounderBio from "./_components/founder-bio";
+import FounderStructure from "./_components/founder-structure";
+import FounderNext from "./_components/founder-next";
 
 export const metadata: Metadata = {
   title: "Founder & Group CEO — Waterlight Group",
   description:
-    "The office of the Founder & Group CEO of Waterlight Group: the conviction behind the group, the remit of the role, standing priorities and the record to date.",
+    "Dr. Engr. Prince Ero Ibhafidon, Founder & Group Chief Executive of Waterlight Group: the conviction behind the group, a concise biography and the governance structures around the office.",
 };
 
 export default function FounderGroupCeoPage() {
   return (
     <main>
       <FounderHero />
-      <FounderStatement />
-      <FounderPriorities />
-      <FounderRecord />
-      <FounderConversion />
+      <FounderBio />
+      <FounderStructure />
+      <FounderNext />
     </main>
   );
 }
