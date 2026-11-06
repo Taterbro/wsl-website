@@ -17,7 +17,7 @@ export default function ProjectMapPage() {
   return (
     <main>
       <MapHeader />
-      <ProjectMap projects={projects} />
+      {/* <ProjectMap projects={projects} /> */}
       <MapIndex projects={projects} />
       <MapCta />
     </main>
