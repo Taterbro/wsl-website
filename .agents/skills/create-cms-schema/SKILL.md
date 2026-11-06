@@ -26,10 +26,10 @@ collections that page needs.
 
 ## Inputs
 
-| Input | Required | Meaning |
-| --- | --- | --- |
-| **page path** | yes | Path to an existing `page.tsx`, e.g. `app/[locale]/businesses/agriculture-food-systems/page.tsx`. |
-| **section overrides** | no | Component file name plus instructions about what must stay fixed or become editable, e.g. "capability_journey header stays fixed". |
+| Input                 | Required | Meaning                                                                                                                            |
+| --------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **page path**         | yes      | Path to an existing `page.tsx`, e.g. `app/[locale]/businesses/agriculture-food-systems/page.tsx`.                                  |
+| **section overrides** | no       | Component file name plus instructions about what must stay fixed or become editable, e.g. "capability_journey header stays fixed". |
 
 If the path does not resolve to exactly one page, ask. If the route contains a
 dynamic segment (`[slug]`, `[...slug]`), ask for the concrete page instead of
@@ -49,7 +49,7 @@ trailing `page.tsx` to get the route.
   `partner-with-us/joint-ventures` → `partner-with-us-joint-ventures`.
   Prefix only when needed; do not prefix every nested page.
 - **Slug equals file name.** The slug must be unique because `cmsGet("pages",
-  { slug })` queries by slug alone.
+{ slug })` queries by slug alone.
 - **Label** is the humanized last segment (`agriculture-food-systems` →
   `Agriculture & Food Systems`, `joint-ventures` → `Joint Ventures`).
 - If a schema already exists at that slug, check whether it belongs to the same
@@ -152,6 +152,8 @@ Mapping rules:
   field.
 - In collections, keep WordPress-native `title`; map a dummy `name` to `title`.
 
+Every field's default value should be the hardcoded data so there's data even if it isn't filled.
+
 Field naming:
 
 - snake_case.
@@ -222,7 +224,10 @@ Page schema:
 - Default export:
   ```ts
   export default {
-    page: { slug: "agriculture-food-systems", label: "Agriculture & Food Systems" },
+    page: {
+      slug: "agriculture-food-systems",
+      label: "Agriculture & Food Systems",
+    },
     sections: {
       section_key: {
         label: "Section Label",

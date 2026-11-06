@@ -6,6 +6,8 @@ export default {
     { name: "description", type: "textarea" },
     { name: "title", type: "text" },
     { name: "background", type: "image" },
+    { name: "background_alt", type: "text" },
     { name: "location", type: "text" },
+    { name: "opportunity", type: "text" },
   ],
 };
