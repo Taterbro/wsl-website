@@ -1,0 +1,212 @@
+{
+  "key": "group_page_group-structure",
+  "title": "Page: Group Structure",
+  "fields": [
+    {
+      "key": "field_group-structure_structure_hero",
+      "name": "structure_hero",
+      "label": "One Group. Four Platforms. One Mandate.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_group-structure_structure_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_group-structure_structure_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_group-structure_structure_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_group-structure_structure_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_group-structure_structure_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_group-structure_structure_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_group-structure_structure_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_group-structure_structure_diagram",
+      "name": "structure_diagram",
+      "label": "Select Any Node To See Its Mandate",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_group-structure_structure_diagram_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_group-structure_structure_diagram_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_group-structure_structure_companies",
+      "name": "structure_companies",
+      "label": "Four Companies. Four Mandates.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_group-structure_structure_companies_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_group-structure_structure_companies_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_group-structure_structure_companies_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_group-structure_structure_companies_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_group-structure_structure_sectors",
+      "name": "structure_sectors",
+      "label": "Which Entity Does What",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_group-structure_structure_sectors_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_group-structure_structure_sectors_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_group-structure_structure_sectors_businesses",
+          "name": "businesses",
+          "label": "Businesses",
+          "type": "relationship",
+          "post_type": [
+            "business"
+          ],
+          "max": 8,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_group-structure_structure_conversion",
+      "name": "structure_conversion",
+      "label": "Start With The Right Entity",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_group-structure_structure_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_group-structure_structure_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_group-structure_structure_conversion_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_group-structure_structure_conversion_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_group-structure_structure_conversion_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "group-structure"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

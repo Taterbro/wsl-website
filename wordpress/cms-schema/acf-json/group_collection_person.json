@@ -1,0 +1,72 @@
+{
+  "key": "group_collection_person",
+  "title": "People",
+  "fields": [
+    {
+      "key": "field_person_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_person_role",
+      "name": "role",
+      "label": "Role",
+      "type": "text"
+    },
+    {
+      "key": "field_person_seat",
+      "name": "seat",
+      "label": "Seat",
+      "type": "text"
+    },
+    {
+      "key": "field_person_focus",
+      "name": "focus",
+      "label": "Focus",
+      "type": "textarea"
+    },
+    {
+      "key": "field_person_committees",
+      "name": "committees",
+      "label": "Committees",
+      "type": "text"
+    },
+    {
+      "key": "field_person_image",
+      "name": "image",
+      "label": "Image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium"
+    },
+    {
+      "key": "field_person_image_alt",
+      "name": "image_alt",
+      "label": "Image Alt",
+      "type": "text"
+    },
+    {
+      "key": "field_person_social_label",
+      "name": "social_label",
+      "label": "Social Label",
+      "type": "text"
+    },
+    {
+      "key": "field_person_social_href",
+      "name": "social_href",
+      "label": "Social Href",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "person"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

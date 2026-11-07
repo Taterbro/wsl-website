@@ -1,0 +1,382 @@
+{
+  "key": "group_page_agriculture-food-systems",
+  "title": "Page: Agriculture & Food Systems",
+  "fields": [
+    {
+      "key": "field_agriculture-food-systems_sector_hero",
+      "name": "sector_hero",
+      "label": "Agriculture & Food Systems.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_sector_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_sector_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_agriculture-food-systems_sector_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_agriculture-food-systems_sector_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_sector_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_agriculture-food-systems_sector_hero_mosaic",
+          "name": "mosaic",
+          "label": "Mosaic",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_agriculture-food-systems_sector_hero_mosaic_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_sector_hero_mosaic_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_sector_hero_mosaic_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_agriculture-food-systems_capability_journey",
+      "name": "capability_journey",
+      "label": "Six links in one chain.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_capability_journey_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_capability_journey_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_agriculture-food-systems_capability_journey_capabilities",
+          "name": "capabilities",
+          "label": "Capabilities",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_agriculture-food-systems_capability_journey_capabilities_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_capability_journey_capabilities_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_capability_journey_capabilities_applications",
+              "name": "applications",
+              "label": "Applications",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_capability_journey_capabilities_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_capability_journey_capabilities_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_agriculture-food-systems_proof_strip",
+      "name": "proof_strip",
+      "label": "The chain in numbers.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_proof_strip_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_proof_strip_stats",
+          "name": "stats",
+          "label": "Stats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_agriculture-food-systems_proof_strip_stats_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_proof_strip_stats_suffix",
+              "name": "suffix",
+              "label": "Suffix",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_proof_strip_stats_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_agriculture-food-systems_role_in_platform",
+      "name": "role_in_platform",
+      "label": "Infrastructure behind the harvest.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_role_in_platform_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_agriculture-food-systems_role_in_platform_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_role_in_platform_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_role_in_platform_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_agriculture-food-systems_role_in_platform_chain",
+          "name": "chain",
+          "label": "Chain",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_role_in_platform_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_agriculture-food-systems_role_in_platform_steps_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_role_in_platform_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_role_in_platform_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_agriculture-food-systems_related_sectors",
+      "name": "related_sectors",
+      "label": "One chain, many sectors.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_related_sectors_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_related_sectors_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_agriculture-food-systems_related_sectors_businesses",
+          "name": "businesses",
+          "label": "Businesses",
+          "type": "relationship",
+          "post_type": [
+            "business"
+          ],
+          "max": 4,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_agriculture-food-systems_related_projects",
+      "name": "related_projects",
+      "label": "The pipeline starts in the field.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_related_projects_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_related_projects_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_agriculture-food-systems_related_projects_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 3,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_agriculture-food-systems_sector_conversion",
+      "name": "sector_conversion",
+      "label": "Grow the next chain.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_agriculture-food-systems_sector_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_agriculture-food-systems_sector_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_agriculture-food-systems_sector_conversion_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_agriculture-food-systems_sector_conversion_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_agriculture-food-systems_sector_conversion_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "agriculture-food-systems"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

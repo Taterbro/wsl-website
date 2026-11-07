@@ -1,0 +1,360 @@
+{
+  "key": "group_page_governance",
+  "title": "Page: Governance",
+  "fields": [
+    {
+      "key": "field_governance_governance_hero",
+      "name": "governance_hero",
+      "label": "Oversight That Survives Contact With Reality",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_governance_governance_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_governance_governance_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_governance_governance_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_hero_principles",
+          "name": "principles",
+          "label": "Principles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_governance_governance_hero_principles_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_hero_principles_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_governance_governance_map",
+      "name": "governance_map",
+      "label": "Who Decides What",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_governance_governance_map_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_map_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_governance_governance_map_bodies",
+          "name": "bodies",
+          "label": "Bodies",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_governance_governance_map_bodies_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_map_bodies_tier",
+              "name": "tier",
+              "label": "Tier",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_map_bodies_remit",
+              "name": "remit",
+              "label": "Remit",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_governance_governance_map_bodies_status",
+              "name": "status",
+              "label": "Status",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_map_bodies_scope",
+              "name": "scope",
+              "label": "Scope",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_governance_governance_rights",
+      "name": "governance_rights",
+      "label": "Reserved Or Delegated",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_governance_governance_rights_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_rights_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_governance_governance_rights_decision_rights",
+          "name": "decision_rights",
+          "label": "Decision Rights",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_governance_governance_rights_decision_rights_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_rights_decision_rights_note",
+              "name": "note",
+              "label": "Note",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_governance_governance_rights_decision_rights_items",
+              "name": "items",
+              "label": "Items",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_governance_governance_seats",
+      "name": "governance_seats",
+      "label": "Seats, Not Profiles",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_governance_governance_seats_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_seats_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_governance_governance_seats_seats",
+          "name": "seats",
+          "label": "Seats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_governance_governance_seats_seats_seat",
+              "name": "seat",
+              "label": "Seat",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_seats_seats_body",
+              "name": "body",
+              "label": "Body",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_seats_seats_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_governance_governance_seats_seats_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_governance_governance_seats_quote",
+          "name": "quote",
+          "label": "Quote",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_seats_attribution",
+          "name": "attribution",
+          "label": "Attribution",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_seats_quote_image",
+          "name": "quote_image",
+          "label": "Quote Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_governance_governance_seats_quote_image_alt",
+          "name": "quote_image_alt",
+          "label": "Quote Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_governance_governance_trust",
+      "name": "governance_trust",
+      "label": "Nothing Goes Live Unreviewed",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_governance_governance_trust_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_trust_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_governance_governance_trust_claim_matrix",
+          "name": "claim_matrix",
+          "label": "Claim Matrix",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_governance_governance_trust_claim_matrix_claim",
+              "name": "claim",
+              "label": "Claim",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_trust_claim_matrix_approval",
+              "name": "approval",
+              "label": "Approval",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_governance_governance_trust_speaks_heading",
+          "name": "speaks_heading",
+          "label": "Speaks Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_trust_speaks_description",
+          "name": "speaks_description",
+          "label": "Speaks Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_governance_governance_trust_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_governance_governance_trust_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_governance_governance_trust_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "key": "field_governance_governance_trust_cta_heading",
+          "name": "cta_heading",
+          "label": "Cta Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_governance_governance_trust_cta_description",
+          "name": "cta_description",
+          "label": "Cta Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "governance"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

@@ -1,0 +1,40 @@
+{
+  "key": "group_collection_media_mention",
+  "title": "Media Coverage",
+  "fields": [
+    {
+      "key": "field_media_mention_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_media_mention_publication",
+      "name": "publication",
+      "label": "Publication",
+      "type": "text"
+    },
+    {
+      "key": "field_media_mention_date",
+      "name": "date",
+      "label": "Date",
+      "type": "text"
+    },
+    {
+      "key": "field_media_mention_date_label",
+      "name": "date_label",
+      "label": "Date Label",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "media_mention"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

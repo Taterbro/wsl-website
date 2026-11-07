@@ -1,0 +1,154 @@
+{
+  "key": "group_page_media",
+  "title": "Page: Media",
+  "fields": [
+    {
+      "key": "field_media_media_header",
+      "name": "media_header",
+      "label": "Media.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_media_media_header_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_media_media_header_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_media_media_coverage",
+      "name": "media_coverage",
+      "label": "In the media.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_media_media_coverage_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_media_media_coverage_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_media_media_coverage_media_mentions",
+          "name": "media_mentions",
+          "label": "Media Mentions",
+          "type": "relationship",
+          "post_type": [
+            "media_mention"
+          ],
+          "max": 5,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_media_media_resources",
+      "name": "media_resources",
+      "label": "Approved material.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_media_media_resources_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_media_media_resources_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_media_media_resources_media_resources",
+          "name": "media_resources",
+          "label": "Media Resources",
+          "type": "relationship",
+          "post_type": [
+            "media_resource"
+          ],
+          "max": 4,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_media_media_boilerplate",
+      "name": "media_boilerplate",
+      "label": "About Waterlight Group",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_media_media_boilerplate_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_media_media_boilerplate_body",
+          "name": "body",
+          "label": "Body",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_media_media_contact",
+      "name": "media_contact",
+      "label": "Media enquiries.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_media_media_contact_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_media_media_contact_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "media"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

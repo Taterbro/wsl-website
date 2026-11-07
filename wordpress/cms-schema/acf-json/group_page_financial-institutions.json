@@ -1,0 +1,120 @@
+{
+  "key": "group_page_financial-institutions",
+  "title": "Page: Financial Institutions",
+  "fields": [
+    {
+      "key": "field_financial-institutions_financial_institutions_hero",
+      "name": "financial_institutions_hero",
+      "label": "Banks, DFIs & financiers.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_financial-institutions_financial_institutions_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_financial-institutions_financial_institutions_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_financial-institutions_financial_institutions_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_financial-institutions_financial_institutions_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_financial-institutions_financial_institutions_intro",
+      "name": "financial_institutions_intro",
+      "label": "Structured finance for essential needs.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_financial-institutions_financial_institutions_intro_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_financial-institutions_financial_institutions_intro_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_financial-institutions_financial_institutions_intro_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_financial-institutions_financial_institutions_intro_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_financial-institutions_financial_institutions_intro_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_financial-institutions_financial_institutions_form_section",
+      "name": "financial_institutions_form_section",
+      "label": "Financial institution enquiry",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_financial-institutions_financial_institutions_form_section_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_financial-institutions_financial_institutions_form_section_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "financial-institutions"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

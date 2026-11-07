@@ -1,0 +1,163 @@
+{
+  "key": "group_page_investor-relations",
+  "title": "Page: Investor Relations",
+  "fields": [
+    {
+      "key": "field_investor-relations_investor_relations_hero",
+      "name": "investor_relations_hero",
+      "label": "Investor Relations",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investor-relations_investor_relations_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investor-relations_investor_relations_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investor-relations_investor_relations_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_investor-relations_investor_relations_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_investor-relations_ir_principles",
+      "name": "ir_principles",
+      "label": "What investors can expect",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investor-relations_ir_principles_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investor-relations_ir_principles_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investor-relations_ir_principles_principles",
+          "name": "principles",
+          "label": "Principles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_investor-relations_ir_principles_principles_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_investor-relations_ir_principles_principles_body",
+              "name": "body",
+              "label": "Body",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_investor-relations_ir_information",
+      "name": "ir_information",
+      "label": "Process & scope",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investor-relations_ir_information_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investor-relations_ir_information_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investor-relations_ir_information_items",
+          "name": "items",
+          "label": "Items",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_investor-relations_ir_information_items_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_investor-relations_ir_information_items_body",
+              "name": "body",
+              "label": "Body",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_investor-relations_investor_relations_cta",
+      "name": "investor_relations_cta",
+      "label": "Start a conversation",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investor-relations_investor_relations_cta_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investor-relations_investor_relations_cta_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "investor-relations"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

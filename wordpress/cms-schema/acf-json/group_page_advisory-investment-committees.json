@@ -1,0 +1,235 @@
+{
+  "key": "group_page_advisory-investment-committees",
+  "title": "Page: Advisory / Investment Committees",
+  "fields": [
+    {
+      "key": "field_advisory-investment-committees_advisory_hero",
+      "name": "advisory_hero",
+      "label": "Outside expertise. Structured challenge.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_advisory-investment-committees_advisory_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_hero_chips",
+          "name": "chips",
+          "label": "Chips",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_advisory-investment-committees_advisory_hero_chips_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_advisory-investment-committees_advisory_charters",
+      "name": "advisory_charters",
+      "label": "One advises. One tests.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_advisory-investment-committees_advisory_charters_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_charters_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_advisory-investment-committees_advisory_constitution",
+      "name": "advisory_constitution",
+      "label": "Appointed on merit and terms.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_advisory-investment-committees_advisory_constitution_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_constitution_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_constitution_criteria",
+          "name": "criteria",
+          "label": "Criteria",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_advisory-investment-committees_advisory_constitution_criteria_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_advisory-investment-committees_advisory_constitution_criteria_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_advisory-investment-committees_advisory_constitution_criteria_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_constitution_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_constitution_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_advisory-investment-committees_advisory_flow",
+      "name": "advisory_flow",
+      "label": "Advice that reaches the decision.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_advisory-investment-committees_advisory_flow_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_flow_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_advisory-investment-committees_advisory_challenge",
+      "name": "advisory_challenge",
+      "label": "Challenge that cannot be waved away.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_advisory-investment-committees_advisory_challenge_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_challenge_challenge",
+          "name": "challenge",
+          "label": "Challenge",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_advisory-investment-committees_advisory_challenge_challenge_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_advisory-investment-committees_advisory_challenge_challenge_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_advisory-investment-committees_advisory_conversion",
+      "name": "advisory_conversion",
+      "label": "Engage the people who test the work.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_advisory-investment-committees_advisory_conversion_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_advisory-investment-committees_advisory_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "advisory-investment-committees"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

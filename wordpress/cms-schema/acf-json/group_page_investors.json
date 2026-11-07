@@ -1,0 +1,120 @@
+{
+  "key": "group_page_investors",
+  "title": "Page: Investors",
+  "fields": [
+    {
+      "key": "field_investors_investors_hero",
+      "name": "investors_hero",
+      "label": "Investors & family offices.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investors_investors_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_investors_investors_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investors_investors_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_investors_investors_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_investors_investors_intro",
+      "name": "investors_intro",
+      "label": "Structured access, not an open data room.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investors_investors_intro_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_investors_investors_intro_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investors_investors_intro_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_investors_investors_intro_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_investors_investors_intro_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_investors_investors_form_section",
+      "name": "investors_form_section",
+      "label": "Investor enquiry",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investors_investors_form_section_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_investors_investors_form_section_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "investors"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

@@ -1,0 +1,92 @@
+{
+  "key": "group_page_opportunities",
+  "title": "Page: Opportunities",
+  "fields": [
+    {
+      "key": "field_opportunities_opportunities_hero",
+      "name": "opportunities_hero",
+      "label": "Opportunities",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_opportunities_opportunities_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_opportunities_opportunities_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_opportunities_opportunities_grid",
+      "name": "opportunities_grid",
+      "label": "Available opportunities",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_opportunities_opportunities_grid_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_opportunities_opportunities_grid_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 24,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_opportunities_opportunities_cta",
+      "name": "opportunities_cta",
+      "label": "Investors, institutions and project owners",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_opportunities_opportunities_cta_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_opportunities_opportunities_cta_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "opportunities"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

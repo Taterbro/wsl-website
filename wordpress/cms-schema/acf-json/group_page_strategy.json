@@ -1,0 +1,230 @@
+{
+  "key": "group_page_strategy",
+  "title": "Page: Strategy",
+  "fields": [
+    {
+      "key": "field_strategy_strategy_hero",
+      "name": "strategy_hero",
+      "label": "Investment Strategy",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_strategy_strategy_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_strategy_strategy_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_strategy_strategy_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_strategy_strategy_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_strategy_lifecycle",
+      "name": "lifecycle",
+      "label": "From opportunity to scale",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_strategy_lifecycle_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_strategy_lifecycle_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_strategy_lifecycle_stages",
+          "name": "stages",
+          "label": "Stages",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_strategy_lifecycle_stages_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_strategy_lifecycle_stages_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_strategy_lifecycle_stages_definition",
+              "name": "definition",
+              "label": "Definition",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_strategy_lifecycle_stages_detail",
+              "name": "detail",
+              "label": "Detail",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_strategy_lifecycle_stages_partners",
+              "name": "partners",
+              "label": "Partners",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_strategy_principles",
+      "name": "principles",
+      "label": "Discipline with purpose",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_strategy_principles_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_strategy_principles_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_strategy_principles_principles",
+          "name": "principles",
+          "label": "Principles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_strategy_principles_principles_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_strategy_principles_principles_body",
+              "name": "body",
+              "label": "Body",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_strategy_corridor_module",
+      "name": "corridor_module",
+      "label": "Connecting capital, technology and markets",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_strategy_corridor_module_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_strategy_corridor_module_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_strategy_corridor_module_nodes",
+          "name": "nodes",
+          "label": "Nodes",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_strategy_corridor_module_nodes_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_strategy_corridor_module_nodes_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_strategy_corridor_module_exchanges",
+          "name": "exchanges",
+          "label": "Exchanges",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_strategy_strategy_cta",
+      "name": "strategy_cta",
+      "label": "Ready to structure a bankable opportunity?",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_strategy_strategy_cta_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_strategy_strategy_cta_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "strategy"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

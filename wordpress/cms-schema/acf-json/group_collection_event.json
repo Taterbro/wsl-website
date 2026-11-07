@@ -1,0 +1,82 @@
+{
+  "key": "group_collection_event",
+  "title": "Events",
+  "fields": [
+    {
+      "key": "field_event_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_event_summary",
+      "name": "summary",
+      "label": "Summary",
+      "type": "textarea"
+    },
+    {
+      "key": "field_event_status",
+      "name": "status",
+      "label": "Status",
+      "type": "text"
+    },
+    {
+      "key": "field_event_type",
+      "name": "type",
+      "label": "Type",
+      "type": "text"
+    },
+    {
+      "key": "field_event_date",
+      "name": "date",
+      "label": "Date",
+      "type": "text"
+    },
+    {
+      "key": "field_event_date_label",
+      "name": "date_label",
+      "label": "Date Label",
+      "type": "text"
+    },
+    {
+      "key": "field_event_day",
+      "name": "day",
+      "label": "Day",
+      "type": "text"
+    },
+    {
+      "key": "field_event_month",
+      "name": "month",
+      "label": "Month",
+      "type": "text"
+    },
+    {
+      "key": "field_event_year",
+      "name": "year",
+      "label": "Year",
+      "type": "text"
+    },
+    {
+      "key": "field_event_location",
+      "name": "location",
+      "label": "Location",
+      "type": "text"
+    },
+    {
+      "key": "field_event_format",
+      "name": "format",
+      "label": "Format",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "event"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

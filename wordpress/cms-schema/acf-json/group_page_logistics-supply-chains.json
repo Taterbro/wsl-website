@@ -1,0 +1,344 @@
+{
+  "key": "group_page_logistics-supply-chains",
+  "title": "Page: Logistics & Supply Chains",
+  "fields": [
+    {
+      "key": "field_logistics-supply-chains_sector_hero",
+      "name": "sector_hero",
+      "label": "Logistics & Supply Chains.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_sector_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_sector_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_logistics-supply-chains_sector_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_logistics-supply-chains_sector_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_sector_hero_manifest",
+          "name": "manifest",
+          "label": "Manifest",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_logistics-supply-chains_sector_hero_manifest_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_sector_hero_manifest_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_logistics-supply-chains_corridor_map",
+      "name": "corridor_map",
+      "label": "Five nodes. One corridor.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_corridor_map_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_corridor_map_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_logistics-supply-chains_corridor_map_nodes",
+          "name": "nodes",
+          "label": "Nodes",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_code",
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_type",
+              "name": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_chips",
+              "name": "chips",
+              "label": "Chips",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_connection",
+              "name": "connection",
+              "label": "Connection",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_map_nodes_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_logistics-supply-chains_proof_strip",
+      "name": "proof_strip",
+      "label": "A corridor is a system.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_proof_strip_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_proof_strip_stats",
+          "name": "stats",
+          "label": "Stats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_logistics-supply-chains_proof_strip_stats_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_proof_strip_stats_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_logistics-supply-chains_corridor_stack",
+      "name": "corridor_stack",
+      "label": "One corridor. Four layers.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_corridor_stack_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_corridor_stack_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_logistics-supply-chains_corridor_stack_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_logistics-supply-chains_corridor_stack_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_corridor_stack_layers",
+          "name": "layers",
+          "label": "Layers",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_logistics-supply-chains_corridor_stack_layers_code",
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_stack_layers_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_logistics-supply-chains_corridor_stack_layers_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_logistics-supply-chains_related_sectors",
+      "name": "related_sectors",
+      "label": "A corridor connects more.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_related_sectors_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_related_sectors_businesses",
+          "name": "businesses",
+          "label": "Businesses",
+          "type": "relationship",
+          "post_type": [
+            "business"
+          ],
+          "max": 4,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        },
+        {
+          "key": "field_logistics-supply-chains_related_sectors_connections",
+          "name": "connections",
+          "label": "Connections",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_logistics-supply-chains_related_projects",
+      "name": "related_projects",
+      "label": "Freight in preparation.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_related_projects_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_related_projects_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 3,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_logistics-supply-chains_sector_conversion",
+      "name": "sector_conversion",
+      "label": "Move goods through a Waterlight corridor.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_logistics-supply-chains_sector_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_logistics-supply-chains_sector_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "logistics-supply-chains"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

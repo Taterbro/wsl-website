@@ -1,0 +1,311 @@
+{
+  "key": "group_page_executive-leadership",
+  "title": "Page: Executive Leadership",
+  "fields": [
+    {
+      "key": "field_executive-leadership_executive_hero",
+      "name": "executive_hero",
+      "label": "The Team That Turns the Mandate Into Delivery",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_executive-leadership_executive_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_executive-leadership_executive_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_executive-leadership_executive_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_hero_stats",
+          "name": "stats",
+          "label": "Stats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_executive-leadership_executive_hero_stats_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_hero_stats_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_executive-leadership_executive_functions",
+      "name": "executive_functions",
+      "label": "Six Functions, One Chain of Delivery",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_executive-leadership_executive_functions_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_functions_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_executive-leadership_executive_functions_functions",
+          "name": "functions",
+          "label": "Functions",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_executive-leadership_executive_functions_functions_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_functions_functions_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_functions_functions_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_functions_functions_scope",
+              "name": "scope",
+              "label": "Scope",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_executive-leadership_executive_operating",
+      "name": "executive_operating",
+      "label": "From Mandate to Outcome",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_executive-leadership_executive_operating_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_operating_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_executive-leadership_executive_operating_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_operating_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_executive-leadership_executive_operating_steps_stage",
+              "name": "stage",
+              "label": "Stage",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_operating_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_operating_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_executive-leadership_executive_companies",
+      "name": "executive_companies",
+      "label": "Each Company, a Defined Mandate",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_executive-leadership_executive_companies_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_companies_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_executive-leadership_executive_companies_companies",
+          "name": "companies",
+          "label": "Companies",
+          "type": "relationship",
+          "post_type": [
+            "company"
+          ],
+          "max": 4,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_executive-leadership_executive_accountability",
+      "name": "executive_accountability",
+      "label": "Held to the Outcome",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_executive-leadership_executive_accountability_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_accountability_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_executive-leadership_executive_accountability_principles",
+          "name": "principles",
+          "label": "Principles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_executive-leadership_executive_accountability_principles_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_accountability_principles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_executive-leadership_executive_conversion",
+      "name": "executive_conversion",
+      "label": "Bring a Problem to the People Who Build",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_executive-leadership_executive_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_executive-leadership_executive_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_executive-leadership_executive_conversion_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_executive-leadership_executive_conversion_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_executive-leadership_executive_conversion_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "executive-leadership"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

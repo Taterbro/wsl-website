@@ -1,0 +1,202 @@
+{
+  "key": "group_page_iheal-framework",
+  "title": "Page: iHEAL Framework",
+  "fields": [
+    {
+      "key": "field_iheal-framework_iheal_hero",
+      "name": "iheal_hero",
+      "label": "The iHEAL Framework.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_iheal-framework_iheal_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_iheal-framework_iheal_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_iheal-framework_iheal_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_iheal-framework_iheal_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_iheal-framework_iheal_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_iheal-framework_iheal_hero_framing",
+          "name": "framing",
+          "label": "Framing",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_iheal-framework_iheal_pillars",
+      "name": "iheal_pillars",
+      "label": "Five letters. Five lenses.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_iheal-framework_iheal_pillars_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_iheal-framework_iheal_pillars_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_iheal-framework_iheal_pillars_pillars",
+          "name": "pillars",
+          "label": "Pillars",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_iheal-framework_iheal_pillars_pillars_letter",
+              "name": "letter",
+              "label": "Letter",
+              "type": "text"
+            },
+            {
+              "key": "field_field_iheal-framework_iheal_pillars_pillars_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_iheal-framework_iheal_boundaries",
+      "name": "iheal_boundaries",
+      "label": "A lens, not a service line.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_iheal-framework_iheal_boundaries_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_iheal-framework_iheal_boundaries_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_iheal-framework_iheal_boundaries_is",
+          "name": "is",
+          "label": "Is",
+          "type": "text"
+        },
+        {
+          "key": "field_iheal-framework_iheal_boundaries_is_not",
+          "name": "is_not",
+          "label": "Is Not",
+          "type": "text"
+        },
+        {
+          "key": "field_iheal-framework_iheal_boundaries_footer_note",
+          "name": "footer_note",
+          "label": "Footer Note",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_iheal-framework_related_company",
+      "name": "related_company",
+      "label": "Waterlight iHEAL Global Limited",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_iheal-framework_related_company_companies",
+          "name": "companies",
+          "label": "Companies",
+          "type": "relationship",
+          "post_type": [
+            "company"
+          ],
+          "max": 1,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        },
+        {
+          "key": "field_iheal-framework_related_company_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_iheal-framework_iheal_closing",
+      "name": "iheal_closing",
+      "label": "Read it in context.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_iheal-framework_iheal_closing_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_iheal-framework_iheal_closing_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "iheal-framework"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

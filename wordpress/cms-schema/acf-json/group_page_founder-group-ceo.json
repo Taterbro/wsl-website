@@ -1,0 +1,181 @@
+{
+  "key": "group_page_founder-group-ceo",
+  "title": "Page: Founder & Group CEO",
+  "fields": [
+    {
+      "key": "field_founder-group-ceo_founder_hero",
+      "name": "founder_hero",
+      "label": "Dr. Engr. Prince Ero Ibhafidon",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_founder-group-ceo_founder_hero_name",
+          "name": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_hero_role",
+          "name": "role",
+          "label": "Role",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_hero_office",
+          "name": "office",
+          "label": "Office",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_hero_quote",
+          "name": "quote",
+          "label": "Quote",
+          "type": "textarea"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_hero_portrait",
+          "name": "portrait",
+          "label": "Portrait",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_hero_portrait_alt",
+          "name": "portrait_alt",
+          "label": "Portrait Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_founder-group-ceo_founder_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_founder-group-ceo_founder_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_founder-group-ceo_founder_bio",
+      "name": "founder_bio",
+      "label": "From Conviction to Institution",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_founder-group-ceo_founder_bio_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_bio_bio",
+          "name": "bio",
+          "label": "Bio",
+          "type": "textarea"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_bio_remit",
+          "name": "remit",
+          "label": "Remit",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_founder-group-ceo_founder_bio_remit_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_founder-group-ceo_founder_bio_remit_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_founder-group-ceo_founder_bio_remit_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_founder-group-ceo_founder_structure",
+      "name": "founder_structure",
+      "label": "One Office. Formal Structures.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_founder-group-ceo_founder_structure_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_structure_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_founder-group-ceo_founder_next",
+      "name": "founder_next",
+      "label": "The Office Within the Structure",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_founder-group-ceo_founder_next_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_founder-group-ceo_founder_next_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "founder-group-ceo"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

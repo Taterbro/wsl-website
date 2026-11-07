@@ -1,0 +1,52 @@
+{
+  "key": "group_collection_partner_category",
+  "title": "Partner Categories",
+  "fields": [
+    {
+      "key": "field_partner_category_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_partner_category_code",
+      "name": "code",
+      "label": "Code",
+      "type": "text"
+    },
+    {
+      "key": "field_partner_category_description",
+      "name": "description",
+      "label": "Description",
+      "type": "textarea"
+    },
+    {
+      "key": "field_partner_category_brings",
+      "name": "brings",
+      "label": "Brings",
+      "type": "text"
+    },
+    {
+      "key": "field_partner_category_instruments",
+      "name": "instruments",
+      "label": "Instruments",
+      "type": "text"
+    },
+    {
+      "key": "field_partner_category_engagement",
+      "name": "engagement",
+      "label": "Engagement",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "partner_category"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

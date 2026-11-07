@@ -1,0 +1,141 @@
+{
+  "key": "group_page_partner-with-us",
+  "title": "Page: Partner With Us",
+  "fields": [
+    {
+      "key": "field_partner-with-us_partner_hero",
+      "name": "partner_hero",
+      "label": "Build with Waterlight.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us_partner_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us_partner_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_partner-with-us_partner_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_partner-with-us_partner_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_partner-with-us_audience_selector",
+      "name": "audience_selector",
+      "label": "Who are you?",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us_audience_selector_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us_audience_selector_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_partner-with-us_market_corridor",
+      "name": "market_corridor",
+      "label": "Market entry, both ways.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us_market_corridor_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us_market_corridor_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_partner-with-us_next_steps",
+      "name": "next_steps",
+      "label": "A short, honest path.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us_next_steps_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us_next_steps_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_partner-with-us_next_steps_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_partner-with-us_next_steps_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_partner-with-us_next_steps_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "partner-with-us"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

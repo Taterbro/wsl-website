@@ -1,0 +1,348 @@
+{
+  "key": "group_page_industrial-development",
+  "title": "Page: Industrial Development",
+  "fields": [
+    {
+      "key": "field_industrial-development_sector_hero",
+      "name": "sector_hero",
+      "label": "Industrial Development.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_sector_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_sector_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_industrial-development_sector_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_industrial-development_sector_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_sector_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_industrial-development_sector_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_sector_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_industrial-development_capability_line",
+      "name": "capability_line",
+      "label": "From blueprint to production.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_capability_line_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_capability_line_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_industrial-development_capability_line_capabilities",
+          "name": "capabilities",
+          "label": "Capabilities",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_industrial-development_capability_line_capabilities_code",
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_capability_line_capabilities_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_capability_line_capabilities_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_industrial-development_capability_line_capabilities_chips",
+              "name": "chips",
+              "label": "Chips",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_capability_line_capabilities_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_industrial-development_capability_line_capabilities_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_industrial-development_proof_strip",
+      "name": "proof_strip",
+      "label": "Built to be repeated.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_proof_strip_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_proof_strip_stats",
+          "name": "stats",
+          "label": "Stats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_industrial-development_proof_strip_stats_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_proof_strip_stats_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_industrial-development_localisation",
+      "name": "localisation",
+      "label": "Build it here. Not just assemble it.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_localisation_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_localisation_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_industrial-development_localisation_stages",
+          "name": "stages",
+          "label": "Stages",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_industrial-development_localisation_stages_number",
+              "name": "number",
+              "label": "Number",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_localisation_stages_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_localisation_stages_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "key": "field_industrial-development_localisation_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_industrial-development_localisation_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_industrial-development_related_sectors",
+      "name": "related_sectors",
+      "label": "Industry touches every chain.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_related_sectors_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_related_sectors_businesses",
+          "name": "businesses",
+          "label": "Businesses",
+          "type": "relationship",
+          "post_type": [
+            "business"
+          ],
+          "max": 4,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_industrial-development_related_projects",
+      "name": "related_projects",
+      "label": "The next plant starts here.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_related_projects_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_related_projects_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 3,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_industrial-development_sector_conversion",
+      "name": "sector_conversion",
+      "label": "Put the plant on the map.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_industrial-development_sector_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_industrial-development_sector_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_industrial-development_sector_conversion_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_industrial-development_sector_conversion_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_industrial-development_sector_conversion_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "industrial-development"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

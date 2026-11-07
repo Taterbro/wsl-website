@@ -1,0 +1,284 @@
+{
+  "key": "group_page_development-partnerships",
+  "title": "Page: Development Partnerships",
+  "fields": [
+    {
+      "key": "field_development-partnerships_partnerships_hero",
+      "name": "partnerships_hero",
+      "label": "Partnership, by category.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_development-partnerships_partnerships_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_development-partnerships_partnerships_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_development-partnerships_partnerships_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_development-partnerships_partnerships_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_partnerships_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_development-partnerships_partnerships_hero_partner_categories",
+          "name": "partner_categories",
+          "label": "Partner Categories",
+          "type": "relationship",
+          "post_type": [
+            "partner_category"
+          ],
+          "max": 5,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_development-partnerships_partner_directory",
+      "name": "partner_directory",
+      "label": "Five categories. No implied agreements.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_development-partnerships_partner_directory_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_development-partnerships_partner_directory_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_development-partnerships_partner_directory_partner_categories",
+          "name": "partner_categories",
+          "label": "Partner Categories",
+          "type": "relationship",
+          "post_type": [
+            "partner_category"
+          ],
+          "max": 5,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_development-partnerships_engagement_checklist",
+      "name": "engagement_checklist",
+      "label": "Bring the mandate. We will bring the map.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_development-partnerships_engagement_checklist_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_development-partnerships_engagement_checklist_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_development-partnerships_engagement_checklist_criteria",
+          "name": "criteria",
+          "label": "Criteria",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_development-partnerships_engagement_checklist_criteria_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_engagement_checklist_criteria_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_engagement_checklist_criteria_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_development-partnerships_engagement_checklist_criteria_ask",
+              "name": "ask",
+              "label": "Ask",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_development-partnerships_engagement_checklist_footer_note",
+          "name": "footer_note",
+          "label": "Footer Note",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_development-partnerships_related_impact",
+      "name": "related_impact",
+      "label": "Continue through Impact.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_development-partnerships_related_impact_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_development-partnerships_related_impact_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_development-partnerships_related_impact_items",
+          "name": "items",
+          "label": "Items",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_development-partnerships_related_impact_items_code",
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_related_impact_items_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_related_impact_items_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_development-partnerships_related_impact_items_href",
+              "name": "href",
+              "label": "Href",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_related_impact_items_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_development-partnerships_partnerships_conversion",
+      "name": "partnerships_conversion",
+      "label": "Start with the category.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_development-partnerships_partnerships_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_development-partnerships_partnerships_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_development-partnerships_partnerships_conversion_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_development-partnerships_partnerships_conversion_steps_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_partnerships_conversion_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_development-partnerships_partnerships_conversion_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "development-partnerships"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

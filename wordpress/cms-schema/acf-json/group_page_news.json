@@ -1,0 +1,92 @@
+{
+  "key": "group_page_news",
+  "title": "Page: News",
+  "fields": [
+    {
+      "key": "field_news_news_header",
+      "name": "news_header",
+      "label": "News & Updates.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_news_news_header_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_news_news_header_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_news_news_grid",
+      "name": "news_grid",
+      "label": "Latest updates.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_news_news_grid_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_news_news_grid_news_items",
+          "name": "news_items",
+          "label": "News Items",
+          "type": "relationship",
+          "post_type": [
+            "news_item"
+          ],
+          "max": 6,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_news_news_closing",
+      "name": "news_closing",
+      "label": "Media enquiries.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_news_news_closing_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_news_news_closing_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "news"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

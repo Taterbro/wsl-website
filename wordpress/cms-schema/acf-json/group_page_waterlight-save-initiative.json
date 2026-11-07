@@ -1,0 +1,272 @@
+{
+  "key": "group_page_waterlight-save-initiative",
+  "title": "Page: Waterlight Save Initiative",
+  "fields": [
+    {
+      "key": "field_waterlight-save-initiative_initiative_hero",
+      "name": "initiative_hero",
+      "label": "Waterlight Save Initiative.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_waterlight-save-initiative_initiative_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_waterlight-save-initiative_initiative_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_waterlight-save-initiative_initiative_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_waterlight-save-initiative_separation_statement",
+      "name": "separation_statement",
+      "label": "Separate by design.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_group_label",
+          "name": "group_label",
+          "label": "Group Label",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_group_name",
+          "name": "group_name",
+          "label": "Group Name",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_group_description",
+          "name": "group_description",
+          "label": "Group Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_initiative_label",
+          "name": "initiative_label",
+          "label": "Initiative Label",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_initiative_name",
+          "name": "initiative_name",
+          "label": "Initiative Name",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_initiative_description",
+          "name": "initiative_description",
+          "label": "Initiative Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_is",
+          "name": "is",
+          "label": "Is",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_separation_statement_is_not",
+          "name": "is_not",
+          "label": "Is Not",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_waterlight-save-initiative_programme_focus",
+      "name": "programme_focus",
+      "label": "Its work. Its own account.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_waterlight-save-initiative_programme_focus_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_programme_focus_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_waterlight-save-initiative_programme_focus_themes",
+          "name": "themes",
+          "label": "Themes",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_waterlight-save-initiative_programme_focus_themes_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_waterlight-save-initiative_programme_focus_themes_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_waterlight-save-initiative_programme_focus_themes_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_waterlight-save-initiative_accountability_ledger",
+      "name": "accountability_ledger",
+      "label": "A claim needs a document.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_waterlight-save-initiative_accountability_ledger_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_accountability_ledger_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_waterlight-save-initiative_accountability_ledger_records",
+          "name": "records",
+          "label": "Records",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_waterlight-save-initiative_accountability_ledger_records_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_waterlight-save-initiative_accountability_ledger_records_value",
+              "name": "value",
+              "label": "Value",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_waterlight-save-initiative_initiative_outbound",
+      "name": "initiative_outbound",
+      "label": "Waterlight Save Initiative continues on its own site.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_waterlight-save-initiative_initiative_outbound_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_outbound_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_waterlight-save-initiative_initiative_outbound_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "waterlight-save-initiative"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

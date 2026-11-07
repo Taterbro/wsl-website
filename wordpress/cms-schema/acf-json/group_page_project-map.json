@@ -1,0 +1,154 @@
+{
+  "key": "group_page_project-map",
+  "title": "Page: Project Map",
+  "fields": [
+    {
+      "key": "field_project-map_map_header",
+      "name": "map_header",
+      "label": "Project Map",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_project-map_map_header_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_project-map_map_header_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_project-map_map_header_reading_rules_heading",
+          "name": "reading_rules_heading",
+          "label": "Reading Rules Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_project-map_map_header_reading_rules",
+          "name": "reading_rules",
+          "label": "Reading Rules",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_project-map_map_header_reading_rules_index",
+              "name": "index",
+              "label": "Index",
+              "type": "text"
+            },
+            {
+              "key": "field_field_project-map_map_header_reading_rules_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_project-map_map_header_reading_rules_detail",
+              "name": "detail",
+              "label": "Detail",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_project-map_map_index",
+      "name": "map_index",
+      "label": "Markets in view",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_project-map_map_index_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_project-map_map_index_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_project-map_map_index_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 24,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        },
+        {
+          "key": "field_project-map_map_index_target_markets",
+          "name": "target_markets",
+          "label": "Target Markets",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_project-map_map_index_target_markets_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_project-map_map_index_target_markets_note",
+              "name": "note",
+              "label": "Note",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_project-map_map_cta",
+      "name": "map_cta",
+      "label": "A market in mind?",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_project-map_map_cta_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_project-map_map_cta_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "project-map"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

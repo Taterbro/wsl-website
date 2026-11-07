@@ -1,0 +1,310 @@
+{
+  "key": "group_page_home",
+  "title": "Page: Home",
+  "fields": [
+    {
+      "key": "field_home_group_thesis",
+      "name": "group_thesis",
+      "label": "Group Thesis",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_group_thesis_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_home_group_thesis_data",
+          "name": "data",
+          "label": "Data",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_home_group_thesis_data_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_home_group_thesis_data_body",
+              "name": "body",
+              "label": "Body",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_home_group_thesis_data_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_home_business_platforms",
+      "name": "business_platforms",
+      "label": "Business Platforms",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_business_platforms_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_home_business_platforms_description",
+          "name": "description",
+          "label": "Description",
+          "type": "text"
+        },
+        {
+          "key": "field_home_business_platforms_businesses",
+          "name": "businesses",
+          "label": "Businesses",
+          "type": "relationship",
+          "post_type": [
+            "business"
+          ],
+          "max": 8,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_home_investments",
+      "name": "investments",
+      "label": "Investments",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_investments_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_home_investments_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_home_investments_stages",
+          "name": "stages",
+          "label": "Stages",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_home_investments_stages_number",
+              "name": "number",
+              "label": "Number",
+              "type": "text"
+            },
+            {
+              "key": "field_field_home_investments_stages_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_home_investments_stages_description",
+              "name": "description",
+              "label": "Description",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_home_innovation",
+      "name": "innovation",
+      "label": "Innovation",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_innovation_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_home_innovation_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_home_innovation_stages",
+          "name": "stages",
+          "label": "Stages",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_home_innovation_stages_number",
+              "name": "number",
+              "label": "Number",
+              "type": "text"
+            },
+            {
+              "key": "field_field_home_innovation_stages_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_home_innovation_stages_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_home_africa",
+      "name": "africa",
+      "label": "Africa",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_africa_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_home_africa_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_home_africa_indicators",
+          "name": "indicators",
+          "label": "Indicators",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_home_africa_indicators_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_home_africa_indicators_label",
+              "name": "label",
+              "label": "Label",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_home_africa_indicators_source",
+              "name": "source",
+              "label": "Source",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_home_featured_projects",
+      "name": "featured_projects",
+      "label": "Featured Projects",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_featured_projects_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_home_featured_projects_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_home_featured_projects_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 8,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_home_impact",
+      "name": "impact",
+      "label": "Impact",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_home_impact_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_home_impact_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_home_impact_wsi_description",
+          "name": "wsi_description",
+          "label": "Wsi Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "home"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

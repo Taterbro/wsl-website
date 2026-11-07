@@ -1,0 +1,60 @@
+{
+  "key": "group_collection_news_item",
+  "title": "News",
+  "fields": [
+    {
+      "key": "field_news_item_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_news_item_excerpt",
+      "name": "excerpt",
+      "label": "Excerpt",
+      "type": "textarea"
+    },
+    {
+      "key": "field_news_item_category",
+      "name": "category",
+      "label": "Category",
+      "type": "text"
+    },
+    {
+      "key": "field_news_item_date",
+      "name": "date",
+      "label": "Date",
+      "type": "text"
+    },
+    {
+      "key": "field_news_item_date_label",
+      "name": "date_label",
+      "label": "Date Label",
+      "type": "text"
+    },
+    {
+      "key": "field_news_item_image",
+      "name": "image",
+      "label": "Image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium"
+    },
+    {
+      "key": "field_news_item_image_alt",
+      "name": "image_alt",
+      "label": "Image Alt",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "news_item"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

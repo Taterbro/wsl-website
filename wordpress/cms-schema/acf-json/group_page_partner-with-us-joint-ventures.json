@@ -1,0 +1,120 @@
+{
+  "key": "group_page_partner-with-us-joint-ventures",
+  "title": "Page: Joint Ventures",
+  "fields": [
+    {
+      "key": "field_partner-with-us-joint-ventures_joint_ventures_hero",
+      "name": "joint_ventures_hero",
+      "label": "Joint ventures & shared platforms.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_partner-with-us-joint-ventures_joint_ventures_intro",
+      "name": "joint_ventures_intro",
+      "label": "Build together, scale with intent.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_intro_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_intro_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_intro_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_partner-with-us-joint-ventures_joint_ventures_intro_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_partner-with-us-joint-ventures_joint_ventures_intro_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_partner-with-us-joint-ventures_joint_ventures_form_section",
+      "name": "joint_ventures_form_section",
+      "label": "Joint venture enquiry",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_form_section_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_partner-with-us-joint-ventures_joint_ventures_form_section_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "partner-with-us-joint-ventures"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

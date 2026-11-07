@@ -1,0 +1,120 @@
+{
+  "key": "group_page_market-entry",
+  "title": "Page: Market Entry",
+  "fields": [
+    {
+      "key": "field_market-entry_market_entry_hero",
+      "name": "market_entry_hero",
+      "label": "Market entry to Africa & GCC.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_market-entry_market_entry_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_market-entry_market_entry_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_market-entry_market_entry_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_market-entry_market_entry_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_market-entry_market_entry_intro",
+      "name": "market_entry_intro",
+      "label": "Enter with local context.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_market-entry_market_entry_intro_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_market-entry_market_entry_intro_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_market-entry_market_entry_intro_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_market-entry_market_entry_intro_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_market-entry_market_entry_intro_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_market-entry_market_entry_form_section",
+      "name": "market_entry_form_section",
+      "label": "Market entry enquiry",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_market-entry_market_entry_form_section_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_market-entry_market_entry_form_section_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "market-entry"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

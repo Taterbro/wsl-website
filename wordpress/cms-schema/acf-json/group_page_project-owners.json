@@ -1,0 +1,120 @@
+{
+  "key": "group_page_project-owners",
+  "title": "Page: Project Owners",
+  "fields": [
+    {
+      "key": "field_project-owners_project_owners_hero",
+      "name": "project_owners_hero",
+      "label": "Project owners & sponsors.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_project-owners_project_owners_hero_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_project-owners_project_owners_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_project-owners_project_owners_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_project-owners_project_owners_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_project-owners_project_owners_intro",
+      "name": "project_owners_intro",
+      "label": "Capital meets delivery capability.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_project-owners_project_owners_intro_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_project-owners_project_owners_intro_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_project-owners_project_owners_intro_steps",
+          "name": "steps",
+          "label": "Steps",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_project-owners_project_owners_intro_steps_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_project-owners_project_owners_intro_steps_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_project-owners_project_owners_form_section",
+      "name": "project_owners_form_section",
+      "label": "Project owner enquiry",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_project-owners_project_owners_form_section_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_project-owners_project_owners_form_section_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "project-owners"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

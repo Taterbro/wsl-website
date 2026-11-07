@@ -1,0 +1,156 @@
+{
+  "key": "group_page_board",
+  "title": "Page: Board",
+  "fields": [
+    {
+      "key": "field_board_board_hero",
+      "name": "board_hero",
+      "label": "The Board That Answers for the Work",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_board_board_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_board_board_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_board_board_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_board_board_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_board_board_hero_stats",
+          "name": "stats",
+          "label": "Stats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_board_board_hero_stats_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_board_board_hero_stats_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_board_board_roster",
+      "name": "board_roster",
+      "label": "Every Member. Every Seat.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_board_board_roster_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_board_board_roster_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_board_board_roster_people",
+          "name": "people",
+          "label": "People",
+          "type": "relationship",
+          "post_type": [
+            "person"
+          ],
+          "max": 9,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_board_board_conversion",
+      "name": "board_conversion",
+      "label": "Bring the Board a Real Problem",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_board_board_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_board_board_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_board_board_conversion_routes",
+          "name": "routes",
+          "label": "Routes",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_board_board_conversion_routes_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_board_board_conversion_routes_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "board"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

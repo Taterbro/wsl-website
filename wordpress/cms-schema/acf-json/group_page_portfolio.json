@@ -1,0 +1,107 @@
+{
+  "key": "group_page_portfolio",
+  "title": "Page: Portfolio",
+  "fields": [
+    {
+      "key": "field_portfolio_portfolio_header",
+      "name": "portfolio_header",
+      "label": "Portfolio",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_portfolio_portfolio_header_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_portfolio_portfolio_header_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_portfolio_portfolio_grid",
+      "name": "portfolio_grid",
+      "label": "Find a project",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_portfolio_portfolio_grid_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_portfolio_portfolio_grid_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 24,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_portfolio_portfolio_routes",
+      "name": "portfolio_routes",
+      "label": "See the portfolio differently",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_portfolio_portfolio_routes_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_portfolio_portfolio_cta",
+      "name": "portfolio_cta",
+      "label": "Request the full brief",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_portfolio_portfolio_cta_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_portfolio_portfolio_cta_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "portfolio"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

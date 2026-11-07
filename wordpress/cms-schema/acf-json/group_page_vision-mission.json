@@ -1,0 +1,303 @@
+{
+  "key": "group_page_vision-mission",
+  "title": "Page: Vision & Mission",
+  "fields": [
+    {
+      "key": "field_vision-mission_vision_hero",
+      "name": "vision_hero",
+      "label": "Vision. Mission. Delivery.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_vision-mission_vision_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_vision-mission_vision_hero_background",
+          "name": "background",
+          "label": "Background",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_vision-mission_vision_hero_background_alt",
+          "name": "background_alt",
+          "label": "Background Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_hero_meta",
+          "name": "meta",
+          "label": "Meta",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_vision-mission_vision_hero_meta_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_hero_meta_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_vision-mission_vision_statement",
+      "name": "vision_statement",
+      "label": "Our Vision",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_vision-mission_vision_statement_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_statement_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_vision-mission_vision_statement_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_vision-mission_vision_statement_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_vision-mission_vision_mission",
+      "name": "vision_mission",
+      "label": "Our Mission",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_vision-mission_vision_mission_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_mission_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_vision-mission_vision_mission_verbs",
+          "name": "verbs",
+          "label": "Verbs",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_vision-mission_vision_mission_verbs_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_mission_verbs_verb",
+              "name": "verb",
+              "label": "Verb",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_mission_verbs_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_vision-mission_vision_delivery",
+      "name": "vision_delivery",
+      "label": "How the Vision is Delivered",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_vision-mission_vision_delivery_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_delivery_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_vision-mission_vision_delivery_stages",
+          "name": "stages",
+          "label": "Stages",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_vision-mission_vision_delivery_stages_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_delivery_stages_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_delivery_stages_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_vision-mission_vision_commitments",
+      "name": "vision_commitments",
+      "label": "Commitments We Publish",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_vision-mission_vision_commitments_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_commitments_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_vision-mission_vision_commitments_commitments",
+          "name": "commitments",
+          "label": "Commitments",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_vision-mission_vision_commitments_commitments_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_commitments_commitments_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_commitments_commitments_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_vision-mission_vision_conversion",
+      "name": "vision_conversion",
+      "label": "Put the Vision to Work",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_vision-mission_vision_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_vision-mission_vision_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_vision-mission_vision_conversion_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_vision-mission_vision_conversion_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_vision-mission_vision_conversion_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "vision-mission"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

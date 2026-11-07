@@ -1,0 +1,350 @@
+{
+  "key": "group_page_climate-esg-solutions",
+  "title": "Page: Climate & ESG Solutions",
+  "fields": [
+    {
+      "key": "field_climate-esg-solutions_sector_hero",
+      "name": "sector_hero",
+      "label": "Climate & ESG Solutions.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_sector_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_sector_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_climate-esg-solutions_sector_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_climate-esg-solutions_sector_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_sector_hero_conditions",
+          "name": "conditions",
+          "label": "Conditions",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_climate-esg-solutions_sector_hero_conditions_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_sector_hero_conditions_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_climate-esg-solutions_circular_loop",
+      "name": "circular_loop",
+      "label": "Five loops. One system.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_circular_loop_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_circular_loop_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_climate-esg-solutions_circular_loop_capabilities",
+          "name": "capabilities",
+          "label": "Capabilities",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_climate-esg-solutions_circular_loop_capabilities_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_circular_loop_capabilities_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_circular_loop_capabilities_chips",
+              "name": "chips",
+              "label": "Chips",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_circular_loop_capabilities_connection",
+              "name": "connection",
+              "label": "Connection",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_circular_loop_capabilities_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_circular_loop_capabilities_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_climate-esg-solutions_proof_strip",
+      "name": "proof_strip",
+      "label": "Every asset has a climate ledger.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_proof_strip_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_proof_strip_stats",
+          "name": "stats",
+          "label": "Stats",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_climate-esg-solutions_proof_strip_stats_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_proof_strip_stats_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_climate-esg-solutions_asset_lifecycle",
+      "name": "asset_lifecycle",
+      "label": "Climate across the whole life.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_stages",
+          "name": "stages",
+          "label": "Stages",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_climate-esg-solutions_asset_lifecycle_stages_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_asset_lifecycle_stages_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_asset_lifecycle_stages_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_climate-esg-solutions_asset_lifecycle_stages_lens",
+              "name": "lens",
+              "label": "Lens",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_bridge_heading",
+          "name": "bridge_heading",
+          "label": "Bridge Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_asset_lifecycle_bridge_description",
+          "name": "bridge_description",
+          "label": "Bridge Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_climate-esg-solutions_related_sectors",
+      "name": "related_sectors",
+      "label": "No sector is climate-neutral.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_related_sectors_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_related_sectors_businesses",
+          "name": "businesses",
+          "label": "Businesses",
+          "type": "relationship",
+          "post_type": [
+            "business"
+          ],
+          "max": 4,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        },
+        {
+          "key": "field_climate-esg-solutions_related_sectors_connections",
+          "name": "connections",
+          "label": "Connections",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_climate-esg-solutions_related_projects",
+      "name": "related_projects",
+      "label": "Assets in transition.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_related_projects_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_related_projects_projects",
+          "name": "projects",
+          "label": "Projects",
+          "type": "relationship",
+          "post_type": [
+            "project"
+          ],
+          "max": 3,
+          "return_format": "id",
+          "filters": [
+            "search"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_climate-esg-solutions_sector_conversion",
+      "name": "sector_conversion",
+      "label": "Build resilience into the asset.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_climate-esg-solutions_sector_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_climate-esg-solutions_sector_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "climate-esg-solutions"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

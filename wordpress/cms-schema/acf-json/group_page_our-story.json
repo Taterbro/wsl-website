@@ -1,0 +1,412 @@
+{
+  "key": "group_page_our-story",
+  "title": "Page: Our Story",
+  "fields": [
+    {
+      "key": "field_our-story_story_hero",
+      "name": "story_hero",
+      "label": "Story Hero",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_our-story_story_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_our-story_story_origin",
+      "name": "story_origin",
+      "label": "The Founding Idea",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_origin_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_origin_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_origin_body",
+          "name": "body",
+          "label": "Body",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_origin_pillars",
+          "name": "pillars",
+          "label": "Pillars",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_origin_pillars_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_origin_pillars_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_origin_pillars_source",
+              "name": "source",
+              "label": "Source",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_our-story_story_origin_fields",
+          "name": "fields",
+          "label": "Fields",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_origin_fields_image",
+              "name": "image",
+              "label": "Image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium"
+            },
+            {
+              "key": "field_field_our-story_story_origin_fields_image_alt",
+              "name": "image_alt",
+              "label": "Image Alt",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_origin_fields_sector",
+              "name": "sector",
+              "label": "Sector",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_origin_fields_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_our-story_story_milestones",
+      "name": "story_milestones",
+      "label": "How We Got Here",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_milestones_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_milestones_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_milestones_milestones",
+          "name": "milestones",
+          "label": "Milestones",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_milestones_milestones_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_milestones_milestones_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_milestones_milestones_description",
+              "name": "description",
+              "label": "Description",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_our-story_story_milestones_milestones_tag",
+              "name": "tag",
+              "label": "Tag",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_our-story_story_value_chain",
+      "name": "story_value_chain",
+      "label": "One Chain, Carried End to End",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_value_chain_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_value_chain_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_value_chain_chain",
+          "name": "chain",
+          "label": "Chain",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_value_chain_chain_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_value_chain_chain_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_value_chain_chain_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_our-story_story_founder",
+      "name": "story_founder",
+      "label": "The Conviction Behind The Group",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_founder_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_founder_attribution",
+          "name": "attribution",
+          "label": "Attribution",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_founder_body",
+          "name": "body",
+          "label": "Body",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_founder_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_our-story_story_founder_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_our-story_story_footprint",
+      "name": "story_footprint",
+      "label": "The Global Bridge",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_footprint_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_footprint_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_footprint_bridges",
+          "name": "bridges",
+          "label": "Bridges",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_footprint_bridges_left",
+              "name": "left",
+              "label": "Left",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_footprint_bridges_right",
+              "name": "right",
+              "label": "Right",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_footprint_bridges_items",
+              "name": "items",
+              "label": "Items",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_our-story_story_footprint_regions",
+          "name": "regions",
+          "label": "Regions",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_footprint_regions_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_footprint_regions_status",
+              "name": "status",
+              "label": "Status",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_footprint_regions_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_our-story_story_conversion",
+      "name": "story_conversion",
+      "label": "Build With Waterlight",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_our-story_story_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_our-story_story_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_our-story_story_conversion_roles",
+          "name": "roles",
+          "label": "Roles",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_our-story_story_conversion_roles_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_our-story_story_conversion_roles_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "our-story"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

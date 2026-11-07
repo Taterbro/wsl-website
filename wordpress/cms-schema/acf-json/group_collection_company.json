@@ -1,0 +1,34 @@
+{
+  "key": "group_collection_company",
+  "title": "Companies",
+  "fields": [
+    {
+      "key": "field_company_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_company_domain",
+      "name": "domain",
+      "label": "Domain",
+      "type": "text"
+    },
+    {
+      "key": "field_company_leads",
+      "name": "leads",
+      "label": "Leads",
+      "type": "text"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "company"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

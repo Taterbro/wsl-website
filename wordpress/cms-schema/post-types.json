@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "business",
+    "label": "Businesses"
+  },
+  {
+    "slug": "company",
+    "label": "Companies"
+  },
+  {
+    "slug": "event",
+    "label": "Events"
+  },
+  {
+    "slug": "media_mention",
+    "label": "Media Coverage"
+  },
+  {
+    "slug": "media_resource",
+    "label": "Press Resources"
+  },
+  {
+    "slug": "news_item",
+    "label": "News"
+  },
+  {
+    "slug": "partner_category",
+    "label": "Partner Categories"
+  },
+  {
+    "slug": "person",
+    "label": "People"
+  },
+  {
+    "slug": "project",
+    "label": "Projects"
+  }
+]

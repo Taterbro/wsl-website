@@ -1,0 +1,163 @@
+{
+  "key": "group_page_investments-joint-ventures",
+  "title": "Page: Joint Ventures",
+  "fields": [
+    {
+      "key": "field_investments-joint-ventures_joint_ventures_hero",
+      "name": "joint_ventures_hero",
+      "label": "Joint Ventures",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investments-joint-ventures_joint_ventures_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investments-joint-ventures_joint_ventures_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investments-joint-ventures_joint_ventures_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_investments-joint-ventures_joint_ventures_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_investments-joint-ventures_jv_approach",
+      "name": "jv_approach",
+      "label": "JV as a delivery model",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investments-joint-ventures_jv_approach_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investments-joint-ventures_jv_approach_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investments-joint-ventures_jv_approach_items",
+          "name": "items",
+          "label": "Items",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_investments-joint-ventures_jv_approach_items_title",
+              "name": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "field_field_investments-joint-ventures_jv_approach_items_body",
+              "name": "body",
+              "label": "Body",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_investments-joint-ventures_jv_partners",
+      "name": "jv_partners",
+      "label": "Complementary strengths",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investments-joint-ventures_jv_partners_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investments-joint-ventures_jv_partners_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_investments-joint-ventures_jv_partners_partners",
+          "name": "partners",
+          "label": "Partners",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_investments-joint-ventures_jv_partners_partners_role",
+              "name": "role",
+              "label": "Role",
+              "type": "text"
+            },
+            {
+              "key": "field_field_investments-joint-ventures_jv_partners_partners_focus",
+              "name": "focus",
+              "label": "Focus",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_investments-joint-ventures_joint_ventures_cta",
+      "name": "joint_ventures_cta",
+      "label": "Have a project worth structuring?",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_investments-joint-ventures_joint_ventures_cta_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_investments-joint-ventures_joint_ventures_cta_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "investments-joint-ventures"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

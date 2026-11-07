@@ -1,0 +1,399 @@
+{
+  "key": "group_page_sustainability",
+  "title": "Page: Sustainability",
+  "fields": [
+    {
+      "key": "field_sustainability_sustainability_hero",
+      "name": "sustainability_hero",
+      "label": "Built to last. Measured honestly.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_sustainability_sustainability_hero_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_sustainability_hero_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_sustainability_sustainability_hero_facts",
+          "name": "facts",
+          "label": "Facts",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_sustainability_sustainability_hero_facts_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_sustainability_hero_facts_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_sustainability_sustainability_hero_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_sustainability_sustainability_hero_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_sustainability_esg_framework",
+      "name": "esg_framework",
+      "label": "Three lenses. One ledger.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_sustainability_esg_framework_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_esg_framework_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_sustainability_esg_framework_lenses",
+          "name": "lenses",
+          "label": "Lenses",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_code",
+              "name": "code",
+              "label": "Code",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_statement",
+              "name": "statement",
+              "label": "Statement",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_practices",
+              "name": "practices",
+              "label": "Practices",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_evidence",
+              "name": "evidence",
+              "label": "Evidence",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_link_1_label",
+              "name": "link_1_label",
+              "label": "Link 1 Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_link_1_href",
+              "name": "link_1_href",
+              "label": "Link 1 Href",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_link_2_label",
+              "name": "link_2_label",
+              "label": "Link 2 Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_esg_framework_lenses_link_2_href",
+              "name": "link_2_href",
+              "label": "Link 2 Href",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_sustainability_esg_framework_ledger",
+          "name": "ledger",
+          "label": "Ledger",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "field_sustainability_outcomes_ledger",
+      "name": "outcomes_ledger",
+      "label": "Outcomes, only when evidenced.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_sustainability_outcomes_ledger_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_outcomes_ledger_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_sustainability_outcomes_ledger_metrics",
+          "name": "metrics",
+          "label": "Metrics",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_sustainability_outcomes_ledger_metrics_label",
+              "name": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_outcomes_ledger_metrics_value",
+              "name": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_outcomes_ledger_metrics_unit",
+              "name": "unit",
+              "label": "Unit",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_outcomes_ledger_metrics_period",
+              "name": "period",
+              "label": "Period",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_outcomes_ledger_metrics_methodology",
+              "name": "methodology",
+              "label": "Methodology",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_outcomes_ledger_metrics_kind",
+              "name": "kind",
+              "label": "Kind",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "field_sustainability_decision_gates",
+      "name": "decision_gates",
+      "label": "ESG is a gate, not a paragraph.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_sustainability_decision_gates_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_decision_gates_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_sustainability_decision_gates_gates",
+          "name": "gates",
+          "label": "Gates",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_sustainability_decision_gates_gates_no",
+              "name": "no",
+              "label": "No",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_decision_gates_gates_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_decision_gates_gates_copy",
+              "name": "copy",
+              "label": "Copy",
+              "type": "textarea"
+            },
+            {
+              "key": "field_field_sustainability_decision_gates_gates_evidence",
+              "name": "evidence",
+              "label": "Evidence",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_decision_gates_gates_link",
+              "name": "link",
+              "label": "Link",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_decision_gates_gates_href",
+              "name": "href",
+              "label": "Href",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_sustainability_decision_gates_image",
+          "name": "image",
+          "label": "Image",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "medium"
+        },
+        {
+          "key": "field_sustainability_decision_gates_image_alt",
+          "name": "image_alt",
+          "label": "Image Alt",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_decision_gates_quote",
+          "name": "quote",
+          "label": "Quote",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_sustainability_focus_areas",
+      "name": "focus_areas",
+      "label": "Seven areas of focus.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_sustainability_focus_areas_heading",
+          "name": "heading",
+          "label": "Heading",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_focus_areas_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        },
+        {
+          "key": "field_sustainability_focus_areas_areas",
+          "name": "areas",
+          "label": "Areas",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Add row",
+          "sub_fields": [
+            {
+              "key": "field_field_sustainability_focus_areas_areas_number",
+              "name": "number",
+              "label": "Number",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_focus_areas_areas_name",
+              "name": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "field_field_sustainability_focus_areas_areas_note",
+              "name": "note",
+              "label": "Note",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_sustainability_focus_areas_footer_note",
+          "name": "footer_note",
+          "label": "Footer Note",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_sustainability_sustainability_conversion",
+      "name": "sustainability_conversion",
+      "label": "Bring the question early.",
+      "type": "group",
+      "layout": "block",
+      "sub_fields": [
+        {
+          "key": "field_sustainability_sustainability_conversion_label",
+          "name": "label",
+          "label": "Label",
+          "type": "text"
+        },
+        {
+          "key": "field_sustainability_sustainability_conversion_description",
+          "name": "description",
+          "label": "Description",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      },
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "sustainability"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}

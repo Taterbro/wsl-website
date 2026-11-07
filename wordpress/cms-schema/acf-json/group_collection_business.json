@@ -1,0 +1,54 @@
+{
+  "key": "group_collection_business",
+  "title": "Businesses",
+  "fields": [
+    {
+      "key": "field_business_title",
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "key": "field_business_short_name",
+      "name": "short_name",
+      "label": "Short Name",
+      "type": "text"
+    },
+    {
+      "key": "field_business_tags",
+      "name": "tags",
+      "label": "Tags",
+      "type": "text"
+    },
+    {
+      "key": "field_business_image",
+      "name": "image",
+      "label": "Image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium"
+    },
+    {
+      "key": "field_business_image_alt",
+      "name": "image_alt",
+      "label": "Image Alt",
+      "type": "text"
+    },
+    {
+      "key": "field_business_description",
+      "name": "description",
+      "label": "Description",
+      "type": "textarea"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "business"
+      }
+    ]
+  ],
+  "show_in_rest": 1
+}
