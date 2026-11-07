@@ -17,7 +17,6 @@ const STEPS: { title: string; copy: string }[] = [
 ];
 
 const SECONDARY_LINKS: { label: string; href: string }[] = [
-  { label: "Careers", href: "/careers" },
   { label: "Newsroom", href: "/insights/media" },
   { label: "Contact & global offices", href: "/contact" },
 ];
@@ -32,7 +31,10 @@ export default function NextSteps() {
         <Reveal className="grid gap-[clamp(30px,6vw,80px)] lg:grid-cols-[0.8fr_1.2fr] motion-reduce:translate-y-0 motion-reduce:transition-none">
           <div>
             <p className="mb-5 flex items-center gap-3 text-[0.78rem] font-semibold tracking-[0.1em] text-primary uppercase">
-              <span aria-hidden="true" className="h-px w-[clamp(24px,4vw,56px)] bg-primary" />
+              <span
+                aria-hidden="true"
+                className="h-px w-[clamp(24px,4vw,56px)] bg-primary"
+              />
               What happens next
             </p>
             <h2

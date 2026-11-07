@@ -30,7 +30,10 @@ const LENSES: Lens[] = [
     ],
     evidence: "Design model · metered output · annual review",
     links: [
-      { label: "Climate & ESG Solutions", href: "/businesses/climate-esg-solutions" },
+      {
+        label: "Climate & ESG Solutions",
+        href: "/businesses/climate-esg-solutions",
+      },
       { label: "Renewable Energy", href: "/businesses/renewable-energy" },
     ],
   },
@@ -48,7 +51,10 @@ const LENSES: Lens[] = [
     ],
     evidence: "Risk register · site audits · incident reporting",
     links: [
-      { label: "Development Partnerships", href: "/impact/development-partnerships" },
+      {
+        label: "Development Partnerships",
+        href: "/impact/development-partnerships",
+      },
       { label: "Our Businesses", href: "/businesses" },
     ],
   },
