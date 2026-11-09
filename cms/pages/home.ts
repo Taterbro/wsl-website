@@ -3,6 +3,15 @@ import { CONSTANTS } from "./constants";
 export default {
   page: { slug: "home", label: "Home" },
   sections: {
+    home_hero: {
+      label: "Building Africa's Industrial Future",
+      fields: [
+        { name: "heading", type: "text" },
+        { name: "description", type: "textarea" },
+        { name: "video", type: "file", mimeTypes: "mp4,webm" },
+        { name: "poster", type: "image" }, // shown while the video loads
+      ],
+    },
     group_thesis: {
       label: "Group Thesis",
       fields: [

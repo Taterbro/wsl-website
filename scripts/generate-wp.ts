@@ -8,6 +8,7 @@ type Field = {
   fields?: Field[];
   collection?: string;
   max?: number;
+  mimeTypes?: string;
 };
 
 const OUT = "wordpress/cms-schema";
@@ -51,6 +52,13 @@ function toAcf(field: Field, parentKey: string): any {
         max: field.max ?? "",
         return_format: "id",
         filters: ["search"],
+      };
+    case "file":
+      return {
+        ...base,
+        type: "file",
+        return_format: "url",
+        mime_types: field.mimeTypes ?? "",
       };
     default:
       throw new Error(`Unknown field type "${field.type}" at ${key}`);
