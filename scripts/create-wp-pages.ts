@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
-const { WP_API_URL, WP_USER, WP_APP_PASSWORD } = process.env;
+const { WORDPRESS_API_URL, WP_USER, WP_APP_PASSWORD } = process.env;
 const auth = Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
 
 async function wp(endpoint: string, init: RequestInit = {}) {
-  const res = await fetch(`${WP_API_URL}${endpoint}`, {
+  const res = await fetch(`${WORDPRESS_API_URL}${endpoint}`, {
     ...init,
     headers: {
       Authorization: `Basic ${auth}`,
@@ -17,10 +18,13 @@ async function wp(endpoint: string, init: RequestInit = {}) {
 }
 
 async function main() {
-  const files = fs.readdirSync("cms/pages").filter((f) => f.endsWith(".ts"));
+  const files = fs
+    .readdirSync("cms/pages")
+    .filter((f) => f.endsWith(".ts") && f !== "constants.ts");
 
   for (const file of files) {
-    const { page } = (await import(path.resolve("cms/pages", file))).default;
+    const filePath = path.resolve("cms/pages", file);
+    const { page } = (await import(pathToFileURL(filePath).href)).default;
 
     const existing = await wp(`pages?slug=${page.slug}&status=any`);
     if (existing.length) {
@@ -31,7 +35,7 @@ async function main() {
     await wp("pages", {
       method: "POST",
       body: JSON.stringify({
-        title: page.title,
+        title: page.label,
         slug: page.slug,
         status: "publish",
       }),
