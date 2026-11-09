@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "cms:generate": "tsx scripts/generate-wp.ts",
-    "cms:pages": "tsx --env-file=.env scripts/create-wp-pages.ts"
+    "cms:pages": "tsx --env-file=.env scripts/create-wp-pages.ts",
+    "cms:next": "tsx scripts/generate-next.ts",
+    "cms:all": "npm run cms:generate && npm run cms:next"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
