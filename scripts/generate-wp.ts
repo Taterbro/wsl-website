@@ -1,15 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-type Field = {
-  name: string;
-  type: string;
-  label?: string;
-  fields?: Field[];
-  collection?: string;
-  max?: number;
-  mimeTypes?: string;
-};
+
+import { FIELD_TYPES, type Field } from "./field-types";
 
 const OUT = "wordpress/cms-schema";
 const titleCase = (s: string) =>
@@ -18,51 +11,18 @@ const titleCase = (s: string) =>
 // Converts one schema field into an SCF field definition
 function toAcf(field: Field, parentKey: string): any {
   const key = `field_${parentKey}_${field.name}`;
-  const base = {
+  const definition = FIELD_TYPES[field.type];
+
+  if (!definition) {
+    throw new Error(`Unknown field type "${field.type}" at ${key}`);
+  }
+
+  return {
     key,
     name: field.name,
     label: field.label ?? titleCase(field.name),
+    ...definition.wp(field, { key, toAcf }),
   };
-
-  switch (field.type) {
-    case "text":
-    case "textarea":
-    case "url":
-      return { ...base, type: field.type };
-    case "image":
-      return {
-        ...base,
-        type: "image",
-        return_format: "array",
-        preview_size: "medium",
-      };
-    case "repeater":
-      return {
-        ...base,
-        type: "repeater",
-        layout: "block",
-        button_label: "Add row",
-        sub_fields: field.fields!.map((f) => toAcf(f, key)),
-      };
-    case "relationship":
-      return {
-        ...base,
-        type: "relationship",
-        post_type: [field.collection],
-        max: field.max ?? "",
-        return_format: "id",
-        filters: ["search"],
-      };
-    case "file":
-      return {
-        ...base,
-        type: "file",
-        return_format: "url",
-        mime_types: field.mimeTypes ?? "",
-      };
-    default:
-      throw new Error(`Unknown field type "${field.type}" at ${key}`);
-  }
 }
 
 async function loadAll(dir: string) {

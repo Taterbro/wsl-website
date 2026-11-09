@@ -14,6 +14,7 @@ export interface GroupEntity {
   mandate: string;
   responsibilities: string[];
   independent?: boolean;
+  href?: string;
 }
 
 export interface SectorRoute {
