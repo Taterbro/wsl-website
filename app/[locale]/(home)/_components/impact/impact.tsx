@@ -1,3 +1,5 @@
+import type { HomeImpact } from "@/lib/cms/generated";
+
 const METRICS: { label: string; caption: string }[] = [
   { label: "Jobs", caption: "Direct and indirect, by project" },
   { label: "Access", caption: "People reached by service" },
@@ -18,7 +20,7 @@ const IHEAL: { letter: string; label: string }[] = [
   { letter: "L", label: "Living standards, leadership & livelihoods" },
 ];
 
-export default function Impact() {
+export default function Impact({ data }: { data: HomeImpact }) {
   return (
     <section
       id="impact"
@@ -85,11 +87,7 @@ export default function Impact() {
               Development partnerships
             </p>
             <p className="text-[0.94rem] leading-[1.6] text-muted-foreground">
-              The Group and Waterlight Save Initiative share a philosophy of
-              sustainable development, but they are separate organisations.
-              Waterlight Save Initiative is an independent
-              nonprofit/development organisation, presented here under Global
-              Impact — not as a commercial subsidiary.
+              {data.wsi_description}
             </p>
             <div
               aria-label="The iHEAL framework"

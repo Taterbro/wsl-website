@@ -128,7 +128,7 @@ export function normalizeHomeGroupThesis(value: unknown): HomeGroupThesis {
 
 export function normalizeHomeBusinessPlatforms(
   value: unknown,
-  deps: { businesses: Business[] },
+  deps: { businesses: Business[] }
 ): HomeBusinessPlatforms {
   const data = toRecord(value);
   return {
@@ -188,7 +188,7 @@ export function normalizeHomeAfrica(value: unknown): HomeAfrica {
 
 export function normalizeHomeFeaturedProjects(
   value: unknown,
-  deps: { projects: Project[] },
+  deps: { projects: Project[] }
 ): HomeFeaturedProjects {
   const data = toRecord(value);
   return {
@@ -299,6 +299,8 @@ export async function getHomePage(): Promise<HomePage> {
   cacheTag("collection_project");
 
   const acf = await getPageAcf("home");
+
+  acf && console.log("acf is: ", acf);
 
   const [businesses, projects] = await Promise.all([
     getBusinesses(),

@@ -1,3 +1,5 @@
+import type { HomeHomeHero } from "@/lib/cms/generated";
+
 const WRAP_CLASS = "mx-auto w-full max-w-[1440px] px-[clamp(20px,5vw,72px)]";
 
 const DESCRIPTOR_WORDS = [
@@ -16,25 +18,19 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-[2px] border border-transparent px-[22px] py-[12px] font-sans text-[0.72rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
-const DUMMY_DATA = {
-  hero_title: "Building Africa's Industrial Future",
-  hero_description:
-    "Waterlight Group invests across industry, infrastructure and innovation to create lasting impact for African communities and global partners.",
-  hero_media: "",
-};
 
-export default function Hero() {
-  const data = DUMMY_DATA;
+export default function Hero({ data }: { data: HomeHomeHero }) {
   return (
     <section
       aria-label="Introduction"
       className="relative flex min-h-[clamp(520px,min(100svh,56.25vw),840px)] flex-col justify-end overflow-hidden bg-sidebar pb-[clamp(28px,4.5vw,56px)] text-muted pt-[64px]"
     >
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        {data.hero_media ? (
+        {data.video ? (
           <video
             className="absolute inset-0 h-full w-full object-contain object-top md:object-center"
-            src={data.hero_media}
+            src={data.video}
+            poster={data.poster?.url}
             autoPlay
             muted
             loop
@@ -62,13 +58,13 @@ export default function Hero() {
             <span
               className={`block translate-y-[105%] animate-rise motion-reduce:translate-y-0`}
             >
-              {data.hero_title || ""}
+              {data.heading || ""}
             </span>
           </span>
         </h1>
 
         <p className="mb-[clamp(20px,3vw,32px)] max-w-[60ch] text-[clamp(0.9rem,1.15vw,1.02rem)] leading-[1.5] text-muted/86 opacity-0 animate-fade-in delay-[0.6s] motion-reduce:opacity-100">
-          {data?.hero_description || ""}
+          {data.description || ""}
         </p>
 
         <div className="flex flex-wrap items-center gap-3">

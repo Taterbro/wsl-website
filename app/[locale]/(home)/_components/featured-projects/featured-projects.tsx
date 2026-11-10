@@ -1,6 +1,12 @@
+import type { HomeFeaturedProjects } from "@/lib/cms/generated";
+
 import ProjectGrid from "./project-grid";
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({
+  data,
+}: {
+  data: HomeFeaturedProjects;
+}) {
   return (
     <section
       id="projects"
@@ -13,17 +19,13 @@ export default function FeaturedProjects() {
             id="projects-title"
             className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            Featured
-            <br />
-            projects
+            {data.label}
           </h2>
           <p className="mt-5 text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal font-normal text-muted-foreground">
-            Public summaries by sector, geography and development stage.
-            Detailed materials are released to qualified parties through the
-            investor gateway.
+            {data.description}
           </p>
         </div>
-        <ProjectGrid />
+        <ProjectGrid projects={data.projects} />
       </div>
     </section>
   );

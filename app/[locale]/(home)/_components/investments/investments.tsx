@@ -1,6 +1,8 @@
+import type { HomeInvestments } from "@/lib/cms/generated";
+
 import ValueStages from "./value-stages";
 
-export default function Investments() {
+export default function Investments({ data }: { data: HomeInvestments }) {
   return (
     <section
       id="investments"
@@ -13,16 +15,13 @@ export default function Investments() {
             id="value-title"
             className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            How we create
-            <br />
-            value
+            {data.label}
           </h2>
           <p className="mt-5 text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal font-normal text-muted-foreground">
-            One operating method, from raw opportunity to generational value.
-            Select a stage to see what happens.
+            {data.description}
           </p>
         </div>
-        <ValueStages />
+        <ValueStages stages={data.stages} />
       </div>
     </section>
   );

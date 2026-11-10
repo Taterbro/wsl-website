@@ -2,78 +2,38 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-
-type StageKey =
-  | "solar"
-  | "source"
-  | "storage"
-  | "distribution"
-  | "monitoring"
-  | "maintenance"
-  | "access";
+import type { HomeInnovationStages } from "@/lib/cms/generated";
 
 interface Stage {
-  key: StageKey;
+  key: string;
   no: string;
   label: string;
   copy: string;
 }
 
-const STAGES: Stage[] = [
-  {
-    key: "solar",
-    no: "Stage 1",
-    label: "Solar energy",
-    copy: "The system draws on abundant solar generation, removing fuel dependence and running cost from the water supply chain.",
-  },
-  {
-    key: "source",
-    no: "Stage 2",
-    label: "Source & treatment",
-    copy: "Sourcing, filtration and treatment sized to demand and water quality, with capacity to serve whole districts and institutions.",
-  },
-  {
-    key: "storage",
-    no: "Stage 3",
-    label: "Smart storage",
-    copy: "Instrumented storage buffers supply against demand peaks, grid outages and drought.",
-  },
-  {
-    key: "distribution",
-    no: "Stage 4",
-    label: "Intelligent distribution",
-    copy: "Pressure-managed networks and metering deliver water where it is needed with minimal loss.",
-  },
-  {
-    key: "monitoring",
-    no: "Stage 5",
-    label: "Digital monitoring",
-    copy: "Sensors and telemetry turn physical infrastructure into live data for operators and financiers.",
-  },
-  {
-    key: "maintenance",
-    no: "Stage 6",
-    label: "Predictive maintenance",
-    copy: "Analytics anticipate failures before they interrupt service, cutting downtime and lifetime cost.",
-  },
-  {
-    key: "access",
-    no: "Stage 7",
-    label: "Reliable access",
-    copy: "The outcome: dependable water for cities, industry, agriculture, healthcare, education and communities.",
-  },
-];
+export default function WswisStages({
+  stages,
+}: {
+  stages: HomeInnovationStages[];
+}) {
+  const items: Stage[] = stages.map((stage, index) => ({
+    key: String(index),
+    no: stage.number,
+    label: stage.label,
+    copy: stage.copy,
+  }));
 
-export default function WswisStages() {
-  const [active, setActive] = useState<StageKey>("solar");
+  const [active, setActive] = useState(() => items[0]?.key ?? "");
   const [animCount, setAnimCount] = useState(0);
 
-  const select = (key: StageKey) => {
+  const select = (key: string) => {
     setActive(key);
     setAnimCount((count) => count + 1);
   };
 
-  const activeStage = STAGES.find((stage) => stage.key === active) ?? STAGES[0];
+  const activeStage = items.find((stage) => stage.key === active) ?? items[0];
+
+  if (!activeStage) return null;
 
   return (
     <>
@@ -86,7 +46,7 @@ export default function WswisStages() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-[34px] h-px bg-accent/20 max-[1080px]:hidden"
         />
-        {STAGES.map((stage) => (
+        {items.map((stage) => (
           <button
             key={stage.key}
             type="button"

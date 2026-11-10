@@ -2,74 +2,41 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-
-type StageKey =
-  | "identify"
-  | "originate"
-  | "structure"
-  | "mobilize"
-  | "build"
-  | "scale";
+import type { HomeInvestmentsStages } from "@/lib/cms/generated";
 
 interface Stage {
-  key: StageKey;
+  key: string;
   no: string;
   label: string;
   copy: string;
 }
 
-const STAGES: Stage[] = [
-  {
-    key: "identify",
-    no: "01",
-    label: "Identify",
-    copy: "We scan markets for essential-need demand across water, energy, food, housing, mobility and digital access — the fundamentals that grow as populations and economies grow.",
-  },
-  {
-    key: "originate",
-    no: "02",
-    label: "Originate",
-    copy: "We shape raw opportunities into defined projects with clear sponsors, sites, demand and a credible route to delivery.",
-  },
-  {
-    key: "structure",
-    no: "03",
-    label: "Structure",
-    copy: "We design bankable vehicles — equity, debt, joint venture, EPC, PPP and blended finance — matched to the risk and return each asset needs.",
-  },
-  {
-    key: "mobilize",
-    no: "04",
-    label: "Mobilize",
-    copy: "We convene capital, technology, expertise and delivery partners across Africa and global markets, aligning interests from the start.",
-  },
-  {
-    key: "build",
-    no: "05",
-    label: "Build",
-    copy: "We execute infrastructure and industrial assets to institutional standards of quality, governance and safety.",
-  },
-  {
-    key: "scale",
-    no: "06",
-    label: "Scale",
-    copy: "We grow the enterprise, replicate the model across markets and compound generational value for partners and communities.",
-  },
-];
-
 const STEP_BORDERS =
   "border-r border-r-[rgba(9,29,42,0.16)] last:border-r-0 max-[1080px]:border-b max-[1080px]:border-b-[rgba(9,29,42,0.16)] max-[1080px]:[&:nth-child(3)]:border-r-0 max-[1080px]:[&:nth-child(n+4)]:border-b-0 max-[760px]:[&:nth-child(2n)]:border-r-0 max-[760px]:[&:nth-child(3)]:border-r max-[760px]:[&:nth-child(5)]:border-r max-[760px]:[&:nth-child(n+5)]:border-b-0";
 
-export default function ValueStages() {
-  const [active, setActive] = useState<StageKey>("identify");
+export default function ValueStages({
+  stages,
+}: {
+  stages: HomeInvestmentsStages[];
+}) {
+  const items: Stage[] = stages.map((stage, index) => ({
+    key: String(index),
+    no: stage.number,
+    label: stage.label,
+    copy: stage.description,
+  }));
+
+  const [active, setActive] = useState(() => items[0]?.key ?? "");
   const [animCount, setAnimCount] = useState(0);
 
-  const select = (key: StageKey) => {
+  const select = (key: string) => {
     setActive(key);
     setAnimCount((count) => count + 1);
   };
 
-  const activeStage = STAGES.find((stage) => stage.key === active) ?? STAGES[0];
+  const activeStage = items.find((stage) => stage.key === active) ?? items[0];
+
+  if (!activeStage) return null;
 
   return (
     <>
@@ -78,7 +45,7 @@ export default function ValueStages() {
         aria-label="Value-creation stages"
         className="relative mt-[clamp(34px,5vw,58px)] grid grid-cols-6 border-y border-y-[rgba(9,29,42,0.16)] max-[1080px]:grid-cols-3 max-[760px]:grid-cols-2"
       >
-        {STAGES.map((stage) => (
+        {items.map((stage) => (
           <button
             key={stage.key}
             type="button"

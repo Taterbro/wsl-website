@@ -1,14 +1,15 @@
+import type { HomeGroupThesis } from "@/lib/cms/generated";
+
 import Reveal from "./reveal";
 
-const DUMMY_DATA = [
+const METRICS = [
   { value: "12+", label: "Countries" },
   { value: "8", label: "Business sectors" },
   { value: "$2.4B", label: "Assets in pipeline" },
   { value: "3,500+", label: "People employed" },
 ];
 
-export default function GroupThesis() {
-  const data = DUMMY_DATA;
+export default function GroupThesis({ data }: { data: HomeGroupThesis }) {
   return (
     <Reveal>
       <section
@@ -25,9 +26,7 @@ export default function GroupThesis() {
               id="group-title"
               className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              African roots.
-              <br />
-              <span className="text-primary">Global vision.</span>
+              {data.heading}
             </h2>
           </div>
           <div>
@@ -42,7 +41,7 @@ export default function GroupThesis() {
               From Africa to the world. From the world to Africa.
             </p>
             <dl className="mt-[26px] grid grid-cols-2 gap-px border border-[rgba(9,29,42,0.16)] bg-[rgba(9,29,42,0.16)]">
-              {data?.map((metric) => (
+              {METRICS.map((metric) => (
                 <div
                   key={metric.label}
                   className="bg-muted px-[18px] pt-[18px] pb-4"
