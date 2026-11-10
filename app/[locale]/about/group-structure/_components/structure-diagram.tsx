@@ -2,12 +2,18 @@
 
 import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import type { GroupStructureStructureDiagram } from "@/lib/cms/generated";
 import {
   GROUP_FUNCTIONS,
   entityByKey,
   type EntityKey,
   type GroupEntity,
 } from "../_data/structure";
+
+const FALLBACK_HEADING = "Select any node to see its mandate.";
+
+const FALLBACK_DESCRIPTION =
+  "The diagram shows roles and mandates, not shareholdings. Legal structure is confirmed against the approved group chart and released on request.";
 
 const ORDER: EntityKey[] = [
   "group",
@@ -113,7 +119,11 @@ function NodeButton({
   );
 }
 
-export default function StructureDiagram() {
+export default function StructureDiagram({
+  data,
+}: {
+  data: GroupStructureStructureDiagram;
+}) {
   const [active, setActive] = useState<EntityKey>("group");
   const [animCount, setAnimCount] = useState(0);
   const tabRefs = useRef(new Map<EntityKey, HTMLButtonElement | null>());
@@ -178,17 +188,15 @@ export default function StructureDiagram() {
             />
             02 — Structure diagram
           </p>
-          <h2
-            id="group-diagram-title"
-            className="font-sans text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
-          >
-            Select any node to see its mandate.
-          </h2>
-          <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-            The diagram shows roles and mandates, not shareholdings. Legal
-            structure is confirmed against the approved group chart and released
-            on request.
-          </p>
+            <h2
+              id="group-diagram-title"
+              className="font-sans text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+            >
+              {data.heading || FALLBACK_HEADING}
+            </h2>
+            <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
+              {data.description || FALLBACK_DESCRIPTION}
+            </p>
         </div>
 
         <div className="mt-[clamp(34px,5vw,58px)] grid grid-cols-[1.32fr_0.68fr] items-start gap-[clamp(26px,4vw,54px)] max-[1080px]:grid-cols-1">

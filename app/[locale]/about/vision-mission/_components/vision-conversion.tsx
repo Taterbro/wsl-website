@@ -1,9 +1,20 @@
+import type { VisionConversion as VisionConversionData } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
-const ROLES: { role: string; copy: string; href: string; link: string }[] = [
+const FALLBACK_HEADING = "Put the vision\nto work.";
+
+const FALLBACK_DESCRIPTION =
+  "A vision is only tested by real capital, real partners and real delivery. Tell us where you want to build, and we will tell you honestly what it takes.";
+
+type Role = VisionConversionData["roles"][number] & {
+  href: string;
+  link: string;
+};
+
+const LEGACY_ROLES: Role[] = [
   {
     role: "Investors",
     copy: "Capital, funds and family offices looking for structured, essential-need exposure.",
@@ -42,12 +53,37 @@ const ROLES: { role: string; copy: string; href: string; link: string }[] = [
   },
 ];
 
+const FALLBACK_ROLES = LEGACY_ROLES;
+
 const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Partner with us", href: "/contact", variant: "glow" },
   { label: "Careers", href: "/careers", variant: "ghost" },
 ];
 
-export default function VisionConversion() {
+function toRole(
+  role: VisionConversionData["roles"][number],
+  index: number
+): Role {
+  const legacy = LEGACY_ROLES.find((item) => item.role === role.role) ??
+    LEGACY_ROLES[index];
+
+  return {
+    role: role.role || legacy?.role || "",
+    copy: role.copy || legacy?.copy || "",
+    href: legacy?.href || "",
+    link: legacy?.link || "",
+  };
+}
+
+export default function VisionConversion({
+  data,
+}: {
+  data?: VisionConversionData;
+}) {
+  const heading = data?.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const roles = data?.roles.length ? data.roles.map(toRole) : FALLBACK_ROLES;
+
   return (
     <Reveal>
       <section
@@ -73,14 +109,18 @@ export default function VisionConversion() {
               id="vision-conversion-title"
               className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Put the vision
-              <br />
-              to work.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[54ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted/80">
-              A vision is only tested by real capital, real partners and real
-              delivery. Tell us where you want to build, and we will tell you
-              honestly what it takes.
+              {data?.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
               {CTAS.map((cta) => (
@@ -100,7 +140,7 @@ export default function VisionConversion() {
           </div>
 
           <ul className="mt-[clamp(34px,5vw,58px)] grid list-none grid-cols-2 gap-x-[clamp(24px,4vw,64px)] p-0 max-[760px]:grid-cols-1">
-            {ROLES.map((role, index) => (
+            {roles.map((role, index) => (
               <li key={role.role} className="border-t border-accent/20">
                 <a
                   href={role.href}

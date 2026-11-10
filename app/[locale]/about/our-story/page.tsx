@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+import { getOurStoryPage } from "@/lib/cms/generated";
+
 import StoryHero from "./_components/story-hero";
 import StoryOrigin from "./_components/story-origin";
 import StoryMilestones from "./_components/story-milestones";
@@ -14,17 +17,19 @@ export const metadata: Metadata = {
     "How Waterlight Group grew from an African engineering-led water practice into a global enterprise platform building, investing in and scaling businesses, infrastructure and technologies.",
 };
 
-export default function OurStoryPage() {
+export default async function OurStoryPage() {
+  const data = await getOurStoryPage();
+
   return (
     <main>
-      <StoryHero />
-      <StoryOrigin />
-      <StoryMilestones />
-      <StoryValueChain />
+      <StoryHero data={data.story_hero} />
+      <StoryOrigin data={data.story_origin} />
+      <StoryMilestones data={data.story_milestones} />
+      <StoryValueChain data={data.story_value_chain} />
       <StoryEntities />
-      <StoryFounder />
-      <StoryFootprint />
-      <StoryConversion />
+      <StoryFounder data={data.story_founder} />
+      <StoryFootprint data={data.story_footprint} />
+      <StoryConversion data={data.story_conversion} />
     </main>
   );
 }

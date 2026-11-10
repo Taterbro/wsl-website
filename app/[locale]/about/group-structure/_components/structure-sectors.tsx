@@ -1,8 +1,66 @@
-import Image from "next/image";
+import type { GroupStructureStructureSectors } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
-import { SECTOR_ROUTES, entityByKey } from "../_data/structure";
+import {
+  SECTOR_ROUTES,
+  entityByKey,
+  type EntityKey,
+} from "../_data/structure";
 
-export default function StructureSectors() {
+const FALLBACK_HEADING = "Which entity\ndoes what.";
+
+const FALLBACK_DESCRIPTION =
+  "Eight sectors, three routes through the group: capital and development, industrial delivery, and the people and innovation that keep both running.";
+
+type Business = GroupStructureStructureSectors["businesses"][number];
+
+type SectorCard = {
+  key: string | number;
+  sector: string;
+  line: string;
+  image: Business["image"];
+  image_alt: string;
+  entities: EntityKey[];
+};
+
+function legacyEntities(sector: string): EntityKey[] {
+  return SECTOR_ROUTES.find((route) => route.sector === sector)?.entities ?? [];
+}
+
+function toSectorCard(business: Business): SectorCard {
+  const sector = business.title || business.postTitle;
+
+  return {
+    key: business.id,
+    sector,
+    line: business.description,
+    image: business.image,
+    image_alt: business.image_alt,
+    entities: legacyEntities(sector),
+  };
+}
+
+const FALLBACK_SECTORS: SectorCard[] = SECTOR_ROUTES.map(
+  ({ sector, line, entities }) => ({
+    key: sector,
+    sector,
+    line,
+    image: null,
+    image_alt: "",
+    entities,
+  })
+);
+
+export default function StructureSectors({
+  data,
+}: {
+  data: GroupStructureStructureSectors;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const sectors = data.businesses.length
+    ? data.businesses.map(toSectorCard)
+    : FALLBACK_SECTORS;
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -23,14 +81,18 @@ export default function StructureSectors() {
                 id="group-sectors-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Which entity
-                <br />
-                does what.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-                Eight sectors, three routes through the group: capital and
-                development, industrial delivery, and the people and innovation
-                that keep both running.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
             <a
@@ -43,41 +105,52 @@ export default function StructureSectors() {
           </div>
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid grid-cols-4 gap-[clamp(12px,1.4vw,20px)] max-[1180px]:grid-cols-2 max-[680px]:grid-cols-1">
-            {SECTOR_ROUTES.map((route) => (
-              <article className="group flex flex-col border border-[rgba(9,29,42,0.16)] bg-background transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary/45">
-                <span className="relative block aspect-[16/10] overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
-                  <Image
-                    src={route.image}
-                    alt={route.alt}
-                    fill
-                    sizes="(max-width: 680px) 100vw, (max-width: 1180px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
-                  />
-                </span>
-                <div className="flex flex-1 flex-col gap-3 p-[clamp(14px,1.8vw,22px)]">
-                  <h3 className="font-sans text-[clamp(0.98rem,1.2vw,1.1rem)] leading-[1.14] font-extrabold uppercase [font-stretch:114%]">
-                    <span className="transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
-                      {route.sector}
-                    </span>
-                  </h3>
-                  <p className="flex-1 text-[0.86rem] leading-[1.55] text-muted-foreground">
-                    {route.line}
-                  </p>
-                  <ul className="flex list-none flex-wrap gap-[6px] border-t border-[rgba(9,29,42,0.16)] p-0 pt-3">
-                    {route.entities.map((key) => {
-                      const entity = entityByKey(key);
-                      return (
-                        <li key={key}>
-                          <span className="inline-flex items-center rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[10px] py-[6px] text-[0.68rem] font-semibold tracking-[0.06em] text-primary uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
-                            {entity.shortName}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </article>
-            ))}
+            {sectors.map((route) => {
+              const alt = route.image
+                ? route.image.alt || route.image_alt
+                : "";
+
+              return (
+                <article
+                  key={route.key}
+                  className="group flex flex-col border border-[rgba(9,29,42,0.16)] bg-background transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary/45"
+                >
+                  <span className="relative block aspect-[16/10] overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
+                    {route.image ? (
+                      <div
+                        role={alt ? "img" : undefined}
+                        aria-label={alt || undefined}
+                        aria-hidden={alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
+                        style={{ backgroundImage: `url(${route.image.url})` }}
+                      />
+                    ) : null}
+                  </span>
+                  <div className="flex flex-1 flex-col gap-3 p-[clamp(14px,1.8vw,22px)]">
+                    <h3 className="font-sans text-[clamp(0.98rem,1.2vw,1.1rem)] leading-[1.14] font-extrabold uppercase [font-stretch:114%]">
+                      <span className="transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+                        {route.sector}
+                      </span>
+                    </h3>
+                    <p className="flex-1 text-[0.86rem] leading-[1.55] text-muted-foreground">
+                      {route.line}
+                    </p>
+                    <ul className="flex list-none flex-wrap gap-[6px] border-t border-[rgba(9,29,42,0.16)] p-0 pt-3">
+                      {route.entities.map((key) => {
+                        const entity = entityByKey(key);
+                        return (
+                          <li key={key}>
+                            <span className="inline-flex items-center rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[10px] py-[6px] text-[0.68rem] font-semibold tracking-[0.06em] text-primary uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+                              {entity.shortName}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <p className="mt-[clamp(22px,3vw,34px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">

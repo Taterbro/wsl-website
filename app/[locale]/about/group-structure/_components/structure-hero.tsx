@@ -1,4 +1,4 @@
-import Image from "next/image";
+import type { GroupStructureStructureHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -8,16 +8,28 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Our businesses", href: "/businesses", variant: "ghost" },
 ];
 
-// PLACEHOLDER — figures are counted from the content published on this site
-// and must be reconciled with the approved group chart.
-const FACTS: { value: string; label: string }[] = [
+const FALLBACK_HEADING = "One group.\nFour platforms.\nOne mandate.";
+
+const FALLBACK_DESCRIPTION =
+  "The group is built as four operating companies behind one master brand — each with a defined mandate, so capital, technology and delivery land in the right place the first time.";
+
+const FALLBACK_FACTS: { value: string; label: string }[] = [
   { value: "01", label: "Master brand" },
   { value: "04", label: "Operating companies" },
   { value: "08", label: "Sectors served" },
   { value: "01", label: "Independent nonprofit" },
 ];
 
-export default function StructureHero() {
+export default function StructureHero({
+  data,
+}: {
+  data: GroupStructureStructureHero;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const imageAlt = data.image ? data.image.alt || data.image_alt : "";
+
   return (
     <section
       aria-labelledby="group-structure-hero-title"
@@ -64,16 +76,20 @@ export default function StructureHero() {
               id="group-structure-hero-title"
               className="max-w-[13ch] font-sans text-[clamp(2.5rem,7.2vw,6.1rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              One group.
-              <br />
-              Four platforms.
-              <br />
-              <span className="text-accent">One mandate.</span>
+              {headingLines.length === 3 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                  <br />
+                  <span className="text-accent">{headingLines[2]}</span>
+                </>
+              ) : (
+                heading
+              )}
             </h1>
             <p className="mt-[clamp(20px,3vw,30px)] max-w-[54ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
-              The group is built as four operating companies behind one master
-              brand — each with a defined mandate, so capital, technology and
-              delivery land in the right place the first time.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-[clamp(26px,3.5vw,38px)] flex flex-wrap items-center gap-3">
               {CTAS.map((cta) => (
@@ -95,14 +111,15 @@ export default function StructureHero() {
           <figure className="relative">
             <div className="relative">
               <div className="relative aspect-[16/11] overflow-hidden border border-accent/20">
-                <Image
-                  src="/placeholders/group-structure-hero.png"
-                  alt="Placeholder artwork standing in for photography of a Waterlight group office tower at dusk"
-                  fill
-                  preload
-                  sizes="(max-width: 980px) 100vw, 44vw"
-                  className="object-cover"
-                />
+                {data.image ? (
+                  <div
+                    role={imageAlt ? "img" : undefined}
+                    aria-label={imageAlt || undefined}
+                    aria-hidden={imageAlt ? undefined : true}
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${data.image.url})` }}
+                  />
+                ) : null}
               </div>
 
               <div className="absolute inset-x-[clamp(10px,1.6vw,22px)] bottom-[clamp(10px,1.6vw,22px)] border border-accent/25 bg-sidebar/95 px-[clamp(14px,2.2vw,24px)] py-[clamp(14px,2vw,20px)] backdrop-blur-sm">
@@ -110,7 +127,7 @@ export default function StructureHero() {
                   At a glance
                 </p>
                 <dl className="mt-3 grid grid-cols-2 gap-x-[clamp(12px,2vw,26px)] gap-y-3">
-                  {FACTS.map((fact) => (
+                  {facts.map((fact) => (
                     <div key={fact.label}>
                       <dt className="sr-only">{fact.label}</dt>
                       <dd>
@@ -127,10 +144,12 @@ export default function StructureHero() {
               </div>
             </div>
 
-            <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-              PLACEHOLDER — approved photography slot. Replace with an image
-              cleared for publication.
-            </figcaption>
+            {data.image ? (
+              <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+                PLACEHOLDER — approved photography slot. Replace with an image
+                cleared for publication.
+              </figcaption>
+            ) : null}
           </figure>
         </div>
       </div>

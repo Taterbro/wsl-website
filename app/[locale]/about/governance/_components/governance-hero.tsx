@@ -1,4 +1,4 @@
-import Image from "next/image";
+import type { GovernanceGovernanceHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -8,27 +8,40 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Group structure", href: "/about/group-structure", variant: "ghost" },
 ];
 
-const PRINCIPLES: { label: string; value: string }[] = [
+const FALLBACK_HEADING = "Oversight that\nsurvives\ncontact with reality.";
+
+const FALLBACK_DESCRIPTION =
+  "A group that builds infrastructure is judged on what it can prove. This is who decides what, who checks the work, and how every published claim is signed off.";
+
+const FALLBACK_PRINCIPLES: { label: string; value: string }[] = [
   { label: "Bodies", value: "Board · 3 committees · Executive" },
   { label: "Named only when approved", value: "Membership published on approval" },
   { label: "Every claim checked", value: "Owner, source, approval status" },
 ];
 
-export default function GovernanceHero() {
+export default function GovernanceHero({
+  data,
+}: {
+  data: GovernanceGovernanceHero;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const principles = data.principles.length
+    ? data.principles
+    : FALLBACK_PRINCIPLES;
+
   return (
     <section
       aria-labelledby="governance-hero-title"
       className="relative isolate overflow-hidden bg-sidebar text-muted"
     >
       <div aria-hidden="true" className="relative h-[clamp(280px,34vw,460px)] w-full">
-        <Image
-          src="/placeholders/governance-hero.png"
-          alt="Placeholder artwork standing in for photography of a boardroom in an African corporate headquarters"
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover"
-        />
+        {data.image ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${data.image.url})` }}
+          />
+        ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/55 to-sidebar/25" />
       </div>
 
@@ -65,17 +78,21 @@ export default function GovernanceHero() {
               id="governance-hero-title"
               className="font-sans text-[clamp(2.4rem,6.6vw,5.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              Oversight that
-              <br />
-              survives
-              <br />
-              <span className="text-accent">contact with reality.</span>
+              {headingLines.length === 3 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                  <br />
+                  <span className="text-accent">{headingLines[2]}</span>
+                </>
+              ) : (
+                heading
+              )}
             </h1>
 
             <p className="mt-[clamp(20px,2.8vw,30px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.6] text-muted/85">
-              A group that builds infrastructure is judged on what it can prove.
-              This is who decides what, who checks the work, and how every
-              published claim is signed off.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
 
             <div className="mt-[clamp(24px,3.4vw,36px)] flex flex-wrap items-center gap-3">
@@ -97,7 +114,7 @@ export default function GovernanceHero() {
 
           <div className="self-end pb-[clamp(4px,1vw,12px)]">
             <dl className="grid list-none grid-cols-1 gap-px bg-accent/20 p-0">
-              {PRINCIPLES.map((principle) => (
+              {principles.map((principle) => (
                 <div
                   key={principle.label}
                   className="bg-sidebar px-[clamp(14px,2vw,22px)] py-[clamp(14px,1.8vw,20px)]"
@@ -111,10 +128,12 @@ export default function GovernanceHero() {
                 </div>
               ))}
             </dl>
-            <p className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-              PLACEHOLDER — approved photography slot. Replace with an image
-              cleared for publication.
-            </p>
+            {data.image ? (
+              <p className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+                PLACEHOLDER — approved photography slot. Replace with an image
+                cleared for publication.
+              </p>
+            ) : null}
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import type { OurStoryStoryMilestones } from "@/lib/cms/generated";
 import BusinessRail, {
   type Sector,
 } from "../../../(home)/_components/business-platforms/business-rail";
@@ -6,8 +7,10 @@ interface Milestone extends Sector {
   placeholder?: boolean;
 }
 
+type MilestoneData = OurStoryStoryMilestones["milestones"][number];
+
 // PLACEHOLDER: replace with approved group milestone dates and approved narrative
-const MILESTONES: Milestone[] = [
+const FALLBACK_MILESTONES: Milestone[] = [
   {
     no: "2011",
     title: "Founded in Africa",
@@ -70,7 +73,33 @@ const MILESTONES: Milestone[] = [
   },
 ];
 
-export default function StoryMilestones() {
+const FALLBACK_HEADING = "How we\ngot here";
+
+const FALLBACK_LEDE =
+  "Six moments that carried a single engineering practice into a multi-platform group.";
+
+function toMilestone(milestone: MilestoneData, index: number): Milestone {
+  const fallback =
+    FALLBACK_MILESTONES[index % FALLBACK_MILESTONES.length] ??
+    FALLBACK_MILESTONES[0];
+
+  return {
+    ...milestone,
+    background: fallback.background,
+  };
+}
+
+export default function StoryMilestones({
+  data,
+}: {
+  data: OurStoryStoryMilestones;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const milestones = data.milestones.length
+    ? data.milestones.map(toMilestone)
+    : FALLBACK_MILESTONES;
+
   return (
     <section
       id="story-milestones"
@@ -83,13 +112,19 @@ export default function StoryMilestones() {
             id="story-milestones-title"
             className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            How we
-            <br />
-            got here
+            {headingLines.length === 2 ? (
+              <>
+                {headingLines[0]}
+                <br />
+                {headingLines[1]}
+              </>
+            ) : (
+              heading
+            )}
           </h2>
         }
-        lede="Six moments that carried a single engineering practice into a multi-platform group."
-        sectors={MILESTONES}
+        lede={data.description || FALLBACK_LEDE}
+        sectors={milestones}
         label="Scrollable list of group milestones"
       />
       <p className="mx-auto mt-5 max-w-[1440px] px-[clamp(20px,5vw,72px)] text-[0.72rem] leading-[1.5] text-muted/55">

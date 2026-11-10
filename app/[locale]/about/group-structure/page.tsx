@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+import { getGroupStructurePage } from "@/lib/cms/generated";
+
 import StructureHero from "./_components/structure-hero";
 import StructureDiagram from "./_components/structure-diagram";
 import StructureCompanies from "./_components/structure-companies";
@@ -11,14 +14,16 @@ export const metadata: Metadata = {
     "How the Waterlight Group is organised: the master brand, four operating companies with defined mandates, shared group functions and the route each sector takes through the group.",
 };
 
-export default function GroupStructurePage() {
+export default async function GroupStructurePage() {
+  const data = await getGroupStructurePage();
+
   return (
     <main>
-      <StructureHero />
-      <StructureDiagram />
-      <StructureCompanies />
-      <StructureSectors />
-      <StructureConversion />
+      <StructureHero data={data.structure_hero} />
+      <StructureDiagram data={data.structure_diagram} />
+      <StructureCompanies data={data.structure_companies} />
+      <StructureSectors data={data.structure_sectors} />
+      <StructureConversion data={data.structure_conversion} />
     </main>
   );
 }

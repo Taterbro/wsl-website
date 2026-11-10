@@ -1,4 +1,11 @@
-const CHAIN: { no: string; label: string; copy: string }[] = [
+import type { OurStoryStoryValueChain } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "One chain, carried end to end.";
+
+const FALLBACK_DESCRIPTION =
+  "The same sequence runs behind every platform — from the first signal of demand to the value that outlives the asset.";
+
+const FALLBACK_CHAIN: { no: string; label: string; copy: string }[] = [
   { no: "01", label: "Opportunity", copy: "Essential-need demand, identified in market." },
   { no: "02", label: "Investment", copy: "Capital structured for the asset it funds." },
   { no: "03", label: "Innovation", copy: "Technology engineered for the context." },
@@ -8,7 +15,13 @@ const CHAIN: { no: string; label: string; copy: string }[] = [
   { no: "07", label: "Generational value", copy: "Long-horizon, compounding returns." },
 ];
 
-export default function StoryValueChain() {
+export default function StoryValueChain({
+  data,
+}: {
+  data: OurStoryStoryValueChain;
+}) {
+  const chain = data.chain.length ? data.chain : FALLBACK_CHAIN;
+
   return (
     <section
       id="story-value-chain"
@@ -24,11 +37,10 @@ export default function StoryValueChain() {
             id="story-value-chain-title"
             className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            One chain, carried end to end.
+            {data.label || FALLBACK_HEADING}
           </h2>
           <p className="mt-5 text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted-foreground">
-            The same sequence runs behind every platform — from the first
-            signal of demand to the value that outlives the asset.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </div>
 
@@ -38,7 +50,7 @@ export default function StoryValueChain() {
             className="absolute inset-x-0 top-[13px] h-px bg-[rgba(9,29,42,0.16)] max-[1080px]:hidden"
           />
           <ol className="relative grid grid-cols-7 gap-x-[clamp(10px,1.6vw,22px)] max-[1080px]:grid-cols-4 max-[760px]:grid-cols-2">
-            {CHAIN.map((step) => (
+            {chain.map((step) => (
               <li key={step.no}>
                 <span
                   aria-hidden="true"

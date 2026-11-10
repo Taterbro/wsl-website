@@ -1,3 +1,4 @@
+import type { GroupStructureStructureConversion } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 const BTN_BASE_CLASS =
@@ -7,6 +8,11 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Partner with us", href: "/contact", variant: "glow" },
   { label: "Careers", href: "/careers", variant: "ghost" },
 ];
+
+const FALLBACK_HEADING = "Start with the\nright entity.";
+
+const FALLBACK_DESCRIPTION =
+  "Every mandate has a door. Tell us which one you need, and we will route you to the team that owns it.";
 
 const ROLES: { role: string; copy: string; href: string }[] = [
   {
@@ -31,7 +37,14 @@ const ROLES: { role: string; copy: string; href: string }[] = [
   },
 ];
 
-export default function StructureConversion() {
+export default function StructureConversion({
+  data,
+}: {
+  data: GroupStructureStructureConversion;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -57,13 +70,18 @@ export default function StructureConversion() {
                 id="group-conversion-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Start with the
-                <br />
-                right entity.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[48ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-                Every mandate has a door. Tell us which one you need, and we
-                will route you to the team that owns it.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
                 {CTAS.map((cta) => (

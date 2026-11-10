@@ -1,10 +1,38 @@
+import type { GovernanceGovernanceTrust } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { CLAIM_MATRIX, GOVERNANCE_ROLES } from "../_data/governance";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
-export default function GovernanceTrust() {
+const FALLBACK_HEADING = "Nothing goes\nlive unreviewed.";
+
+const FALLBACK_DESCRIPTION =
+  "Before any material claim is published, it must have an owner, a source and an approval status. If something cannot be verified, it is labelled — or it is not published.";
+
+const FALLBACK_SPEAKS_HEADING = "Governed for\nscrutiny.";
+
+const FALLBACK_SPEAKS_DESCRIPTION =
+  "Governments, institutions and investors expect a group to be able to show how decisions are made. We would rather show the framework than overstate the roster.";
+
+const FALLBACK_CTA_HEADING = "Need a governed partner?";
+
+const FALLBACK_CTA_DESCRIPTION =
+  "Start a conversation through the route that fits your role. Confidential material is released only through an authenticated process.";
+
+export default function GovernanceTrust({
+  data,
+}: {
+  data: GovernanceGovernanceTrust;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const speaksHeading = data.speaks_heading || FALLBACK_SPEAKS_HEADING;
+  const speaksHeadingLines = speaksHeading.split("\n");
+  const claimMatrix = data.claim_matrix.length
+    ? data.claim_matrix
+    : CLAIM_MATRIX;
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -25,14 +53,18 @@ export default function GovernanceTrust() {
                 id="governance-trust-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Nothing goes
-                <br />
-                live unreviewed.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-                Before any material claim is published, it must have an owner, a
-                source and an approval status. If something cannot be
-                verified, it is labelled — or it is not published.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
 
               <div className="mt-[clamp(26px,3.4vw,38px)] border border-[rgba(9,29,42,0.16)]">
@@ -44,7 +76,7 @@ export default function GovernanceTrust() {
                     Approval requirement
                   </span>
                 </div>
-                {CLAIM_MATRIX.map((row) => (
+                {claimMatrix.map((row) => (
                   <div
                     key={row.claim}
                     className="grid grid-cols-[0.9fr_1.1fr] gap-x-[clamp(12px,2vw,26px)] border-b border-[rgba(9,29,42,0.16)] px-[clamp(16px,2.2vw,26px)] py-[clamp(12px,1.6vw,16px)] last:border-b-0 max-[680px]:grid-cols-1 max-[680px]:gap-y-2"
@@ -75,14 +107,18 @@ export default function GovernanceTrust() {
                   05 — Who this speaks to
                 </p>
                 <h3 className="font-sans text-[clamp(1.4rem,2.8vw,2.2rem)] leading-[1.06] font-extrabold uppercase [font-stretch:116%]">
-                  Governed for
-                  <br />
-                  scrutiny.
+                  {speaksHeadingLines.length === 2 ? (
+                    <>
+                      {speaksHeadingLines[0]}
+                      <br />
+                      {speaksHeadingLines[1]}
+                    </>
+                  ) : (
+                    speaksHeading
+                  )}
                 </h3>
                 <p className="mt-4 max-w-[48ch] text-[0.95rem] leading-[1.6] text-muted-foreground">
-                  Governments, institutions and investors expect a group to be
-                  able to show how decisions are made. We would rather show the
-                  framework than overstate the roster.
+                  {data.speaks_description || FALLBACK_SPEAKS_DESCRIPTION}
                 </p>
                 <ul className="mt-[clamp(20px,2.8vw,28px)] list-none p-0">
                   {GOVERNANCE_ROLES.map((role) => (
@@ -117,12 +153,10 @@ export default function GovernanceTrust() {
                   Build with Waterlight
                 </p>
                 <h4 className="mt-3 font-sans text-[clamp(1.25rem,2.2vw,1.8rem)] leading-[1.08] font-extrabold uppercase [font-stretch:114%]">
-                  Need a governed partner?
+                  {data.cta_heading || FALLBACK_CTA_HEADING}
                 </h4>
                 <p className="mt-3 max-w-[44ch] text-[0.92rem] leading-[1.6] text-muted/80">
-                  Start a conversation through the route that fits your role.
-                  Confidential material is released only through an authenticated
-                  process.
+                  {data.cta_description || FALLBACK_CTA_DESCRIPTION}
                 </p>
                 <a
                   href="/contact"

@@ -1,6 +1,12 @@
+import type { VisionMissionVisionCommitments } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
-const COMMITMENTS: {
+const FALLBACK_HEADING = "Commitments we publish.";
+
+const FALLBACK_DESCRIPTION =
+  "Five commitments that decide how the group works — and how it is judged by partners, regulators and communities.";
+
+const FALLBACK_COMMITMENTS: {
   no: string;
   title: string;
   copy: string;
@@ -32,7 +38,15 @@ const COMMITMENTS: {
   },
 ];
 
-export default function VisionCommitments() {
+export default function VisionCommitments({
+  data,
+}: {
+  data: VisionMissionVisionCommitments;
+}) {
+  const commitments = data.commitments.length
+    ? data.commitments
+    : FALLBACK_COMMITMENTS;
+
   return (
     <Reveal>
       <section
@@ -53,16 +67,15 @@ export default function VisionCommitments() {
               id="vision-commitments-title"
               className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Commitments we publish.
+              {data.label || FALLBACK_HEADING}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted-foreground">
-              Five commitments that decide how the group works — and how it is
-              judged by partners, regulators and communities.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <ol className="mt-[clamp(34px,5vw,58px)] list-none border-t border-[rgba(9,29,42,0.16)] p-0">
-            {COMMITMENTS.map((item) => (
+            {commitments.map((item) => (
               <li
                 key={item.no}
                 className="border-b border-[rgba(9,29,42,0.16)]"

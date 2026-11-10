@@ -1,4 +1,4 @@
-import Image from "next/image";
+import type { OurStoryStoryHero } from "@/lib/cms/generated";
 
 const WRAP_CLASS = "mx-auto w-full max-w-[1440px] px-[clamp(20px,5vw,72px)]";
 
@@ -14,7 +14,17 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Start a conversation", href: "/contact", variant: "ghost" },
 ];
 
-export default function StoryHero() {
+const FALLBACK_DESCRIPTION =
+  "Waterlight Group began as an engineering-led response to one problem — African cities could not finance, build or maintain the water their growth depended on. The same discipline now runs across eight business platforms and five operating regions.";
+
+const FALLBACK_IMAGE_ALT =
+  "Placeholder artwork standing in for archival photography of Waterlight engineers on a water treatment plant";
+
+export default function StoryHero({ data }: { data: OurStoryStoryHero }) {
+  const imageAlt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="story-hero-title"
@@ -44,15 +54,16 @@ export default function StoryHero() {
             id="story-hero-title"
             className="max-w-[15ch] font-sans text-[clamp(2.5rem,7.4vw,6.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            It started with <span className="text-accent">water.</span>
-            <br />
-            It became a platform.
+            {data.heading || (
+              <>
+                It started with <span className="text-accent">water.</span>
+                <br />
+                It became a platform.
+              </>
+            )}
           </h1>
           <p className="mt-[clamp(22px,3vw,30px)] max-w-[54ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
-            Waterlight Group began as an engineering-led response to one problem
-            — African cities could not finance, build or maintain the water
-            their growth depended on. The same discipline now runs across eight
-            business platforms and five operating regions.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
           <div className="mt-[clamp(28px,4vw,42px)] flex flex-wrap items-center gap-3">
             {CTAS.map((cta) => (
@@ -73,18 +84,22 @@ export default function StoryHero() {
 
         <figure>
           <div className="relative aspect-[16/11] overflow-hidden border border-accent/20">
-            <Image
-              src="/placeholders/story-hero-archive.png"
-              alt="Placeholder artwork standing in for archival photography of Waterlight engineers on a water treatment plant"
-              fill
-              sizes="(max-width: 1080px) 100vw, 46vw"
-              className="object-cover"
-            />
+            {data.image ? (
+              <div
+                role={imageAlt ? "img" : undefined}
+                aria-label={imageAlt || undefined}
+                aria-hidden={imageAlt ? undefined : true}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
           </div>
-          <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-            PLACEHOLDER — archival image slot. Replace with an approved founding
-            photograph.
-          </figcaption>
+          {data.image ? (
+            <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+              PLACEHOLDER — archival image slot. Replace with an approved
+              founding photograph.
+            </figcaption>
+          ) : null}
         </figure>
       </div>
     </section>

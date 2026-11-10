@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import type { VisionMissionVisionDelivery } from "@/lib/cms/generated";
 import { cn } from "@/lib/utils";
 
-interface Stage {
-  no: string;
-  name: string;
-  copy: string;
-}
+type Stage = VisionMissionVisionDelivery["stages"][number];
 
-const STAGES: Stage[] = [
+const FALLBACK_HEADING = "One logic.\nSeven stages.";
+
+const FALLBACK_DESCRIPTION =
+  "The same value-creation logic runs behind every platform, in every region. Open a stage to see what it covers.";
+
+const FALLBACK_STAGES: Stage[] = [
   {
     no: "01",
     name: "Opportunity",
@@ -47,8 +49,15 @@ const STAGES: Stage[] = [
   },
 ];
 
-export default function VisionDelivery() {
-  const [open, setOpen] = useState<string | null>(STAGES[0].no);
+export default function VisionDelivery({
+  data,
+}: {
+  data: VisionMissionVisionDelivery;
+}) {
+  const stages = data.stages.length ? data.stages : FALLBACK_STAGES;
+  const [open, setOpen] = useState<string | null>(stages[0]?.no ?? null);
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
 
   return (
     <section
@@ -74,13 +83,18 @@ export default function VisionDelivery() {
             id="vision-delivery-title"
             className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            One logic.
-            <br />
-            Seven stages.
+            {headingLines.length === 2 ? (
+              <>
+                {headingLines[0]}
+                <br />
+                {headingLines[1]}
+              </>
+            ) : (
+              heading
+            )}
           </h2>
           <p className="mt-[clamp(20px,2.6vw,28px)] max-w-[56ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted/80">
-            The same value-creation logic runs behind every platform, in every
-            region. Open a stage to see what it covers.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </div>
 
@@ -90,7 +104,7 @@ export default function VisionDelivery() {
             className="absolute inset-y-[26px] left-[13px] w-px bg-linear-to-b from-accent/45 via-accent/15 to-transparent"
           />
           <ol className="list-none p-0">
-            {STAGES.map((stage) => {
+            {stages.map((stage) => {
               const isOpen = open === stage.no;
               return (
                 <li

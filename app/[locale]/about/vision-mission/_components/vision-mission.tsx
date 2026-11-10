@@ -1,6 +1,13 @@
+import type { VisionMissionVisionMission } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
-const VERBS: { no: string; verb: string; copy: string }[] = [
+const FALLBACK_HEADING =
+  "To identify opportunities, mobilize capital, develop enterprises and deploy innovative solutions across critical sectors.";
+
+const FALLBACK_DESCRIPTION =
+  "Four verbs carry the mission. Each one is a discipline with owners, a stage gate and a standard — not an aspiration.";
+
+const FALLBACK_VERBS: { no: string; verb: string; copy: string }[] = [
   {
     no: "01",
     verb: "Identify",
@@ -46,7 +53,13 @@ const SECTORS: { label: string; href: string }[] = [
   { label: "Climate & ESG", href: "/businesses/climate-esg" },
 ];
 
-export default function VisionMission() {
+export default function VisionMission({
+  data,
+}: {
+  data: VisionMissionVisionMission;
+}) {
+  const verbs = data.verbs.length ? data.verbs : FALLBACK_VERBS;
+
   return (
     <Reveal>
       <section
@@ -67,17 +80,15 @@ export default function VisionMission() {
               id="vision-mission-title"
               className="font-sans text-[clamp(1.4rem,3vw,2.5rem)] leading-[1.14] font-extrabold tracking-[-0.01em]"
             >
-              To identify opportunities, mobilize capital, develop enterprises
-              and deploy innovative solutions across critical sectors.
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <p className="mt-[clamp(20px,2.6vw,28px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Four verbs carry the mission. Each one is a discipline with owners,
-              a stage gate and a standard — not an aspiration.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <ol className="mt-[clamp(34px,5vw,60px)] grid list-none grid-cols-4 gap-px border border-[rgba(9,29,42,0.16)] bg-[rgba(9,29,42,0.16)] p-0 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
-            {VERBS.map((verb) => (
+            {verbs.map((verb) => (
               <li
                 key={verb.no}
                 className="flex flex-col gap-3 bg-muted px-[clamp(18px,2.4vw,32px)] pt-[clamp(20px,2.4vw,30px)] pb-[clamp(20px,2.4vw,30px)]"

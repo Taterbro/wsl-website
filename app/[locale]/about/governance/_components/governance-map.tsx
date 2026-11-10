@@ -2,15 +2,47 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import type { GovernanceGovernanceMap } from "@/lib/cms/generated";
 import {
   GOVERNANCE_BODIES,
   type GovernanceBody,
 } from "../_data/governance";
 
-const BOARD = GOVERNANCE_BODIES.find((body) => body.tier === "board");
-const COMMITTEES = GOVERNANCE_BODIES.filter((body) => body.tier === "committee");
-const EXECUTIVE = GOVERNANCE_BODIES.find((body) => body.tier === "executive");
-const ASSURANCE = GOVERNANCE_BODIES.find((body) => body.tier === "assurance");
+const FALLBACK_HEADING = "Who decides\nwhat.";
+
+const FALLBACK_DESCRIPTION =
+  "Select any body to see its remit. Membership, titles and affiliations are published only once the body is formally constituted, approved and current.";
+
+const TIERS = ["board", "committee", "executive", "assurance"] as const;
+
+function toTier(value: string): GovernanceBody["tier"] {
+  return (TIERS as readonly string[]).includes(value)
+    ? (value as GovernanceBody["tier"])
+    : "committee";
+}
+
+function toKey(name: string): string {
+  return (
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "") || "body"
+  );
+}
+
+function toBodies(rows: GovernanceGovernanceMap["bodies"]): GovernanceBody[] {
+  return rows.map((row) => ({
+    key: toKey(row.name),
+    name: row.name,
+    tier: toTier(row.tier),
+    remit: row.remit,
+    status: row.status,
+    scope: row.scope
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean),
+  }));
+}
 
 function BodyCard({
   body,
@@ -66,15 +98,25 @@ function BodyCard({
   );
 }
 
-export default function GovernanceMap() {
-  const [active, setActive] = useState<string>(
-    GOVERNANCE_BODIES[0]?.key ?? "board"
-  );
+export default function GovernanceMap({
+  data,
+}: {
+  data: GovernanceGovernanceMap;
+}) {
+  const bodies = data.bodies.length ? toBodies(data.bodies) : GOVERNANCE_BODIES;
+  const board = bodies.find((body) => body.tier === "board");
+  const committees = bodies.filter((body) => body.tier === "committee");
+  const executive = bodies.find((body) => body.tier === "executive");
+  const assurance = bodies.find((body) => body.tier === "assurance");
 
-  const body =
-    GOVERNANCE_BODIES.find((item) => item.key === active) ?? GOVERNANCE_BODIES[0];
+  const [active, setActive] = useState<string>(bodies[0]?.key ?? "board");
 
-  if (!body || !BOARD || !EXECUTIVE || !ASSURANCE) {
+  const body = bodies.find((item) => item.key === active) ?? bodies[0];
+
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
+  if (!body || !board || !executive || !assurance) {
     return null;
   }
 
@@ -98,14 +140,18 @@ export default function GovernanceMap() {
               id="governance-map-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Who decides
-              <br />
-              what.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Select any body to see its remit. Membership, titles and
-              affiliations are published only once the body is formally
-              constituted, approved and current.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <span className="rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[14px] py-[9px] text-[0.7rem] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
@@ -117,8 +163,8 @@ export default function GovernanceMap() {
           <div className="flex justify-center">
             <div className="w-full max-w-[380px]">
               <BodyCard
-                body={BOARD}
-                active={active === BOARD.key}
+                body={board}
+                active={active === board.key}
                 onSelect={setActive}
               />
             </div>
@@ -134,7 +180,7 @@ export default function GovernanceMap() {
               aria-hidden="true"
               className="absolute inset-x-0 top-0 h-px bg-[rgba(9,29,42,0.24)] max-[820px]:hidden"
             />
-            {COMMITTEES.map((committee) => (
+            {committees.map((committee) => (
               <div
                 key={committee.key}
                 className="relative pt-[clamp(16px,2.2vw,24px)]"
@@ -160,8 +206,8 @@ export default function GovernanceMap() {
           <div className="flex justify-center">
             <div className="w-full max-w-[380px]">
               <BodyCard
-                body={EXECUTIVE}
-                active={active === EXECUTIVE.key}
+                body={executive}
+                active={active === executive.key}
                 onSelect={setActive}
               />
             </div>
@@ -175,8 +221,8 @@ export default function GovernanceMap() {
           <div className="flex justify-center">
             <div className="w-full max-w-[380px]">
               <BodyCard
-                body={ASSURANCE}
-                active={active === ASSURANCE.key}
+                body={assurance}
+                active={active === assurance.key}
                 onSelect={setActive}
                 dashed
               />

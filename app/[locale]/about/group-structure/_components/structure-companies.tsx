@@ -1,4 +1,4 @@
-import Image from "next/image";
+import type { GroupStructureStructureCompanies } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { ENTITIES, entityByKey } from "../_data/structure";
 
@@ -8,7 +8,20 @@ const COMPANIES = ENTITIES.filter(
 
 const SAVE = entityByKey("save-initiative");
 
-export default function StructureCompanies() {
+const FALLBACK_HEADING = "Four companies.\nFour mandates.";
+
+const FALLBACK_DESCRIPTION =
+  "Each company carries one clear responsibility. Nothing is built twice, and no mandate is stretched to cover something it was not formed to do.";
+
+export default function StructureCompanies({
+  data,
+}: {
+  data: GroupStructureStructureCompanies;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const imageAlt = data.image ? data.image.alt || data.image_alt : "";
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -28,14 +41,18 @@ export default function StructureCompanies() {
               id="group-companies-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Four companies.
-              <br />
-              Four mandates.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-              Each company carries one clear responsibility. Nothing is built
-              twice, and no mandate is stretched to cover something it was not
-              formed to do.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
@@ -73,13 +90,15 @@ export default function StructureCompanies() {
 
           <div className="mt-[clamp(26px,3.6vw,44px)] grid grid-cols-[0.7fr_1.3fr] items-center gap-[clamp(20px,3.4vw,48px)] border border-dashed border-chart-4/45 bg-sidebar-accent/40 p-[clamp(18px,2.6vw,30px)] max-[760px]:grid-cols-1">
             <div className="relative aspect-[4/3] overflow-hidden max-[760px]:aspect-[16/9]">
-              <Image
-                src="/placeholders/group-structure-save.png"
-                alt="Placeholder artwork standing in for photography of community water and health programme work"
-                fill
-                sizes="(max-width: 760px) 100vw, 32vw"
-                className="object-cover"
-              />
+              {data.image ? (
+                <div
+                  role={imageAlt ? "img" : undefined}
+                  aria-label={imageAlt || undefined}
+                  aria-hidden={imageAlt ? undefined : true}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${data.image.url})` }}
+                />
+              ) : null}
             </div>
             <div>
               <span className="inline-flex items-center rounded-[2px] border border-chart-4/35 px-3 py-[7px] text-[0.66rem] font-semibold tracking-[0.12em] text-[#d6a24a] uppercase">

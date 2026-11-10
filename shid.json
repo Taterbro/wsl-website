@@ -1,23 +1,107 @@
-[
-  {
-    "acf": {
-      "home_hero": {
+{
+  "id": 166,
+  "date": "2026-11-09T20:16:39",
+  "date_gmt": "2026-11-09T20:16:39",
+  "guid": { "rendered": "https:\/\/thewaterlightgroup.com\/home\/" },
+  "modified": "2026-11-10T09:33:22",
+  "modified_gmt": "2026-11-10T09:33:22",
+  "slug": "home",
+  "status": "publish",
+  "type": "page",
+  "link": "https:\/\/thewaterlightgroup.com\/home\/",
+  "title": { "rendered": "Home" },
+  "content": { "rendered": "", "protected": false },
+  "excerpt": { "rendered": "", "protected": false },
+  "author": 1,
+  "featured_media": 0,
+  "parent": 0,
+  "menu_order": 0,
+  "comment_status": "closed",
+  "ping_status": "closed",
+  "template": "",
+  "meta": { "_acf_changed": false, "footnotes": "" },
+  "class_list": ["post-166", "page", "type-page", "status-publish", "hentry"],
+  "acf": {
+    "home_hero": {
+      "heading": "BUILDING THINGS THE AFRICAN WAY",
+      "description": "This is a test, all content here is not final. ",
+      "video": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/griddy.mp4",
+      "poster": false
+    },
+    "home_hero_source": {
+      "label": "Building Africa's Industrial Future",
+      "type": "group",
+      "formatted_value": {
         "heading": "BUILDING THINGS THE AFRICAN WAY",
         "description": "This is a test, all content here is not final. ",
-        "video": false,
+        "video": 31,
         "poster": false
-      },
-      "home_hero_source": {
-        "label": "Building Africa's Industrial Future",
-        "type": "group",
-        "formatted_value": {
-          "heading": "BUILDING THINGS THE AFRICAN WAY",
-          "description": "This is a test, all content here is not final. ",
-          "video": false,
-          "poster": false
+      }
+    },
+    "group_thesis": {
+      "heading": "Test thesis",
+      "data": [
+        {
+          "label": "A row",
+          "body": "This is a test for the repeater",
+          "image": {
+            "ID": 173,
+            "id": 173,
+            "title": "angryPoint",
+            "filename": "angryPoint.jpg",
+            "filesize": 50620,
+            "url": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
+            "link": "https:\/\/thewaterlightgroup.com\/home\/angrypoint\/",
+            "alt": "",
+            "author": "1",
+            "description": "",
+            "caption": "",
+            "name": "angrypoint",
+            "status": "inherit",
+            "uploaded_to": 166,
+            "date": "2026-11-09 20:38:22",
+            "modified": "2026-11-09 20:38:22",
+            "menu_order": 0,
+            "mime_type": "image\/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https:\/\/thewaterlightgroup.com\/wp-includes\/images\/media\/default.png",
+            "width": 736,
+            "height": 736,
+            "sizes": {
+              "thumbnail": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-300x300.jpg",
+              "medium-width": 300,
+              "medium-height": 300,
+              "medium_large": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
+              "medium_large-width": 736,
+              "medium_large-height": 736,
+              "large": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
+              "large-width": 736,
+              "large-height": 736,
+              "1536x1536": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
+              "1536x1536-width": 736,
+              "1536x1536-height": 736,
+              "2048x2048": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
+              "2048x2048-width": 736,
+              "2048x2048-height": 736,
+              "blog-thumb": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-530x250.jpg",
+              "blog-thumb-width": 530,
+              "blog-thumb-height": 250,
+              "blog-full": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-736x450.jpg",
+              "blog-full-width": 736,
+              "blog-full-height": 450
+            }
+          }
         }
-      },
-      "group_thesis": {
+      ]
+    },
+    "group_thesis_source": {
+      "label": "Group Thesis",
+      "type": "group",
+      "formatted_value": {
         "heading": "Test thesis",
         "data": [
           {
@@ -29,8 +113,8 @@
               "title": "angryPoint",
               "filename": "angryPoint.jpg",
               "filesize": 50620,
-              "url": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
-              "link": "https://thewaterlightgroup.com/home/angrypoint/",
+              "url": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
+              "link": "https:\/\/thewaterlightgroup.com\/home\/angrypoint\/",
               "alt": "",
               "author": "1",
               "description": "",
@@ -41,158 +125,136 @@
               "date": "2026-11-09 20:38:22",
               "modified": "2026-11-09 20:38:22",
               "menu_order": 0,
-              "mime_type": "image/jpeg",
+              "mime_type": "image\/jpeg",
               "type": "image",
               "subtype": "jpeg",
-              "icon": "https://thewaterlightgroup.com/wp-includes/images/media/default.png",
+              "icon": "https:\/\/thewaterlightgroup.com\/wp-includes\/images\/media\/default.png",
               "width": 736,
               "height": 736,
               "sizes": {
-                "thumbnail": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-150x150.jpg",
+                "thumbnail": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-150x150.jpg",
                 "thumbnail-width": 150,
                 "thumbnail-height": 150,
-                "medium": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-300x300.jpg",
+                "medium": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-300x300.jpg",
                 "medium-width": 300,
                 "medium-height": 300,
-                "medium_large": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
+                "medium_large": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
                 "medium_large-width": 736,
                 "medium_large-height": 736,
-                "large": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
+                "large": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
                 "large-width": 736,
                 "large-height": 736,
-                "1536x1536": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
+                "1536x1536": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
                 "1536x1536-width": 736,
                 "1536x1536-height": 736,
-                "2048x2048": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
+                "2048x2048": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint.jpg",
                 "2048x2048-width": 736,
                 "2048x2048-height": 736,
-                "blog-thumb": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-530x250.jpg",
+                "blog-thumb": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-530x250.jpg",
                 "blog-thumb-width": 530,
                 "blog-thumb-height": 250,
-                "blog-full": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-736x450.jpg",
+                "blog-full": "https:\/\/thewaterlightgroup.com\/wp-content\/uploads\/2026\/11\/angryPoint-736x450.jpg",
                 "blog-full-width": 736,
                 "blog-full-height": 450
               }
             }
           }
         ]
-      },
-      "group_thesis_source": {
-        "label": "Group Thesis",
-        "type": "group",
-        "formatted_value": {
-          "heading": "Test thesis",
-          "data": [
-            {
-              "label": "A row",
-              "body": "This is a test for the repeater",
-              "image": {
-                "ID": 173,
-                "id": 173,
-                "title": "angryPoint",
-                "filename": "angryPoint.jpg",
-                "filesize": 50620,
-                "url": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
-                "link": "https://thewaterlightgroup.com/home/angrypoint/",
-                "alt": "",
-                "author": "1",
-                "description": "",
-                "caption": "",
-                "name": "angrypoint",
-                "status": "inherit",
-                "uploaded_to": 166,
-                "date": "2026-11-09 20:38:22",
-                "modified": "2026-11-09 20:38:22",
-                "menu_order": 0,
-                "mime_type": "image/jpeg",
-                "type": "image",
-                "subtype": "jpeg",
-                "icon": "https://thewaterlightgroup.com/wp-includes/images/media/default.png",
-                "width": 736,
-                "height": 736,
-                "sizes": {
-                  "thumbnail": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-150x150.jpg",
-                  "thumbnail-width": 150,
-                  "thumbnail-height": 150,
-                  "medium": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-300x300.jpg",
-                  "medium-width": 300,
-                  "medium-height": 300,
-                  "medium_large": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
-                  "medium_large-width": 736,
-                  "medium_large-height": 736,
-                  "large": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
-                  "large-width": 736,
-                  "large-height": 736,
-                  "1536x1536": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
-                  "1536x1536-width": 736,
-                  "1536x1536-height": 736,
-                  "2048x2048": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint.jpg",
-                  "2048x2048-width": 736,
-                  "2048x2048-height": 736,
-                  "blog-thumb": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-530x250.jpg",
-                  "blog-thumb-width": 530,
-                  "blog-thumb-height": 250,
-                  "blog-full": "https://thewaterlightgroup.com/wp-content/uploads/2026/11/angryPoint-736x450.jpg",
-                  "blog-full-width": 736,
-                  "blog-full-height": 450
-                }
-              }
-            }
-          ]
-        }
-      },
-      "business_platforms": {
-        "heading": "",
+      }
+    },
+    "business_platforms": {
+      "heading": "",
+      "description": "",
+      "businesses": ""
+    },
+    "business_platforms_source": {
+      "label": "Business Platforms",
+      "type": "group",
+      "formatted_value": { "heading": "", "description": "", "businesses": "" }
+    },
+    "investments": { "label": "", "description": "", "stages": null },
+    "investments_source": {
+      "label": "Investments",
+      "type": "group",
+      "formatted_value": { "label": "", "description": "", "stages": false }
+    },
+    "innovation": { "label": "", "description": "", "stages": null },
+    "innovation_source": {
+      "label": "Innovation",
+      "type": "group",
+      "formatted_value": { "label": "", "description": "", "stages": false }
+    },
+    "africa": { "label": "", "description": "", "indicators": null },
+    "africa_source": {
+      "label": "Africa",
+      "type": "group",
+      "formatted_value": { "label": "", "description": "", "indicators": false }
+    },
+    "featured_projects": { "label": "", "description": "", "projects": "" },
+    "featured_projects_source": {
+      "label": "Featured Projects",
+      "type": "group",
+      "formatted_value": { "label": "", "description": "", "projects": "" }
+    },
+    "impact": { "label": "", "description": "", "wsi_description": "" },
+    "impact_source": {
+      "label": "Impact",
+      "type": "group",
+      "formatted_value": {
+        "label": "",
         "description": "",
-        "businesses": ""
-      },
-      "business_platforms_source": {
-        "label": "Business Platforms",
-        "type": "group",
-        "formatted_value": {
-          "heading": "",
-          "description": "",
-          "businesses": ""
-        }
-      },
-      "investments": { "label": "", "description": "", "stages": null },
-      "investments_source": {
-        "label": "Investments",
-        "type": "group",
-        "formatted_value": { "label": "", "description": "", "stages": false }
-      },
-      "innovation": { "label": "", "description": "", "stages": null },
-      "innovation_source": {
-        "label": "Innovation",
-        "type": "group",
-        "formatted_value": { "label": "", "description": "", "stages": false }
-      },
-      "africa": { "label": "", "description": "", "indicators": null },
-      "africa_source": {
-        "label": "Africa",
-        "type": "group",
-        "formatted_value": {
-          "label": "",
-          "description": "",
-          "indicators": false
-        }
-      },
-      "featured_projects": { "label": "", "description": "", "projects": "" },
-      "featured_projects_source": {
-        "label": "Featured Projects",
-        "type": "group",
-        "formatted_value": { "label": "", "description": "", "projects": "" }
-      },
-      "impact": { "label": "", "description": "", "wsi_description": "" },
-      "impact_source": {
-        "label": "Impact",
-        "type": "group",
-        "formatted_value": {
-          "label": "",
-          "description": "",
-          "wsi_description": ""
-        }
+        "wsi_description": ""
       }
     }
+  },
+  "_hostinger_reach_plugin_has_subscription_block": false,
+  "_hostinger_reach_plugin_is_elementor": false,
+  "_links": {
+    "self": [
+      {
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/pages\/166",
+        "targetHints": { "allow": ["GET"] }
+      }
+    ],
+    "collection": [
+      { "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/pages" }
+    ],
+    "about": [
+      {
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/types\/page"
+      }
+    ],
+    "author": [
+      {
+        "embeddable": true,
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/users\/1"
+      }
+    ],
+    "replies": [
+      {
+        "embeddable": true,
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/comments?post=166"
+      }
+    ],
+    "version-history": [
+      {
+        "count": 3,
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/pages\/166\/revisions"
+      }
+    ],
+    "predecessor-version": [
+      {
+        "id": 176,
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/pages\/166\/revisions\/176"
+      }
+    ],
+    "wp:attachment": [
+      {
+        "href": "https:\/\/thewaterlightgroup.com\/wp-json\/wp\/v2\/media?parent=166"
+      }
+    ],
+    "curies": [
+      { "name": "wp", "href": "https:\/\/api.w.org\/{rel}", "templated": true }
+    ]
   }
-]
+}

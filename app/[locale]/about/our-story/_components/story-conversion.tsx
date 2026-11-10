@@ -1,4 +1,16 @@
-const ROLES: { role: string; copy: string; href: string; cta: string }[] = [
+import type { OurStoryStoryConversion } from "@/lib/cms/generated";
+
+type Role = OurStoryStoryConversion["roles"][number] & {
+  href: string;
+  cta: string;
+};
+
+const FALLBACK_HEADING = "Build with\nWaterlight.";
+
+const FALLBACK_DESCRIPTION =
+  "The story so far is only the beginning of it. If you are investing, entering a market, developing infrastructure or deploying technology, we would like to hear from you.";
+
+const LEGACY_ROLES: Role[] = [
   {
     role: "Investors",
     copy: "Capital, funds and family offices looking for structured, essential-need exposure.",
@@ -37,12 +49,37 @@ const ROLES: { role: string; copy: string; href: string; cta: string }[] = [
   },
 ];
 
+const FALLBACK_ROLES = LEGACY_ROLES;
+
 const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Partner with us", href: "/contact", variant: "glow" },
   { label: "Careers", href: "/careers", variant: "ghost" },
 ];
 
-export default function StoryConversion() {
+function toRole(
+  role: OurStoryStoryConversion["roles"][number],
+  index: number
+): Role {
+  const legacy = LEGACY_ROLES.find((item) => item.role === role.role) ??
+    LEGACY_ROLES[index];
+
+  return {
+    role: role.role || legacy?.role || "",
+    copy: role.copy || legacy?.copy || "",
+    href: legacy?.href || "",
+    cta: legacy?.cta || "",
+  };
+}
+
+export default function StoryConversion({
+  data,
+}: {
+  data: OurStoryStoryConversion;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const roles = data.roles.length ? data.roles.map(toRole) : FALLBACK_ROLES;
+
   return (
     <section
       id="story-partner"
@@ -63,16 +100,20 @@ export default function StoryConversion() {
               id="story-conversion-title"
               className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Build with
-              <br />
-              Waterlight.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
           </div>
           <div>
             <p className="max-w-[54ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted/80">
-              The story so far is only the beginning of it. If you are
-              investing, entering a market, developing infrastructure or
-              deploying technology, we would like to hear from you.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
               {CTAS.map((cta) => (
@@ -93,7 +134,7 @@ export default function StoryConversion() {
         </div>
 
         <div className="mt-[clamp(34px,5vw,58px)] grid grid-cols-3 gap-px border border-accent/20 bg-accent/20 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
-          {ROLES.map((role) => (
+          {roles.map((role) => (
             <article
               key={role.role}
               className="flex flex-col gap-3 bg-sidebar-accent p-[clamp(20px,2.6vw,32px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-primary"
@@ -104,15 +145,17 @@ export default function StoryConversion() {
               <p className="flex-1 text-[0.9rem] leading-[1.55] text-muted/75">
                 {role.copy}
               </p>
-              <a
-                href={role.href}
-                className="text-[0.76rem] font-semibold tracking-[0.06em] text-accent uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-muted"
-              >
-                {role.cta}
-                <span aria-hidden="true" className="ml-1.5">
-                  →
-                </span>
-              </a>
+              {role.href ? (
+                <a
+                  href={role.href}
+                  className="text-[0.76rem] font-semibold tracking-[0.06em] text-accent uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-muted"
+                >
+                  {role.cta}
+                  <span aria-hidden="true" className="ml-1.5">
+                    →
+                  </span>
+                </a>
+              ) : null}
             </article>
           ))}
         </div>

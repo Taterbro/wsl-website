@@ -1,7 +1,38 @@
+import type { GovernanceGovernanceRights } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { DECISION_RIGHTS } from "../_data/governance";
 
-export default function GovernanceRights() {
+const FALLBACK_HEADING = "Reserved or\ndelegated.";
+
+const FALLBACK_DESCRIPTION =
+  "A group grows faster when most decisions are delegated — and slower to regret when the few that matter are not.";
+
+type DecisionRight = { title: string; note: string; items: string[] };
+
+function toDecisionRights(
+  rows: GovernanceGovernanceRights["decision_rights"]
+): DecisionRight[] {
+  return rows.map((row) => ({
+    title: row.title,
+    note: row.note,
+    items: row.items
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean),
+  }));
+}
+
+export default function GovernanceRights({
+  data,
+}: {
+  data: GovernanceGovernanceRights;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const decisionRights = data.decision_rights.length
+    ? toDecisionRights(data.decision_rights)
+    : DECISION_RIGHTS;
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -21,18 +52,23 @@ export default function GovernanceRights() {
               id="governance-rights-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Reserved or
-              <br />
-              delegated.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-              A group grows faster when most decisions are delegated — and
-              slower to regret when the few that matter are not.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid grid-cols-3 gap-px bg-accent/20 max-[980px]:grid-cols-1">
-            {DECISION_RIGHTS.map((column, index) => (
+            {decisionRights.map((column, index) => (
               <article
                 key={column.title}
                 className="flex flex-col bg-sidebar-accent/55 px-[clamp(18px,2.6vw,32px)] pt-[clamp(20px,2.6vw,32px)] pb-[clamp(22px,2.8vw,36px)]"
