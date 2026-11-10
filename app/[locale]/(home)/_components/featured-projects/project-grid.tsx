@@ -5,22 +5,111 @@ import type { Project } from "@/lib/cms/generated";
 
 const FALLBACK_BACKGROUND = "linear-gradient(150deg, #0f4c57, #06181f)";
 
-function toBackground(project: Project): string {
-  return project.background
-    ? `linear-gradient(150deg, rgba(6, 24, 31, 0.35), rgba(6, 24, 31, 0.7)), url(${project.background.url}) center/cover no-repeat`
-    : FALLBACK_BACKGROUND;
+type GridProject = {
+  id: string | number;
+  sector: string;
+  stage: string;
+  location: string;
+  title: string;
+  description: string;
+  background: string;
+};
+
+const FALLBACK_PROJECTS: GridProject[] = [
+  {
+    id: "fallback-water",
+    sector: "water",
+    stage: "Investment Ready",
+    location: "Rwanda",
+    title: "Kigali Smart Water Network",
+    description:
+      "Municipal distribution upgrade with digital metering, leak detection and solar-pumped supply.",
+    background:
+      "radial-gradient(90% 90% at 30% 10%, rgba(95, 227, 198, 0.6), transparent 60%), linear-gradient(150deg, #0f4c57, #06181f)",
+  },
+  {
+    id: "fallback-energy",
+    sector: "energy",
+    stage: "Financing",
+    location: "Ghana",
+    title: "Accra Solar & Storage Hub",
+    description:
+      "Utility-scale solar with battery storage and hybrid controls serving industry and the grid.",
+    background:
+      "radial-gradient(90% 90% at 30% 10%, rgba(218, 156, 67, 0.62), transparent 60%), linear-gradient(150deg, #0f4c57, #06181f)",
+  },
+  {
+    id: "fallback-agriculture",
+    sector: "agriculture",
+    stage: "Development",
+    location: "Nigeria",
+    title: "Lagos Cold-Chain & Agri-Processing",
+    description:
+      "Cold chain, processing and aggregation infrastructure reducing post-harvest loss.",
+    background:
+      "radial-gradient(90% 90% at 30% 10%, rgba(120, 200, 120, 0.55), transparent 60%), linear-gradient(150deg, #0f4c57, #06181f)",
+  },
+  {
+    id: "fallback-technology",
+    sector: "technology",
+    stage: "Concept",
+    location: "Kenya",
+    title: "Nairobi Digital Infrastructure Campus",
+    description:
+      "Data, compute and innovation campus designed for regional digital demand.",
+    background:
+      "radial-gradient(90% 90% at 30% 10%, rgba(95, 227, 198, 0.45), transparent 60%), linear-gradient(150deg, #0f4c57, #06181f)",
+  },
+  {
+    id: "fallback-industry",
+    sector: "industry",
+    stage: "Operational",
+    location: "Morocco",
+    title: "Casablanca Industrial Park",
+    description:
+      "Manufacturing and technology-localisation park serving domestic and export markets.",
+    background:
+      "radial-gradient(90% 90% at 30% 10%, rgba(160, 160, 175, 0.55), transparent 60%), linear-gradient(150deg, #0f4c57, #06181f)",
+  },
+  {
+    id: "fallback-logistics",
+    sector: "logistics",
+    stage: "Construction",
+    location: "Tanzania",
+    title: "Dar es Salaam Logistics Terminal",
+    description:
+      "Warehousing and cross-border trade terminal linking inland markets to port capacity.",
+    background:
+      "radial-gradient(90% 90% at 30% 10%, rgba(95, 180, 220, 0.55), transparent 60%), linear-gradient(150deg, #0f4c57, #06181f)",
+  },
+];
+
+function toGridProject(project: Project): GridProject {
+  return {
+    id: project.id,
+    sector: project.sector,
+    stage: project.stage || project.investment_status,
+    location: project.location || project.country,
+    title: project.title || project.postTitle,
+    description: project.description,
+    background: project.background
+      ? `linear-gradient(150deg, rgba(6, 24, 31, 0.35), rgba(6, 24, 31, 0.7)), url(${project.background.url}) center/cover no-repeat`
+      : FALLBACK_BACKGROUND,
+  };
 }
 
 export default function ProjectGrid({ projects }: { projects: Project[] }) {
+  const items = projects.length ? projects.map(toGridProject) : FALLBACK_PROJECTS;
+
   const sectors: string[] = [];
-  for (const project of projects) {
+  for (const project of items) {
     const sector = project.sector.trim();
     if (sector && !sectors.includes(sector)) sectors.push(sector);
   }
 
   const [active, setActive] = useState("all");
 
-  const visible = projects.filter(
+  const visible = items.filter(
     (project) => active === "all" || project.sector === active
   );
 
@@ -52,18 +141,18 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
             <div className="relative aspect-16/10 overflow-hidden">
               <div
                 className="absolute inset-0 scale-[1.03] transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-100"
-                style={{ background: toBackground(project) }}
+                style={{ background: project.background }}
               />
               <span className="absolute top-4 left-4 border-l-2 border-accent bg-sidebar/82 px-3 py-[7px] text-[0.66rem] font-semibold tracking-[0.1em] text-muted uppercase">
-                {project.stage || project.investment_status}
+                {project.stage}
               </span>
             </div>
             <div className="flex flex-1 flex-col gap-3 px-[22px] pt-[22px] pb-6">
               <span className="text-[0.72rem] tracking-[0.08em] text-muted-foreground uppercase">
-                {project.location || project.country}
+                {project.location}
               </span>
               <h3 className="font-sans text-[1.12rem] leading-[1.1] font-bold tracking-[0.01em] uppercase [font-stretch:110%]">
-                {project.title || project.postTitle}
+                {project.title}
               </h3>
               <p className="flex-1 text-[0.88rem] leading-[1.5] text-muted-foreground">
                 {project.description}

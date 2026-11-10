@@ -26,7 +26,15 @@ export default function GroupThesis({ data }: { data: HomeGroupThesis }) {
               id="group-title"
               className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              {data.heading}
+              {data.heading ? (
+                data.heading
+              ) : (
+                <>
+                  African roots.
+                  <br />
+                  <span className="text-primary">Global vision.</span>
+                </>
+              )}
             </h2>
           </div>
           <div>

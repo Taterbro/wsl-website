@@ -19,6 +19,10 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-[2px] border border-transparent px-[22px] py-[12px] font-sans text-[0.72rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
+const FALLBACK_HEADING = "Building Africa's Industrial Future";
+const FALLBACK_DESCRIPTION =
+  "Waterlight Group invests across industry, infrastructure and innovation to create lasting impact for African communities and global partners.";
+
 export default function Hero({ data }: { data: HomeHomeHero }) {
   return (
     <section
@@ -58,13 +62,13 @@ export default function Hero({ data }: { data: HomeHomeHero }) {
             <span
               className={`block translate-y-[105%] animate-rise motion-reduce:translate-y-0`}
             >
-              {data.heading || ""}
+              {data.heading || FALLBACK_HEADING}
             </span>
           </span>
         </h1>
 
         <p className="mb-[clamp(20px,3vw,32px)] max-w-[60ch] text-[clamp(0.9rem,1.15vw,1.02rem)] leading-[1.5] text-muted/86 opacity-0 animate-fade-in delay-[0.6s] motion-reduce:opacity-100">
-          {data.description || ""}
+          {data.description || FALLBACK_DESCRIPTION}
         </p>
 
         <div className="flex flex-wrap items-center gap-3">

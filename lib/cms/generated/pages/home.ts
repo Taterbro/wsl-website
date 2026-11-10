@@ -300,8 +300,6 @@ export async function getHomePage(): Promise<HomePage> {
 
   const acf = await getPageAcf("home");
 
-  acf && console.log("acf is: ", acf);
-
   const [businesses, projects] = await Promise.all([
     getBusinesses(),
     getProjects(),

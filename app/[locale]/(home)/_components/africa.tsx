@@ -1,11 +1,44 @@
-import type { HomeAfrica } from "@/lib/cms/generated";
+import type {
+  HomeAfrica,
+  HomeAfricaIndicators,
+} from "@/lib/cms/generated";
 
 import Reveal from "./reveal";
+
+const FALLBACK_DESCRIPTION =
+  "Africa is not only a market of tomorrow. It is an investment opportunity of today. Waterlight Group connects opportunities across the continent with capital, technology, expertise and execution capability — helping serious partners move from interest to structured opportunity.";
+
+const FALLBACK_INDICATORS: HomeAfricaIndicators[] = [
+  {
+    value: "1.5bn",
+    label: "People, a young and urbanising workforce",
+    source: "Source owner pending · UN DESA",
+  },
+  {
+    value: "~19",
+    label: "Median age, the world's youngest population",
+    source: "Source owner pending · UN DESA",
+  },
+  {
+    value: "50+",
+    label: "Member states across a single continental market",
+    source: "Source owner pending · AfCFTA",
+  },
+  {
+    value: "2x",
+    label: "Infrastructure demand projected over the coming decade",
+    source: "Source owner pending · AfDB",
+  },
+];
 
 const BTN_INK_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent bg-foreground px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-muted uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-primary";
 
 export default function Africa({ data }: { data: HomeAfrica }) {
+  const indicators = data.indicators.length
+    ? data.indicators
+    : FALLBACK_INDICATORS;
+
   return (
     <Reveal>
       <section
@@ -22,7 +55,7 @@ export default function Africa({ data }: { data: HomeAfrica }) {
               Africa <em className="not-italic text-[#855c18]">is now.</em>
             </h2>
             <p className="max-w-[64ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal font-normal">
-              {data.description}
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-[30px] flex flex-wrap items-center gap-3">
               <a href="#projects" className={BTN_INK_CLASS}>
@@ -32,7 +65,7 @@ export default function Africa({ data }: { data: HomeAfrica }) {
           </div>
           <div>
             <dl className="mt-[30px] grid grid-cols-2 gap-px border border-[rgba(9,29,42,0.16)] bg-[rgba(9,29,42,0.16)]">
-              {data.indicators.map((indicator) => (
+              {indicators.map((indicator) => (
                 <div
                   key={indicator.value}
                   className="bg-muted px-5 pt-[22px] pb-[22px]"

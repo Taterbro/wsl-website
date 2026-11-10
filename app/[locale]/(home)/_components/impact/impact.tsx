@@ -12,6 +12,9 @@ const COMMITMENTS: string[] = [
   "Targets are published only when they have a credible delivery path.",
 ];
 
+const FALLBACK_WSI_DESCRIPTION =
+  "The Group and Waterlight Save Initiative share a philosophy of sustainable development, but they are separate organisations. Waterlight Save Initiative is an independent nonprofit/development organisation, presented here under Global Impact — not as a commercial subsidiary.";
+
 const IHEAL: { letter: string; label: string }[] = [
   { letter: "I", label: "Innovation, income & infrastructure" },
   { letter: "H", label: "Healthcare & hygiene" },
@@ -87,7 +90,7 @@ export default function Impact({ data }: { data: HomeImpact }) {
               Development partnerships
             </p>
             <p className="text-[0.94rem] leading-[1.6] text-muted-foreground">
-              {data.wsi_description}
+              {data.wsi_description || FALLBACK_WSI_DESCRIPTION}
             </p>
             <div
               aria-label="The iHEAL framework"

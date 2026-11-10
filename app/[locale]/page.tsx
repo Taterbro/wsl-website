@@ -12,7 +12,6 @@ import Partner from "./(home)/_components/partner/partner";
 
 export default async function Home() {
   const data = await getHomePage();
-  console.log("gotten data is: ", data);
 
   return (
     <>
