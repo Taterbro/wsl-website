@@ -1,11 +1,18 @@
 import Link from "next/link";
+import type { EventsEventsHeader } from "@/lib/cms/generated";
+
+const FALLBACK_LABEL = "Events.";
+const FALLBACK_DESCRIPTION =
+  "Institutional convenings, dialogues and appearances from across the Waterlight platform.";
 
 interface EventsHeaderProps {
+  data: EventsEventsHeader;
   upcoming: number;
   recent: number;
 }
 
 export default function EventsHeader({
+  data,
   upcoming,
   recent,
 }: EventsHeaderProps) {
@@ -46,13 +53,12 @@ export default function EventsHeader({
             </p>
             <h1
               id="events-title"
-              className="mt-3 font-sans text-[clamp(3.4rem,10vw,8rem)] leading-[0.84] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
+              className="mt-3 font-sans text-[clamp(3.4rem,10vw,8rem)] leading-[0.84] font-extrabold tracking-[-0.015em]               uppercase [font-stretch:120%]"
             >
-              Events.
+              {data.label || FALLBACK_LABEL}
             </h1>
             <p className="mt-5 max-w-[54ch] text-[clamp(1rem,1.4vw,1.18rem)] leading-[1.6] text-muted/65">
-              Institutional convenings, dialogues and appearances from across
-              the Waterlight platform.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 

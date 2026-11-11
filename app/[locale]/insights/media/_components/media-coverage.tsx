@@ -1,7 +1,18 @@
+import type { MediaMediaCoverage } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
-import { MEDIA_MENTIONS } from "./media-data";
+import type { MediaMention } from "./media-data";
 
-export default function MediaCoverage() {
+const FALLBACK_LABEL = "In the media.";
+const FALLBACK_DESCRIPTION =
+  "A select record of external mentions. Outlet names, headlines and dates are placeholders; no coverage link is published without approval.";
+
+export default function MediaCoverage({
+  data,
+  mentions,
+}: {
+  data: MediaMediaCoverage;
+  mentions: MediaMention[];
+}) {
   return (
     <section
       id="coverage"
@@ -19,17 +30,15 @@ export default function MediaCoverage() {
                 id="media-coverage-title"
                 className="mt-2 max-w-[12ch] font-sans text-[clamp(1.9rem,4.2vw,3.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                In the media.
+                {data.label || FALLBACK_LABEL}
               </h2>
               <p className="mt-4 max-w-[38ch] text-[0.9rem] leading-[1.6] text-muted-foreground">
-                A select record of external mentions. Outlet names, headlines
-                and dates are placeholders; no coverage link is published
-                without approval.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
 
             <ul className="list-none border-t border-foreground/15 p-0">
-              {MEDIA_MENTIONS.map((mention) => (
+              {mentions.map((mention) => (
                 <li
                   key={mention.id}
                   className="grid gap-2 border-b border-foreground/10 py-[clamp(14px,2vw,22px)] md:grid-cols-[92px_1fr] md:gap-6"

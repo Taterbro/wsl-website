@@ -1,7 +1,16 @@
 import Link from "next/link";
+import type { EventsEventsClosing } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
-export default function EventsClosing() {
+const FALLBACK_LABEL = "Convene with us.";
+const FALLBACK_DESCRIPTION =
+  "For event partnerships, hosting or participation requests, contact the group. Participation is subject to confirmation.";
+
+export default function EventsClosing({
+  data,
+}: {
+  data: EventsEventsClosing;
+}) {
   return (
     <section
       aria-labelledby="events-closing-title"
@@ -19,11 +28,10 @@ export default function EventsClosing() {
                 id="events-closing-title"
                 className="mt-3 font-sans text-[clamp(2rem,4.6vw,3.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Convene with us.
+                {data.label || FALLBACK_LABEL}
               </h2>
               <p className="mt-4 text-[clamp(0.94rem,1.2vw,1.04rem)] leading-[1.6] text-muted/65">
-                For event partnerships, hosting or participation requests,
-                contact the group. Participation is subject to confirmation.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
 

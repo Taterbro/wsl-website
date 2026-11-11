@@ -1,28 +1,37 @@
 "use client";
 
 import { useState } from "react";
+import type { EventsEventsList } from "@/lib/cms/generated";
 import { cn } from "@/lib/utils";
 import Reveal from "../../../(home)/_components/reveal";
 import {
-  EVENTS,
   EVENT_FILTERS,
+  type EventItem,
   type EventStatus,
 } from "./events-data";
 
+const FALLBACK_HEADING = "Upcoming & recent.";
+
 type EventFilter = (typeof EVENT_FILTERS)[number];
 
-function countFor(filter: EventFilter): number {
-  if (filter === "All") return EVENTS.length;
-  return EVENTS.filter((event) => event.status === filter).length;
+function countFor(filter: EventFilter, events: EventItem[]): number {
+  if (filter === "All") return events.length;
+  return events.filter((event) => event.status === filter).length;
 }
 
-export default function EventsList() {
+export default function EventsList({
+  data,
+  events,
+}: {
+  data: EventsEventsList;
+  events: EventItem[];
+}) {
   const [active, setActive] = useState<EventFilter>("All");
 
   const filtered =
     active === "All"
-      ? EVENTS
-      : EVENTS.filter((event) => event.status === (active as EventStatus));
+      ? events
+      : events.filter((event) => event.status === (active as EventStatus));
 
   return (
     <section
@@ -40,7 +49,7 @@ export default function EventsList() {
                 id="events-directory-title"
                 className="mt-2 font-sans text-[clamp(1.8rem,3.6vw,3rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Upcoming &amp; recent.
+                {data.heading || FALLBACK_HEADING}
               </h2>
             </div>
             <p
@@ -51,7 +60,7 @@ export default function EventsList() {
               <span className="font-semibold text-foreground">
                 {filtered.length}
               </span>{" "}
-              of {EVENTS.length} illustrative entries
+              of {events.length} illustrative entries
             </p>
           </div>
 
@@ -86,7 +95,7 @@ export default function EventsList() {
                         : "text-muted-foreground/60"
                     )}
                   >
-                    {countFor(filter).toString().padStart(2, "0")}
+                    {countFor(filter, events).toString().padStart(2, "0")}
                   </span>
                 </button>
               );

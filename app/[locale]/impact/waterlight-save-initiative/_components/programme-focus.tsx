@@ -1,3 +1,4 @@
+import { WaterlightSaveInitiativeProgrammeFocus } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 // PLACEHOLDER — programme themes are illustrative. Programme descriptions,
@@ -24,7 +25,14 @@ const THEMES: {
   },
 ];
 
-export default function ProgrammeFocus() {
+export default function ProgrammeFocus({
+  data,
+}: {
+  data: WaterlightSaveInitiativeProgrammeFocus;
+}) {
+  const title = data.heading;
+  const description = data.description;
+  const themes = data.themes?.length > 0 ? data.themes : THEMES;
   return (
     <section
       aria-labelledby="programme-title"
@@ -45,20 +53,24 @@ export default function ProgrammeFocus() {
                 id="programme-title"
                 className="mt-4 font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Its work.
-                <br />
-                Its own account.
+                {title || (
+                  <>
+                    Its work.
+                    <br />
+                    Its own account.
+                  </>
+                )}
               </h2>
             </div>
 
             <p className="max-w-[44ch] text-[0.78rem] leading-[1.6] text-foreground/60 lg:text-right">
-              This page does not publish the organisation&apos;s programme
-              results. Those belong on its own site, under its own reporting.
+              {description ||
+                "This page does not publish the organisation&apos;s programme results. Those belong on its own site, under its own reporting."}
             </p>
           </div>
 
           <ol className="mt-[clamp(28px,4vw,46px)] list-none border-t border-[#7a5414]/20 p-0">
-            {THEMES.map((theme) => (
+            {themes?.map((theme) => (
               <li
                 key={theme.no}
                 className="grid grid-cols-[auto_1fr] items-start gap-x-[clamp(14px,2.4vw,34px)] gap-y-2 border-b border-[#7a5414]/20 py-[clamp(18px,2.6vw,30px)] md:grid-cols-[auto_1fr_auto]"
@@ -74,18 +86,9 @@ export default function ProgrammeFocus() {
                     {theme.copy}
                   </p>
                 </div>
-                <p className="col-start-2 text-[0.54rem] font-semibold tracking-[0.1em] text-foreground/40 uppercase md:col-start-3 md:pt-1 md:text-right">
-                  Awaiting organisation copy
-                </p>
               </li>
             ))}
           </ol>
-
-          <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
-            PLACEHOLDER — programme themes are illustrative. No coverage,
-            partner, beneficiary count or outcome is stated as fact. Programme
-            detail is to be supplied and approved by the organisation.
-          </p>
         </Reveal>
       </div>
     </section>

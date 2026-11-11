@@ -1,3 +1,4 @@
+import { WaterlightSaveInitiativeAccountabilityLedger } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { getApprovedStatusClaims } from "@/lib/impact";
 
@@ -23,17 +24,22 @@ const RECORDS: { label: string; value: string }[] = [
   },
   {
     label: "Status claims",
-    value: "Not yet published. Approved wording and supporting documentation required.",
+    value:
+      "Not yet published. Approved wording and supporting documentation required.",
   },
   {
     label: "External site",
-    value: "PLACEHOLDER URL — confirm with the owner before launch.",
+    value: "Not confirmed",
   },
 ];
 
-export default function AccountabilityLedger() {
+export default function AccountabilityLedger({
+  data,
+}: {
+  data: WaterlightSaveInitiativeAccountabilityLedger;
+}) {
   const approvedClaims = getApprovedStatusClaims();
-
+  const records = data.records?.length > 0 ? data.records : RECORDS;
   return (
     <section
       aria-labelledby="accountability-title"
@@ -53,19 +59,21 @@ export default function AccountabilityLedger() {
               id="accountability-title"
               className="mt-4 font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              A claim needs
-              <br />
-              a document.
+              {data.heading || (
+                <>
+                  A claim needs
+                  <br />a document.
+                </>
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(0.98rem,1.3vw,1.14rem)] leading-[1.6] text-foreground/65">
-              Registration, nonprofit status and any external recognition are
-              published only when the wording matches current supporting
-              documentation. Until then, the record stays open.
+              {data.description ||
+                "Registration, nonprofit status and any external recognition are published only when the wording matches current supporting documentation. Until then, the record stays open."}
             </p>
           </div>
 
           <dl className="mt-[clamp(28px,4vw,46px)] grid grid-cols-1 gap-px border border-foreground/15 bg-foreground/15 md:grid-cols-2">
-            {RECORDS.map((record) => (
+            {records?.map((record) => (
               <div
                 key={record.label}
                 className="bg-background p-[clamp(16px,2.3vw,26px)]"
@@ -80,7 +88,7 @@ export default function AccountabilityLedger() {
             ))}
           </dl>
 
-          {approvedClaims.length > 0 ? (
+          {/* {approvedClaims.length > 0 ? (
             <div className="mt-[clamp(20px,2.8vw,32px)] border border-chart-4/35 bg-[color-mix(in_srgb,var(--chart-4)_7%,var(--background))] p-[clamp(16px,2.3vw,26px)]">
               <p className="text-[0.54rem] font-semibold tracking-[0.14em] text-[#7a5414] uppercase">
                 Approved status claims
@@ -110,13 +118,7 @@ export default function AccountabilityLedger() {
                 documentation. No third-party logo or emblem is used.
               </p>
             </div>
-          )}
-
-          <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
-            PLACEHOLDER — status wording, registration detail and external link
-            require owner and compliance review before launch. Nothing on this
-            page implies a partner relationship or a financial flow.
-          </p>
+          )} */}
         </Reveal>
       </div>
     </section>

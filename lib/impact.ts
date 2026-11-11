@@ -50,8 +50,8 @@ export const SAVE_INITIATIVE: IndependentInitiative = {
   label: "Independent nonprofit organisation",
   mandate:
     "An independent nonprofit development organisation, with its own mandate, governance and programmes. It is presented separately and is never described as a commercial subsidiary of the group.",
-  externalSite: "https://waterlight-save.example",
-  externalSiteConfirmed: false,
+  externalSite: "https://waterlightsave.africa",
+  externalSiteConfirmed: true,
 };
 
 export interface PartnerCategory {

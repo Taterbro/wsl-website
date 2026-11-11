@@ -1,7 +1,18 @@
+import type { MediaMediaResources } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
-import { MEDIA_RESOURCES } from "./media-data";
+import type { MediaResource } from "./media-data";
 
-export default function MediaResources() {
+const FALLBACK_LABEL = "Approved material.";
+const FALLBACK_DESCRIPTION =
+  "Available on request. Downloadable files and final asset packs are not published on this site yet.";
+
+export default function MediaResources({
+  data,
+  resources,
+}: {
+  data: MediaMediaResources;
+  resources: MediaResource[];
+}) {
   return (
     <section
       id="resources"
@@ -19,17 +30,16 @@ export default function MediaResources() {
                 id="media-resources-title"
                 className="mt-2 font-sans text-[clamp(1.9rem,4.2vw,3.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Approved material.
+                {data.label || FALLBACK_LABEL}
               </h2>
             </div>
             <p className="max-w-[42ch] text-[0.86rem] leading-[1.55] text-muted-foreground">
-              Available on request. Downloadable files and final asset packs
-              are not published on this site yet.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <div className="mt-[clamp(24px,3.4vw,40px)] grid gap-x-[clamp(20px,4vw,48px)] sm:grid-cols-2">
-            {MEDIA_RESOURCES.map((resource) => (
+            {resources.map((resource) => (
               <div
                 key={resource.id}
                 className="border-t border-border py-[clamp(16px,2.2vw,24px)]"

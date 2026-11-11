@@ -1,7 +1,16 @@
 import Link from "next/link";
+import type { MediaMediaContact } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
-export default function MediaContact() {
+const FALLBACK_LABEL = "Media enquiries.";
+const FALLBACK_DESCRIPTION =
+  "For interviews, comment, imagery or resource requests, contact the group communications team.";
+
+export default function MediaContact({
+  data,
+}: {
+  data: MediaMediaContact;
+}) {
   return (
     <section
       id="media-contact"
@@ -20,11 +29,10 @@ export default function MediaContact() {
                 id="media-contact-title"
                 className="mt-3 font-sans text-[clamp(2rem,4.6vw,3.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Media enquiries.
+                {data.label || FALLBACK_LABEL}
               </h2>
               <p className="mt-4 text-[clamp(0.94rem,1.2vw,1.04rem)] leading-[1.6] text-muted-foreground">
-                For interviews, comment, imagery or resource requests, contact
-                the group communications team.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <p className="mt-3 text-[0.6rem] leading-[1.5] text-muted-foreground/70">
                 PLACEHOLDER — confirm the media contact route and response

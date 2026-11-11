@@ -1,6 +1,15 @@
+import type { MediaMediaBoilerplate } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
-export default function MediaBoilerplate() {
+const FALLBACK_HEADING = "About Waterlight Group";
+const FALLBACK_BODY =
+  "Waterlight Group is an African-founded global enterprise platform that builds, invests in and scales businesses, infrastructure and technologies.";
+
+export default function MediaBoilerplate({
+  data,
+}: {
+  data: MediaMediaBoilerplate;
+}) {
   return (
     <section
       aria-labelledby="media-boilerplate-title"
@@ -17,13 +26,11 @@ export default function MediaBoilerplate() {
               id="media-boilerplate-title"
               className="mt-3 font-sans text-[0.78rem] font-semibold tracking-[0.14em] text-muted/50 uppercase"
             >
-              About Waterlight Group
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <blockquote className="mt-[clamp(16px,2.4vw,26px)]">
               <p className="font-sans text-[clamp(1.35rem,2.8vw,2.35rem)] leading-[1.28] font-semibold tracking-[-0.01em] text-muted [font-stretch:104%]">
-                “Waterlight Group is an African-founded global enterprise
-                platform that builds, invests in and scales businesses,
-                infrastructure and technologies.”
+                “{data.body || FALLBACK_BODY}”
               </p>
             </blockquote>
             <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[56ch] text-[0.76rem] leading-[1.55] text-muted/45">

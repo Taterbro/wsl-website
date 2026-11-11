@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
 import { SAVE_INITIATIVE } from "@/lib/impact";
+import { WaterlightSaveInitiativeInitiativeOutbound } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -23,7 +24,11 @@ const RELATED: { code: string; title: string; href: string }[] = [
   },
 ];
 
-export default function InitiativeOutbound() {
+export default function InitiativeOutbound({
+  data,
+}: {
+  data: WaterlightSaveInitiativeInitiativeOutbound;
+}) {
   return (
     <section
       aria-labelledby="initiative-outbound-title"
@@ -33,22 +38,25 @@ export default function InitiativeOutbound() {
         <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
           <div className="mx-auto max-w-[68ch] text-center">
             <span className="inline-flex items-center gap-2 rounded-[2px] border border-chart-4/45 bg-background/60 px-3 py-[7px] text-[0.6rem] font-semibold tracking-[0.1em] text-[#7a5414] uppercase">
-              {SAVE_INITIATIVE.label}
+              {data.label || SAVE_INITIATIVE.label}
             </span>
             <h2
               id="initiative-outbound-title"
               className="mt-[clamp(18px,2.6vw,28px)] font-sans text-[clamp(2rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Waterlight Save
-              <br />
-              Initiative continues
-              <br />
-              on its own site.
+              {data.heading || (
+                <>
+                  Waterlight Save
+                  <br />
+                  Initiative continues
+                  <br />
+                  on its own site.
+                </>
+              )}
             </h2>
             <p className="mx-auto mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(0.98rem,1.3vw,1.14rem)] leading-[1.65] text-foreground/65">
-              Its programmes, governance, reporting and external
-              communications belong to the organisation. This site does not
-              process donations or speak on its behalf.
+              {data.description ||
+                "Its programmes, governance, reporting and external communications belong to the organisation. This site does not process donations or speak on its behalf."}
             </p>
             <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center justify-center gap-3">
               <a
@@ -67,10 +75,6 @@ export default function InitiativeOutbound() {
                 Back to Impact
               </Link>
             </div>
-            <p className="mt-3 text-[0.58rem] leading-[1.5] text-foreground/45">
-              PLACEHOLDER external URL — confirm with the owner. No donation
-              form, payment flow or fundraising is hosted on this site.
-            </p>
           </div>
 
           <nav
@@ -79,7 +83,10 @@ export default function InitiativeOutbound() {
           >
             <ul className="grid list-none grid-cols-1 gap-px bg-[#7a5414]/20 p-0 sm:grid-cols-3">
               {RELATED.map((item) => (
-                <li key={item.href} className="bg-[color-mix(in_srgb,var(--chart-4)_10%,var(--background))]">
+                <li
+                  key={item.href}
+                  className="bg-[color-mix(in_srgb,var(--chart-4)_10%,var(--background))]"
+                >
                   <Link
                     href={item.href}
                     className="group flex h-full items-center justify-between gap-4 px-[clamp(14px,2vw,22px)] py-[clamp(16px,2.2vw,24px)] transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-background focus-visible:bg-background focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#7a5414]"

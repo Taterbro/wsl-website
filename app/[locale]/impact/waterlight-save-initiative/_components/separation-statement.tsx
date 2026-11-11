@@ -1,3 +1,4 @@
+import { WaterlightSaveInitiativeSeparationStatement } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { SAVE_INITIATIVE } from "@/lib/impact";
 
@@ -15,7 +16,15 @@ const IS_NOT: string[] = [
   "A donation form, payment flow or fundraising page on this site",
 ];
 
-export default function SeparationStatement() {
+export default function SeparationStatement({
+  data,
+}: {
+  data: WaterlightSaveInitiativeSeparationStatement;
+}) {
+  const title = data.heading;
+  const description =
+    data.description ||
+    "The distinction is structural, not a footnote. The commercial group and Waterlight Save Initiative share a philosophy of sustainable development — not ownership, governance or financial flows.";
   return (
     <section
       aria-labelledby="separation-title"
@@ -35,15 +44,16 @@ export default function SeparationStatement() {
               id="separation-title"
               className="mt-4 font-sans text-[clamp(2rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Separate
-              <br />
-              by design.
+              {title ?? (
+                <>
+                  Separate
+                  <br />
+                  by design.
+                </>
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.4vw,1.2rem)] leading-[1.6] text-foreground/70">
-              The distinction is structural, not a footnote. The commercial
-              group and Waterlight Save Initiative share a philosophy of
-              sustainable development — not ownership, governance or financial
-              flows.
+              {description}
             </p>
           </div>
 
@@ -53,11 +63,11 @@ export default function SeparationStatement() {
                 Commercial group
               </p>
               <h3 className="mt-2 font-sans text-[clamp(1.3rem,2.2vw,1.8rem)] leading-[1.05] font-extrabold uppercase [font-stretch:112%]">
-                Waterlight Group
+                {data.group_label || "Waterlight Group"}
               </h3>
               <p className="mt-3 max-w-[40ch] text-[0.84rem] leading-[1.6] text-foreground/60">
-                Investment, industry, infrastructure and technology platforms
-                presented through the commercial group.
+                {data.group_description ||
+                  "Investment, industry, infrastructure and technology platforms presented through the commercial group."}
               </p>
             </div>
 
@@ -131,12 +141,6 @@ export default function SeparationStatement() {
               </ul>
             </div>
           </div>
-
-          <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
-            PLACEHOLDER — separation language requires owner and compliance
-            review. No financial flow, shared governance or control is implied
-            between the group and Waterlight Save Initiative.
-          </p>
         </Reveal>
       </div>
     </section>

@@ -1,12 +1,19 @@
 import Link from "next/link";
+import type { MediaMediaHeader } from "@/lib/cms/generated";
 import { cn } from "@/lib/utils";
 
+const FALLBACK_LABEL = "Media.";
+const FALLBACK_DESCRIPTION =
+  "Selected coverage, press resources and contact for journalists. External links and downloadable assets are released only after approval.";
+
 interface MediaHeaderProps {
+  data: MediaMediaHeader;
   coverageCount: number;
   resourceCount: number;
 }
 
 export default function MediaHeader({
+  data,
   coverageCount,
   resourceCount,
 }: MediaHeaderProps) {
@@ -62,12 +69,10 @@ export default function MediaHeader({
             id="media-title"
             className="mt-3 font-sans text-[clamp(3.2rem,9.5vw,7.8rem)] leading-[0.84] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
           >
-            Media.
+            {data.label || FALLBACK_LABEL}
           </h1>
           <p className="mt-5 max-w-[58ch] text-[clamp(1rem,1.4vw,1.18rem)] leading-[1.6] text-muted-foreground">
-            Selected coverage, press resources and contact for journalists.
-            External links and downloadable assets are released only after
-            approval.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </div>
 
