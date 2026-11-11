@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
+import { IhealFrameworkIhealClosing } from "@/lib/cms/generated";
 
 const LINKS: { label: string; href: string; note: string }[] = [
   {
@@ -24,7 +25,17 @@ const LINKS: { label: string; href: string; note: string }[] = [
   },
 ];
 
-export default function IhealClosing() {
+export default function IhealClosing({
+  data,
+}: {
+  data: IhealFrameworkIhealClosing;
+}) {
+  const title = data.label;
+  const description =
+    data.description ||
+    `The framework is one part of how the group approaches development.
+              Explore the related Impact pages, or speak to us about a
+              development partnership.`;
   return (
     <section
       aria-labelledby="iheal-closing-title"
@@ -41,15 +52,17 @@ export default function IhealClosing() {
               id="iheal-closing-title"
               className="mt-[clamp(12px,1.8vw,20px)] max-w-[12ch] font-sans text-[clamp(2rem,5vw,3rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%] lg:text-[clamp(3rem,4.4vw,4.4rem)]"
             >
-              Read it
-              <br />
-              in context.
+              {title ? (
+                title
+              ) : (
+                <>
+                  Read it
+                  <br />
+                  in context.
+                </>
+              )}
             </h2>
-            <p className="mt-[clamp(14px,2vw,22px)] max-w-[48ch] text-[clamp(0.9rem,1.15vw,1rem)] leading-[1.6] text-muted/65">
-              The framework is one part of how the group approaches
-              development. Explore the related Impact pages, or speak to us
-              about a development partnership.
-            </p>
+            <p className="mt-[clamp(14px,2vw,22px)] max-w-[48ch] text-[clamp(0.9rem,1.15vw,1rem)] leading-[1.6] text-muted/65"></p>
           </div>
 
           <nav

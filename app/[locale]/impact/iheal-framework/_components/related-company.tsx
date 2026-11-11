@@ -14,6 +14,7 @@ export default function RelatedCompany({
 }) {
   const company = data.companies[0];
   const title = company?.title || company?.postTitle || FALLBACK_TITLE;
+  const description = data.description ?? FALLBACK_DESCRIPTION;
   return (
     <section
       id="related-company"
@@ -38,12 +39,10 @@ export default function RelatedCompany({
                   id="related-company-title"
                   className="font-sans text-[clamp(1.3rem,2.6vw,2.2rem)] leading-[1.05] font-extrabold tracking-[-0.005em] uppercase [font-stretch:110%]"
                 >
-                  Waterlight iHEAL Global Limited
+                  {title}
                 </h2>
                 <p className="mt-2 max-w-[64ch] text-[clamp(0.8rem,1.05vw,0.92rem)] leading-[1.55] text-foreground/60">
-                  A separate company. The iHEAL framework is not its offering,
-                  product or service line, and this page does not describe its
-                  operations.
+                  {description}
                 </p>
               </div>
 

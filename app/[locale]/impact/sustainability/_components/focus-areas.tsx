@@ -1,7 +1,17 @@
+import { SustainabilityFocusAreas } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { SDG_FOCUS_AREAS } from "@/lib/impact";
 
-export default function FocusAreas() {
+export default function FocusAreas({
+  data,
+}: {
+  data: SustainabilityFocusAreas;
+}) {
+  const title = data.heading;
+  const description =
+    data.description ||
+    `The UN Sustainable Development Goals are used here as a reference language for the needs the group&apos;s sectors address. They are areas of focus — not a claim of contribution.`;
+  const focusAreas = data.areas.length > 0 ? data.areas : SDG_FOCUS_AREAS;
   return (
     <section
       aria-labelledby="focus-title"
@@ -27,25 +37,29 @@ export default function FocusAreas() {
                 id="focus-title"
                 className="mt-4 font-sans text-[clamp(2rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Seven areas
-                <br />
-                of focus.
+                {title ? (
+                  title
+                ) : (
+                  <>
+                    Seven areas
+                    <br />
+                    of focus.
+                  </>
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[48ch] text-[clamp(0.98rem,1.3vw,1.14rem)] leading-[1.6] text-muted/70">
-                The UN Sustainable Development Goals are used here as a
-                reference language for the needs the group&apos;s sectors
-                address. They are areas of focus — not a claim of contribution.
+                {description}
               </p>
             </div>
 
-            <p className="max-w-[46ch] text-[0.72rem] leading-[1.6] text-muted/55 lg:justify-self-end lg:text-right">
+            {/* <p className="max-w-[46ch] text-[0.72rem] leading-[1.6] text-muted/55 lg:justify-self-end lg:text-right">
               PLACEHOLDER — the mapping below is illustrative. No contribution,
               beneficiary count or verified outcome is claimed for any goal.
-            </p>
+            </p> */}
           </div>
 
           <ul className="mt-[clamp(30px,4.5vw,54px)] grid list-none grid-cols-2 gap-px border border-accent/20 bg-accent/20 p-0 md:grid-cols-3 lg:grid-cols-4">
-            {SDG_FOCUS_AREAS.map((area) => (
+            {focusAreas.map((area) => (
               <li
                 key={area.number}
                 className="group flex min-h-[clamp(150px,18vw,210px)] flex-col justify-between bg-sidebar p-[clamp(14px,2vw,24px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-sidebar-accent"

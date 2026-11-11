@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { IMPACT_METRICS } from "@/lib/impact";
+import { SustainabilityOutcomesLedger } from "@/lib/cms/generated";
 
 const numberFormat = new Intl.NumberFormat("en-US");
 
@@ -10,11 +11,25 @@ function getReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function OutcomesLedger() {
+export default function OutcomesLedger({
+  data,
+}: {
+  data: SustainabilityOutcomesLedger;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
   const reduceMotionRef = useRef(getReducedMotion());
+
+  const title = data.heading;
+  const description =
+    data.description ||
+    "Each figure must carry a method, a reporting period and a named owner. No verified figure has been released for publication yet.";
+
+  const metrics =
+    data.metrics.length > 0
+      ? data.metrics.map((m) => ({ id: m.label, ...m }))
+      : IMPACT_METRICS;
 
   useEffect(() => {
     const el = ref.current;
@@ -77,22 +92,33 @@ export default function OutcomesLedger() {
               id="outcomes-title"
               className="mt-4 font-sans text-[clamp(2rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Outcomes, only
-              <br />
-              when evidenced.
+              {title ? (
+                title
+              ) : (
+                <>
+                  Outcomes, only
+                  <br />
+                  when evidenced.
+                </>
+              )}
             </h2>
           </div>
 
           <p className="max-w-[42ch] text-[0.76rem] leading-[1.6] text-foreground/60 lg:text-right">
-            Each figure must carry a method, a reporting period and a named
-            owner. No verified figure has been released for publication yet.
+            {description}
           </p>
         </div>
 
         <div className="mt-[clamp(28px,4vw,46px)] border-t border-foreground/15">
-          {IMPACT_METRICS.map((metric, index) => {
+          {metrics.map((metric, index) => {
+            let value;
+            if (typeof metric.value === "string") {
+              value = 0;
+            } else {
+              value = metric.value;
+            }
             const displayValue = numberFormat.format(
-              Math.round(metric.value * progress)
+              Math.round(Number(value) * progress)
             );
             return (
               <div
@@ -149,7 +175,9 @@ export default function OutcomesLedger() {
                   <p className="font-sans text-[clamp(2.2rem,4.6vw,3.8rem)] leading-[0.82] font-extrabold tracking-[-0.03em] text-primary tabular-nums [font-stretch:118%]">
                     <span aria-hidden="true">{displayValue}</span>
                     <span className="sr-only">
-                      {numberFormat.format(metric.value)}
+                      {typeof metric.value === "number"
+                        ? numberFormat.format(metric.value)
+                        : 0}
                     </span>
                   </p>
                   <p className="mt-2 text-[0.56rem] font-semibold tracking-[0.12em] text-foreground/55 uppercase">
@@ -162,12 +190,12 @@ export default function OutcomesLedger() {
         </div>
 
         <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <p className="max-w-[78ch] text-[0.66rem] leading-[1.55] text-foreground/60">
+          {/* <p className="max-w-[78ch] text-[0.66rem] leading-[1.55] text-foreground/60">
             PLACEHOLDER — these values are illustrative for layout only. They
             are not a delivery record, an audited result or a forecast. Verified
             data will be published only with an approved method, period and
             source owner.
-          </p>
+          </p> */}
           <a
             href="/impact/development-partnerships"
             className="inline-flex shrink-0 items-center gap-2 border-b border-primary pb-1 text-[0.66rem] font-semibold tracking-[0.08em] text-foreground uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"

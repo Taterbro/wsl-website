@@ -1,3 +1,7 @@
+import {
+  SustainabilitySustainabilityHero,
+  SustainabilitySustainabilityHeroFacts,
+} from "@/lib/cms/generated";
 import Image from "next/image";
 
 const BTN_BASE_CLASS =
@@ -19,7 +23,16 @@ const FACTS: { label: string; value: string }[] = [
   { label: "Review", value: "Annual — to be confirmed" },
 ];
 
-export default function SustainabilityHero() {
+export default function SustainabilityHero({
+  data,
+}: {
+  data: SustainabilitySustainabilityHero;
+}) {
+  const title = data.heading;
+  const description =
+    data.description ||
+    "Sustainability is not a communications layer. It is a set of decisions taken at screening, design, construction and operation — and reported only when the evidence exists.";
+  const facts = data.facts?.length > 0 ? data.facts : FACTS;
   return (
     <section
       aria-labelledby="sustainability-hero-title"
@@ -68,17 +81,19 @@ export default function SustainabilityHero() {
                 id="sustainability-hero-title"
                 className="mt-[clamp(14px,2vw,22px)] max-w-[13ch] font-sans text-[clamp(2.2rem,7.6vw,3.7rem)] leading-[0.9] font-extrabold tracking-[-0.015em] uppercase [font-stretch:112%] lg:text-[clamp(3.7rem,5.4vw,5.5rem)] lg:[font-stretch:118%]"
               >
-                Built to last.
-                <br />
-                <span className="text-primary">Measured</span>
-                <br />
-                honestly.
+                {title || (
+                  <>
+                    Built to last.
+                    <br />
+                    <span className="text-primary">Measured</span>
+                    <br />
+                    honestly.
+                  </>
+                )}
               </h1>
 
               <p className="mt-[clamp(16px,2.2vw,26px)] max-w-[48ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.55] text-foreground/70">
-                Sustainability is not a communications layer. It is a set of
-                decisions taken at screening, design, construction and
-                operation — and reported only when the evidence exists.
+                {description}
               </p>
 
               <div className="mt-[clamp(20px,2.8vw,30px)] flex flex-wrap gap-2.5">
@@ -99,7 +114,7 @@ export default function SustainabilityHero() {
             </div>
 
             <dl className="relative z-10 mt-[clamp(26px,3.4vw,38px)] grid grid-cols-3 gap-x-[clamp(14px,2.4vw,30px)] border-t border-foreground/15 pt-[clamp(16px,2.2vw,24px)]">
-              {FACTS.map((fact) => (
+              {facts.map((fact) => (
                 <div key={fact.label}>
                   <dt className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
                     {fact.label}
@@ -114,12 +129,17 @@ export default function SustainabilityHero() {
 
           <figure className="relative min-h-[clamp(320px,48vh,520px)] overflow-hidden bg-sidebar">
             <Image
-              src="/placeholders/vision-impact.png"
-              alt="Placeholder image standing in for photography of African industrial and infrastructure development at city scale"
+              src={data.image?.url || "/placeholders/vision-impact.png"}
+              alt={
+                data.image_alt ||
+                "Placeholder image standing in for photography of African industrial and infrastructure development at city scale"
+              }
               fill
               preload
               sizes="(min-width: 1024px) 40vw, 100vw"
               className="object-cover"
+              width={data.image?.width}
+              height={data.image?.height}
             />
             <div
               aria-hidden="true"
@@ -157,17 +177,17 @@ export default function SustainabilityHero() {
             <p className="absolute top-[clamp(16px,2.4vw,30px)] left-[clamp(16px,2.4vw,30px)] border border-accent/35 bg-sidebar/75 px-2.5 py-1.5 text-[0.56rem] font-semibold tracking-[0.14em] text-accent uppercase">
               Operating discipline
             </p>
-            <p className="absolute right-[clamp(16px,2.4vw,30px)] bottom-[clamp(16px,2.4vw,30px)] left-[clamp(16px,2.4vw,30px)] text-[0.55rem] leading-[1.5] text-muted/65">
+            {/* <p className="absolute right-[clamp(16px,2.4vw,30px)] bottom-[clamp(16px,2.4vw,30px)] left-[clamp(16px,2.4vw,30px)] text-[0.55rem] leading-[1.5] text-muted/65">
               PLACEHOLDER — photography slot. Replace with an image cleared for
               publication.
-            </p>
+            </p> */}
           </figure>
         </div>
 
-        <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
+        {/* <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
           PLACEHOLDER — hero copy, descriptors and imagery are illustrative
           until approved sustainability content is supplied.
-        </p>
+        </p> */}
       </div>
     </section>
   );

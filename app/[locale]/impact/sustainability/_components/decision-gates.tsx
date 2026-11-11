@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import { SustainabilityDecisionGates } from "@/lib/cms/generated";
 
 // PLACEHOLDER — gate names, copy and evidence labels are illustrative until
 // approved sustainability content is supplied.
@@ -47,7 +48,20 @@ const GATES: Gate[] = [
   },
 ];
 
-export default function DecisionGates() {
+export default function DecisionGates({
+  data,
+}: {
+  data: SustainabilityDecisionGates;
+}) {
+  const title = data.heading;
+  const description =
+    data.description ||
+    `Four points where sustainability changes a decision. Each gate
+              produces a record that can be reviewed — by us, by partners and by
+              the institutions financing the asset.`;
+  const gates = data.gates;
+  const image = data.image;
+  const alt = data.image_alt;
   return (
     <section
       aria-labelledby="gates-title"
@@ -68,21 +82,25 @@ export default function DecisionGates() {
                 id="gates-title"
                 className="mt-4 font-sans text-[clamp(2rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                ESG is a gate,
-                <br />
-                not a paragraph.
+                {title ? (
+                  title
+                ) : (
+                  <>
+                    ESG is a gate,
+                    <br />
+                    not a paragraph.
+                  </>
+                )}
               </h2>
             </div>
 
             <p className="max-w-[42ch] text-[0.78rem] leading-[1.6] text-foreground/65 lg:text-right">
-              Four points where sustainability changes a decision. Each gate
-              produces a record that can be reviewed — by us, by partners and by
-              the institutions financing the asset.
+              {description}
             </p>
           </div>
 
           <ol className="mt-[clamp(30px,4.5vw,54px)] grid list-none gap-px border border-foreground/15 bg-foreground/15 p-0 sm:grid-cols-2 lg:grid-cols-4">
-            {GATES.map((gate) => (
+            {gates?.map((gate) => (
               <li
                 key={gate.no}
                 className="group flex flex-col bg-secondary px-[clamp(16px,2.2vw,26px)] py-[clamp(20px,2.8vw,32px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-muted"
@@ -121,10 +139,15 @@ export default function DecisionGates() {
           <figure className="mt-[clamp(24px,3.6vw,42px)]">
             <div className="relative aspect-[21/9] min-h-[240px] overflow-hidden border border-foreground/15">
               <Image
-                src="/placeholders/story-field-digital.png"
-                alt="Placeholder image standing in for field measurement and sustainability reporting"
+                src={image?.url ?? "/placeholders/story-field-digital.png"}
+                alt={
+                  image?.alt ??
+                  "Placeholder image standing in for field measurement and sustainability reporting"
+                }
                 fill
                 sizes="100vw"
+                height={image?.height}
+                width={image?.width}
                 className="object-cover"
               />
               <div
@@ -134,20 +157,20 @@ export default function DecisionGates() {
               <p className="absolute top-[clamp(16px,2.4vw,28px)] left-[clamp(16px,2.4vw,28px)] border border-accent/35 bg-sidebar/75 px-2.5 py-1.5 text-[0.54rem] font-semibold tracking-[0.14em] text-accent uppercase">
                 Evidence over assertion
               </p>
-              <blockquote className="absolute right-[clamp(16px,2.4vw,28px)] bottom-[clamp(16px,2.4vw,28px)] left-[clamp(16px,2.4vw,28px)] max-w-[34ch]">
+              {/* <blockquote className="absolute right-[clamp(16px,2.4vw,28px)] bottom-[clamp(16px,2.4vw,28px)] left-[clamp(16px,2.4vw,28px)] max-w-[34ch]">
                 <p className="font-sans text-[clamp(1.1rem,2.4vw,1.9rem)] leading-[1.08] font-extrabold uppercase [font-stretch:112%]">
                   If it cannot be evidenced, it is not published.
                 </p>
                 <footer className="mt-2 text-[0.58rem] font-semibold tracking-[0.12em] text-muted/60 uppercase">
                   Reporting principle — wording pending approval
                 </footer>
-              </blockquote>
+              </blockquote> */}
             </div>
-            <figcaption className="mt-3 text-[0.6rem] leading-[1.5] text-foreground/55">
+            {/* <figcaption className="mt-3 text-[0.6rem] leading-[1.5] text-foreground/55">
               PLACEHOLDER — imagery, gate evidence and the reporting principle
               are illustrative until approved sustainability content is
               supplied.
-            </figcaption>
+            </figcaption> */}
           </figure>
         </Reveal>
       </div>

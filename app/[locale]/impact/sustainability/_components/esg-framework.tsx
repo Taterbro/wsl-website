@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { SustainabilityEsgFramework } from "@/lib/cms/generated";
 
 // PLACEHOLDER — framework structure, copy and evidence labels are illustrative
 // until approved sustainability content is supplied.
 interface Lens {
-  id: string;
   code: string;
   name: string;
   statement: string;
@@ -17,7 +17,6 @@ interface Lens {
 
 const LENSES: Lens[] = [
   {
-    id: "environment",
     code: "E-01",
     name: "Environment",
     statement:
@@ -38,7 +37,6 @@ const LENSES: Lens[] = [
     ],
   },
   {
-    id: "social",
     code: "S-02",
     name: "Social",
     statement:
@@ -59,7 +57,6 @@ const LENSES: Lens[] = [
     ],
   },
   {
-    id: "governance",
     code: "G-03",
     name: "Governance",
     statement:
@@ -86,9 +83,21 @@ const LEDGER: string[] = [
   "Reported",
 ];
 
-export default function EsgFramework() {
-  const [activeId, setActiveId] = useState(LENSES[0].id);
-  const active = LENSES.find((lens) => lens.id === activeId) ?? LENSES[0];
+export default function EsgFramework({
+  data,
+}: {
+  data: SustainabilityEsgFramework;
+}) {
+  const [activeCode, setActiveId] = useState(LENSES[0].code);
+  const active = LENSES.find((lens) => lens.code === activeCode) ?? LENSES[0];
+
+  const title = data.heading;
+  const description =
+    data.description ||
+    `Environmental, social and governance criteria run through the same
+              investment and asset decisions. Select a lens to see what it
+              changes.`;
+  const lenses = data.lenses.length > 0 ? data.lenses : LENSES;
 
   return (
     <section
@@ -115,14 +124,18 @@ export default function EsgFramework() {
               id="framework-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Three lenses.
-              <br />
-              One ledger.
+              {title ? (
+                title
+              ) : (
+                <>
+                  Three lenses.
+                  <br />
+                  One ledger.
+                </>
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.4vw,1.2rem)] leading-[1.6] text-muted/75">
-              Environmental, social and governance criteria run through the same
-              investment and asset decisions. Select a lens to see what it
-              changes.
+              {description}
             </p>
           </div>
 
@@ -141,15 +154,15 @@ export default function EsgFramework() {
             aria-label="Sustainability lenses"
             className="flex flex-col gap-px border border-accent/25 bg-accent/25"
           >
-            {LENSES.map((lens, index) => {
-              const isActive = lens.id === active.id;
+            {lenses.map((lens, index) => {
+              const isActive = lens.code === active.code;
               return (
                 <button
-                  key={lens.id}
+                  key={lens.code}
                   type="button"
                   aria-pressed={isActive}
                   aria-controls="framework-brief"
-                  onClick={() => setActiveId(lens.id)}
+                  onClick={() => setActiveId(lens.code)}
                   className={cn(
                     "group flex flex-1 items-start gap-4 px-[clamp(16px,2.4vw,26px)] py-[clamp(18px,2.6vw,28px)] text-left transition-colors duration-(--transition-normal) ease-(--ease-standard) focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar focus-visible:outline-none",
                     isActive
@@ -210,7 +223,7 @@ export default function EsgFramework() {
             className="border border-accent/25 bg-sidebar-accent p-[clamp(20px,3vw,40px)]"
           >
             <div
-              key={active.id}
+              key={active.code}
               className="animate-slide-in motion-reduce:animate-none"
             >
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-accent/25 pb-4">
@@ -289,11 +302,11 @@ export default function EsgFramework() {
           ))}
         </ol>
 
-        <p className="mt-6 max-w-[78ch] text-[0.6rem] leading-[1.55] text-muted/55">
+        {/* <p className="mt-6 max-w-[78ch] text-[0.6rem] leading-[1.55] text-muted/55">
           PLACEHOLDER — the lens structure, practice statements and evidence
           labels are illustrative until approved sustainability content and
           reporting standards are supplied.
-        </p>
+        </p> */}
       </div>
     </section>
   );

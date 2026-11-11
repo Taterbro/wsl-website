@@ -1,3 +1,4 @@
+import { SustainabilitySustainabilityConversion } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 const BTN_BASE_CLASS =
@@ -14,11 +15,22 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 
 const LINKS: { label: string; href: string }[] = [
   { label: "Impact overview", href: "/impact" },
-  { label: "Development partnerships", href: "/impact/development-partnerships" },
+  {
+    label: "Development partnerships",
+    href: "/impact/development-partnerships",
+  },
   { label: "iHEAL framework", href: "/impact/iheal-framework" },
 ];
 
-export default function SustainabilityConversion() {
+export default function SustainabilityConversion({
+  data,
+}: {
+  data: SustainabilitySustainabilityConversion;
+}) {
+  const title = data.label;
+  const description =
+    data.description ||
+    "If you are financing, building or operating an asset in Africa, bring the sustainability question into the first conversation. We will tell you what the evidence standard is — and where it is still being built.";
   return (
     <Reveal>
       <section
@@ -44,15 +56,18 @@ export default function SustainabilityConversion() {
                 id="sustainability-conversion-title"
                 className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Bring the
-                <br />
-                question early.
+                {title ? (
+                  title
+                ) : (
+                  <>
+                    Bring the
+                    <br />
+                    question early.
+                  </>
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[54ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted/80">
-                If you are financing, building or operating an asset in Africa,
-                bring the sustainability question into the first conversation.
-                We will tell you what the evidence standard is — and where it is
-                still being built.
+                {description}
               </p>
               <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
                 {CTAS.map((cta) => (
@@ -71,7 +86,10 @@ export default function SustainabilityConversion() {
               </div>
             </div>
 
-            <nav aria-label="Impact pages" className="border-t border-accent/20">
+            <nav
+              aria-label="Impact pages"
+              className="border-t border-accent/20"
+            >
               <p className="py-3 text-[0.58rem] font-semibold tracking-[0.14em] text-muted/45 uppercase">
                 Continue reading
               </p>
