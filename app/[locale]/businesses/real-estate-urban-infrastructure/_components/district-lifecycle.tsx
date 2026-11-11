@@ -1,9 +1,16 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type { RealEstateUrbanInfrastructureDistrictLifecycle } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "A district is\nnever finished.";
+
+const FALLBACK_DESCRIPTION =
+  "Value is created across the whole urban cycle — not only at handover. We stay through operations and renewal.";
+
+const FALLBACK_IMAGE_ALT = "Panoramic urban district at the edge of the city";
 
 // PLACEHOLDER — lifecycle copy and imagery are illustrative until approved
 // sector content is supplied.
-const STAGES: { number: string; title: string; copy: string }[] = [
+const FALLBACK_STAGES: { number: string; title: string; copy: string }[] = [
   {
     number: "01",
     title: "Plan",
@@ -26,7 +33,18 @@ const STAGES: { number: string; title: string; copy: string }[] = [
   },
 ];
 
-export default function DistrictLifecycle() {
+export default function DistrictLifecycle({
+  data,
+}: {
+  data: RealEstateUrbanInfrastructureDistrictLifecycle;
+}) {
+  const stages = data.stages.length ? data.stages : FALLBACK_STAGES;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="urban-lifecycle-title"
@@ -47,16 +65,21 @@ export default function DistrictLifecycle() {
                 id="urban-lifecycle-title"
                 className="mt-4 max-w-[16ch] font-sans text-[clamp(2rem,4.4vw,3.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                A district is
-                <br />
-                never finished.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
 
             <div className="max-w-[46ch] lg:text-right">
               <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] leading-[1.6] text-muted/70">
-                Value is created across the whole urban cycle — not only at
-                handover. We stay through operations and renewal.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <a
                 href="/businesses/technology-digital-infrastructure"
@@ -69,13 +92,15 @@ export default function DistrictLifecycle() {
           </div>
 
           <div className="relative mt-[clamp(24px,3.6vw,44px)] aspect-[4/3] min-h-[220px] overflow-hidden border border-accent/25 sm:aspect-[21/9] sm:min-h-0">
-            <Image
-              src="/placeholders/district-panorama.png"
-              alt="Panoramic urban district at the edge of the city (placeholder image)"
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/75 via-sidebar/10 to-transparent"
@@ -83,14 +108,16 @@ export default function DistrictLifecycle() {
             <p className="absolute top-4 left-4 border border-accent/35 bg-sidebar/80 px-2.5 py-1.5 text-[0.56rem] font-semibold tracking-[0.14em] text-accent uppercase">
               District lifecycle — 04
             </p>
-            <p className="absolute right-4 bottom-4 max-w-[30ch] text-right text-[0.58rem] leading-[1.5] text-muted/65">
-              PLACEHOLDER — panorama to be replaced with approved district
-              imagery.
-            </p>
+            {data.image ? (
+              <p className="absolute right-4 bottom-4 max-w-[30ch] text-right text-[0.58rem] leading-[1.5] text-muted/65">
+                PLACEHOLDER — panorama to be replaced with approved district
+                imagery.
+              </p>
+            ) : null}
           </div>
 
           <ol className="grid gap-px border-x border-b border-accent/20 bg-accent/20 sm:grid-cols-2 lg:grid-cols-4">
-            {STAGES.map((stage) => (
+            {stages.map((stage) => (
               <li
                 key={stage.number}
                 className="bg-sidebar p-[clamp(18px,2.4vw,28px)]"

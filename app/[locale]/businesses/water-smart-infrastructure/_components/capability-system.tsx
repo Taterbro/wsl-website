@@ -3,14 +3,25 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { getSector } from "@/lib/businesses";
+import type {
+  WaterSmartInfrastructureCapabilitySystem,
+  WaterSmartInfrastructureCapabilitySystemCapabilities,
+} from "@/lib/cms/generated";
 
 const SECTOR = getSector("water-smart-infrastructure");
+
+const FALLBACK_HEADING = "One system.\nSeven capabilities.";
+
+const FALLBACK_DESCRIPTION =
+  "Every capability is a working part of the same water system — not a standalone service. Select a station to see what it covers.";
 
 interface Detail {
   copy: string;
   applications: string[];
 }
 
+// PLACEHOLDER — scope detail is illustrative until approved capability copy is
+// supplied.
 const DETAILS: Detail[] = [
   {
     copy: "Instrumented networks that treat water as live data: demand, pressure, quality and loss in one operating picture.",
@@ -52,16 +63,61 @@ const POSITIONS: { left: string; top: string }[] = [
   { left: "84%", top: "42%" },
 ];
 
-const CAPABILITIES = SECTOR.capabilities.map((label, index) => ({
-  label,
-  no: String(index + 1).padStart(2, "0"),
-  detail: DETAILS[index],
-  position: POSITIONS[index],
-}));
+type Capability = {
+  label: string;
+  no: string;
+  copy: string;
+  applications: string[];
+  position: { left: string; top: string };
+};
 
-export default function CapabilitySystem() {
+const FALLBACK_CAPABILITIES: Capability[] = SECTOR.capabilities.map(
+  (label, index) => {
+    const detail = DETAILS[index];
+    return {
+      label,
+      no: String(index + 1).padStart(2, "0"),
+      copy: detail?.copy ?? "",
+      applications: detail?.applications ?? [],
+      position: POSITIONS[index % POSITIONS.length],
+    };
+  }
+);
+
+function toCapability(
+  capability: WaterSmartInfrastructureCapabilitySystemCapabilities,
+  index: number
+): Capability {
+  const fallback = FALLBACK_CAPABILITIES[index % FALLBACK_CAPABILITIES.length];
+  const applications = capability.applications
+    .split(",")
+    .map((application) => application.trim())
+    .filter(Boolean);
+
+  return {
+    label: capability.label || fallback?.label || "",
+    no: String(index + 1).padStart(2, "0"),
+    copy: capability.copy || fallback?.copy || "",
+    applications: applications.length
+      ? applications
+      : (fallback?.applications ?? []),
+    position: POSITIONS[index % POSITIONS.length],
+  };
+}
+
+export default function CapabilitySystem({
+  data,
+}: {
+  data: WaterSmartInfrastructureCapabilitySystem;
+}) {
   const [active, setActive] = useState(0);
-  const current = CAPABILITIES[active];
+  const capabilities = data.capabilities.length
+    ? data.capabilities.map(toCapability)
+    : FALLBACK_CAPABILITIES;
+  const current = capabilities[active];
+  const count = String(capabilities.length).padStart(2, "0");
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
 
   return (
     <section
@@ -80,13 +136,18 @@ export default function CapabilitySystem() {
               id="capabilities-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              One system.
-              <br />
-              Seven capabilities.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Every capability is a working part of the same water system — not
-              a standalone service. Select a station to see what it covers.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <a
@@ -209,7 +270,7 @@ export default function CapabilitySystem() {
                 />
               </svg>
 
-              {CAPABILITIES.map((capability, index) => (
+              {capabilities.map((capability, index) => (
                 <button
                   key={capability.label}
                   type="button"
@@ -239,7 +300,7 @@ export default function CapabilitySystem() {
             </div>
 
             <div className="relative flex flex-col p-[clamp(14px,2.4vw,22px)] lg:hidden">
-              {CAPABILITIES.map((capability, index) => (
+              {capabilities.map((capability, index) => (
                 <button
                   key={capability.label}
                   type="button"
@@ -274,16 +335,16 @@ export default function CapabilitySystem() {
           >
             <div key={active} className="motion-safe:animate-slide-in">
               <p className="text-[0.64rem] font-semibold tracking-[0.2em] text-accent uppercase">
-                {current.no} / 07
+                {current.no} / {count}
               </p>
               <h3 className="mt-4 font-sans text-[clamp(1.3rem,2.1vw,1.85rem)] leading-[1.08] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]">
                 {current.label}
               </h3>
               <p className="mt-4 max-w-[42ch] text-[0.94rem] leading-[1.62] text-muted/78">
-                {current.detail.copy}
+                {current.copy}
               </p>
               <ul className="mt-7 flex list-none flex-wrap gap-2 p-0">
-                {current.detail.applications.map((application) => (
+                {current.applications.map((application) => (
                   <li
                     key={application}
                     className="rounded-[2px] border border-accent/25 px-[10px] py-[6px] text-[0.68rem] tracking-[0.04em] text-muted/80"

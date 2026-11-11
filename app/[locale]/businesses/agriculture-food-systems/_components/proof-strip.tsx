@@ -1,22 +1,55 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { AgricultureFoodSystemsProofStrip } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "The chain in numbers.";
 
 // PLACEHOLDER — indicative scope figures for layout only. Replace with
 // verified data before publication.
-const STATS: { value: number; suffix: string; label: string }[] = [
+const FALLBACK_STATS: { value: number; suffix: string; label: string }[] = [
   { value: 6, suffix: "", label: "Capability areas" },
-  { value: 4, suffix: "", label: "Chain stages — farm, processing, cold chain, market" },
+  {
+    value: 4,
+    suffix: "",
+    label: "Chain stages — farm, processing, cold chain, market",
+  },
   { value: 24, suffix: "/7", label: "Cold-chain monitoring target" },
-  { value: 3, suffix: "", label: "End markets — community, commercial, institutional" },
+  {
+    value: 3,
+    suffix: "",
+    label: "End markets — community, commercial, institutional",
+  },
 ];
+
+type Stat = { value: number; suffix: string; label: string };
+
+function toStat(
+  stat: AgricultureFoodSystemsProofStrip["stats"][number],
+  index: number
+): Stat {
+  const fallback = FALLBACK_STATS[index];
+  const parsed = Number(stat.value);
+  const hasValue = stat.value.trim() !== "" && Number.isFinite(parsed);
+
+  return {
+    value: hasValue ? parsed : (fallback?.value ?? 0),
+    suffix: stat.suffix,
+    label: stat.label || fallback?.label || "",
+  };
+}
 
 function getReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function ProofStrip() {
+export default function ProofStrip({
+  data,
+}: {
+  data: AgricultureFoodSystemsProofStrip;
+}) {
+  const stats = data.stats.length ? data.stats.map(toStat) : FALLBACK_STATS;
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -83,7 +116,7 @@ export default function ProofStrip() {
               id="agriculture-proof-title"
               className="mt-3 font-sans text-[clamp(1.4rem,2.4vw,2rem)] leading-[1.04] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
             >
-              The chain in numbers.
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
           <p className="max-w-[52ch] text-[0.72rem] leading-[1.6] text-primary-foreground/60">
@@ -94,7 +127,7 @@ export default function ProofStrip() {
         </div>
 
         <dl className="mt-[clamp(24px,3.4vw,40px)] grid grid-cols-4 gap-px border border-primary-foreground/20 bg-primary-foreground/20 max-[900px]:grid-cols-2">
-          {STATS.map((stat) => {
+          {stats.map((stat) => {
             const value = Math.round(stat.value * progress);
             return (
               <div

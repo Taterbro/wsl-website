@@ -1,42 +1,81 @@
-import Image from "next/image";
 import Link from "next/link";
+import type {
+  TechnologyDigitalInfrastructureRelatedProjects,
+  Project,
+} from "@/lib/cms/generated";
 
-// PLACEHOLDER — illustrative project concepts only. Not a portfolio record.
-const PROJECTS: {
-  name: string;
+const FALLBACK_HEADING = "Where the stack\nmeets the asset.";
+
+const FALLBACK_DESCRIPTION =
+  "Illustrative concepts show how monitoring, automation and data platforms become structured digital-infrastructure opportunities.";
+
+const FALLBACK_IMAGE_ALT = "Illustrative digital infrastructure project concept";
+
+type ProjectCard = {
+  id: number | string;
+  title: string;
   geography: string;
   stage: string;
   opportunity: string;
-  image: string;
+  image: string | null;
   alt: string;
-}[] = [
+};
+
+// PLACEHOLDER — illustrative project concepts only. Not a portfolio record.
+// Media has no value fallback; images render only from the CMS.
+const FALLBACK_PROJECTS: ProjectCard[] = [
   {
-    name: "Smart Water Monitoring Network",
+    id: "PL-01",
+    title: "Smart Water Monitoring Network",
     geography: "West Africa · placeholder",
     stage: "Development",
     opportunity: "JV",
-    image: "/placeholders/tech-wswis.png",
+    image: null,
     alt: "Smart water monitoring network concept (placeholder image)",
   },
   {
-    name: "Industrial Automation Platform",
+    id: "PL-02",
+    title: "Industrial Automation Platform",
     geography: "East Africa · placeholder",
     stage: "Investment Ready",
     opportunity: "Equity",
-    image: "/placeholders/group-sector-industry.png",
+    image: null,
     alt: "Industrial automation platform concept (placeholder image)",
   },
   {
-    name: "Municipal Data Exchange",
+    id: "PL-03",
+    title: "Municipal Data Exchange",
     geography: "Southern Africa · placeholder",
     stage: "Concept",
     opportunity: "PPP",
-    image: "/placeholders/district-smart-city.png",
+    image: null,
     alt: "Municipal data exchange concept (placeholder image)",
   },
 ];
 
-export default function RelatedProjects() {
+function toProjectCard(project: Project): ProjectCard {
+  return {
+    id: project.id,
+    title: project.title || project.postTitle || project.slug,
+    geography: project.location || project.country || project.region,
+    stage: project.stage || project.investment_status,
+    opportunity: project.opportunity,
+    image: project.background?.url ?? null,
+    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+  };
+}
+
+export default function RelatedProjects({
+  data,
+}: {
+  data: TechnologyDigitalInfrastructureRelatedProjects;
+}) {
+  const projects = data.projects.length
+    ? data.projects.map(toProjectCard)
+    : FALLBACK_PROJECTS;
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="technology-projects-title"
@@ -56,13 +95,18 @@ export default function RelatedProjects() {
               id="technology-projects-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Where the stack
-              <br />
-              meets the asset.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[54ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Illustrative concepts show how monitoring, automation and data
-              platforms become structured digital-infrastructure opportunities.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <Link
@@ -75,9 +119,9 @@ export default function RelatedProjects() {
         </div>
 
         <div className="mt-[clamp(28px,4vw,48px)] grid gap-[clamp(14px,1.8vw,22px)] md:grid-cols-3">
-          {PROJECTS.map((project) => (
+          {projects.map((project) => (
             <article
-              key={project.name}
+              key={project.id}
               className="flex flex-col border border-[rgba(9,29,42,0.16)] bg-background"
             >
               <Link
@@ -85,13 +129,15 @@ export default function RelatedProjects() {
                 className="group flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
               >
                 <div className="relative aspect-[16/7] overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
-                  />
+                  {project.image ? (
+                    <div
+                      role={project.alt ? "img" : undefined}
+                      aria-label={project.alt || undefined}
+                      aria-hidden={project.alt ? undefined : true}
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
+                      style={{ backgroundImage: `url(${project.image})` }}
+                    />
+                  ) : null}
                   <div
                     aria-hidden="true"
                     className="absolute inset-0 bg-linear-to-t from-foreground/40 via-transparent to-foreground/10"
@@ -104,7 +150,7 @@ export default function RelatedProjects() {
                 <div className="flex flex-1 flex-col gap-3 p-[clamp(16px,2.2vw,24px)]">
                   <div>
                     <h3 className="font-sans text-[clamp(1.06rem,1.55vw,1.26rem)] leading-[1.16] font-extrabold uppercase [font-stretch:112%]">
-                      {project.name}
+                      {project.title}
                     </h3>
                     <p className="mt-1.5 text-[0.78rem] leading-[1.5] text-muted-foreground">
                       {project.geography}

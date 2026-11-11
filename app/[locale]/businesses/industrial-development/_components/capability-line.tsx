@@ -1,67 +1,119 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { CmsImage } from "@/lib/cms/normalize";
+import type { IndustrialDevelopmentCapabilityLine } from "@/lib/cms/generated";
 
 // PLACEHOLDER — capability imagery and supporting copy are illustrative until
-// approved sector assets and content are supplied.
-type CapabilityDetail = {
+// approved sector assets and content are supplied. Media has no value fallback;
+// images render only from the CMS.
+type Capability = {
   code: string;
+  label: string;
   copy: string;
   chips: string[];
-  image: string;
+  image: CmsImage | null;
   alt: string;
 };
 
-const DETAILS: Record<string, CapabilityDetail> = {
-  Manufacturing: {
+const FALLBACK_LABELS = getSector("industrial-development").capabilities;
+
+const FALLBACK_DETAILS: {
+  code: string;
+  copy: string;
+  chips: string[];
+  alt: string;
+}[] = [
+  {
     code: "ST-01",
     copy: "Industrial production built around local inputs, standards and demand.",
     chips: ["Production lines", "Assembly", "Quality systems"],
-    image: "/placeholders/industry-manufacturing.png",
     alt: "Manufacturing line in operation (placeholder image)",
   },
-  "Industrial facilities": {
+  {
     code: "ST-02",
     copy: "Facilities planned, built and operated as long-term industrial assets.",
     chips: ["Industrial parks", "Plants", "Shared utilities"],
-    image: "/placeholders/industry-facilities.png",
     alt: "Industrial facility and plant infrastructure (placeholder image)",
   },
-  Processing: {
+  {
     code: "ST-03",
     copy: "Processing capacity that adds value before products leave the region.",
     chips: ["Agro-processing", "Materials", "Packaging"],
-    image: "/placeholders/industry-processing.png",
     alt: "Processing line and materials handling (placeholder image)",
   },
-  "Technology localization": {
+  {
     code: "ST-04",
     copy: "Technology transfer that turns imported systems into local capability.",
     chips: ["Licensing", "Skills", "Supplier development"],
-    image: "/placeholders/industry-localisation.png",
     alt: "Technology localisation and assembly work (placeholder image)",
   },
-  "Equipment production": {
+  {
     code: "ST-05",
     copy: "Equipment manufactured and supported closer to the projects that use it.",
     chips: ["Fabrication", "Assembly", "Service"],
-    image: "/placeholders/industry-partners.png",
     alt: "Industrial equipment production and partnership (placeholder image)",
   },
-  "Industrial partnerships": {
+  {
     code: "ST-06",
     copy: "Joint ventures and operating partnerships that anchor industry locally.",
     chips: ["Joint ventures", "O&M", "Offtake"],
-    image: "/placeholders/industry-partnership.png",
     alt: "Industrial partnership and operations team (placeholder image)",
   },
-};
+];
 
-export default function CapabilityLine() {
-  const sector = getSector("industrial-development");
-  const capabilities = sector.capabilities.map((label) => ({
-    label,
-    ...DETAILS[label],
-  }));
+const FALLBACK_DESCRIPTION =
+  "Six stations along one industrial value chain — each able to stand alone, stronger when sequenced.";
+
+const FALLBACK_CAPABILITIES: Capability[] = FALLBACK_LABELS.map(
+  (label, index) => {
+    const legacy = FALLBACK_DETAILS[index];
+    return {
+      code: legacy?.code ?? `ST-0${index + 1}`,
+      label,
+      copy: legacy?.copy ?? "",
+      chips: legacy?.chips ?? [],
+      image: null,
+      alt: legacy?.alt ?? "",
+    };
+  }
+);
+
+function parseChips(value: string): string[] {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function toCapability(
+  capability: IndustrialDevelopmentCapabilityLine["capabilities"][number],
+  index: number
+): Capability {
+  const legacy = FALLBACK_CAPABILITIES[index];
+  const chips = parseChips(capability.chips);
+
+  return {
+    code: capability.code || legacy?.code || `ST-0${index + 1}`,
+    label: capability.label || legacy?.label || "",
+    copy: capability.copy || legacy?.copy || "",
+    chips: chips.length ? chips : (legacy?.chips ?? []),
+    image: capability.image,
+    alt:
+      capability.image?.alt ||
+      capability.image_alt ||
+      legacy?.alt ||
+      "",
+  };
+}
+
+export default function CapabilityLine({
+  data,
+}: {
+  data: IndustrialDevelopmentCapabilityLine;
+}) {
+  const capabilities = data.capabilities.length
+    ? data.capabilities.map(toCapability)
+    : FALLBACK_CAPABILITIES;
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   return (
     <section
@@ -83,16 +135,29 @@ export default function CapabilityLine() {
               id="industrial-capabilities-title"
               className="mt-4 max-w-[16ch] font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              From blueprint
-              <br />
-              to production.
+              {data.heading ? (
+                headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  data.heading
+                )
+              ) : (
+                <>
+                  From blueprint
+                  <br />
+                  to production.
+                </>
+              )}
             </h2>
           </div>
 
           <div className="max-w-[46ch] lg:text-right">
             <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] leading-[1.6] text-foreground/70">
-              Six stations along one industrial value chain — each able to
-              stand alone, stronger when sequenced.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <a
               href="/innovation/technology-partnerships"
@@ -121,56 +186,66 @@ export default function CapabilityLine() {
           className="-mx-[clamp(20px,5vw,72px)] overflow-x-auto px-[clamp(20px,5vw,72px)] pb-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
           <ol className="mt-4 flex w-max snap-x snap-mandatory gap-[clamp(12px,2vw,20px)]">
-            {capabilities.map((capability) => (
-              <li
-                key={capability.label}
-                className="w-[clamp(260px,31vw,420px)] shrink-0 snap-start"
-              >
-                <article className="group flex h-full flex-col border border-foreground/15 bg-card">
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={capability.image}
-                      alt={capability.alt}
-                      fill
-                      sizes="(min-width: 1024px) 31vw, 80vw"
-                      className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 bg-linear-to-t from-sidebar/75 via-sidebar/10 to-transparent"
-                    />
-                    <span className="absolute top-3 left-3 border border-accent/35 bg-sidebar/80 px-2 py-1 font-sans text-[0.6rem] font-semibold tracking-[0.14em] text-accent uppercase tabular-nums">
-                      {capability.code}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="absolute right-3 bottom-3 font-sans text-[2.6rem] leading-none font-extrabold tracking-[-0.04em] text-muted/25 uppercase tabular-nums [font-stretch:120%]"
-                    >
-                      {capability.code.slice(-2)}
-                    </span>
-                  </div>
+            {capabilities.map((capability, index) => {
+              const alt = capability.image
+                ? capability.alt
+                : "";
 
-                  <div className="flex flex-1 flex-col gap-3 p-[clamp(18px,2.2vw,26px)]">
-                    <h3 className="font-sans text-[clamp(1.05rem,1.7vw,1.35rem)] leading-[1.15] font-extrabold tracking-[-0.005em] uppercase [font-stretch:110%]">
-                      {capability.label}
-                    </h3>
-                    <p className="text-[0.86rem] leading-[1.6] text-foreground/65">
-                      {capability.copy}
-                    </p>
-                    <ul className="mt-auto flex flex-wrap gap-1.5 pt-1">
-                      {capability.chips.map((chip) => (
-                        <li
-                          key={chip}
-                          className="border border-foreground/15 px-2 py-1 text-[0.58rem] font-semibold tracking-[0.08em] text-foreground/65 uppercase"
-                        >
-                          {chip}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </li>
-            ))}
+              return (
+                <li
+                  key={`${capability.code}-${index}`}
+                  className="w-[clamp(260px,31vw,420px)] shrink-0 snap-start"
+                >
+                  <article className="group flex h-full flex-col border border-foreground/15 bg-card">
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      {capability.image ? (
+                        <div
+                          role={alt ? "img" : undefined}
+                          aria-label={alt || undefined}
+                          aria-hidden={alt ? undefined : true}
+                          className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
+                          style={{
+                            backgroundImage: `url(${capability.image.url})`,
+                          }}
+                        />
+                      ) : null}
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-linear-to-t from-sidebar/75 via-sidebar/10 to-transparent"
+                      />
+                      <span className="absolute top-3 left-3 border border-accent/35 bg-sidebar/80 px-2 py-1 font-sans text-[0.6rem] font-semibold tracking-[0.14em] text-accent uppercase tabular-nums">
+                        {capability.code}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="absolute right-3 bottom-3 font-sans text-[2.6rem] leading-none font-extrabold tracking-[-0.04em] text-muted/25 uppercase tabular-nums [font-stretch:120%]"
+                      >
+                        {capability.code.slice(-2)}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-1 flex-col gap-3 p-[clamp(18px,2.2vw,26px)]">
+                      <h3 className="font-sans text-[clamp(1.05rem,1.7vw,1.35rem)] leading-[1.15] font-extrabold tracking-[-0.005em] uppercase [font-stretch:110%]">
+                        {capability.label}
+                      </h3>
+                      <p className="text-[0.86rem] leading-[1.6] text-foreground/65">
+                        {capability.copy}
+                      </p>
+                      <ul className="mt-auto flex flex-wrap gap-1.5 pt-1">
+                        {capability.chips.map((chip) => (
+                          <li
+                            key={chip}
+                            className="border border-foreground/15 px-2 py-1 text-[0.58rem] font-semibold tracking-[0.08em] text-foreground/65 uppercase"
+                          >
+                            {chip}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
           </ol>
         </div>
 

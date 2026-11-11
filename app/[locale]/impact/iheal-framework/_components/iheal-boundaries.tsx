@@ -1,19 +1,43 @@
 import Reveal from "../../../(home)/_components/reveal";
+import type { IhealFrameworkIhealBoundaries } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "A lens, not a\nservice line.";
+
+const FALLBACK_DESCRIPTION =
+  "The framework informs how Waterlight approaches opportunities. It does not prescribe a delivery sequence, and it is never used to describe an individual company's offer.";
 
 // PLACEHOLDER — boundary copy to be approved by the owner.
-const IS: string[] = [
+const FALLBACK_IS: string[] = [
   "A development and impact framework.",
   "A shared philosophy of sustainable development.",
   "A set of five lenses that can be read in any order.",
 ];
 
-const IS_NOT: string[] = [
+const FALLBACK_IS_NOT: string[] = [
   "A service line, product or commercial offering.",
   "A description of what any Waterlight company does.",
   "A map of sectors, subsidiaries or named companies.",
 ];
 
-export default function IhealBoundaries() {
+const FALLBACK_FOOTER_NOTE =
+  "Pillars are not mapped to sectors, subsidiaries or named companies. The framework does not imply that every Waterlight company undertakes every activity.";
+
+function toList(value: string): string[] {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+export default function IhealBoundaries({
+  data,
+}: {
+  data: IhealFrameworkIhealBoundaries;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const is = data.is ? toList(data.is) : FALLBACK_IS;
+  const isNot = data.is_not ? toList(data.is_not) : FALLBACK_IS_NOT;
   return (
     <section
       aria-labelledby="iheal-boundaries-title"
@@ -31,15 +55,19 @@ export default function IhealBoundaries() {
                 id="iheal-boundaries-title"
                 className="mt-[clamp(12px,1.8vw,20px)] max-w-[14ch] font-sans text-[clamp(1.9rem,4.8vw,2.9rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%] lg:text-[clamp(2.9rem,4.2vw,4.2rem)]"
               >
-                A lens, not a
-                <br />
-                service line.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <p className="max-w-[52ch] text-[clamp(0.92rem,1.2vw,1.04rem)] leading-[1.6] text-foreground/60 lg:justify-self-end">
-              The framework informs how Waterlight approaches opportunities. It
-              does not prescribe a delivery sequence, and it is never used to
-              describe an individual company&apos;s offer.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
@@ -49,7 +77,7 @@ export default function IhealBoundaries() {
                 It is
               </p>
               <ul className="mt-[clamp(14px,2vw,22px)] list-none p-0">
-                {IS.map((item) => (
+                {is.map((item) => (
                   <li
                     key={item}
                     className="flex gap-3 border-b border-foreground/10 py-3 text-[clamp(0.86rem,1.15vw,1rem)] leading-[1.5] text-foreground/75 last:border-b-0"
@@ -69,7 +97,7 @@ export default function IhealBoundaries() {
                 It is not
               </p>
               <ul className="mt-[clamp(14px,2vw,22px)] list-none p-0">
-                {IS_NOT.map((item) => (
+                {isNot.map((item) => (
                   <li
                     key={item}
                     className="flex gap-3 border-b border-foreground/10 py-3 text-[clamp(0.86rem,1.15vw,1rem)] leading-[1.5] text-foreground/60 last:border-b-0"
@@ -86,9 +114,7 @@ export default function IhealBoundaries() {
           </div>
 
           <p className="mt-[clamp(22px,3vw,34px)] border-t border-foreground/20 pt-4 text-[0.68rem] leading-[1.55] text-foreground/55">
-            Pillars are not mapped to sectors, subsidiaries or named companies.
-            The framework does not imply that every Waterlight company
-            undertakes every activity.
+            {data.footer_note || FALLBACK_FOOTER_NOTE}
           </p>
         </Reveal>
       </div>

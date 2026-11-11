@@ -1,7 +1,19 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
+import type { IhealFrameworkRelatedCompany } from "@/lib/cms/generated";
 
-export default function RelatedCompany() {
+const FALLBACK_TITLE = "Waterlight iHEAL Global Limited";
+
+const FALLBACK_DESCRIPTION =
+  "A separate company. The iHEAL framework is not its offering, product or service line, and this page does not describe its operations.";
+
+export default function RelatedCompany({
+  data,
+}: {
+  data: IhealFrameworkRelatedCompany;
+}) {
+  const company = data.companies[0];
+  const title = company?.title || company?.postTitle || FALLBACK_TITLE;
   return (
     <section
       id="related-company"

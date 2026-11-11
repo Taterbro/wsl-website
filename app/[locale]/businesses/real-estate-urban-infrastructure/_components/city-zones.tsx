@@ -1,28 +1,44 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { getSector } from "@/lib/businesses";
 import { cn } from "@/lib/utils";
+import type { CmsImage } from "@/lib/cms/normalize";
+import type { RealEstateUrbanInfrastructureCityZones } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "Five zones.\nOne city.";
+
+const FALLBACK_DESCRIPTION =
+  "Select a zone to open its brief. Each capability is a layer of the same urban system, not a standalone product.";
 
 // PLACEHOLDER — capability imagery, copy and interfaces are illustrative until
-// approved sector content and photography are supplied.
+// approved sector content and photography are supplied. Media has no value
+// fallback; images render only from the CMS.
 type ZoneDetail = {
   code: string;
+  label: string;
   copy: string;
   chips: string[];
   connection: string;
-  image: string;
+  image: CmsImage | null;
   alt: string;
 };
 
-const DETAILS: Record<string, ZoneDetail> = {
+const FALLBACK_DETAILS: Record<
+  string,
+  {
+    code: string;
+    copy: string;
+    chips: string[];
+    connection: string;
+    alt: string;
+  }
+> = {
   "Affordable housing": {
     code: "Z-01",
     copy: "Housing models that remain accessible as cities grow.",
     chips: ["Build-to-suit", "Mixed tenure", "Rent-to-own"],
     connection: "Urban infrastructure · Sustainable buildings",
-    image: "/placeholders/district-housing.png",
     alt: "Urban housing and mixed-tenure development (placeholder image)",
   },
   "Smart cities": {
@@ -30,7 +46,6 @@ const DETAILS: Record<string, ZoneDetail> = {
     copy: "Connected districts with shared data, services and operations.",
     chips: ["District platforms", "Mobility", "Utilities"],
     connection: "Technology & digital infrastructure · Urban infrastructure",
-    image: "/placeholders/district-smart-city.png",
     alt: "Smart city district with connected services (placeholder image)",
   },
   "Commercial development": {
@@ -38,7 +53,6 @@ const DETAILS: Record<string, ZoneDetail> = {
     copy: "Commercial districts designed for changing work and trade.",
     chips: ["Offices", "Retail", "Mixed-use"],
     connection: "Logistics & supply chains · Smart cities",
-    image: "/placeholders/district-commercial.png",
     alt: "Commercial district and mixed-use buildings (placeholder image)",
   },
   "Urban infrastructure": {
@@ -46,7 +60,6 @@ const DETAILS: Record<string, ZoneDetail> = {
     copy: "The streets, utilities and public realm that make density work.",
     chips: ["Utilities", "Public realm", "Mobility"],
     connection: "Water · Energy · Mobility",
-    image: "/placeholders/district-panorama.png",
     alt: "Urban infrastructure and public realm (placeholder image)",
   },
   "Sustainable buildings": {
@@ -54,10 +67,49 @@ const DETAILS: Record<string, ZoneDetail> = {
     copy: "Buildings designed to perform across their whole life cycle.",
     chips: ["Energy", "Water", "Materials"],
     connection: "Climate & ESG · Renewable energy",
-    image: "/placeholders/district-sustainable.png",
     alt: "Sustainable buildings and green urban systems (placeholder image)",
   },
 };
+
+const FALLBACK_LABELS = getSector("real-estate-urban-infrastructure").capabilities;
+
+const FALLBACK_ZONES: ZoneDetail[] = FALLBACK_LABELS.map((label, index) => {
+  const detail = FALLBACK_DETAILS[label];
+  return {
+    label,
+    code: detail?.code ?? `Z-0${index + 1}`,
+    copy: detail?.copy ?? "",
+    chips: detail?.chips ?? [],
+    connection: detail?.connection ?? "",
+    image: null,
+    alt: detail?.alt ?? "",
+  };
+});
+
+function parseChips(value: string): string[] {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function toZone(
+  zone: RealEstateUrbanInfrastructureCityZones["zones"][number],
+  index: number
+): ZoneDetail {
+  const legacy = FALLBACK_ZONES[index];
+  const chips = parseChips(zone.chips);
+
+  return {
+    code: zone.code || legacy?.code || `Z-0${index + 1}`,
+    label: zone.label || legacy?.label || "",
+    copy: zone.copy || legacy?.copy || "",
+    chips: chips.length ? chips : (legacy?.chips ?? []),
+    connection: zone.connection || legacy?.connection || "",
+    image: zone.image,
+    alt: zone.image?.alt || zone.image_alt || legacy?.alt || "",
+  };
+}
 
 const SPANS = [
   "col-span-2 row-span-1 lg:row-span-2",
@@ -67,14 +119,17 @@ const SPANS = [
   "col-span-2",
 ];
 
-export default function CityZones() {
-  const sector = getSector("real-estate-urban-infrastructure");
-  const zones = sector.capabilities.map((label) => ({
-    label,
-    ...DETAILS[label],
-  }));
+export default function CityZones({
+  data,
+}: {
+  data: RealEstateUrbanInfrastructureCityZones;
+}) {
+  const zones = data.zones.length ? data.zones.map(toZone) : FALLBACK_ZONES;
   const [activeIndex, setActiveIndex] = useState(0);
   const active = zones[activeIndex];
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const total = String(zones.length).padStart(2, "0");
 
   return (
     <section
@@ -96,16 +151,21 @@ export default function CityZones() {
               id="urban-zones-title"
               className="mt-4 max-w-[15ch] font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Five zones.
-              <br />
-              One city.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
           </div>
 
           <div className="max-w-[46ch] lg:text-right">
             <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] leading-[1.6] text-muted/70">
-              Select a zone to open its brief. Each capability is a layer of the
-              same urban system, not a standalone product.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <a
               href="/projects/development-pipeline"
@@ -124,7 +184,7 @@ export default function CityZones() {
                 Select a zone
               </p>
               <p className="text-[0.6rem] font-semibold tracking-[0.14em] text-muted/60 uppercase tabular-nums">
-                05 zones — live brief
+                {total} zones — live brief
               </p>
             </div>
 
@@ -148,18 +208,20 @@ export default function CityZones() {
                       isActive && "ring-2 ring-accent ring-inset"
                     )}
                   >
-                    <Image
-                      src={zone.image}
-                      alt={zone.alt}
-                      fill
-                      sizes="(min-width: 1024px) 30vw, 50vw"
-                      className={cn(
-                        "object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) motion-reduce:transform-none",
-                        isActive
-                          ? "scale-105"
-                          : "group-hover:scale-[1.04]"
-                      )}
-                    />
+                    {zone.image ? (
+                      <div
+                        role={zone.alt ? "img" : undefined}
+                        aria-label={zone.alt || undefined}
+                        aria-hidden={zone.alt ? undefined : true}
+                        className={cn(
+                          "absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) motion-reduce:transform-none",
+                          isActive
+                            ? "scale-105"
+                            : "group-hover:scale-[1.04]"
+                        )}
+                        style={{ backgroundImage: `url(${zone.image.url})` }}
+                      />
+                    ) : null}
                     <div
                       aria-hidden="true"
                       className={cn(
@@ -218,7 +280,7 @@ export default function CityZones() {
                 Zone brief — {active.code}
               </p>
               <p className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase tabular-nums">
-                {String(activeIndex + 1).padStart(2, "0")} / 05
+                {String(activeIndex + 1).padStart(2, "0")} / {total}
               </p>
             </div>
 

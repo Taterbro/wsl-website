@@ -1,22 +1,47 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { ClimateEsgSolutionsProofStrip } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "Every asset has a climate ledger.";
 
 // PLACEHOLDER — indicative scope figures for layout only. Replace with
 // verified data before publication.
-const STATS: { value: number; label: string }[] = [
+const FALLBACK_STATS: { value: number; label: string }[] = [
   { value: 5, label: "Capability loops" },
   { value: 4, label: "Lifecycle stages — design, build, operate, renew" },
   { value: 3, label: "Climate lenses — resilience, circularity, efficiency" },
   { value: 1, label: "Integrated ESG framework" },
 ];
 
+type Stat = { value: number; label: string };
+
+function toStat(
+  stat: ClimateEsgSolutionsProofStrip["stats"][number],
+  index: number
+): Stat {
+  const fallback = FALLBACK_STATS[index];
+  const parsed = Number(stat.value);
+  const hasValue = stat.value.trim() !== "" && Number.isFinite(parsed);
+
+  return {
+    value: hasValue ? parsed : (fallback?.value ?? 0),
+    label: stat.label || fallback?.label || "",
+  };
+}
+
 function getReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function ProofStrip() {
+export default function ProofStrip({
+  data,
+}: {
+  data: ClimateEsgSolutionsProofStrip;
+}) {
+  const stats = data.stats.length ? data.stats.map(toStat) : FALLBACK_STATS;
+  const max = Math.max(...stats.map((stat) => stat.value), 1);
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -83,9 +108,7 @@ export default function ProofStrip() {
               id="climate-proof-title"
               className="mt-4 max-w-[16ch] font-sans text-[clamp(1.8rem,3.4vw,2.9rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
             >
-              Every asset has
-              <br />
-              a climate ledger.
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
 
@@ -97,7 +120,7 @@ export default function ProofStrip() {
         </div>
 
         <dl className="mt-[clamp(26px,4vw,44px)] grid grid-cols-2 gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-4">
-          {STATS.map((stat) => {
+          {stats.map((stat) => {
             const displayValue = String(
               Math.round(stat.value * progress)
             ).padStart(2, "0");
@@ -121,7 +144,7 @@ export default function ProofStrip() {
                 >
                   <div
                     className="h-full bg-primary transition-[width] duration-(--transition-slow) ease-(--ease-standard)"
-                    style={{ width: `${(stat.value / 5) * 100}%` }}
+                    style={{ width: `${(stat.value / max) * 100}%` }}
                   />
                 </div>
               </div>

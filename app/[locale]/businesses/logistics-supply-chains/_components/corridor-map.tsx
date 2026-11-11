@@ -3,30 +3,39 @@
 import { useState } from "react";
 import { getSector } from "@/lib/businesses";
 import { cn } from "@/lib/utils";
+import type { LogisticsSupplyChainsCorridorMap } from "@/lib/cms/generated";
 
 type NodeType = "core" | "interface" | "digital";
 
 // PLACEHOLDER — capability copy, node positions and interfaces are
-// illustrative until approved sector content is supplied.
+// illustrative until approved sector content is supplied. Media fields on
+// corridor nodes are not rendered by this component.
 type NodeDetail = {
   code: string;
+  label: string;
   type: NodeType;
   copy: string;
   chips: string[];
   connection: string;
-  image: string;
-  alt: string;
+  position: { left: string; top: string };
 };
 
-const NODE_DETAILS: Record<string, NodeDetail> = {
+const FALLBACK_NODE_DETAILS: Record<
+  string,
+  {
+    code: string;
+    type: NodeType;
+    copy: string;
+    chips: string[];
+    connection: string;
+  }
+> = {
   "Transportation infrastructure": {
     code: "N-01",
     type: "core",
     copy: "Road, rail and port links that keep freight moving between origin and market.",
     chips: ["Corridor planning", "Multimodal links", "Terminal access"],
     connection: "Industrial development · Cross-border trade",
-    image: "/placeholders/logistics-corridor.png",
-    alt: "Freight corridor with road and rail links (placeholder image)",
   },
   Warehousing: {
     code: "N-02",
@@ -34,8 +43,6 @@ const NODE_DETAILS: Record<string, NodeDetail> = {
     copy: "Storage and handling capacity positioned where goods change hands.",
     chips: ["Inland hubs", "Bonded storage", "Cold rooms"],
     connection: "Agriculture & food systems · Distribution",
-    image: "/placeholders/logistics-hub.png",
-    alt: "Warehouse and inland logistics hub (placeholder image)",
   },
   Distribution: {
     code: "N-03",
@@ -43,8 +50,6 @@ const NODE_DETAILS: Record<string, NodeDetail> = {
     copy: "Regional and last-mile flows that turn stored stock into delivery.",
     chips: ["Regional depots", "Urban delivery", "Fleet operations"],
     connection: "Real estate & urban infrastructure · Technology",
-    image: "/placeholders/group-sector-logistics.png",
-    alt: "Distribution fleet and terminal operations (placeholder image)",
   },
   "Supply-chain technology": {
     code: "N-04",
@@ -52,8 +57,6 @@ const NODE_DETAILS: Record<string, NodeDetail> = {
     copy: "Visibility, tracking and control across every node and hand-off.",
     chips: ["Tracking", "Control tower", "Forecasting"],
     connection: "Technology & digital infrastructure",
-    image: "/placeholders/tech-wswis.png",
-    alt: "Digital supply-chain monitoring interface (placeholder image)",
   },
   "Cross-border trade infrastructure": {
     code: "N-05",
@@ -61,8 +64,6 @@ const NODE_DETAILS: Record<string, NodeDetail> = {
     copy: "Border systems and trade interfaces that shorten clearance time.",
     chips: ["Border posts", "Customs interfaces", "Trade corridors"],
     connection: "Climate & ESG solutions · Industrial development",
-    image: "/placeholders/logistics-corridor.png",
-    alt: "Cross-border trade corridor and border post (placeholder image)",
   },
 };
 
@@ -73,6 +74,8 @@ const POSITIONS: Record<string, { left: string; top: string }> = {
   "Supply-chain technology": { left: "28%", top: "16%" },
   "Cross-border trade infrastructure": { left: "86%", top: "56%" },
 };
+
+const POSITION_LIST = Object.values(POSITIONS);
 
 const TYPE_LABELS: Record<NodeType, string> = {
   core: "Core node",
@@ -86,6 +89,60 @@ const LEGEND: { type: NodeType | "corridor"; label: string }[] = [
   { type: "digital", label: "Digital layer" },
   { type: "corridor", label: "Corridor" },
 ];
+
+const FALLBACK_HEADING = "Five nodes.\nOne corridor.";
+
+const FALLBACK_DESCRIPTION =
+  "Select a node to open its brief. Each capability is a layer of the same trade system, not a standalone service.";
+
+const FALLBACK_LABELS = getSector("logistics-supply-chains").capabilities;
+
+const FALLBACK_NODES: NodeDetail[] = FALLBACK_LABELS.map((label, index) => {
+  const detail = FALLBACK_NODE_DETAILS[label];
+  return {
+    label,
+    code: detail?.code ?? `N-0${index + 1}`,
+    type: detail?.type ?? "core",
+    copy: detail?.copy ?? "",
+    chips: detail?.chips ?? [],
+    connection: detail?.connection ?? "",
+    position: POSITIONS[label] ?? POSITION_LIST[index] ?? { left: "50%", top: "50%" },
+  };
+});
+
+function parseChips(value: string): string[] {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function toNodeType(value: string, fallback: NodeType): NodeType {
+  return value === "core" || value === "interface" || value === "digital"
+    ? value
+    : fallback;
+}
+
+function toNode(
+  node: LogisticsSupplyChainsCorridorMap["nodes"][number],
+  index: number
+): NodeDetail {
+  const legacy = FALLBACK_NODES[index];
+  const chips = parseChips(node.chips);
+
+  return {
+    code: node.code || legacy?.code || `N-0${index + 1}`,
+    label: node.label || legacy?.label || "",
+    type: toNodeType(node.type, legacy?.type ?? "core"),
+    copy: node.copy || legacy?.copy || "",
+    chips: chips.length ? chips : (legacy?.chips ?? []),
+    connection: node.connection || legacy?.connection || "",
+    position:
+      POSITIONS[node.label] ??
+      POSITION_LIST[index] ??
+      { left: "50%", top: "50%" },
+  };
+}
 
 function NodeShape({
   type,
@@ -114,15 +171,19 @@ function NodeShape({
   );
 }
 
-export default function CorridorMap() {
-  const sector = getSector("logistics-supply-chains");
-  const nodes = sector.capabilities.map((label) => ({
-    label,
-    ...NODE_DETAILS[label],
-    position: POSITIONS[label],
-  }));
+export default function CorridorMap({
+  data,
+}: {
+  data: LogisticsSupplyChainsCorridorMap;
+}) {
+  const nodes = data.nodes.length
+    ? data.nodes.map(toNode)
+    : FALLBACK_NODES;
   const [activeIndex, setActiveIndex] = useState(0);
   const active = nodes[activeIndex];
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const total = String(nodes.length).padStart(2, "0");
 
   return (
     <section
@@ -144,16 +205,29 @@ export default function CorridorMap() {
               id="logistics-map-title"
               className="mt-4 max-w-[15ch] font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Five nodes.
-              <br />
-              One corridor.
+              {data.heading ? (
+                headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )
+              ) : (
+                <>
+                  Five nodes.
+                  <br />
+                  One corridor.
+                </>
+              )}
             </h2>
           </div>
 
           <div className="max-w-[46ch] lg:text-right">
             <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] leading-[1.6] text-muted/70">
-              Select a node to open its brief. Each capability is a layer of the
-              same trade system, not a standalone service.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <a
               href="/investments/opportunities"
@@ -172,7 +246,7 @@ export default function CorridorMap() {
                 Select a node
               </p>
               <p className="text-[0.6rem] font-semibold tracking-[0.14em] text-muted/60 uppercase tabular-nums">
-                05 nodes — live brief
+                {total} nodes — live brief
               </p>
             </div>
 
@@ -277,7 +351,7 @@ export default function CorridorMap() {
                 Node brief — {active.code}
               </p>
               <p className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase tabular-nums">
-                {String(activeIndex + 1).padStart(2, "0")} / 05
+                {String(activeIndex + 1).padStart(2, "0")} / {total}
               </p>
             </div>
 

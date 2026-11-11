@@ -1,17 +1,27 @@
 import Link from "next/link";
 import { IHEAL_FRAMING } from "@/lib/impact";
+import type { IhealFrameworkIhealHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
+const FALLBACK_DESCRIPTION =
+  "A development and impact framework — five lenses for reading opportunities and outcomes. Not a service line, and not a description of what any Waterlight company does.";
+
 // PLACEHOLDER — descriptors only. Not a delivery record or a service offer.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Type", value: "Development & impact framework" },
   { label: "Pillars", value: "Five, non-sequential" },
   { label: "Use", value: "A lens, not a service" },
 ];
 
-export default function IhealHero() {
+export default function IhealHero({
+  data,
+}: {
+  data: IhealFrameworkIhealHero;
+}) {
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const headingLines = data.heading ? data.heading.split("\n") : [];
   return (
     <section
       aria-labelledby="iheal-hero-title"
@@ -60,15 +70,28 @@ export default function IhealHero() {
                 id="iheal-hero-title"
                 className="mt-[clamp(14px,2vw,22px)] max-w-[12ch] font-sans text-[clamp(2.6rem,7.8vw,4.2rem)] leading-[0.9] font-extrabold tracking-[-0.015em] uppercase [font-stretch:112%] lg:text-[clamp(4.2rem,6vw,6.4rem)] lg:[font-stretch:118%]"
               >
-                The <span className="normal-case text-accent">iHEAL</span>
-                <br />
-                Framework.
+                {data.heading ? (
+                  headingLines.length === 2 ? (
+                    <>
+                      {headingLines[0]}
+                      <br />
+                      {headingLines[1]}
+                    </>
+                  ) : (
+                    data.heading
+                  )
+                ) : (
+                  <>
+                    The{" "}
+                    <span className="normal-case text-accent">iHEAL</span>
+                    <br />
+                    Framework.
+                  </>
+                )}
               </h1>
 
               <p className="mt-[clamp(16px,2.2vw,26px)] max-w-[48ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.6] text-muted/70">
-                A development and impact framework — five lenses for reading
-                opportunities and outcomes. Not a service line, and not a
-                description of what any Waterlight company does.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
 
               <div className="mt-[clamp(20px,2.8vw,30px)] flex flex-wrap items-center gap-3">
@@ -89,7 +112,7 @@ export default function IhealHero() {
             </div>
 
             <dl className="mt-[clamp(28px,3.6vw,42px)] grid grid-cols-3 gap-x-[clamp(12px,2vw,28px)] border-t border-muted/15 pt-[clamp(16px,2.2vw,24px)]">
-              {FACTS.map((fact) => (
+              {facts.map((fact) => (
                 <div key={fact.label}>
                   <dt className="text-[0.56rem] font-semibold tracking-[0.14em] text-muted/45 uppercase">
                     {fact.label}
@@ -160,7 +183,7 @@ export default function IhealHero() {
             Framing line
           </p>
           <p className="mt-2 max-w-[74ch] text-[clamp(1rem,1.5vw,1.28rem)] leading-[1.5] text-muted/85">
-            {IHEAL_FRAMING}
+            {data.framing || IHEAL_FRAMING}
           </p>
           <p className="mt-2 text-[0.58rem] leading-[1.5] text-muted/40">
             PLACEHOLDER — wording to be approved by the owner before launch.

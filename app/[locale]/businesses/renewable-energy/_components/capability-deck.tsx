@@ -1,69 +1,123 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getSector } from "@/lib/businesses";
+import type {
+  RenewableEnergyCapabilityDeck,
+  RenewableEnergyCapabilityDeckCapabilities,
+} from "@/lib/cms/generated";
 
 const SECTOR = getSector("renewable-energy");
 
-interface Detail {
+const FALLBACK_HEADING = "Generation,\nstorage, dispatch.";
+
+const FALLBACK_DESCRIPTION =
+  "Six capability areas, designed as one energy system rather than six separate services. Select a layer to see what it covers.";
+
+const FALLBACK_IMAGE_ALT = "Renewable energy capability infrastructure";
+
+type Capability = {
+  label: string;
+  no: string;
   copy: string;
   applications: string[];
-  image: string;
+  image: string | null;
   alt: string;
-}
+};
 
 // PLACEHOLDER — imagery and scope detail are illustrative until approved
-// sector photography and capability copy are supplied.
-const DETAILS: Detail[] = [
+// sector photography and capability copy are supplied. Media has no value
+// fallback; images render only from the CMS.
+const FALLBACK_DETAILS: {
+  copy: string;
+  applications: string[];
+  alt: string;
+}[] = [
   {
     copy: "Utility-scale and rooftop solar arrays shaped around irradiance, grid conditions and the load they serve.",
     applications: ["Ground-mount", "Rooftop", "Utility"],
-    image: "/placeholders/group-sector-energy.png",
     alt: "Solar generation array at golden hour (placeholder image)",
   },
   {
     copy: "Generation placed close to demand: campuses, industrial parks, towns and remote operations that cannot wait on the grid.",
     applications: ["Campuses", "Industrial parks", "Towns"],
-    image: "/placeholders/district-sustainable.png",
     alt: "Sustainable urban district with distributed power infrastructure (placeholder image)",
   },
   {
     copy: "Battery systems that shift supply, firm output and keep critical loads running after sunset or through grid instability.",
     applications: ["Firming", "Peak shifting", "Backup"],
-    image: "/placeholders/industry-facilities.png",
     alt: "Industrial energy facility with storage infrastructure (placeholder image)",
   },
   {
     copy: "Solar paired with storage, back-up generation or water systems so supply keeps working when one source does not.",
     applications: ["Solar + storage", "Solar + water", "Grid backup"],
-    image: "/placeholders/group-sector-water.png",
     alt: "Solar-powered water and energy infrastructure (placeholder image)",
   },
   {
     copy: "Grid connection, metering and balance-of-system works engineered for long-life renewable supply.",
     applications: ["Grid connection", "Metering", "Balance of system"],
-    image: "/placeholders/group-sector-climate.png",
     alt: "Climate-resilient renewable infrastructure landscape (placeholder image)",
   },
   {
     copy: "Power models sized to industrial load or community demand, with operating support built into the structure.",
     applications: ["Industry", "Communities", "Institutions"],
-    image: "/placeholders/group-sector-industry.png",
     alt: "Industrial operations powered by on-site energy (placeholder image)",
   },
 ];
 
-const CAPABILITIES = SECTOR.capabilities.map((label, index) => ({
-  label,
-  no: String(index + 1).padStart(2, "0"),
-  detail: DETAILS[index],
-}));
+const FALLBACK_CAPABILITIES: Capability[] = SECTOR.capabilities.map(
+  (label, index) => {
+    const detail = FALLBACK_DETAILS[index];
+    return {
+      label,
+      no: String(index + 1).padStart(2, "0"),
+      copy: detail?.copy ?? "",
+      applications: detail?.applications ?? [],
+      image: null,
+      alt: detail?.alt ?? FALLBACK_IMAGE_ALT,
+    };
+  }
+);
 
-export default function CapabilityDeck() {
+function toCapability(
+  capability: RenewableEnergyCapabilityDeckCapabilities,
+  index: number
+): Capability {
+  const fallback = FALLBACK_CAPABILITIES[index];
+  const applications = capability.applications
+    .split(",")
+    .map((application) => application.trim())
+    .filter(Boolean);
+  const image = capability.image?.url ?? null;
+
+  return {
+    label: capability.label || fallback?.label || "",
+    no: String(index + 1).padStart(2, "0"),
+    copy: capability.copy || fallback?.copy || "",
+    applications: applications.length
+      ? applications
+      : (fallback?.applications ?? []),
+    image,
+    alt: image
+      ? capability.image?.alt || capability.image_alt || FALLBACK_IMAGE_ALT
+      : "",
+  };
+}
+
+export default function CapabilityDeck({
+  data,
+}: {
+  data: RenewableEnergyCapabilityDeck;
+}) {
   const [active, setActive] = useState(0);
-  const current = CAPABILITIES[active];
+  const capabilities = data.capabilities.length
+    ? data.capabilities.map(toCapability)
+    : FALLBACK_CAPABILITIES;
+  const current = capabilities[active];
+  const count = String(capabilities.length).padStart(2, "0");
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
 
   return (
     <section
@@ -85,13 +139,18 @@ export default function CapabilityDeck() {
               id="capabilities-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Generation,
-              <br />
-              storage, dispatch.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Six capability areas, designed as one energy system rather than
-              six separate services. Select a layer to see what it covers.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <a
@@ -107,7 +166,7 @@ export default function CapabilityDeck() {
           <div className="order-2 flex flex-col bg-sidebar text-muted lg:order-1">
             <div className="border-b border-accent/15 p-[clamp(18px,2.4vw,28px)]">
               <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-accent uppercase">
-                Capabilities / 06
+                Capabilities / {count}
               </p>
               <p className="mt-2 max-w-[34ch] text-[0.82rem] leading-[1.55] text-muted/60">
                 Choose a capability to preview its scope.
@@ -115,7 +174,7 @@ export default function CapabilityDeck() {
             </div>
 
             <div className="flex flex-col">
-              {CAPABILITIES.map((capability, index) => (
+              {capabilities.map((capability, index) => (
                 <button
                   key={capability.label}
                   type="button"
@@ -156,20 +215,27 @@ export default function CapabilityDeck() {
           </div>
 
           <div className="relative order-1 min-h-[clamp(360px,48vw,620px)] overflow-hidden bg-sidebar text-muted lg:order-2">
-            {CAPABILITIES.map((capability, index) => (
-              <Image
-                key={capability.label}
-                src={capability.detail.image}
-                alt={active === index ? capability.detail.alt : ""}
-                aria-hidden={active !== index}
-                fill
-                sizes="(max-width: 1024px) 100vw, 62vw"
-                className={cn(
-                  "object-cover transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
-                  active === index ? "opacity-100" : "opacity-0"
-                )}
-              />
-            ))}
+            {capabilities.map((capability, index) =>
+              capability.image ? (
+                <div
+                  key={capability.label}
+                  role={active === index && capability.alt ? "img" : undefined}
+                  aria-label={
+                    active === index && capability.alt
+                      ? capability.alt
+                      : undefined
+                  }
+                  aria-hidden={
+                    active === index && capability.alt ? undefined : true
+                  }
+                  className={cn(
+                    "absolute inset-0 bg-cover bg-center transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
+                    active === index ? "opacity-100" : "opacity-0"
+                  )}
+                  style={{ backgroundImage: `url(${capability.image})` }}
+                />
+              ) : null
+            )}
 
             <div
               aria-hidden="true"
@@ -186,7 +252,7 @@ export default function CapabilityDeck() {
                   Renewable Energy
                 </p>
                 <p className="text-[0.62rem] font-semibold tracking-[0.18em] text-muted/55 uppercase">
-                  {current.no} / 06
+                  {current.no} / {count}
                 </p>
               </div>
 
@@ -202,10 +268,10 @@ export default function CapabilityDeck() {
                   {current.label}
                 </h3>
                 <p className="mt-4 text-[clamp(0.92rem,1.2vw,1.02rem)] leading-[1.6] text-muted/82">
-                  {current.detail.copy}
+                  {current.copy}
                 </p>
                 <ul className="mt-6 flex list-none flex-wrap gap-2 p-0">
-                  {current.detail.applications.map((application) => (
+                  {current.applications.map((application) => (
                     <li
                       key={application}
                       className="rounded-[2px] border border-accent/30 bg-sidebar/45 px-[10px] py-[6px] text-[0.68rem] tracking-[0.04em] text-muted/85 backdrop-blur-[3px]"

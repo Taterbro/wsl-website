@@ -1,7 +1,17 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
+import type { WaterSmartInfrastructureRoleInPlatform } from "@/lib/cms/generated";
 
-const STEPS = [
+const FALLBACK_HEADING = "From need\nto reliable\naccess.";
+
+const FALLBACK_DESCRIPTION =
+  "Water & Smart Infrastructure is the entry point for the group’s build-operate discipline: demand first, structure second, delivery to measurable uptime.";
+
+const FALLBACK_STEPS: {
+  no: string;
+  title: string;
+  copy: string;
+}[] = [
   {
     no: "01",
     title: "Identify",
@@ -24,7 +34,15 @@ const STEPS = [
   },
 ];
 
-export default function RoleInPlatform() {
+export default function RoleInPlatform({
+  data,
+}: {
+  data: WaterSmartInfrastructureRoleInPlatform;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const steps = data.steps.length ? data.steps : FALLBACK_STEPS;
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section aria-labelledby="role-title" className="bg-background py-[clamp(72px,10vw,140px)]">
@@ -38,16 +56,20 @@ export default function RoleInPlatform() {
               id="role-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              From need
-              <br />
-              to reliable
-              <br />
-              access.
+              {headingLines.length === 3 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                  <br />
+                  {headingLines[2]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[48ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Water & Smart Infrastructure is the entry point for the group’s
-              build-operate discipline: demand first, structure second, delivery
-              to measurable uptime.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-[clamp(22px,3vw,34px)] flex flex-wrap items-center gap-3">
               <Link
@@ -66,9 +88,9 @@ export default function RoleInPlatform() {
           </div>
 
           <div className="grid gap-px border border-accent/15 bg-accent/15 sm:grid-cols-2">
-            {STEPS.map((step) => (
+            {steps.map((step, index) => (
               <article
-                key={step.no}
+                key={`${index}-${step.no}`}
                 className="flex h-full flex-col gap-3 bg-sidebar text-muted p-[clamp(18px,2.6vw,28px)]"
               >
                 <span className="font-sans text-[1.6rem] font-extrabold text-accent [font-stretch:114%]">

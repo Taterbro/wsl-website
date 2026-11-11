@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { TechnologyDigitalInfrastructureSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -10,15 +10,25 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Discipline", value: "Digital infrastructure" },
   { label: "Core", value: "AI · Data · Platforms" },
   { label: "Deployment", value: "Enterprise & public systems" },
   { label: "Model", value: "Build · Integrate · Operate" },
 ];
 
-export default function SectorHero() {
+const FALLBACK_IMAGE_ALT = "Technology and digital infrastructure";
+
+export default function SectorHero({
+  data,
+}: {
+  data: TechnologyDigitalInfrastructureSectorHero;
+}) {
   const sector = getSector("technology-digital-infrastructure");
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
 
   return (
     <section
@@ -27,14 +37,15 @@ export default function SectorHero() {
     >
       <div className="grid lg:min-h-[clamp(660px,82vh,920px)] lg:grid-cols-[1.32fr_0.68fr]">
         <div className="relative flex min-h-[clamp(430px,60vh,720px)] flex-col overflow-hidden">
-          <Image
-            src={sector.image}
-            alt={sector.alt}
-            fill
-            preload
-            sizes="(max-width: 1024px) 100vw, 66vw"
-            className="scale-105 object-cover motion-safe:animate-drift-3"
-          />
+          {data.image ? (
+            <div
+              role={alt ? "img" : undefined}
+              aria-label={alt || undefined}
+              aria-hidden={alt ? undefined : true}
+              className="absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+              style={{ backgroundImage: `url(${data.image.url})` }}
+            />
+          ) : null}
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/45 to-sidebar/65"
@@ -92,9 +103,15 @@ export default function SectorHero() {
                 id="technology-hero-title"
                 className="mt-[clamp(16px,2.4vw,26px)] max-w-[14ch] font-sans text-[clamp(2.6rem,6.6vw,5.8rem)] leading-[0.9] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]"
               >
-                <span className="block">Technology</span>
-                <span className="block text-accent">&amp; Digital</span>
-                <span className="block">Infrastructure.</span>
+                {data.heading ? (
+                  data.heading
+                ) : (
+                  <>
+                    <span className="block">Technology</span>
+                    <span className="block text-accent">&amp; Digital</span>
+                    <span className="block">Infrastructure.</span>
+                  </>
+                )}
               </h1>
             </div>
 
@@ -114,7 +131,7 @@ export default function SectorHero() {
               04 / 08 — Our Businesses
             </p>
             <p className="mt-[clamp(20px,3vw,32px)] max-w-[42ch] text-[clamp(1.1rem,1.6vw,1.35rem)] leading-[1.5] text-muted/90">
-              {sector.valueProp}
+              {data.description || sector.valueProp}
             </p>
           </div>
 
@@ -136,7 +153,7 @@ export default function SectorHero() {
             </div>
 
             <dl className="mt-[clamp(26px,3.6vw,42px)] border-t border-accent/20">
-              {FACTS.map((fact) => (
+              {facts.map((fact) => (
                 <div
                   key={fact.label}
                   className="flex items-baseline justify-between gap-5 border-b border-accent/12 py-[clamp(9px,1.2vw,13px)]"

@@ -1,7 +1,13 @@
 import Reveal from "../../../(home)/_components/reveal";
+import type { IndustrialDevelopmentSectorConversion } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
+
+const FALLBACK_HEADING = "Put the plant\non the map.";
+
+const FALLBACK_DESCRIPTION =
+  "Bring a site, a technology or an offtake requirement. We will help shape the industrial model around it.";
 
 const ROLES: { number: string; title: string; copy: string; href: string }[] = [
   {
@@ -30,7 +36,32 @@ const ROLES: { number: string; title: string; copy: string; href: string }[] = [
   },
 ];
 
-export default function SectorConversion() {
+const ROLE_HREFS: Record<string, string> = Object.fromEntries(
+  ROLES.map((role) => [role.title, role.href])
+);
+
+function toRole(
+  role: IndustrialDevelopmentSectorConversion["roles"][number],
+  index: number
+): { number: string; title: string; copy: string; href: string } {
+  const legacy = ROLES[index];
+  return {
+    number: String(index + 1).padStart(2, "0"),
+    title: role.role || legacy?.title || "",
+    copy: role.copy || legacy?.copy || "",
+    href: ROLE_HREFS[role.role] ?? legacy?.href ?? "/contact",
+  };
+}
+
+export default function SectorConversion({
+  data,
+}: {
+  data: IndustrialDevelopmentSectorConversion;
+}) {
+  const roles = data.roles.length ? data.roles.map(toRole) : ROLES;
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="industrial-conversion-title"
@@ -60,13 +91,18 @@ export default function SectorConversion() {
                 id="industrial-conversion-title"
                 className="mt-4 max-w-[14ch] font-sans text-[clamp(2rem,4.4vw,3.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Put the plant
-                <br />
-                on the map.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-5 max-w-[46ch] text-[clamp(0.95rem,1.25vw,1.05rem)] leading-[1.6] text-muted/70">
-                Bring a site, a technology or an offtake requirement. We will
-                help shape the industrial model around it.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap gap-3">
                 <a
@@ -85,8 +121,8 @@ export default function SectorConversion() {
             </div>
 
             <ul className="border-t border-accent/20">
-              {ROLES.map((role) => (
-                <li key={role.number}>
+              {roles.map((role) => (
+                <li key={`${role.number}-${role.title}`}>
                   <a
                     href={role.href}
                     className="group grid grid-cols-[auto_1fr_auto] items-center gap-[clamp(14px,2.4vw,28px)] border-b border-accent/15 py-[clamp(16px,2.2vw,24px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary/5"

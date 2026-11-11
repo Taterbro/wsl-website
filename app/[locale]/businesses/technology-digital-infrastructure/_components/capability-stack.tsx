@@ -1,75 +1,126 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getSector } from "@/lib/businesses";
+import type {
+  TechnologyDigitalInfrastructureCapabilityStack,
+  TechnologyDigitalInfrastructureCapabilityStackCapabilities,
+} from "@/lib/cms/generated";
 
 const SECTOR = getSector("technology-digital-infrastructure");
 
-interface Detail {
+const FALLBACK_HEADING = "Seven layers.\nOne operating system.";
+
+const FALLBACK_DESCRIPTION =
+  "Each layer makes the one above it possible. Open a layer to see what it covers across infrastructure, industry and public systems.";
+
+const FALLBACK_IMAGE_ALT = "Digital infrastructure capability layer";
+
+type Layer = {
+  label: string;
+  no: string;
   copy: string;
   applications: string[];
-  image: string;
+  image: string | null;
   alt: string;
-}
+};
 
 // PLACEHOLDER — imagery and scope detail are illustrative until approved
-// sector photography and capability copy are supplied.
-const DETAILS: Detail[] = [
+// sector photography and capability copy are supplied. Media has no value
+// fallback; images render only from the CMS.
+const FALLBACK_DETAILS: {
+  copy: string;
+  applications: string[];
+  alt: string;
+}[] = [
   {
     copy: "Models that detect anomalies, forecast demand and support operating decisions in real time.",
     applications: ["Monitoring", "Forecasting", "Decision support"],
-    image: "/placeholders/group-sector-technology.png",
     alt: "Digital operations and AI infrastructure (placeholder image)",
   },
   {
     copy: "Platforms that connect assets, operators and customers into one operating picture.",
     applications: ["Operations", "Customer portals", "Integration"],
-    image: "/placeholders/tech-wswis.png",
     alt: "WSWIS digital platform interface (placeholder image)",
   },
   {
     copy: "Instrumented physical systems that report condition, usage and performance as live data.",
     applications: ["Sensors", "Telemetry", "Control"],
-    image: "/placeholders/district-smart-city.png",
     alt: "Smart city infrastructure with connected systems (placeholder image)",
   },
   {
     copy: "Governed data foundations that make infrastructure measurable, comparable and auditable.",
     applications: ["Data pipelines", "Dashboards", "Governance"],
-    image: "/placeholders/story-field-digital.png",
     alt: "Field data capture and digital monitoring (placeholder image)",
   },
   {
     copy: "Payment, credit and settlement rails that extend access and reduce friction across markets.",
     applications: ["Payments", "Credit", "Settlement"],
-    image: "/placeholders/group-sector-technology.png",
     alt: "Digital financial infrastructure (placeholder image)",
   },
   {
     copy: "Workflow and process automation that removes manual steps from industrial and utility operations.",
     applications: ["Workflows", "Process control", "Robotics"],
-    image: "/placeholders/group-sector-industry.png",
     alt: "Automated industrial operations (placeholder image)",
   },
   {
     copy: "Operating-model change supported by technology, data and training — not a software installation.",
     applications: ["Advisory", "Change management", "Training"],
-    image: "/placeholders/group-sector-logistics.png",
     alt: "Digital transformation across logistics operations (placeholder image)",
   },
 ];
 
-const LAYERS = SECTOR.capabilities.map((label, index) => ({
-  label,
-  no: String(index + 1).padStart(2, "0"),
-  detail: DETAILS[index],
-}));
+const FALLBACK_LAYERS: Layer[] = SECTOR.capabilities.map((label, index) => {
+  const detail = FALLBACK_DETAILS[index];
+  return {
+    label,
+    no: String(index + 1).padStart(2, "0"),
+    copy: detail?.copy ?? "",
+    applications: detail?.applications ?? [],
+    image: null,
+    alt: detail?.alt ?? FALLBACK_IMAGE_ALT,
+  };
+});
 
-export default function CapabilityStack() {
+function toLayer(
+  capability: TechnologyDigitalInfrastructureCapabilityStackCapabilities,
+  index: number
+): Layer {
+  const fallback = FALLBACK_LAYERS[index];
+  const applications = capability.applications
+    .split(",")
+    .map((application) => application.trim())
+    .filter(Boolean);
+  const image = capability.image?.url ?? null;
+
+  return {
+    label: capability.label || fallback?.label || "",
+    no: String(index + 1).padStart(2, "0"),
+    copy: capability.copy || fallback?.copy || "",
+    applications: applications.length
+      ? applications
+      : (fallback?.applications ?? []),
+    image,
+    alt: image
+      ? capability.image?.alt || capability.image_alt || FALLBACK_IMAGE_ALT
+      : "",
+  };
+}
+
+export default function CapabilityStack({
+  data,
+}: {
+  data: TechnologyDigitalInfrastructureCapabilityStack;
+}) {
   const [active, setActive] = useState(0);
-  const current = LAYERS[active];
+  const layers = data.capabilities.length
+    ? data.capabilities.map(toLayer)
+    : FALLBACK_LAYERS;
+  const current = layers[active];
+  const count = String(layers.length).padStart(2, "0");
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
 
   return (
     <section
@@ -91,13 +142,18 @@ export default function CapabilityStack() {
               id="technology-capabilities-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Seven layers.
-              <br />
-              One operating system.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Each layer makes the one above it possible. Open a layer to see
-              what it covers across infrastructure, industry and public systems.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <a
@@ -111,7 +167,7 @@ export default function CapabilityStack() {
 
         <div className="mt-[clamp(30px,4.4vw,52px)] grid gap-[clamp(20px,3.4vw,44px)] lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
           <div className="order-2 border-y border-foreground/15 lg:order-1">
-            {LAYERS.map((layer, index) => {
+            {layers.map((layer, index) => {
               const isActive = active === index;
               return (
                 <div
@@ -162,10 +218,10 @@ export default function CapabilityStack() {
                   >
                     <div className="pb-[clamp(16px,2.4vw,26px)] pl-[clamp(28px,3.4vw,42px)]">
                       <p className="max-w-[54ch] text-[0.94rem] leading-[1.62] text-muted-foreground">
-                        {layer.detail.copy}
+                        {layer.copy}
                       </p>
                       <ul className="mt-5 flex list-none flex-wrap gap-2 p-0">
-                        {layer.detail.applications.map((application) => (
+                        {layer.applications.map((application) => (
                           <li
                             key={application}
                             className="rounded-[2px] border border-primary/20 bg-secondary/60 px-[10px] py-[6px] text-[0.66rem] tracking-[0.04em] text-primary"
@@ -183,20 +239,23 @@ export default function CapabilityStack() {
 
           <div className="order-1 lg:sticky lg:top-[clamp(96px,8vw,120px)] lg:order-2">
             <div className="relative aspect-[16/10] overflow-hidden border border-accent/20 bg-sidebar lg:aspect-[4/5]">
-              {LAYERS.map((layer, index) => (
-                <Image
-                  key={layer.label}
-                  src={layer.detail.image}
-                  alt={active === index ? layer.detail.alt : ""}
-                  aria-hidden={active !== index}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 44vw"
-                  className={cn(
-                    "object-cover transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
-                    active === index ? "opacity-100" : "opacity-0"
-                  )}
-                />
-              ))}
+              {layers.map((layer, index) =>
+                layer.image ? (
+                  <div
+                    key={layer.label}
+                    role={active === index && layer.alt ? "img" : undefined}
+                    aria-label={
+                      active === index && layer.alt ? layer.alt : undefined
+                    }
+                    aria-hidden={active === index && layer.alt ? undefined : true}
+                    className={cn(
+                      "absolute inset-0 bg-cover bg-center transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
+                      active === index ? "opacity-100" : "opacity-0"
+                    )}
+                    style={{ backgroundImage: `url(${layer.image})` }}
+                  />
+                ) : null
+              )}
 
               <div
                 aria-hidden="true"
@@ -206,7 +265,7 @@ export default function CapabilityStack() {
               <div className="relative flex h-full flex-col justify-between p-[clamp(16px,2.4vw,28px)] text-muted">
                 <div className="flex items-start justify-between gap-4">
                   <p className="text-[0.6rem] font-semibold tracking-[0.2em] text-accent uppercase">
-                    Layer {current.no} / 07
+                    Layer {current.no} / {count}
                   </p>
                   <p className="text-[0.6rem] font-semibold tracking-[0.18em] text-muted/55 uppercase">
                     The stack

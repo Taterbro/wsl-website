@@ -1,49 +1,80 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type {
+  ClimateEsgSolutionsRelatedProjects,
+  Project,
+} from "@/lib/cms/generated";
 
-// PLACEHOLDER — projects, stages and geographies are illustrative concepts,
-// not a record of delivered work.
-const PROJECTS: {
-  id: string;
+type ProjectCard = {
+  id: number | string;
   title: string;
   stage: string;
   opportunity: string;
   geography: string;
-  image: string;
+  image: string | null;
   alt: string;
-}[] = [
+};
+
+const FALLBACK_HEADING = "Assets in\ntransition.";
+
+const FALLBACK_IMAGE_ALT = "Illustrative climate project concept";
+
+// PLACEHOLDER — projects, stages and geographies are illustrative concepts,
+// not a record of delivered work. Media has no value fallback; images render
+// only from the CMS.
+const FALLBACK_PROJECTS: ProjectCard[] = [
   {
-    id: "PL-01",
+    id: "fallback-coastal",
     title: "Coastal Resilience Programme",
     stage: "Development",
     opportunity: "PPP",
     geography: "West Africa",
-    image: "/placeholders/district-sustainable.png",
+    image: null,
     alt: "Coastal resilience and sustainable district infrastructure (placeholder image)",
   },
   {
-    id: "PL-02",
+    id: "fallback-circularity",
     title: "Industrial Circularity Hub",
     stage: "Investment ready",
     opportunity: "JV",
     geography: "Southern Africa",
-    image: "/placeholders/industry-processing.png",
+    image: null,
     alt: "Industrial processing and circular material hub (placeholder image)",
   },
   {
-    id: "PL-03",
+    id: "fallback-retrofit",
     title: "Clean Energy Retrofit Portfolio",
     stage: "Concept",
     opportunity: "Equity",
     geography: "East Africa",
-    image: "/placeholders/group-sector-energy.png",
+    image: null,
     alt: "Clean energy retrofit across an operating portfolio (placeholder image)",
   },
 ];
 
-const [FEATURED, ...SECONDARY] = PROJECTS;
+function toProjectCard(project: Project): ProjectCard {
+  return {
+    id: project.id,
+    title: project.title || project.postTitle || project.slug,
+    stage: project.stage || project.investment_status,
+    opportunity: project.opportunity,
+    geography: project.location || project.country || project.region,
+    image: project.background?.url ?? null,
+    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+  };
+}
 
-export default function RelatedProjects() {
+export default function RelatedProjects({
+  data,
+}: {
+  data: ClimateEsgSolutionsRelatedProjects;
+}) {
+  const projects = data.projects.length
+    ? data.projects.map(toProjectCard)
+    : FALLBACK_PROJECTS;
+  const [FEATURED, ...SECONDARY] = projects;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="climate-projects-title"
@@ -64,9 +95,15 @@ export default function RelatedProjects() {
                 id="climate-projects-title"
                 className="mt-4 max-w-[16ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                Assets in
-                <br />
-                transition.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <a
@@ -84,13 +121,17 @@ export default function RelatedProjects() {
                 href="/projects/development-pipeline"
                 className="group relative flex h-full min-h-[clamp(400px,50vw,640px)] flex-col justify-end overflow-hidden border border-foreground/20 bg-sidebar text-muted"
               >
-                <Image
-                  src={FEATURED.image}
-                  alt={FEATURED.alt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                  className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
-                />
+                {FEATURED.image ? (
+                  <div
+                    role={
+                      FEATURED.alt ? "img" : undefined
+                    }
+                    aria-label={FEATURED.alt || undefined}
+                    aria-hidden={FEATURED.alt ? undefined : true}
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
+                    style={{ backgroundImage: `url(${FEATURED.image})` }}
+                  />
+                ) : null}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/25 to-sidebar/35"
@@ -134,13 +175,15 @@ export default function RelatedProjects() {
                   className="group grid h-full overflow-hidden border border-foreground/20 bg-background transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-foreground/35 sm:grid-cols-[0.78fr_1.22fr] lg:grid-cols-[0.72fr_1.28fr]"
                 >
                   <div className="relative min-h-[170px] overflow-hidden bg-foreground/10 lg:min-h-0">
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      fill
-                      sizes="(max-width: 1024px) 40vw, 18vw"
-                      className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.04] motion-reduce:transform-none"
-                    />
+                    {project.image ? (
+                      <div
+                        role={project.alt ? "img" : undefined}
+                        aria-label={project.alt || undefined}
+                        aria-hidden={project.alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.04] motion-reduce:transform-none"
+                        style={{ backgroundImage: `url(${project.image})` }}
+                      />
+                    ) : null}
                   </div>
 
                   <div className="flex flex-col p-[clamp(14px,2vw,22px)]">

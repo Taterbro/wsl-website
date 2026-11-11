@@ -1,9 +1,10 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type { IndustrialDevelopmentLocalisation } from "@/lib/cms/generated";
 
 // PLACEHOLDER — stage copy and imagery are illustrative until approved sector
-// content is supplied.
-const STAGES: { number: string; title: string; copy: string }[] = [
+// content is supplied. Media has no value fallback; the image renders only from
+// the CMS.
+const FALLBACK_STAGES: { number: string; title: string; copy: string }[] = [
   {
     number: "01",
     title: "Design",
@@ -26,7 +27,23 @@ const STAGES: { number: string; title: string; copy: string }[] = [
   },
 ];
 
-export default function Localisation() {
+const FALLBACK_DESCRIPTION =
+  "Industrial development is a capability transfer, not a one-off construction job. We sequence design, localisation, manufacturing and partnership so value stays in the market.";
+
+const FALLBACK_IMAGE_ALT =
+  "Technology localisation and industrial assembly (placeholder image)";
+
+export default function Localisation({
+  data,
+}: {
+  data: IndustrialDevelopmentLocalisation;
+}) {
+  const stages = data.stages.length ? data.stages : FALLBACK_STAGES;
+  const headingLines = data.heading ? data.heading.split("\n") : [];
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="industrial-localisation-title"
@@ -47,24 +64,40 @@ export default function Localisation() {
                 id="industrial-localisation-title"
                 className="mt-4 max-w-[15ch] font-sans text-[clamp(2rem,4.4vw,3.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Build it here.
-                <br />
-                <span className="text-foreground/45">
-                  Not just
-                  <br />
-                  assemble it.
-                </span>
+                {data.heading ? (
+                  headingLines.length === 3 ? (
+                    <>
+                      {headingLines[0]}
+                      <br />
+                      <span className="text-foreground/45">
+                        {headingLines[1]}
+                        <br />
+                        {headingLines[2]}
+                      </span>
+                    </>
+                  ) : (
+                    data.heading
+                  )
+                ) : (
+                  <>
+                    Build it here.
+                    <br />
+                    <span className="text-foreground/45">
+                      Not just
+                      <br />
+                      assemble it.
+                    </span>
+                  </>
+                )}
               </h2>
               <p className="mt-6 max-w-[52ch] text-[clamp(0.95rem,1.25vw,1.08rem)] leading-[1.6] text-foreground/70">
-                Industrial development is a capability transfer, not a one-off
-                construction job. We sequence design, localisation,
-                manufacturing and partnership so value stays in the market.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
 
               <ol className="mt-[clamp(24px,3.4vw,38px)] grid gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-2">
-                {STAGES.map((stage) => (
+                {stages.map((stage, index) => (
                   <li
-                    key={stage.number}
+                    key={`${stage.number}-${index}`}
                     className="bg-background p-[clamp(16px,2vw,24px)]"
                   >
                     <p className="font-sans text-[0.62rem] font-semibold tracking-[0.14em] text-accent uppercase tabular-nums">
@@ -90,13 +123,15 @@ export default function Localisation() {
             </div>
 
             <div className="relative min-h-[clamp(320px,46vw,620px)] overflow-hidden border border-foreground/15">
-              <Image
-                src="/placeholders/industry-localisation.png"
-                alt="Technology localisation and industrial assembly (placeholder image)"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
+              {data.image ? (
+                <div
+                  role={alt ? "img" : undefined}
+                  aria-label={alt || undefined}
+                  aria-hidden={alt ? undefined : true}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${data.image.url})` }}
+                />
+              ) : null}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-linear-to-t from-sidebar/80 via-transparent to-sidebar/20"
@@ -114,10 +149,14 @@ export default function Localisation() {
                 Localisation sheet — 04
               </div>
               <div className="absolute right-4 bottom-4 left-4 flex flex-wrap items-end justify-between gap-3">
-                <p className="max-w-[30ch] text-[0.72rem] leading-[1.5] text-muted/75">
-                  PLACEHOLDER — localisation photography and stage detail to be
-                  supplied.
-                </p>
+                {data.image ? (
+                  <p className="max-w-[30ch] text-[0.72rem] leading-[1.5] text-muted/75">
+                    PLACEHOLDER — localisation photography and stage detail to be
+                    supplied.
+                  </p>
+                ) : (
+                  <span aria-hidden="true" />
+                )}
                 <span className="font-sans text-[0.6rem] font-semibold tracking-[0.18em] text-muted/60 uppercase">
                   Design → Partner
                 </span>

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getRenewableEnergyPage } from "@/lib/cms/generated";
+
 import SectorHero from "./_components/sector-hero";
 import CapabilityDeck from "./_components/capability-deck";
 import ProofStrip from "./_components/proof-strip";
@@ -13,16 +15,18 @@ export const metadata: Metadata = {
     "Solar, storage and hybrid systems that power industry, infrastructure and communities. Explore Waterlight Group's renewable energy capabilities and project routes.",
 };
 
-export default function RenewableEnergyPage() {
+export default async function RenewableEnergyPage() {
+  const data = await getRenewableEnergyPage();
+
   return (
     <main>
-      <SectorHero />
-      <CapabilityDeck />
-      <ProofStrip />
-      <EnergyCycle />
-      <RelatedSectors />
-      <RelatedProjects />
-      <SectorConversion />
+      <SectorHero data={data.sector_hero} />
+      <CapabilityDeck data={data.capability_deck} />
+      <ProofStrip data={data.proof_strip} />
+      <EnergyCycle data={data.energy_cycle} />
+      <RelatedSectors data={data.related_sectors} />
+      <RelatedProjects data={data.related_projects} />
+      <SectorConversion data={data.sector_conversion} />
     </main>
   );
 }

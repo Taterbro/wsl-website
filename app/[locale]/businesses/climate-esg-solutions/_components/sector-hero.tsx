@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { ClimateEsgSolutionsSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -14,17 +14,29 @@ const CTAS: { label: string; href: string; variant: "solid" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered assets.
-const CONDITIONS: { label: string; value: string }[] = [
+const FALLBACK_CONDITIONS: { label: string; value: string }[] = [
   { label: "Lens", value: "Resilience · Circularity · Efficiency" },
   { label: "Horizon", value: "Design → Renew" },
   { label: "Model", value: "Advisory · Asset · Capital" },
   { label: "Bridge", value: "Impact & ESG" },
 ];
 
+const FALLBACK_IMAGE_ALT = "Climate-resilient infrastructure and landscape";
+
 const ORBIT_DOTS = [0, 1, 2, 3, 4];
 
-export default function SectorHero() {
+export default function SectorHero({
+  data,
+}: {
+  data: ClimateEsgSolutionsSectorHero;
+}) {
   const sector = getSector("climate-esg-solutions");
+  const conditions = data.conditions.length
+    ? data.conditions
+    : FALLBACK_CONDITIONS;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
 
   return (
     <section
@@ -78,15 +90,21 @@ export default function SectorHero() {
                 id="climate-hero-title"
                 className="mt-[clamp(14px,2vw,22px)] max-w-[13ch] font-sans text-[clamp(2.1rem,8vw,3.6rem)] leading-[0.88] font-extrabold tracking-[-0.015em] break-words uppercase [font-stretch:112%] lg:text-[clamp(3.6rem,5.4vw,5.6rem)] lg:[font-stretch:118%]"
               >
-                Climate
-                <br />
-                <span className="text-primary">&amp;</span> ESG
-                <br />
-                Solutions.
+                {data.heading ? (
+                  data.heading
+                ) : (
+                  <>
+                    Climate
+                    <br />
+                    <span className="text-primary">&amp;</span> ESG
+                    <br />
+                    Solutions.
+                  </>
+                )}
               </h1>
 
               <p className="mt-[clamp(16px,2.2vw,26px)] max-w-[46ch] text-[clamp(0.98rem,1.3vw,1.12rem)] leading-[1.55] text-foreground/70">
-                {sector.valueProp}
+                {data.description || sector.valueProp}
               </p>
 
               <div className="mt-[clamp(20px,2.8vw,30px)] flex flex-wrap gap-2.5">
@@ -107,7 +125,7 @@ export default function SectorHero() {
             </div>
 
             <dl className="relative z-10 mt-[clamp(26px,3.4vw,38px)] grid grid-cols-2 gap-x-[clamp(16px,3vw,36px)] gap-y-[clamp(12px,1.8vw,18px)] border-t border-foreground/15 pt-[clamp(16px,2.2vw,24px)]">
-              {CONDITIONS.map((fact) => (
+              {conditions.map((fact) => (
                 <div key={fact.label}>
                   <dt className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
                     {fact.label}
@@ -121,14 +139,15 @@ export default function SectorHero() {
           </div>
 
           <div className="relative min-h-[clamp(340px,52vh,580px)] overflow-hidden bg-sidebar lg:min-h-[520px]">
-            <Image
-              src={sector.image}
-              alt={sector.alt}
-              fill
-              preload
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="scale-105 object-cover motion-safe:animate-drift-3"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/85 via-sidebar/15 to-sidebar/35"

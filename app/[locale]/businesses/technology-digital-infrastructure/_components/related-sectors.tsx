@@ -1,16 +1,72 @@
-import Image from "next/image";
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
 import { getSector } from "@/lib/businesses";
+import type {
+  TechnologyDigitalInfrastructureRelatedSectors,
+  Business,
+} from "@/lib/cms/generated";
 
-const RELATED = [
-  getSector("water-smart-infrastructure"),
-  getSector("industrial-development"),
-  getSector("logistics-supply-chains"),
-  getSector("climate-esg-solutions"),
-];
+const RELATED_SLUGS = [
+  "water-smart-infrastructure",
+  "industrial-development",
+  "logistics-supply-chains",
+  "climate-esg-solutions",
+] as const;
 
-export default function RelatedSectors() {
+const FALLBACK_HEADING = "The layer beneath\nevery sector.";
+
+const FALLBACK_DESCRIPTION =
+  "Digital systems reinforce water, industry, logistics and climate work. The same data, platforms and operating discipline run across each.";
+
+const FALLBACK_IMAGE_ALT = "Related business sector infrastructure";
+
+type Sector = {
+  slug: string;
+  name: string;
+  valueProp: string;
+  image: string | null;
+  alt: string;
+};
+
+type SectorSlug = Parameters<typeof getSector>[0];
+
+// PLACEHOLDER — related sectors and value propositions are illustrative until
+// approved sector content is supplied. Media has no value fallback; images
+// render only from the CMS.
+function fallbackSector(slug: SectorSlug): Sector {
+  const sector = getSector(slug);
+  return {
+    slug: sector.slug,
+    name: sector.name,
+    valueProp: sector.valueProp,
+    image: null,
+    alt: sector.alt,
+  };
+}
+
+const FALLBACK_SECTORS: Sector[] = RELATED_SLUGS.map(fallbackSector);
+
+function toSector(business: Business): Sector {
+  return {
+    slug: business.slug,
+    name: business.title || business.postTitle || business.slug,
+    valueProp: business.description,
+    image: business.image?.url ?? null,
+    alt: business.image?.alt || business.image_alt || FALLBACK_IMAGE_ALT,
+  };
+}
+
+export default function RelatedSectors({
+  data,
+}: {
+  data: TechnologyDigitalInfrastructureRelatedSectors;
+}) {
+  const sectors = data.businesses.length
+    ? data.businesses.map(toSector)
+    : FALLBACK_SECTORS;
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -31,14 +87,18 @@ export default function RelatedSectors() {
                 id="technology-related-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                The layer beneath
-                <br />
-                every sector.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[54ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-                Digital systems reinforce water, industry, logistics and climate
-                work. The same data, platforms and operating discipline run
-                across each.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
             <Link
@@ -51,7 +111,7 @@ export default function RelatedSectors() {
           </div>
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid gap-[clamp(12px,1.6vw,20px)] sm:grid-cols-2">
-            {RELATED.map((sector) => (
+            {sectors.map((sector) => (
               <article
                 key={sector.slug}
                 className="border border-[rgba(9,29,42,0.16)] bg-background"
@@ -61,13 +121,15 @@ export default function RelatedSectors() {
                   className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring sm:flex-row"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden sm:aspect-auto sm:w-[40%] sm:min-h-[180px]">
-                    <Image
-                      src={sector.image}
-                      alt={sector.alt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 22vw"
-                      className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
-                    />
+                    {sector.image ? (
+                      <div
+                        role={sector.alt ? "img" : undefined}
+                        aria-label={sector.alt || undefined}
+                        aria-hidden={sector.alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
+                        style={{ backgroundImage: `url(${sector.image})` }}
+                      />
+                    ) : null}
                     <div
                       aria-hidden="true"
                       className="absolute inset-0 bg-linear-to-t from-foreground/55 via-transparent to-transparent"

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getLogisticsSupplyChainsPage } from "@/lib/cms/generated";
+
 import SectorHero from "./_components/sector-hero";
 import CorridorMap from "./_components/corridor-map";
 import ProofStrip from "./_components/proof-strip";
@@ -14,16 +16,18 @@ export const metadata: Metadata = {
     "Warehousing, distribution and cross-border trade corridors that connect production to demand. Explore Waterlight Group's logistics and supply-chain capabilities.",
 };
 
-export default function LogisticsSupplyChainsPage() {
+export default async function LogisticsSupplyChainsPage() {
+  const data = await getLogisticsSupplyChainsPage();
+
   return (
     <main>
-      <SectorHero />
-      <CorridorMap />
-      <ProofStrip />
-      <CorridorStack />
-      <RelatedSectors />
-      <RelatedProjects />
-      <SectorConversion />
+      <SectorHero data={data.sector_hero} />
+      <CorridorMap data={data.corridor_map} />
+      <ProofStrip data={data.proof_strip} />
+      <CorridorStack data={data.corridor_stack} />
+      <RelatedSectors data={data.related_sectors} />
+      <RelatedProjects data={data.related_projects} />
+      <SectorConversion data={data.sector_conversion} />
     </main>
   );
 }

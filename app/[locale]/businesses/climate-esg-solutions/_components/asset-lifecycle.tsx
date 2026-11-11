@@ -1,9 +1,15 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type { ClimateEsgSolutionsAssetLifecycle } from "@/lib/cms/generated";
 
 // PLACEHOLDER — lifecycle copy and imagery are illustrative until approved
-// sector content and photography are supplied.
-const STAGES: { no: string; title: string; copy: string; lens: string }[] = [
+// sector content and photography are supplied. Media has no value fallback;
+// the image renders only from the CMS.
+const FALLBACK_STAGES: {
+  no: string;
+  title: string;
+  copy: string;
+  lens: string;
+}[] = [
   {
     no: "01",
     title: "Design",
@@ -30,7 +36,28 @@ const STAGES: { no: string; title: string; copy: string; lens: string }[] = [
   },
 ];
 
-export default function AssetLifecycle() {
+const FALLBACK_DESCRIPTION =
+  "A climate commitment that stops at handover is a design note, not an outcome. The lens stays on through construction, operations and renewal.";
+
+const FALLBACK_BRIDGE_HEADING = "Outcomes need a measurement home.";
+
+const FALLBACK_BRIDGE_DESCRIPTION =
+  "The climate lens runs into the group's wider impact reporting and development partnerships.";
+
+const FALLBACK_IMAGE_ALT =
+  "Climate and community impact work in the field (placeholder image)";
+
+export default function AssetLifecycle({
+  data,
+}: {
+  data: ClimateEsgSolutionsAssetLifecycle;
+}) {
+  const stages = data.stages.length ? data.stages : FALLBACK_STAGES;
+  const headingLines = data.heading ? data.heading.split("\n") : [];
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="climate-lifecycle-title"
@@ -50,18 +77,30 @@ export default function AssetLifecycle() {
               id="climate-lifecycle-title"
               className="mt-4 max-w-[15ch] font-sans text-[clamp(2rem,4.2vw,3.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Climate across
-              <br />
-              the whole life.
+              {data.heading ? (
+                headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  data.heading
+                )
+              ) : (
+                <>
+                  Climate across
+                  <br />
+                  the whole life.
+                </>
+              )}
             </h2>
             <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[48ch] text-[clamp(0.96rem,1.25vw,1.08rem)] leading-[1.6] text-foreground/65">
-              A climate commitment that stops at handover is a design note, not
-              an outcome. The lens stays on through construction, operations and
-              renewal.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
 
             <ol className="relative mt-[clamp(24px,3.6vw,40px)] before:absolute before:top-3 before:bottom-3 before:left-[9px] before:w-px before:bg-foreground/15">
-              {STAGES.map((stage) => (
+              {stages.map((stage) => (
                 <li
                   key={stage.no}
                   className="relative grid grid-cols-[auto_1fr] gap-x-[clamp(14px,2.2vw,24px)] pb-[clamp(18px,2.6vw,28px)] last:pb-0"
@@ -94,13 +133,15 @@ export default function AssetLifecycle() {
           </div>
 
           <div className="relative min-h-[clamp(380px,48vw,620px)] overflow-hidden bg-sidebar">
-            <Image
-              src="/placeholders/vision-impact.png"
-              alt="Climate and community impact work in the field (placeholder image)"
-              fill
-              sizes="(max-width: 1024px) 100vw, 48vw"
-              className="object-cover"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/90 via-sidebar/20 to-sidebar/35"
@@ -115,11 +156,10 @@ export default function AssetLifecycle() {
                 From commitments to outcomes
               </p>
               <p className="mt-2.5 max-w-[34ch] font-sans text-[clamp(1.2rem,2.2vw,1.7rem)] leading-[1.06] font-extrabold tracking-[-0.01em] uppercase [font-stretch:112%]">
-                Outcomes need a measurement home.
+                {data.bridge_heading || FALLBACK_BRIDGE_HEADING}
               </p>
               <p className="mt-3 max-w-[44ch] text-[0.82rem] leading-[1.55] text-muted/70">
-                The climate lens runs into the group&apos;s wider impact
-                reporting and development partnerships.
+                {data.bridge_description || FALLBACK_BRIDGE_DESCRIPTION}
               </p>
               <a
                 href="/impact/sustainability"

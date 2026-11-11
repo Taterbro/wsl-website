@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { RealEstateUrbanInfrastructureSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -14,15 +14,25 @@ const CTAS: { label: string; href: string; variant: "solid" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Focus", value: "Housing · Commercial · Civic" },
   { label: "Model", value: "Develop · Partner · Operate" },
   { label: "Scale", value: "District and city" },
   { label: "Delivery", value: "PPP · JV · Build-to-suit" },
 ];
 
-export default function SectorHero() {
+const FALLBACK_IMAGE_ALT = "Urban development and housing infrastructure";
+
+export default function SectorHero({
+  data,
+}: {
+  data: RealEstateUrbanInfrastructureSectorHero;
+}) {
   const sector = getSector("real-estate-urban-infrastructure");
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
 
   return (
     <section
@@ -57,14 +67,15 @@ export default function SectorHero() {
 
         <div className="relative mt-[clamp(16px,2.4vw,28px)]">
           <div className="relative min-h-[clamp(400px,58vh,680px)] overflow-hidden bg-sidebar">
-            <Image
-              src={sector.image}
-              alt={sector.alt}
-              fill
-              preload
-              sizes="100vw"
-              className="scale-105 object-cover motion-safe:animate-drift-3"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/75 via-sidebar/20 to-transparent"
@@ -104,16 +115,22 @@ export default function SectorHero() {
               id="urban-hero-title"
               className="mt-[clamp(14px,2vw,22px)] max-w-[15ch] font-sans text-[clamp(1.6rem,7.5vw,3.2rem)] leading-[0.88] font-extrabold tracking-[-0.015em] break-words uppercase [font-stretch:112%] lg:text-[clamp(3.4rem,5.2vw,5.4rem)] lg:[font-stretch:120%]"
             >
-              Real Estate
-              <br />
-              <span className="text-primary">&amp;</span> Urban
-              <br />
-              Infrastructure.
+              {data.heading ? (
+                data.heading
+              ) : (
+                <>
+                  Real Estate
+                  <br />
+                  <span className="text-primary">&amp;</span> Urban
+                  <br />
+                  Infrastructure.
+                </>
+              )}
             </h1>
 
             <div className="mt-[clamp(18px,2.6vw,28px)] grid gap-[clamp(16px,2.6vw,28px)] lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
               <p className="max-w-[50ch] text-[clamp(0.98rem,1.3vw,1.12rem)] leading-[1.55] text-foreground/70">
-                {sector.valueProp}
+                {data.description || sector.valueProp}
               </p>
               <div className="flex flex-wrap gap-2.5 lg:justify-end">
                 {CTAS.map((cta) => (
@@ -133,7 +150,7 @@ export default function SectorHero() {
             </div>
 
             <dl className="mt-[clamp(22px,3vw,32px)] grid grid-cols-2 gap-x-[clamp(16px,3vw,36px)] gap-y-[clamp(12px,1.8vw,18px)] border-t border-foreground/15 pt-[clamp(16px,2.2vw,24px)]">
-              {FACTS.map((fact) => (
+              {facts.map((fact) => (
                 <div key={fact.label}>
                   <dt className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
                     {fact.label}

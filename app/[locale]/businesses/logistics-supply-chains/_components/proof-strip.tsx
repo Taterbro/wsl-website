@@ -1,26 +1,52 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { LogisticsSupplyChainsProofStrip } from "@/lib/cms/generated";
 
 // PLACEHOLDER — indicative scope figures for layout only. Replace with
 // verified data before publication.
-const STATS: { value: number; label: string }[] = [
+const FALLBACK_STATS: { value: number; label: string }[] = [
   { value: 5, label: "Capability nodes" },
   { value: 4, label: "Corridor layers — transport, storage, flow, control" },
   { value: 3, label: "Node types — core, interface, digital" },
   { value: 1, label: "Digital control layer" },
 ];
 
+const FALLBACK_HEADING = "A corridor is\na system.";
+
 function getReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function ProofStrip() {
+function parseStatValue(raw: string): number | null {
+  const match = raw.match(/-?\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : null;
+}
+
+export default function ProofStrip({
+  data,
+}: {
+  data: LogisticsSupplyChainsProofStrip;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
   const reduceMotionRef = useRef(getReducedMotion());
+
+  const stats = data.stats.length
+    ? data.stats.map((stat) => ({
+        raw: stat.value,
+        label: stat.label,
+        numeric: parseStatValue(stat.value),
+      }))
+    : FALLBACK_STATS.map((stat) => ({
+        raw: String(stat.value),
+        label: stat.label,
+        numeric: stat.value,
+      }));
+  const heading = data.heading || "A corridor is\na system.";
+  const headingLines = heading.split("\n");
 
   useEffect(() => {
     const el = ref.current;
@@ -83,9 +109,23 @@ export default function ProofStrip() {
               id="logistics-proof-title"
               className="mt-4 max-w-[15ch] font-sans text-[clamp(1.8rem,3.4vw,2.9rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
             >
-              A corridor is
-              <br />
-              a system.
+              {data.heading ? (
+                headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )
+              ) : (
+                <>
+                  A corridor is
+                  <br />
+                  a system.
+                </>
+              )}
             </h2>
           </div>
 
@@ -97,10 +137,15 @@ export default function ProofStrip() {
         </div>
 
         <dl className="mt-[clamp(26px,4vw,44px)] grid grid-cols-2 gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-4">
-          {STATS.map((stat) => {
-            const displayValue = String(
-              Math.round(stat.value * progress)
-            ).padStart(2, "0");
+          {stats.map((stat) => {
+            const displayValue =
+              stat.numeric === null
+                ? stat.raw
+                : String(Math.round(stat.numeric * progress)).padStart(2, "0");
+            const barWidth =
+              stat.numeric === null
+                ? 0
+                : Math.min(100, (stat.numeric / 5) * 100);
             return (
               <div
                 key={stat.label}
@@ -112,7 +157,9 @@ export default function ProofStrip() {
                 <dd className="mt-auto pt-3 font-sans text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[0.85] font-extrabold tracking-[-0.03em] text-primary tabular-nums [font-stretch:120%]">
                   <span aria-hidden="true">{displayValue}</span>
                   <span className="sr-only">
-                    {String(stat.value).padStart(2, "0")}
+                    {stat.numeric === null
+                      ? stat.raw
+                      : String(stat.numeric).padStart(2, "0")}
                   </span>
                 </dd>
                 <div
@@ -121,7 +168,7 @@ export default function ProofStrip() {
                 >
                   <div
                     className="h-full bg-primary transition-[width] duration-(--transition-slow) ease-(--ease-standard)"
-                    style={{ width: `${(stat.value / 5) * 100}%` }}
+                    style={{ width: `${barWidth}%` }}
                   />
                 </div>
               </div>

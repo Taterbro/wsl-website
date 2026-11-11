@@ -1,8 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
+import type { AgricultureFoodSystemsRoleInPlatform } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
-const STEPS = [
+const FALLBACK_DESCRIPTION =
+  "Agriculture & Food Systems is where the group connects production to processing, storage and market access — with delivery discipline applied to every link.";
+
+const FALLBACK_CHAIN = "Farm → Processing → Cold chain → Distribution";
+
+const FALLBACK_IMAGE_ALT =
+  "Agricultural processing infrastructure at work (placeholder image)";
+
+const FALLBACK_STEPS = [
   {
     no: "01",
     title: "Identify",
@@ -25,7 +33,16 @@ const STEPS = [
   },
 ];
 
-export default function RoleInPlatform() {
+export default function RoleInPlatform({
+  data,
+}: {
+  data: AgricultureFoodSystemsRoleInPlatform;
+}) {
+  const steps = data.steps.length ? data.steps : FALLBACK_STEPS;
+  const imageAlt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -34,13 +51,15 @@ export default function RoleInPlatform() {
       >
         <div className="mx-auto grid w-full max-w-[1440px] gap-[clamp(30px,5vw,70px)] px-[clamp(20px,5vw,72px)] lg:grid-cols-[0.88fr_1.12fr] lg:items-stretch">
           <div className="relative min-h-[clamp(340px,46vw,640px)] overflow-hidden bg-sidebar">
-            <Image
-              src="/placeholders/industry-processing.png"
-              alt="Agricultural processing infrastructure at work (placeholder image)"
-              fill
-              sizes="(max-width: 1024px) 100vw, 44vw"
-              className="object-cover"
-            />
+            {data.image ? (
+              <div
+                role={imageAlt ? "img" : undefined}
+                aria-label={imageAlt || undefined}
+                aria-hidden={imageAlt ? undefined : true}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/85 via-sidebar/10 to-sidebar/35"
@@ -50,7 +69,7 @@ export default function RoleInPlatform() {
                 The chain
               </p>
               <p className="mt-2 font-sans text-[0.82rem] leading-[1.5] font-semibold tracking-[0.03em] uppercase [font-stretch:108%]">
-                Farm → Processing → Cold chain → Distribution
+                {data.chain || FALLBACK_CHAIN}
               </p>
               <p className="mt-2 text-[0.62rem] leading-[1.5] text-muted/50">
                 PLACEHOLDER — illustrative chain, not a delivery record.
@@ -70,20 +89,24 @@ export default function RoleInPlatform() {
               id="agriculture-role-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Infrastructure
-              <br />
-              behind the
-              <br />
-              harvest.
+              {data.heading ? (
+                data.heading
+              ) : (
+                <>
+                  Infrastructure
+                  <br />
+                  behind the
+                  <br />
+                  harvest.
+                </>
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Agriculture &amp; Food Systems is where the group connects
-              production to processing, storage and market access — with delivery
-              discipline applied to every link.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
 
             <ol className="mt-[clamp(26px,3.6vw,42px)] list-none border-t border-foreground/15 p-0">
-              {STEPS.map((step) => (
+              {steps.map((step) => (
                 <li
                   key={step.no}
                   className="grid grid-cols-[2.2rem_1fr] gap-x-4 border-b border-foreground/15 py-[clamp(12px,1.6vw,18px)]"

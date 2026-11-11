@@ -1,27 +1,40 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
+import type {
+  DevelopmentPartnershipsRelatedImpact,
+  DevelopmentPartnershipsRelatedImpactItems,
+} from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "Continue\nthrough Impact.";
+
+const FALLBACK_DESCRIPTION =
+  "Related pages, not partner categories. Each one sets out a different part of the group's approach to development.";
 
 // PLACEHOLDER — related-page summaries are illustrative. Waterlight Save
 // Initiative is a separate independent nonprofit organisation, not a partner
 // category or a commercial subsidiary.
-const RELATED: {
+type RelatedItem = {
   code: string;
   title: string;
   copy: string;
   href: string;
-  label?: string;
-}[] = [
+  label: string;
+};
+
+const FALLBACK_ITEMS: RelatedItem[] = [
   {
     code: "I-01",
     title: "Sustainability",
     copy: "How environmental, social and governance decisions are embedded in the commercial group.",
     href: "/impact/sustainability",
+    label: "",
   },
   {
     code: "I-02",
     title: "iHEAL framework",
     copy: "A development and impact framework, not a service line or a description of any company's offering.",
     href: "/impact/iheal-framework",
+    label: "",
   },
   {
     code: "I-03",
@@ -32,7 +45,30 @@ const RELATED: {
   },
 ];
 
-export default function RelatedImpact() {
+function toItem(
+  item: DevelopmentPartnershipsRelatedImpactItems,
+  index: number
+): RelatedItem {
+  const fallback = FALLBACK_ITEMS[index];
+
+  return {
+    code: item.code || fallback?.code || "",
+    title: item.title || fallback?.title || "",
+    copy: item.copy || fallback?.copy || "",
+    href: item.href || fallback?.href || "/impact",
+    label: item.label || fallback?.label || "",
+  };
+}
+
+export default function RelatedImpact({
+  data,
+}: {
+  data: DevelopmentPartnershipsRelatedImpact;
+}) {
+  const items = data.items.length ? data.items.map(toItem) : FALLBACK_ITEMS;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="related-impact-title"
@@ -53,21 +89,26 @@ export default function RelatedImpact() {
                 id="related-impact-title"
                 className="mt-4 font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Continue
-                <br />
-                through Impact.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
 
             <p className="max-w-[42ch] text-[0.78rem] leading-[1.6] text-foreground/60 lg:text-right">
-              Related pages, not partner categories. Each one sets out a
-              different part of the group&apos;s approach to development.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <ul className="mt-[clamp(28px,4vw,46px)] list-none border-t border-foreground/15 p-0">
-            {RELATED.map((item) => (
-              <li key={item.href} className="border-b border-foreground/15">
+            {items.map((item, index) => (
+              <li key={`${index}-${item.code}`} className="border-b border-foreground/15">
                 <Link
                   href={item.href}
                   className="group grid grid-cols-[auto_1fr_auto] items-start gap-x-[clamp(14px,2.4vw,34px)] gap-y-2 py-[clamp(18px,2.6vw,30px)] transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-muted focus-visible:bg-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"

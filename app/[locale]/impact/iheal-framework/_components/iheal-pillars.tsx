@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { IMPACT_PILLARS } from "@/lib/impact";
 import { cn } from "@/lib/utils";
+import type { IhealFrameworkIhealPillars } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 const OFFSETS = [
@@ -13,9 +14,21 @@ const OFFSETS = [
   "lg:mt-10",
 ];
 
-export default function IhealPillars() {
+const FALLBACK_HEADING = "Five letters.\nFive lenses.";
+
+const FALLBACK_DESCRIPTION =
+  "The pillars are not stages. They can apply in any order, and no pillar is assigned to a business, sector or company.";
+
+export default function IhealPillars({
+  data,
+}: {
+  data: IhealFrameworkIhealPillars;
+}) {
   const [active, setActive] = useState(0);
-  const activePillar = IMPACT_PILLARS[active];
+  const pillars = data.pillars.length ? data.pillars : IMPACT_PILLARS;
+  const activePillar = pillars[active] ?? pillars[0];
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
 
   return (
     <section
@@ -35,14 +48,19 @@ export default function IhealPillars() {
                 id="iheal-pillars-title"
                 className="mt-[clamp(12px,1.8vw,20px)] max-w-[14ch] font-sans text-[clamp(2rem,5.4vw,3.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%] lg:text-[clamp(3.2rem,4.6vw,4.8rem)]"
               >
-                Five letters.
-                <br />
-                Five lenses.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <p className="max-w-[42ch] text-[clamp(0.92rem,1.2vw,1.04rem)] leading-[1.6] text-foreground/60 lg:justify-self-end">
-              The pillars are not stages. They can apply in any order, and no
-              pillar is assigned to a business, sector or company.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
@@ -51,7 +69,7 @@ export default function IhealPillars() {
             aria-label="The five iHEAL pillars. Select a letter to read its sub-terms."
             className="mt-[clamp(34px,6vw,74px)] grid grid-cols-5 items-start gap-x-1 sm:gap-x-3"
           >
-            {IMPACT_PILLARS.map((pillar, index) => {
+            {pillars.map((pillar, index) => {
               const isActive = active === index;
 
               return (
@@ -135,7 +153,7 @@ export default function IhealPillars() {
               The five pillars, in full
             </p>
             <dl className="mt-3 grid grid-cols-1 border-t border-foreground/15 sm:grid-cols-2 lg:grid-cols-5">
-              {IMPACT_PILLARS.map((pillar) => (
+              {pillars.map((pillar) => (
                 <div
                   key={pillar.letter}
                   className="border-b border-foreground/10 py-3 sm:border-b-0 lg:border-l lg:border-foreground/10 lg:px-4 lg:first:border-l-0 lg:first:pl-0"

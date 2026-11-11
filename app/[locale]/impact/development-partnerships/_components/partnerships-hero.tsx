@@ -1,17 +1,63 @@
 import Link from "next/link";
 import { PARTNER_CATEGORIES } from "@/lib/impact";
+import type {
+  DevelopmentPartnershipsPartnershipsHero,
+  PartnerCategory,
+} from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
+const FALLBACK_DESCRIPTION =
+  "Development partnerships begin with a mandate, not a logo. These are the categories of institution Waterlight engages with — and the role each can play.";
+
 // PLACEHOLDER — scope descriptors, not a record of existing relationships.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Categories", value: "05" },
   { label: "Named partners", value: "None shown" },
   { label: "Agreements", value: "None implied" },
 ];
 
-export default function PartnershipsHero() {
+type Category = {
+  id: string | number;
+  code: string;
+  name: string;
+  instruments: string[];
+};
+
+// PLACEHOLDER — category descriptors are illustrative until approved
+// partnership content is supplied.
+const FALLBACK_CATEGORIES: Category[] = PARTNER_CATEGORIES.map((category) => ({
+  id: category.id,
+  code: category.code,
+  name: category.name,
+  instruments: category.instruments,
+}));
+
+function toCategory(category: PartnerCategory): Category {
+  return {
+    id: category.id,
+    code: category.code,
+    name: category.title || category.postTitle || category.slug,
+    instruments: category.instruments
+      .split(",")
+      .map((instrument) => instrument.trim())
+      .filter(Boolean),
+  };
+}
+
+export default function PartnershipsHero({
+  data,
+}: {
+  data: DevelopmentPartnershipsPartnershipsHero;
+}) {
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const categories = data.partner_categories.length
+    ? data.partner_categories.map(toCategory)
+    : FALLBACK_CATEGORIES;
+  const count = String(categories.length).padStart(2, "0");
+  const headingLines = data.heading ? data.heading.split("\n") : [];
+
   return (
     <section
       aria-labelledby="partnerships-hero-title"
@@ -60,15 +106,27 @@ export default function PartnershipsHero() {
                 id="partnerships-hero-title"
                 className="mt-[clamp(14px,2vw,22px)] max-w-[13ch] font-sans text-[clamp(2.3rem,7.6vw,3.8rem)] leading-[0.9] font-extrabold tracking-[-0.015em] uppercase [font-stretch:112%] lg:text-[clamp(3.8rem,5.4vw,5.6rem)] lg:[font-stretch:118%]"
               >
-                Partnership,
-                <br />
-                <span className="text-primary">by category.</span>
+                {data.heading ? (
+                  headingLines.length === 2 ? (
+                    <>
+                      {headingLines[0]}
+                      <br />
+                      <span className="text-primary">{headingLines[1]}</span>
+                    </>
+                  ) : (
+                    data.heading
+                  )
+                ) : (
+                  <>
+                    Partnership,
+                    <br />
+                    <span className="text-primary">by category.</span>
+                  </>
+                )}
               </h1>
 
               <p className="mt-[clamp(16px,2.2vw,26px)] max-w-[48ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.55] text-foreground/70">
-                Development partnerships begin with a mandate, not a logo. These
-                are the categories of institution Waterlight engages with — and
-                the role each can play.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
 
               <div className="mt-[clamp(20px,2.8vw,30px)] flex flex-wrap gap-2.5">
@@ -88,7 +146,7 @@ export default function PartnershipsHero() {
             </div>
 
             <dl className="relative z-10 mt-[clamp(26px,3.4vw,38px)] grid grid-cols-3 gap-x-[clamp(12px,2vw,28px)] border-t border-foreground/15 pt-[clamp(16px,2.2vw,24px)]">
-              {FACTS.map((fact) => (
+              {facts.map((fact) => (
                 <div key={fact.label}>
                   <dt className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
                     {fact.label}
@@ -118,12 +176,12 @@ export default function PartnershipsHero() {
                   </p>
                 </div>
                 <p className="font-sans text-[clamp(2rem,4vw,3rem)] leading-[0.8] font-extrabold tracking-[-0.03em] text-accent tabular-nums [font-stretch:120%]">
-                  05
+                  {count}
                 </p>
               </div>
 
               <ol className="mt-1 list-none p-0">
-                {PARTNER_CATEGORIES.map((category) => (
+                {categories.map((category) => (
                   <li
                     key={category.id}
                     className="grid grid-cols-[auto_1fr_auto] items-baseline gap-[clamp(10px,1.6vw,18px)] border-b border-accent/15 py-[clamp(11px,1.5vw,16px)]"

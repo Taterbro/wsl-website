@@ -1,3 +1,4 @@
+import type { AgricultureFoodSystemsSectorConversion } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 const BTN_BASE_CLASS =
@@ -12,7 +13,12 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   },
 ];
 
-const ROLES: { role: string; copy: string; href: string }[] = [
+const FALLBACK_HEADING = "Grow the\nnext chain.";
+
+const FALLBACK_DESCRIPTION =
+  "Food infrastructure needs the right site, offtake and operating partner. Tell us what you hold, and we will tell you honestly what it takes.";
+
+const FALLBACK_ROLES: { role: string; copy: string; href: string }[] = [
   {
     role: "Investors",
     copy: "Capital partners seeking structured exposure to agri-infrastructure, processing and cold chains.",
@@ -35,7 +41,30 @@ const ROLES: { role: string; copy: string; href: string }[] = [
   },
 ];
 
-export default function SectorConversion() {
+function toRole(
+  row: AgricultureFoodSystemsSectorConversion["roles"][number],
+  index: number
+) {
+  const legacy =
+    FALLBACK_ROLES.find((item) => item.role === row.role) ??
+    FALLBACK_ROLES[index];
+
+  return {
+    role: row.role || legacy?.role || "",
+    copy: row.copy || legacy?.copy || "",
+    href: legacy?.href || "/contact",
+  };
+}
+
+export default function SectorConversion({
+  data,
+}: {
+  data: AgricultureFoodSystemsSectorConversion;
+}) {
+  const roles = data.roles.length ? data.roles.map(toRole) : FALLBACK_ROLES;
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -65,14 +94,18 @@ export default function SectorConversion() {
                 id="agriculture-conversion-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Grow the
-                <br />
-                next chain.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[48ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-                Food infrastructure needs the right site, offtake and operating
-                partner. Tell us what you hold, and we will tell you honestly
-                what it takes.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
                 {CTAS.map((cta) => (
@@ -92,8 +125,8 @@ export default function SectorConversion() {
             </div>
 
             <ul className="grid list-none grid-cols-2 gap-x-[clamp(20px,3.4vw,48px)] p-0 max-[760px]:grid-cols-1">
-              {ROLES.map((role, index) => (
-                <li key={role.role} className="border-t border-accent/20">
+              {roles.map((role, index) => (
+                <li key={role.role || index} className="border-t border-accent/20">
                   <a
                     href={role.href}
                     className="group flex items-start gap-[clamp(10px,1.4vw,16px)] py-[clamp(16px,2.2vw,24px)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"

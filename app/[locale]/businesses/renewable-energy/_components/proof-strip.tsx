@@ -1,22 +1,49 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { RenewableEnergyProofStrip } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "A system,\nnot a kit.";
 
 // PLACEHOLDER — indicative scope figures for layout only. Replace with
 // verified data before publication.
-const STATS: { value: number; suffix: string; label: string }[] = [
+const FALLBACK_STATS: { value: number; suffix: string; label: string }[] = [
   { value: 6, suffix: "", label: "Capability areas" },
   { value: 4, suffix: "", label: "Delivery models — EPC, IPP, JV, O&M" },
   { value: 24, suffix: "/7", label: "Remote monitoring target" },
   { value: 2, suffix: "", label: "End markets — industry & communities" },
 ];
 
+type Stat = { value: number; suffix: string; label: string };
+
+function toStat(
+  stat: RenewableEnergyProofStrip["stats"][number],
+  index: number
+): Stat {
+  const fallback = FALLBACK_STATS[index];
+  const parsed = Number(stat.value);
+  const hasValue = stat.value.trim() !== "" && Number.isFinite(parsed);
+
+  return {
+    value: hasValue ? parsed : (fallback?.value ?? 0),
+    suffix: stat.suffix || fallback?.suffix || "",
+    label: stat.label || fallback?.label || "",
+  };
+}
+
 function getReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function ProofStrip() {
+export default function ProofStrip({
+  data,
+}: {
+  data: RenewableEnergyProofStrip;
+}) {
+  const stats = data.stats.length ? data.stats.map(toStat) : FALLBACK_STATS;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -82,9 +109,15 @@ export default function ProofStrip() {
             id="energy-proof-title"
             className="mt-3 font-sans text-[clamp(1.5rem,2.6vw,2.2rem)] leading-[1.04] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
           >
-            A system,
-            <br />
-            not a kit.
+            {headingLines.length === 2 ? (
+              <>
+                {headingLines[0]}
+                <br />
+                {headingLines[1]}
+              </>
+            ) : (
+              heading
+            )}
           </h2>
           <p className="mt-4 max-w-[46ch] text-[0.72rem] leading-[1.6] text-muted/50">
             PLACEHOLDER — indicative scope figures for layout only. These are
@@ -94,7 +127,7 @@ export default function ProofStrip() {
         </div>
 
         <dl className="grid grid-cols-2 gap-px border border-accent/20 bg-accent/20">
-          {STATS.map((stat) => {
+          {stats.map((stat) => {
             const value = Math.round(stat.value * progress);
             return (
               <div

@@ -1,47 +1,79 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type {
+  IndustrialDevelopmentRelatedProjects,
+  Project,
+} from "@/lib/cms/generated";
 
-// PLACEHOLDER — projects, stages and geographies are illustrative concepts,
-// not a record of delivered work.
-const PROJECTS: {
-  id: string;
+type ProjectCard = {
+  id: number | string;
   title: string;
   stage: string;
   opportunity: string;
   geography: string;
-  image: string;
+  image: string | null;
   alt: string;
-}[] = [
+};
+
+const FALLBACK_HEADING = "The next plant\nstarts here.";
+
+const FALLBACK_IMAGE_ALT = "Illustrative industrial project concept";
+
+// PLACEHOLDER — projects, stages and geographies are illustrative concepts,
+// not a record of delivered work. Media has no value fallback; images render
+// only from the CMS.
+const FALLBACK_PROJECTS: ProjectCard[] = [
   {
-    id: "PL-01",
+    id: "fallback-park",
     title: "Industrial Park Phase",
     stage: "Development",
     opportunity: "Joint venture",
     geography: "West Africa",
-    image: "/placeholders/industry-facilities.png",
+    image: null,
     alt: "Industrial park and shared utilities (placeholder image)",
   },
   {
-    id: "PL-02",
+    id: "fallback-assembly",
     title: "Equipment Assembly Plant",
     stage: "Investment ready",
     opportunity: "Equity",
     geography: "East Africa",
-    image: "/placeholders/industry-manufacturing.png",
+    image: null,
     alt: "Equipment assembly line (placeholder image)",
   },
   {
-    id: "PL-03",
+    id: "fallback-processing",
     title: "Agro-Processing Equipment Line",
     stage: "Concept",
     opportunity: "PPP",
     geography: "Southern Africa",
-    image: "/placeholders/industry-processing.png",
+    image: null,
     alt: "Agro-processing equipment line (placeholder image)",
   },
 ];
 
-export default function RelatedProjects() {
+function toProjectCard(project: Project): ProjectCard {
+  return {
+    id: project.id,
+    title: project.title || project.postTitle || project.slug,
+    stage: project.stage || project.investment_status,
+    opportunity: project.opportunity,
+    geography: project.location || project.country || project.region,
+    image: project.background?.url ?? null,
+    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+  };
+}
+
+export default function RelatedProjects({
+  data,
+}: {
+  data: IndustrialDevelopmentRelatedProjects;
+}) {
+  const projects = data.projects.length
+    ? data.projects.map(toProjectCard)
+    : FALLBACK_PROJECTS;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="industrial-projects-title"
@@ -62,9 +94,15 @@ export default function RelatedProjects() {
                 id="industrial-projects-title"
                 className="mt-4 max-w-[16ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                The next plant
-                <br />
-                starts here.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <a
@@ -77,83 +115,91 @@ export default function RelatedProjects() {
           </div>
 
           <div className="mt-[clamp(28px,4vw,48px)] grid gap-[clamp(14px,2vw,22px)] lg:grid-cols-3">
-            {PROJECTS.map((project) => (
-              <a
-                key={project.id}
-                href="/projects/development-pipeline"
-                className="group flex h-full flex-col border border-foreground/15 bg-card transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-foreground/35"
-              >
-                <div className="relative aspect-[16/6] overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.alt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-linear-to-t from-sidebar/60 to-transparent"
-                  />
-                  <span className="absolute top-3 left-3 border border-accent/40 bg-sidebar/85 px-2 py-1 text-[0.56rem] font-semibold tracking-[0.12em] text-accent uppercase">
-                    {project.stage}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="absolute right-3 bottom-2 font-sans text-[2rem] leading-none font-extrabold tracking-[-0.04em] text-muted/35 tabular-nums [font-stretch:120%]"
-                  >
-                    {project.id.slice(-2)}
-                  </span>
-                </div>
+            {projects.map((project) => {
+              const alt = project.image
+                ? project.alt || FALLBACK_IMAGE_ALT
+                : "";
 
-                <div className="flex items-center justify-between gap-3 border-b border-dashed border-foreground/20 px-[clamp(16px,2vw,24px)] py-2.5">
-                  <p className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
-                    Illustrative project
-                  </p>
-                  <p className="text-[0.58rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase tabular-nums">
-                    {project.id}
-                  </p>
-                </div>
+              return (
+                <a
+                  key={project.id}
+                  href="/projects/development-pipeline"
+                  className="group flex h-full flex-col border border-foreground/15 bg-card transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-foreground/35"
+                >
+                  <div className="relative aspect-[16/6] overflow-hidden">
+                    {project.image ? (
+                      <div
+                        role={alt ? "img" : undefined}
+                        aria-label={alt || undefined}
+                        aria-hidden={alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
+                        style={{ backgroundImage: `url(${project.image})` }}
+                      />
+                    ) : null}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-linear-to-t from-sidebar/60 to-transparent"
+                    />
+                    <span className="absolute top-3 left-3 border border-accent/40 bg-sidebar/85 px-2 py-1 text-[0.56rem] font-semibold tracking-[0.12em] text-accent uppercase">
+                      {project.stage}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="absolute right-3 bottom-2 font-sans text-[2rem] leading-none font-extrabold tracking-[-0.04em] text-muted/35 tabular-nums [font-stretch:120%]"
+                    >
+                      {String(project.id).slice(-2)}
+                    </span>
+                  </div>
 
-                <div className="flex flex-1 flex-col p-[clamp(16px,2vw,24px)]">
-                  <h3 className="font-sans text-[clamp(1.1rem,1.9vw,1.45rem)] leading-[1.12] font-extrabold tracking-[-0.005em] uppercase [font-stretch:110%]">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center justify-between gap-3 border-b border-dashed border-foreground/20 px-[clamp(16px,2vw,24px)] py-2.5">
+                    <p className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
+                      Illustrative project
+                    </p>
+                    <p className="text-[0.58rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase tabular-nums">
+                      {project.id}
+                    </p>
+                  </div>
 
-                  <dl className="mt-[clamp(16px,2vw,22px)] grid gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-3">
-                    <div className="bg-card p-2.5">
-                      <dt className="text-[0.54rem] font-semibold tracking-[0.12em] text-foreground/60 uppercase">
-                        Stage
-                      </dt>
-                      <dd className="mt-1.5 text-[0.72rem] leading-[1.35] font-semibold text-foreground/75">
-                        {project.stage}
-                      </dd>
-                    </div>
-                    <div className="bg-card p-2.5">
-                      <dt className="text-[0.54rem] font-semibold tracking-[0.12em] text-foreground/60 uppercase">
-                        Opportunity
-                      </dt>
-                      <dd className="mt-1.5 text-[0.72rem] leading-[1.35] font-semibold text-foreground/75">
-                        {project.opportunity}
-                      </dd>
-                    </div>
-                    <div className="bg-card p-2.5">
-                      <dt className="text-[0.54rem] font-semibold tracking-[0.12em] text-foreground/60 uppercase">
-                        Geography
-                      </dt>
-                      <dd className="mt-1.5 text-[0.72rem] leading-[1.35] font-semibold text-foreground/75">
-                        {project.geography}
-                      </dd>
-                    </div>
-                  </dl>
+                  <div className="flex flex-1 flex-col p-[clamp(16px,2vw,24px)]">
+                    <h3 className="font-sans text-[clamp(1.1rem,1.9vw,1.45rem)] leading-[1.12] font-extrabold tracking-[-0.005em] uppercase [font-stretch:110%]">
+                      {project.title}
+                    </h3>
 
-                  <span className="mt-auto flex items-center justify-between gap-3 pt-[clamp(18px,2.4vw,26px)] text-[0.66rem] font-semibold tracking-[0.1em] text-foreground/65 uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) group-hover:text-accent">
-                    View pipeline
-                    <span aria-hidden="true">↗</span>
-                  </span>
-                </div>
-              </a>
-            ))}
+                    <dl className="mt-[clamp(16px,2vw,22px)] grid gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-3">
+                      <div className="bg-card p-2.5">
+                        <dt className="text-[0.54rem] font-semibold tracking-[0.12em] text-foreground/60 uppercase">
+                          Stage
+                        </dt>
+                        <dd className="mt-1.5 text-[0.72rem] leading-[1.35] font-semibold text-foreground/75">
+                          {project.stage}
+                        </dd>
+                      </div>
+                      <div className="bg-card p-2.5">
+                        <dt className="text-[0.54rem] font-semibold tracking-[0.12em] text-foreground/60 uppercase">
+                          Opportunity
+                        </dt>
+                        <dd className="mt-1.5 text-[0.72rem] leading-[1.35] font-semibold text-foreground/75">
+                          {project.opportunity}
+                        </dd>
+                      </div>
+                      <div className="bg-card p-2.5">
+                        <dt className="text-[0.54rem] font-semibold tracking-[0.12em] text-foreground/60 uppercase">
+                          Geography
+                        </dt>
+                        <dd className="mt-1.5 text-[0.72rem] leading-[1.35] font-semibold text-foreground/75">
+                          {project.geography}
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <span className="mt-auto flex items-center justify-between gap-3 pt-[clamp(18px,2.4vw,26px)] text-[0.66rem] font-semibold tracking-[0.1em] text-foreground/65 uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) group-hover:text-accent">
+                      View pipeline
+                      <span aria-hidden="true">↗</span>
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
           </div>
 
           <p className="mt-6 text-[0.62rem] leading-[1.5] text-foreground/60">

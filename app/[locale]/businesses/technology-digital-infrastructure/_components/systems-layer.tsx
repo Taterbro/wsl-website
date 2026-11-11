@@ -1,9 +1,20 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type { TechnologyDigitalInfrastructureSystemsLayer } from "@/lib/cms/generated";
 
-// PLACEHOLDER — imagery is illustrative until approved sector photography is
-// supplied.
-const PRINCIPLES = [
+const FALLBACK_HEADING = "The physical\nworld, made\nreadable.";
+
+const FALLBACK_DESCRIPTION =
+  "Technology only matters when it changes what an operator can see, decide or do. The sector sits over water, energy, industry and cities — not beside them.";
+
+const FALLBACK_IMAGE_ALT =
+  "Digital monitoring platform connecting physical infrastructure (placeholder image)";
+
+const FALLBACK_FLOW = ["Sense", "Model", "Act"];
+
+// PLACEHOLDER — imagery and principles are illustrative until approved sector
+// photography and content are supplied. Media has no value fallback; the image
+// renders only from the CMS.
+const FALLBACK_PRINCIPLES = [
   {
     no: "01",
     title: "Instrument",
@@ -21,7 +32,25 @@ const PRINCIPLES = [
   },
 ];
 
-export default function SystemsLayer() {
+export default function SystemsLayer({
+  data,
+}: {
+  data: TechnologyDigitalInfrastructureSystemsLayer;
+}) {
+  const principles = data.principles.length
+    ? data.principles
+    : FALLBACK_PRINCIPLES;
+  const flow = data.flow
+    .split(",")
+    .map((step) => step.trim())
+    .filter(Boolean);
+  const steps = flow.length ? flow : FALLBACK_FLOW;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -41,20 +70,24 @@ export default function SystemsLayer() {
               id="technology-systems-title"
               className="max-w-[16ch] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              The physical
-              <br />
-              world, made
-              <br />
-              readable.
+              {headingLines.length === 3 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                  <br />
+                  {headingLines[2]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/78">
-              Technology only matters when it changes what an operator can see,
-              decide or do. The sector sits over water, energy, industry and
-              cities — not beside them.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
 
             <ol className="mt-[clamp(26px,3.6vw,42px)] list-none border-t border-accent/20 p-0">
-              {PRINCIPLES.map((principle) => (
+              {principles.map((principle) => (
                 <li
                   key={principle.no}
                   className="grid grid-cols-[2.2rem_1fr] gap-x-4 border-b border-accent/15 py-[clamp(12px,1.6vw,18px)]"
@@ -84,13 +117,15 @@ export default function SystemsLayer() {
           </div>
 
           <div className="relative min-h-[clamp(340px,48vw,680px)] overflow-hidden border border-accent/20 bg-sidebar-accent">
-            <Image
-              src="/placeholders/tech-wswis.png"
-              alt="Digital monitoring platform connecting physical infrastructure (placeholder image)"
-              fill
-              sizes="(max-width: 1024px) 100vw, 54vw"
-              className="object-cover"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/90 via-sidebar/15 to-sidebar/55"
@@ -109,13 +144,15 @@ export default function SystemsLayer() {
               <p className="text-[0.6rem] font-semibold tracking-[0.2em] text-accent uppercase">
                 Platform layer
               </p>
-              <p className="text-[0.6rem] font-semibold tracking-[0.18em] text-muted/60 uppercase">
-                PLACEHOLDER
-              </p>
+              {data.image ? (
+                <p className="text-[0.6rem] font-semibold tracking-[0.18em] text-muted/60 uppercase">
+                  PLACEHOLDER
+                </p>
+              ) : null}
             </div>
 
             <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-x-3 gap-y-2 p-[clamp(14px,2.2vw,26px)] text-[0.66rem] font-semibold tracking-[0.14em] uppercase">
-              {["Sense", "Model", "Act"].map((step, index) => (
+              {steps.map((step, index) => (
                 <span key={step} className="flex items-center gap-3">
                   {index > 0 && (
                     <span aria-hidden="true" className="text-accent/60">

@@ -2,8 +2,60 @@ import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
 import { PARTNER_CATEGORIES } from "@/lib/impact";
 import { cn } from "@/lib/utils";
+import type {
+  DevelopmentPartnershipsPartnerDirectory,
+  PartnerCategory,
+} from "@/lib/cms/generated";
 
-export default function PartnerDirectory() {
+const FALLBACK_HEADING = "Five categories.\nNo implied agreements.";
+
+const FALLBACK_DESCRIPTION =
+  "Start with the institution type. The engagement model follows. Nothing on this page identifies a specific partner.";
+
+type Category = {
+  id: string | number;
+  code: string;
+  name: string;
+  description: string;
+  brings: string[];
+  instruments: string[];
+  engagement: string;
+};
+
+// PLACEHOLDER — categories, instruments and engagement models are illustrative
+// until approved partnership content is supplied.
+const FALLBACK_CATEGORIES: Category[] = PARTNER_CATEGORIES;
+
+function toList(value: string): string[] {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function toCategory(category: PartnerCategory): Category {
+  return {
+    id: category.id,
+    code: category.code,
+    name: category.title || category.postTitle || category.slug,
+    description: category.description,
+    brings: toList(category.brings),
+    instruments: toList(category.instruments),
+    engagement: category.engagement,
+  };
+}
+
+export default function PartnerDirectory({
+  data,
+}: {
+  data: DevelopmentPartnershipsPartnerDirectory;
+}) {
+  const categories = data.partner_categories.length
+    ? data.partner_categories.map(toCategory)
+    : FALLBACK_CATEGORIES;
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       id="directory"
@@ -25,20 +77,25 @@ export default function PartnerDirectory() {
                 id="directory-title"
                 className="mt-4 font-sans text-[clamp(2rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Five categories.
-                <br />
-                No implied agreements.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
 
             <p className="max-w-[42ch] text-[0.78rem] leading-[1.6] text-muted/60 lg:text-right">
-              Start with the institution type. The engagement model follows.
-              Nothing on this page identifies a specific partner.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <ul className="mt-[clamp(30px,4.5vw,54px)] grid list-none grid-cols-1 gap-px border border-accent/20 bg-accent/20 p-0 md:grid-cols-2 lg:grid-cols-3">
-            {PARTNER_CATEGORIES.map((category, index) => (
+            {categories.map((category, index) => (
               <li
                 key={category.id}
                 className={cn(

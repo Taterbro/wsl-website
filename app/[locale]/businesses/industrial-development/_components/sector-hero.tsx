@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { IndustrialDevelopmentSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -14,15 +14,26 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Scope", value: "Industrial systems" },
   { label: "Core", value: "Manufacturing · Processing" },
   { label: "Model", value: "Localise · Build · Partner" },
   { label: "Delivery", value: "EPC · JV · PPP · O&M" },
 ];
 
-export default function SectorHero() {
+const FALLBACK_IMAGE_ALT =
+  "Industrial manufacturing facility (placeholder image)";
+
+export default function SectorHero({
+  data,
+}: {
+  data: IndustrialDevelopmentSectorHero;
+}) {
   const sector = getSector("industrial-development");
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
 
   return (
     <section
@@ -32,14 +43,15 @@ export default function SectorHero() {
       <div className="mx-auto w-full max-w-[1640px] px-[clamp(12px,2vw,26px)] pt-[clamp(96px,11vw,142px)] pb-[clamp(18px,2.6vw,32px)]">
         <div className="border border-accent/25">
           <div className="relative flex min-h-[clamp(470px,64vh,760px)] flex-col overflow-hidden">
-            <Image
-              src={sector.image}
-              alt={sector.alt}
-              fill
-              preload
-              sizes="100vw"
-              className="scale-105 object-cover motion-safe:animate-drift-3"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/55 to-sidebar/70"
@@ -106,14 +118,22 @@ export default function SectorHero() {
                     id="industrial-hero-title"
                     className="mt-[clamp(16px,2.4vw,26px)] max-w-[13ch] font-sans text-[clamp(2.7rem,7vw,6.2rem)] leading-[0.9] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]"
                   >
-                    <span className="block">Industrial</span>
-                    <span className="block text-accent">Development.</span>
+                    {data.heading ? (
+                      data.heading
+                    ) : (
+                      <>
+                        <span className="block">Industrial</span>
+                        <span className="block text-accent">
+                          Development.
+                        </span>
+                      </>
+                    )}
                   </h1>
                 </div>
 
                 <div>
                   <p className="max-w-[46ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
-                    {sector.valueProp}
+                    {data.description || sector.valueProp}
                   </p>
                   <div className="mt-[clamp(20px,3vw,30px)] flex flex-wrap items-center gap-3">
                     {CTAS.map((cta) => (
@@ -136,7 +156,7 @@ export default function SectorHero() {
           </div>
 
           <div className="grid grid-cols-2 gap-px border-t border-accent/20 bg-accent/20 lg:grid-cols-4">
-            {FACTS.map((fact) => (
+            {facts.map((fact) => (
               <div
                 key={fact.label}
                 className="bg-sidebar px-[clamp(14px,2.4vw,28px)] py-[clamp(14px,1.8vw,22px)]"

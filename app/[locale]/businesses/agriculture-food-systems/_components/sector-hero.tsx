@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { AgricultureFoodSystemsSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -14,38 +14,56 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Focus", value: "Field-to-market infrastructure" },
   { label: "Chain", value: "Farm · Processing · Cold chain" },
   { label: "Markets", value: "Community, commercial, institutional" },
   { label: "Models", value: "EPC · JV · PPP · O&M" },
 ];
 
+type MosaicTile = AgricultureFoodSystemsSectorHero["mosaic"][number] & {
+  span: string;
+};
+
 // PLACEHOLDER — imagery is illustrative until approved sector photography is
-// supplied.
-const MOSAIC = [
+// supplied. Media has no value fallback; tiles render without an image until
+// CMS media is supplied.
+const FALLBACK_MOSAIC: MosaicTile[] = [
   {
-    src: "/placeholders/group-sector-agriculture.png",
-    alt: "Agricultural production and field infrastructure (placeholder image)",
+    image: null,
+    image_alt: "Agricultural production and field infrastructure (placeholder image)",
     label: "Farm",
     span: "row-span-2",
   },
   {
-    src: "/placeholders/story-field-water.png",
-    alt: "Irrigated agricultural fields (placeholder image)",
+    image: null,
+    image_alt: "Irrigated agricultural fields (placeholder image)",
     label: "Water",
     span: "",
   },
   {
-    src: "/placeholders/logistics-hub.png",
-    alt: "Warehouse and cold-chain logistics infrastructure (placeholder image)",
+    image: null,
+    image_alt: "Warehouse and cold-chain logistics infrastructure (placeholder image)",
     label: "Cold chain",
     span: "",
   },
 ];
 
-export default function SectorHero() {
+const FALLBACK_MOSAIC_ALT = "Agriculture & Food Systems infrastructure";
+
+export default function SectorHero({
+  data,
+}: {
+  data: AgricultureFoodSystemsSectorHero;
+}) {
   const sector = getSector("agriculture-food-systems");
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const mosaic: MosaicTile[] = data.mosaic.length
+    ? data.mosaic.map((tile, index) => ({
+        ...tile,
+        span: index === 0 ? "row-span-2" : "",
+      }))
+    : FALLBACK_MOSAIC;
 
   return (
     <section
@@ -85,13 +103,19 @@ export default function SectorHero() {
               id="agriculture-hero-title"
               className="mt-[clamp(16px,2.4vw,26px)] max-w-[11ch] font-sans text-[clamp(2.8rem,6.8vw,6rem)] leading-[0.9] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]"
             >
-              <span className="block">Agriculture</span>
-              <span className="block text-accent">&amp; Food</span>
-              <span className="block">Systems.</span>
+              {data.heading ? (
+                data.heading
+              ) : (
+                <>
+                  <span className="block">Agriculture</span>
+                  <span className="block text-accent">&amp; Food</span>
+                  <span className="block">Systems.</span>
+                </>
+              )}
             </h1>
 
             <p className="mt-[clamp(20px,3vw,30px)] max-w-[48ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
-              {sector.valueProp}
+              {data.description || sector.valueProp}
             </p>
 
             <div className="mt-[clamp(26px,3.5vw,38px)] flex flex-wrap items-center gap-3">
@@ -112,7 +136,7 @@ export default function SectorHero() {
           </div>
 
           <dl className="mt-[clamp(34px,5vw,62px)] border-t border-accent/20">
-            {FACTS.map((fact) => (
+            {facts.map((fact) => (
               <div
                 key={fact.label}
                 className="flex items-baseline justify-between gap-6 border-b border-accent/12 py-[clamp(9px,1.2vw,13px)]"
@@ -130,32 +154,41 @@ export default function SectorHero() {
 
         <div className="relative min-h-[clamp(340px,46vh,620px)] p-[clamp(14px,2vw,22px)] lg:min-h-full">
           <div className="grid h-full grid-cols-2 grid-rows-2 gap-px bg-accent/20">
-            {MOSAIC.map((tile, index) => (
-              <div
-                key={tile.src}
-                className={`relative overflow-hidden bg-sidebar ${tile.span}`}
-              >
-                <Image
-                  src={tile.src}
-                  alt={tile.alt}
-                  fill
-                  preload={index === 0}
-                  sizes="(max-width: 1024px) 50vw, 27vw"
-                  className={
-                    index === 0
-                      ? "scale-105 object-cover motion-safe:animate-drift-3"
-                      : "object-cover"
-                  }
-                />
+            {mosaic.map((tile, index) => {
+              const alt = tile.image
+                ? tile.image.alt || tile.image_alt || FALLBACK_MOSAIC_ALT
+                : "";
+
+              return (
                 <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-linear-to-t from-sidebar/70 via-transparent to-sidebar/25"
-                />
-                <p className="absolute bottom-[clamp(10px,1.4vw,16px)] left-[clamp(10px,1.4vw,16px)] text-[0.6rem] font-semibold tracking-[0.2em] text-accent uppercase">
-                  {tile.label}
-                </p>
-              </div>
-            ))}
+                  key={`${tile.label || "tile"}-${index}`}
+                  className={`relative overflow-hidden bg-sidebar ${tile.span}`}
+                >
+                  {tile.image ? (
+                    <div
+                      role={alt ? "img" : undefined}
+                      aria-label={alt || undefined}
+                      aria-hidden={alt ? undefined : true}
+                      className={
+                        index === 0
+                          ? "absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+                          : "absolute inset-0 bg-cover bg-center"
+                      }
+                      style={{ backgroundImage: `url(${tile.image.url})` }}
+                    />
+                  ) : null}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-linear-to-t from-sidebar/70 via-transparent to-sidebar/25"
+                  />
+                  {tile.image && tile.label ? (
+                    <p className="absolute bottom-[clamp(10px,1.4vw,16px)] left-[clamp(10px,1.4vw,16px)] text-[0.6rem] font-semibold tracking-[0.2em] text-accent uppercase">
+                      {tile.label}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
 
           <p

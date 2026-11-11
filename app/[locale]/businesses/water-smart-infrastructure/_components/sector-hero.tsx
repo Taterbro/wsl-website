@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { WaterSmartInfrastructureSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -9,18 +9,41 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "WSWIS platform", href: "/innovation/wswis", variant: "ghost" },
 ];
 
+const SECTOR = getSector("water-smart-infrastructure");
+
+const FALLBACK_IMAGE_ALT = SECTOR.alt;
+
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Platform", value: "WSWIS" },
   { label: "Power", value: "Solar-powered" },
   { label: "Monitoring", value: "AI-enabled" },
   { label: "Delivery", value: "Municipal & commercial" },
 ];
 
-const FLOW = ["Solar", "Treatment", "Storage", "Distribution", "Monitoring"];
+const FALLBACK_FLOW = [
+  "Solar",
+  "Treatment",
+  "Storage",
+  "Distribution",
+  "Monitoring",
+];
 
-export default function SectorHero() {
-  const sector = getSector("water-smart-infrastructure");
+export default function SectorHero({
+  data,
+}: {
+  data: WaterSmartInfrastructureSectorHero;
+}) {
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const flow = data.flow
+    .split(",")
+    .map((step) => step.trim())
+    .filter(Boolean);
+  const steps = flow.length ? flow : FALLBACK_FLOW;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   return (
     <section
@@ -63,13 +86,27 @@ export default function SectorHero() {
             id="water-hero-title"
             className="relative mt-[clamp(18px,2.6vw,28px)] max-w-[13ch] font-sans text-[clamp(2.7rem,6.6vw,5.8rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]"
           >
-            <span className="block">Water &amp;</span>
-            <span className="block text-accent">Smart</span>
-            <span className="block">Infrastructure</span>
+            {data.heading ? (
+              headingLines.length === 3 ? (
+                <>
+                  <span className="block">{headingLines[0]}</span>
+                  <span className="block">{headingLines[1]}</span>
+                  <span className="block">{headingLines[2]}</span>
+                </>
+              ) : (
+                data.heading
+              )
+            ) : (
+              <>
+                <span className="block">Water &amp;</span>
+                <span className="block text-accent">Smart</span>
+                <span className="block">Infrastructure</span>
+              </>
+            )}
           </h1>
 
           <p className="relative mt-[clamp(20px,3vw,30px)] max-w-[52ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
-            {sector.valueProp}
+            {data.description || SECTOR.valueProp}
           </p>
 
           <div className="relative mt-[clamp(26px,3.5vw,38px)] flex flex-wrap items-center gap-3">
@@ -90,14 +127,15 @@ export default function SectorHero() {
         </div>
 
         <div className="relative min-h-[clamp(320px,46vh,600px)] overflow-hidden lg:min-h-full">
-          <Image
-            src={sector.image}
-            alt={sector.alt}
-            fill
-            preload
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="scale-105 object-cover motion-safe:animate-drift-3"
-          />
+          {data.image ? (
+            <div
+              role={alt ? "img" : undefined}
+              aria-label={alt || undefined}
+              aria-hidden={alt ? undefined : true}
+              className="absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+              style={{ backgroundImage: `url(${data.image.url})` }}
+            />
+          ) : null}
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-linear-to-r from-sidebar via-sidebar/45 to-transparent lg:via-sidebar/20"
@@ -119,7 +157,7 @@ export default function SectorHero() {
               WSWIS flow
             </p>
             <ol className="mt-3 flex list-none flex-wrap items-center gap-x-2 gap-y-1.5 p-0 text-[0.68rem] font-semibold tracking-[0.04em] text-muted/80 uppercase">
-              {FLOW.map((step, index) => (
+              {steps.map((step, index) => (
                 <li key={step} className="flex items-center gap-2">
                   {index > 0 && (
                     <span aria-hidden="true" className="text-accent/70">
@@ -136,7 +174,7 @@ export default function SectorHero() {
 
       <div className="relative border-t border-accent/20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-4 gap-px bg-accent/20 max-[900px]:grid-cols-2">
-          {FACTS.map((fact) => (
+          {facts.map((fact) => (
             <div
               key={fact.label}
               className="bg-sidebar px-[clamp(16px,3vw,40px)] py-[clamp(15px,1.9vw,22px)]"

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { LogisticsSupplyChainsSectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -14,7 +14,7 @@ const CTAS: { label: string; href: string; variant: "solid" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered routes.
-const MANIFEST: { label: string; value: string }[] = [
+const FALLBACK_MANIFEST: { label: string; value: string }[] = [
   { label: "Network", value: "Corridor + nodes" },
   { label: "Modes", value: "Road · Rail · Port" },
   { label: "Model", value: "Build · Operate · Connect" },
@@ -27,8 +27,19 @@ const HERO_MARKERS: { left: string; top: string; label: string }[] = [
   { left: "82%", top: "54%", label: "Border" },
 ];
 
-export default function SectorHero() {
+const FALLBACK_IMAGE_ALT =
+  "Freight corridor and logistics infrastructure (placeholder image)";
+
+export default function SectorHero({
+  data,
+}: {
+  data: LogisticsSupplyChainsSectorHero;
+}) {
   const sector = getSector("logistics-supply-chains");
+  const manifest = data.manifest.length ? data.manifest : FALLBACK_MANIFEST;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
 
   return (
     <section aria-labelledby="logistics-hero-title" className="bg-background">
@@ -70,15 +81,21 @@ export default function SectorHero() {
                 id="logistics-hero-title"
                 className="mt-[clamp(14px,2vw,22px)] max-w-[14ch] font-sans text-[clamp(1.7rem,7.5vw,3.2rem)] leading-[0.88] font-extrabold tracking-[-0.015em] break-words uppercase [font-stretch:112%] lg:text-[clamp(3.2rem,4.9vw,5rem)] lg:[font-stretch:118%]"
               >
-                Logistics
-                <br />
-                <span className="text-primary">&amp;</span> Supply
-                <br />
-                Chains.
+                {data.heading ? (
+                  data.heading
+                ) : (
+                  <>
+                    Logistics
+                    <br />
+                    <span className="text-primary">&amp;</span> Supply
+                    <br />
+                    Chains.
+                  </>
+                )}
               </h1>
 
               <p className="mt-[clamp(16px,2.2vw,26px)] max-w-[46ch] text-[clamp(0.98rem,1.3vw,1.12rem)] leading-[1.55] text-foreground/70">
-                {sector.valueProp}
+                {data.description || sector.valueProp}
               </p>
 
               <div className="mt-[clamp(20px,2.8vw,30px)] flex flex-wrap gap-2.5">
@@ -99,7 +116,7 @@ export default function SectorHero() {
             </div>
 
             <dl className="mt-[clamp(26px,3.4vw,38px)] grid grid-cols-2 gap-x-[clamp(16px,3vw,36px)] gap-y-[clamp(12px,1.8vw,18px)] border-t border-foreground/15 pt-[clamp(16px,2.2vw,24px)]">
-              {MANIFEST.map((fact) => (
+              {manifest.map((fact) => (
                 <div key={fact.label}>
                   <dt className="text-[0.56rem] font-semibold tracking-[0.14em] text-foreground/60 uppercase">
                     {fact.label}
@@ -113,14 +130,15 @@ export default function SectorHero() {
           </div>
 
           <div className="relative min-h-[clamp(360px,52vh,660px)] overflow-hidden bg-sidebar">
-            <Image
-              src={sector.image}
-              alt={sector.alt}
-              fill
-              preload
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="scale-105 object-cover motion-safe:animate-drift-3"
-            />
+            {data.image ? (
+              <div
+                role={alt ? "img" : undefined}
+                aria-label={alt || undefined}
+                aria-hidden={alt ? undefined : true}
+                className="absolute inset-0 scale-105 bg-cover bg-center motion-safe:animate-drift-3"
+                style={{ backgroundImage: `url(${data.image.url})` }}
+              />
+            ) : null}
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-sidebar/80 via-sidebar/20 to-transparent"

@@ -1,4 +1,8 @@
 import Reveal from "../../../(home)/_components/reveal";
+import type {
+  TechnologyDigitalInfrastructureSectorConversion,
+  TechnologyDigitalInfrastructureSectorConversionRoles,
+} from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -12,30 +16,63 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   },
 ];
 
-const ROLES: { role: string; copy: string; href: string }[] = [
+const FALLBACK_HEADING = "Build the\nsystems layer.";
+
+const FALLBACK_DESCRIPTION =
+  "Digital infrastructure needs operators, data owners and technology partners working from the same stack. Start with the asset or the platform you already hold.";
+
+type Role = { number: string; title: string; copy: string; href: string };
+
+// PLACEHOLDER — partner roles and outbound links are indicative and should be
+// confirmed against the current investment and partnership offer.
+const FALLBACK_ROLES: Role[] = [
   {
-    role: "Investors",
+    number: "01",
+    title: "Investors",
     copy: "Capital for platforms, data infrastructure and digital operating models.",
     href: "/investments/opportunities",
   },
   {
-    role: "Governments & utilities",
+    number: "02",
+    title: "Governments & utilities",
     copy: "Public operators modernising service delivery and asset visibility.",
     href: "/contact",
   },
   {
-    role: "Technology partners",
+    number: "03",
+    title: "Technology partners",
     copy: "Owners seeking deployment, localisation and integration partners.",
     href: "/innovation/technology-partnerships",
   },
   {
-    role: "Project owners",
+    number: "04",
+    title: "Project owners",
     copy: "Asset owners whose operations need monitoring, automation or platforms.",
     href: "/projects",
   },
 ];
 
-export default function SectorConversion() {
+function toRole(
+  role: TechnologyDigitalInfrastructureSectorConversionRoles,
+  index: number
+): Role {
+  return {
+    number: String(index + 1).padStart(2, "0"),
+    title: role.role,
+    copy: role.copy,
+    href: FALLBACK_ROLES[index]?.href ?? "/contact",
+  };
+}
+
+export default function SectorConversion({
+  data,
+}: {
+  data: TechnologyDigitalInfrastructureSectorConversion;
+}) {
+  const roles = data.roles.length ? data.roles.map(toRole) : FALLBACK_ROLES;
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -65,14 +102,18 @@ export default function SectorConversion() {
                 id="technology-conversion-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Build the
-                <br />
-                systems layer.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[50ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-                Digital infrastructure needs operators, data owners and
-                technology partners working from the same stack. Start with the
-                asset or the platform you already hold.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
 
@@ -94,17 +135,17 @@ export default function SectorConversion() {
           </div>
 
           <ul className="mt-[clamp(34px,5vw,58px)] grid list-none grid-cols-2 gap-px border border-accent/20 bg-accent/20 p-0 lg:grid-cols-4">
-            {ROLES.map((role, index) => (
-              <li key={role.role} className="bg-sidebar-accent/55">
+            {roles.map((role) => (
+              <li key={role.number} className="bg-sidebar-accent/55">
                 <a
                   href={role.href}
                   className="group flex h-full flex-col gap-3 p-[clamp(18px,2.4vw,28px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-sidebar-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
                 >
                   <span className="font-sans text-[0.64rem] font-extrabold tracking-[0.16em] text-accent [font-stretch:112%]">
-                    {String(index + 1).padStart(2, "0")}
+                    {role.number}
                   </span>
                   <span className="font-sans text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.15] font-extrabold uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) group-hover:text-accent [font-stretch:114%]">
-                    {role.role}
+                    {role.title}
                   </span>
                   <span className="flex-1 text-[0.86rem] leading-[1.55] text-muted/70">
                     {role.copy}

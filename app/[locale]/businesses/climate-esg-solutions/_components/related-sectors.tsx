@@ -1,6 +1,9 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
 import { getSector } from "@/lib/businesses";
+import type {
+  ClimateEsgSolutionsRelatedSectors,
+  Business,
+} from "@/lib/cms/generated";
 
 const CONNECTIONS: Record<string, string> = {
   "water-smart-infrastructure":
@@ -17,12 +20,63 @@ const RELATED_SLUGS = [
   "logistics-supply-chains",
 ] as const;
 
-const RELATED = RELATED_SLUGS.map((slug) => ({
-  ...getSector(slug),
-  connection: CONNECTIONS[slug],
-}));
+const FALLBACK_HEADING = "No sector is\nclimate-neutral.";
 
-export default function RelatedSectors() {
+const FALLBACK_IMAGE_ALT = "Related business sector infrastructure";
+
+type Sector = {
+  slug: string;
+  name: string;
+  connection: string;
+  image: string | null;
+  alt: string;
+};
+
+// PLACEHOLDER — related sectors and connections are illustrative until approved
+// sector content is supplied. Media has no value fallback; images render only
+// from the CMS.
+const FALLBACK_SECTORS: Sector[] = RELATED_SLUGS.map((slug) => {
+  const sector = getSector(slug);
+  return {
+    slug: sector.slug,
+    name: sector.name,
+    connection: CONNECTIONS[slug] ?? "",
+    image: null,
+    alt: sector.alt,
+  };
+});
+
+function toSector(
+  business: Business,
+  index: number,
+  connections: string[]
+): Sector {
+  return {
+    slug: business.slug,
+    name: business.title || business.postTitle || business.slug,
+    connection: connections[index] || CONNECTIONS[business.slug] || "",
+    image: business.image?.url ?? null,
+    alt: business.image?.alt || business.image_alt,
+  };
+}
+
+export default function RelatedSectors({
+  data,
+}: {
+  data: ClimateEsgSolutionsRelatedSectors;
+}) {
+  const connections = data.connections
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const sectors = data.businesses.length
+    ? data.businesses.map((business, index) =>
+        toSector(business, index, connections)
+      )
+    : FALLBACK_SECTORS;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="climate-related-title"
@@ -43,9 +97,15 @@ export default function RelatedSectors() {
                 id="climate-related-title"
                 className="mt-4 max-w-[18ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                No sector is
-                <br />
-                climate-neutral.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <a
@@ -58,50 +118,58 @@ export default function RelatedSectors() {
           </div>
 
           <div className="mt-[clamp(28px,4vw,48px)] flex snap-x snap-mandatory gap-[clamp(12px,2vw,22px)] overflow-x-auto pb-2">
-            {RELATED.map((sector, index) => (
-              <a
-                key={sector.slug}
-                href={`/businesses/${sector.slug}`}
-                className="group relative w-[min(78vw,300px)] shrink-0 snap-start overflow-hidden border border-accent/20 lg:w-auto lg:min-w-0 lg:flex-1"
-              >
-                <div className="relative aspect-[3/4]">
-                  <Image
-                    src={sector.image}
-                    alt={sector.alt}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 78vw"
-                    className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.04] motion-reduce:transform-none"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/20 to-sidebar/45"
-                  />
+            {sectors.map((sector, index) => {
+              const alt = sector.image
+                ? sector.alt || FALLBACK_IMAGE_ALT
+                : "";
 
-                  <div className="absolute inset-0 flex flex-col justify-between p-[clamp(14px,2vw,22px)]">
-                    <div className="flex items-start justify-between gap-3">
-                      <span className="border border-accent/40 bg-sidebar/75 px-2 py-1 text-[0.54rem] font-semibold tracking-[0.12em] text-accent uppercase tabular-nums">
-                        0{index + 1}
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="grid size-8 place-items-center border border-muted/35 text-[0.7rem] text-muted/80 transition-colors duration-(--transition-normal) ease-(--ease-standard) group-hover:border-accent group-hover:bg-accent group-hover:text-sidebar"
-                      >
-                        ↗
-                      </span>
-                    </div>
+              return (
+                <a
+                  key={sector.slug}
+                  href={`/businesses/${sector.slug}`}
+                  className="group relative w-[min(78vw,300px)] shrink-0 snap-start overflow-hidden border border-accent/20 lg:w-auto lg:min-w-0 lg:flex-1"
+                >
+                  <div className="relative aspect-[3/4]">
+                    {sector.image ? (
+                      <div
+                        role={alt ? "img" : undefined}
+                        aria-label={alt || undefined}
+                        aria-hidden={alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.04] motion-reduce:transform-none"
+                        style={{ backgroundImage: `url(${sector.image})` }}
+                      />
+                    ) : null}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/20 to-sidebar/45"
+                    />
 
-                    <div>
-                      <h3 className="max-w-[16ch] font-sans text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.12] font-extrabold tracking-[0.005em] uppercase [font-stretch:108%]">
-                        {sector.name}
-                      </h3>
-                      <p className="mt-2 border-t border-accent/25 pt-2 text-[0.66rem] leading-[1.5] text-muted/65">
-                        {sector.connection}
-                      </p>
+                    <div className="absolute inset-0 flex flex-col justify-between p-[clamp(14px,2vw,22px)]">
+                      <div className="flex items-start justify-between gap-3">
+                        <span className="border border-accent/40 bg-sidebar/75 px-2 py-1 text-[0.54rem] font-semibold tracking-[0.12em] text-accent uppercase tabular-nums">
+                          0{index + 1}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="grid size-8 place-items-center border border-muted/35 text-[0.7rem] text-muted/80 transition-colors duration-(--transition-normal) ease-(--ease-standard) group-hover:border-accent group-hover:bg-accent group-hover:text-sidebar"
+                        >
+                          ↗
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="max-w-[16ch] font-sans text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.12] font-extrabold tracking-[0.005em] uppercase [font-stretch:108%]">
+                          {sector.name}
+                        </h3>
+                        <p className="mt-2 border-t border-accent/25 pt-2 text-[0.66rem] leading-[1.5] text-muted/65">
+                          {sector.connection}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         </Reveal>
       </div>

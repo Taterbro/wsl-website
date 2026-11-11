@@ -1,9 +1,15 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
+import type { DevelopmentPartnershipsEngagementChecklist } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "Bring the mandate.\nWe will bring the map.";
+
+const FALLBACK_DESCRIPTION =
+  "A useful first conversation needs four things. None of them is a pitch deck.";
 
 // PLACEHOLDER — readiness criteria are illustrative until approved partnership
 // guidance is supplied.
-const CRITERIA: {
+const FALLBACK_CRITERIA: {
   no: string;
   title: string;
   copy: string;
@@ -35,7 +41,18 @@ const CRITERIA: {
   },
 ];
 
-export default function EngagementChecklist() {
+const FALLBACK_FOOTER_NOTE =
+  "If your institution does not fit one category, use the selector anyway. It will route the enquiry to the closest owner, or tell you honestly that there is no fit.";
+
+export default function EngagementChecklist({
+  data,
+}: {
+  data: DevelopmentPartnershipsEngagementChecklist;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const criteria = data.criteria.length ? data.criteria : FALLBACK_CRITERIA;
+
   return (
     <section
       aria-labelledby="checklist-title"
@@ -56,22 +73,27 @@ export default function EngagementChecklist() {
                 id="checklist-title"
                 className="mt-4 font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Bring the mandate.
-                <br />
-                We will bring the map.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
 
             <p className="max-w-[42ch] text-[0.78rem] leading-[1.6] text-foreground/60 lg:text-right">
-              A useful first conversation needs four things. None of them is a
-              pitch deck.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <ol className="mt-[clamp(28px,4vw,46px)] grid list-none grid-cols-1 gap-px border border-foreground/15 bg-foreground/15 p-0 sm:grid-cols-2 lg:grid-cols-4">
-            {CRITERIA.map((item) => (
+            {criteria.map((item, index) => (
               <li
-                key={item.no}
+                key={`${index}-${item.no}`}
                 className="flex flex-col bg-secondary p-[clamp(16px,2.3vw,26px)]"
               >
                 <div className="flex items-center justify-between gap-3 border-b border-foreground/15 pb-3">
@@ -97,9 +119,7 @@ export default function EngagementChecklist() {
 
           <div className="mt-[clamp(20px,2.8vw,32px)] flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-[64ch] text-[0.66rem] leading-[1.55] text-foreground/60">
-              If your institution does not fit one category, use the selector
-              anyway. It will route the enquiry to the closest owner, or tell
-              you honestly that there is no fit.
+              {data.footer_note || FALLBACK_FOOTER_NOTE}
             </p>
             <Link
               href="/partner-with-us"

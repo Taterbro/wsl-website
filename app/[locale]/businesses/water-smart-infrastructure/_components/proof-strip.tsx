@@ -1,22 +1,48 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { WaterSmartInfrastructureProofStrip } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "The system in numbers.";
 
 // PLACEHOLDER — indicative scope figures for layout only. Replace with
 // verified data before publication.
-const STATS: { value: number; suffix: string; label: string }[] = [
+const FALLBACK_STATS: { value: number; suffix: string; label: string }[] = [
   { value: 7, suffix: "", label: "Integrated capabilities" },
   { value: 4, suffix: "", label: "Delivery models — municipal, commercial, industrial, community" },
   { value: 24, suffix: "/7", label: "Remote monitoring target" },
   { value: 1, suffix: "", label: "Platform — WSWIS" },
 ];
 
+type Stat = { value: number; suffix: string; label: string };
+
+function toStat(
+  stat: WaterSmartInfrastructureProofStrip["stats"][number],
+  index: number
+): Stat {
+  const fallback = FALLBACK_STATS[index];
+  const parsed = Number(stat.value);
+  const hasValue = stat.value.trim() !== "" && Number.isFinite(parsed);
+
+  return {
+    value: hasValue ? parsed : (fallback?.value ?? 0),
+    suffix: stat.suffix || fallback?.suffix || "",
+    label: stat.label || fallback?.label || "",
+  };
+}
+
 function getReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function ProofStrip() {
+export default function ProofStrip({
+  data,
+}: {
+  data: WaterSmartInfrastructureProofStrip;
+}) {
+  const stats = data.stats.length ? data.stats.map(toStat) : FALLBACK_STATS;
+  const heading = data.heading || FALLBACK_HEADING;
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -79,7 +105,7 @@ export default function ProofStrip() {
               id="proof-title"
               className="mt-2 font-sans text-[clamp(1.05rem,1.6vw,1.35rem)] font-bold tracking-[0.02em] uppercase [font-stretch:112%]"
             >
-              The system in numbers.
+              {heading}
             </h2>
           </div>
           <p className="max-w-[52ch] text-[0.7rem] leading-[1.55] text-muted/50">
@@ -90,7 +116,7 @@ export default function ProofStrip() {
         </div>
 
         <dl className="mt-[clamp(24px,3.4vw,40px)] grid grid-cols-4 gap-px bg-accent/20 max-[900px]:grid-cols-2">
-          {STATS.map((stat) => {
+          {stats.map((stat) => {
             const value = Math.round(stat.value * progress);
             return (
               <div

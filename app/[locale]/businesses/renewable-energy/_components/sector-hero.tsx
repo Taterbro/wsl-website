@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getSector } from "@/lib/businesses";
+import type { RenewableEnergySectorHero } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
@@ -14,29 +14,40 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.
-const FACTS: { label: string; value: string }[] = [
+const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Source", value: "Solar" },
   { label: "Architecture", value: "Hybrid + storage" },
   { label: "Delivery", value: "EPC · IPP · JV" },
   { label: "Offtake", value: "Industry & communities" },
 ];
 
-export default function SectorHero() {
+const FALLBACK_IMAGE_ALT = "Renewable energy generation and storage";
+
+export default function SectorHero({
+  data,
+}: {
+  data: RenewableEnergySectorHero;
+}) {
   const sector = getSector("renewable-energy");
+  const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
+  const alt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
 
   return (
     <section
       aria-labelledby="energy-hero-title"
       className="relative isolate flex min-h-[clamp(620px,80vh,880px)] flex-col overflow-hidden bg-sidebar text-muted"
     >
-      <Image
-        src={sector.image}
-        alt={sector.alt}
-        fill
-        preload
-        sizes="100vw"
-        className="object-cover motion-safe:animate-drift-3"
-      />
+      {data.image ? (
+        <div
+          role={alt ? "img" : undefined}
+          aria-label={alt || undefined}
+          aria-hidden={alt ? undefined : true}
+          className="absolute inset-0 bg-cover bg-center motion-safe:animate-drift-3"
+          style={{ backgroundImage: `url(${data.image.url})` }}
+        />
+      ) : null}
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-linear-to-r from-sidebar via-sidebar/80 to-sidebar/25"
@@ -95,12 +106,18 @@ export default function SectorHero() {
               id="energy-hero-title"
               className="relative mt-[clamp(16px,2.4vw,26px)] max-w-[13ch] font-sans text-[clamp(2.8rem,7.2vw,6.4rem)] leading-[0.9] font-extrabold tracking-[-0.01em] uppercase [font-stretch:120%]"
             >
-              <span className="block">Renewable</span>
-              <span className="block text-accent">Energy.</span>
+              {data.heading ? (
+                data.heading
+              ) : (
+                <>
+                  <span className="block">Renewable</span>
+                  <span className="block text-accent">Energy.</span>
+                </>
+              )}
             </h1>
 
             <p className="relative mt-[clamp(20px,3vw,30px)] max-w-[54ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
-              {sector.valueProp}
+              {data.description || sector.valueProp}
             </p>
 
             <div className="relative mt-[clamp(26px,3.5vw,38px)] flex flex-wrap items-center gap-3">
@@ -121,7 +138,7 @@ export default function SectorHero() {
           </div>
 
           <dl className="grid grid-cols-2 gap-px border border-accent/25 bg-accent/25 backdrop-blur-[6px]">
-            {FACTS.map((fact) => (
+            {facts.map((fact) => (
               <div
                 key={fact.label}
                 className="bg-sidebar/72 px-[clamp(14px,2vw,24px)] py-[clamp(14px,1.8vw,22px)]"

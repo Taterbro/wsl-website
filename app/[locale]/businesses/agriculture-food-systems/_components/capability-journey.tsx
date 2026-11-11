@@ -1,69 +1,119 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getSector } from "@/lib/businesses";
+import type { CmsImage } from "@/lib/cms/normalize";
+import type { AgricultureFoodSystemsCapabilityJourney } from "@/lib/cms/generated";
 
 const SECTOR = getSector("agriculture-food-systems");
 
-interface Detail {
+const FALLBACK_DESCRIPTION =
+  "From field infrastructure to the market shelf, each capability is a working link in the same food system. Select a link to see its scope.";
+
+// PLACEHOLDER — scope detail is illustrative until approved capability copy is
+// supplied. Media has no value fallback; images render only from the CMS.
+const FALLBACK_DETAILS: {
   copy: string;
   applications: string[];
-  image: string;
   alt: string;
-}
-
-// PLACEHOLDER — imagery and scope detail are illustrative until approved
-// sector photography and capability copy are supplied.
-const DETAILS: Detail[] = [
+}[] = [
   {
     copy: "Irrigation, storage and field infrastructure that keeps production moving beyond the harvest.",
     applications: ["Irrigation", "On-farm storage", "Access roads"],
-    image: "/placeholders/group-sector-agriculture.png",
     alt: "Agricultural field and production infrastructure (placeholder image)",
   },
   {
     copy: "Processing capacity placed close to production, sized to local supply and end markets.",
     applications: ["Milling", "Packing", "Value addition"],
-    image: "/placeholders/industry-processing.png",
     alt: "Agricultural processing facility (placeholder image)",
   },
   {
     copy: "Sensors, data and advisory tools that make yield, water and inputs measurable.",
     applications: ["Remote sensing", "Farm data", "Advisory"],
-    image: "/placeholders/story-field-digital.png",
     alt: "Digital technology deployed in an agricultural field (placeholder image)",
   },
   {
     copy: "Supply models that improve availability and affordability across communities and institutions.",
     applications: ["Community supply", "Institutions", "Market access"],
-    image: "/placeholders/vision-impact.png",
     alt: "Community food supply and impact (placeholder image)",
   },
   {
     copy: "Cold storage and temperature-controlled movement that cut post-harvest loss.",
     applications: ["Cold storage", "Reefer transport", "Distribution"],
-    image: "/placeholders/logistics-hub.png",
     alt: "Cold-chain warehouse and distribution infrastructure (placeholder image)",
   },
   {
     copy: "Water-efficient, resilient production systems designed for changing rainfall and heat.",
     applications: ["Water efficiency", "Soil health", "Climate resilience"],
-    image: "/placeholders/group-sector-climate.png",
     alt: "Climate-resilient agricultural landscape (placeholder image)",
   },
 ];
 
-const STAGES = SECTOR.capabilities.map((label, index) => ({
-  label,
-  no: String(index + 1).padStart(2, "0"),
-  detail: DETAILS[index],
-}));
+const FALLBACK_LABELS = SECTOR.capabilities;
 
-export default function CapabilityJourney() {
+type Stage = {
+  label: string;
+  no: string;
+  copy: string;
+  applications: string[];
+  image: CmsImage | null;
+  alt: string;
+};
+
+function parseApplications(value: string): string[] {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function toStage(
+  capability: AgricultureFoodSystemsCapabilityJourney["capabilities"][number],
+  index: number
+): Stage {
+  const legacy = FALLBACK_DETAILS[index];
+  const applications = parseApplications(capability.applications);
+
+  return {
+    label: capability.label || FALLBACK_LABELS[index] || "",
+    no: String(index + 1).padStart(2, "0"),
+    copy: capability.copy || legacy?.copy || "",
+    applications: applications.length
+      ? applications
+      : (legacy?.applications ?? []),
+    image: capability.image,
+    alt: capability.image?.alt || capability.image_alt || legacy?.alt || "",
+  };
+}
+
+function toStages(
+  data: AgricultureFoodSystemsCapabilityJourney
+): Stage[] {
+  if (data.capabilities.length) {
+    return data.capabilities.map(toStage);
+  }
+
+  return FALLBACK_LABELS.map((label, index) => ({
+    label,
+    no: String(index + 1).padStart(2, "0"),
+    copy: FALLBACK_DETAILS[index]?.copy ?? "",
+    applications: FALLBACK_DETAILS[index]?.applications ?? [],
+    image: null,
+    alt: FALLBACK_DETAILS[index]?.alt ?? "",
+  }));
+}
+
+export default function CapabilityJourney({
+  data,
+}: {
+  data: AgricultureFoodSystemsCapabilityJourney;
+}) {
+  const stages = toStages(data);
   const [active, setActive] = useState(0);
-  const current = STAGES[active];
+  const current = stages[active];
+
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   return (
     <section
@@ -85,14 +135,26 @@ export default function CapabilityJourney() {
               id="agriculture-capabilities-title"
               className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Six links in
-              <br />
-              one chain.
+              {data.heading ? (
+                headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  data.heading
+                )
+              ) : (
+                <>
+                  Six links in
+                  <br />
+                  one chain.
+                </>
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              From field infrastructure to the market shelf, each capability is
-              a working link in the same food system. Select a link to see its
-              scope.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <a
@@ -110,7 +172,7 @@ export default function CapabilityJourney() {
             aria-label="Field-to-market capabilities"
             className="flex gap-px overflow-x-auto bg-accent/20 md:grid md:grid-cols-6 md:overflow-visible"
           >
-            {STAGES.map((stage, index) => (
+            {stages.map((stage, index) => (
               <button
                 key={stage.label}
                 type="button"
@@ -139,20 +201,23 @@ export default function CapabilityJourney() {
           </div>
 
           <div className="relative mt-px min-h-[clamp(460px,52vw,620px)] overflow-hidden">
-            {STAGES.map((stage, index) => (
-              <Image
-                key={stage.label}
-                src={stage.detail.image}
-                alt={active === index ? stage.detail.alt : ""}
-                aria-hidden={active !== index}
-                fill
-                sizes="(max-width: 768px) 100vw, 90vw"
-                className={cn(
-                  "object-cover transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
-                  active === index ? "opacity-100" : "opacity-0"
-                )}
-              />
-            ))}
+            {stages.map((stage, index) =>
+              stage.image ? (
+                <div
+                  key={`${stage.label}-${index}`}
+                  role={active === index && stage.alt ? "img" : undefined}
+                  aria-label={
+                    active === index && stage.alt ? stage.alt : undefined
+                  }
+                  aria-hidden={active === index && stage.alt ? undefined : true}
+                  className={cn(
+                    "absolute inset-0 bg-cover bg-center transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
+                    active === index ? "opacity-100" : "opacity-0"
+                  )}
+                  style={{ backgroundImage: `url(${stage.image.url})` }}
+                />
+              ) : null
+            )}
 
             <div
               aria-hidden="true"
@@ -181,11 +246,11 @@ export default function CapabilityJourney() {
                   {current.label}
                 </h3>
                 <p className="mt-4 max-w-[52ch] text-[clamp(0.92rem,1.2vw,1.02rem)] leading-[1.6] text-muted/82">
-                  {current.detail.copy}
+                  {current.copy}
                 </p>
               </div>
               <ul className="flex list-none flex-wrap gap-2 p-0 lg:justify-end">
-                {current.detail.applications.map((application) => (
+                {current.applications.map((application) => (
                   <li
                     key={application}
                     className="rounded-[2px] border border-accent/30 bg-sidebar/45 px-[10px] py-[6px] text-[0.68rem] tracking-[0.04em] text-muted/85 backdrop-blur-[3px]"

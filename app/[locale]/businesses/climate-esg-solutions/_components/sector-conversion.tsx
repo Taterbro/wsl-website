@@ -1,7 +1,13 @@
 import Reveal from "../../../(home)/_components/reveal";
+import type { ClimateEsgSolutionsSectorConversion } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
+
+const FALLBACK_HEADING = "Build resilience\ninto the asset.";
+
+const FALLBACK_DESCRIPTION =
+  "Bring an asset, a portfolio or a climate requirement. We will help structure the lens around it.";
 
 const ROLES: { number: string; title: string; copy: string; href: string }[] = [
   {
@@ -30,7 +36,14 @@ const ROLES: { number: string; title: string; copy: string; href: string }[] = [
   },
 ];
 
-export default function SectorConversion() {
+export default function SectorConversion({
+  data,
+}: {
+  data: ClimateEsgSolutionsSectorConversion;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="climate-conversion-title"
@@ -57,13 +70,18 @@ export default function SectorConversion() {
                 id="climate-conversion-title"
                 className="mt-4 max-w-[12ch] font-sans text-[clamp(2.1rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Build resilience
-                <br />
-                into the asset.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-5 max-w-[44ch] text-[clamp(0.95rem,1.25vw,1.05rem)] leading-[1.6] text-muted/75">
-                Bring an asset, a portfolio or a climate requirement. We will
-                help structure the lens around it.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap gap-3">
                 <a

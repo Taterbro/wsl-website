@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { IndustrialDevelopmentProofStrip } from "@/lib/cms/generated";
 
 // PLACEHOLDER — indicative scope figures for layout only. Replace with
 // verified data before publication.
-const STATS: { value: number; label: string }[] = [
+const FALLBACK_STATS: { value: number; label: string }[] = [
   { value: 6, label: "Capability areas" },
   { value: 4, label: "Delivery models — EPC, JV, PPP, O&M" },
   { value: 3, label: "Localisation stages" },
@@ -16,11 +17,33 @@ function getReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function ProofStrip() {
+function parseStatValue(raw: string): number | null {
+  const match = raw.match(/-?\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : null;
+}
+
+export default function ProofStrip({
+  data,
+}: {
+  data: IndustrialDevelopmentProofStrip;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0);
   const reduceMotionRef = useRef(getReducedMotion());
+
+  const stats = data.stats.length
+    ? data.stats.map((stat) => ({
+        raw: stat.value,
+        label: stat.label,
+        numeric: parseStatValue(stat.value),
+      }))
+    : FALLBACK_STATS.map((stat) => ({
+        raw: String(stat.value),
+        label: stat.label,
+        numeric: stat.value,
+      }));
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   useEffect(() => {
     const el = ref.current;
@@ -82,9 +105,23 @@ export default function ProofStrip() {
             id="industrial-proof-title"
             className="mt-4 font-sans text-[clamp(1.6rem,2.8vw,2.4rem)] leading-[1.02] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            Built to
-            <br />
-            be repeated.
+            {data.heading ? (
+              headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                data.heading
+              )
+            ) : (
+              <>
+                Built to
+                <br />
+                be repeated.
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-[40ch] text-[0.74rem] leading-[1.6] text-muted/60">
             PLACEHOLDER — indicative scope figures for layout only. These are
@@ -94,11 +131,11 @@ export default function ProofStrip() {
         </div>
 
         <dl className="grid gap-px border border-accent/20 bg-accent/20 sm:grid-cols-2">
-          {STATS.map((stat) => {
-            const value = String(Math.round(stat.value * progress)).padStart(
-              2,
-              "0"
-            );
+          {stats.map((stat) => {
+            const value =
+              stat.numeric === null
+                ? stat.raw
+                : String(Math.round(stat.numeric * progress)).padStart(2, "0");
             return (
               <div
                 key={stat.label}
@@ -110,7 +147,9 @@ export default function ProofStrip() {
                 <dd className="shrink-0 font-sans text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[0.85] font-extrabold tracking-[-0.03em] text-accent tabular-nums [font-stretch:120%]">
                   <span aria-hidden="true">{value}</span>
                   <span className="sr-only">
-                    {String(stat.value).padStart(2, "0")}
+                    {stat.numeric === null
+                      ? stat.raw
+                      : String(stat.numeric).padStart(2, "0")}
                   </span>
                 </dd>
               </div>

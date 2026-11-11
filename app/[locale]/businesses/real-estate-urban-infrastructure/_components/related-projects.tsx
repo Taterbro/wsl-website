@@ -1,24 +1,34 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type {
+  RealEstateUrbanInfrastructureRelatedProjects,
+  Project,
+} from "@/lib/cms/generated";
 
-// PLACEHOLDER — projects, stages and geographies are illustrative concepts,
-// not a record of delivered work.
-const PROJECTS: {
-  id: string;
+type ProjectCard = {
+  id: number | string;
   title: string;
   stage: string;
   opportunity: string;
   geography: string;
-  image: string;
+  image: string | null;
   alt: string;
-}[] = [
+};
+
+const FALLBACK_HEADING = "Sites in\npreparation.";
+
+const FALLBACK_IMAGE_ALT = "Illustrative urban development project concept";
+
+// PLACEHOLDER — projects, stages and geographies are illustrative concepts,
+// not a record of delivered work. Media has no value fallback; images render
+// only from the CMS.
+const FALLBACK_PROJECTS: ProjectCard[] = [
   {
     id: "PL-01",
     title: "Riverfront Mixed-Use District",
     stage: "Development",
     opportunity: "JV",
     geography: "West Africa",
-    image: "/placeholders/district-commercial.png",
+    image: null,
     alt: "Riverfront commercial and mixed-use district (placeholder image)",
   },
   {
@@ -27,7 +37,7 @@ const PROJECTS: {
     stage: "Investment ready",
     opportunity: "Equity",
     geography: "East Africa",
-    image: "/placeholders/district-housing.png",
+    image: null,
     alt: "Urban housing phase with shared public realm (placeholder image)",
   },
   {
@@ -36,12 +46,34 @@ const PROJECTS: {
     stage: "Concept",
     opportunity: "PPP",
     geography: "Southern Africa",
-    image: "/placeholders/district-panorama.png",
+    image: null,
     alt: "Civic infrastructure and district public realm (placeholder image)",
   },
 ];
 
-export default function RelatedProjects() {
+function toProjectCard(project: Project): ProjectCard {
+  return {
+    id: project.id,
+    title: project.title || project.postTitle || project.slug,
+    stage: project.stage || project.investment_status,
+    opportunity: project.opportunity,
+    geography: project.location || project.country || project.region,
+    image: project.background?.url ?? null,
+    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+  };
+}
+
+export default function RelatedProjects({
+  data,
+}: {
+  data: RealEstateUrbanInfrastructureRelatedProjects;
+}) {
+  const projects = data.projects.length
+    ? data.projects.map(toProjectCard)
+    : FALLBACK_PROJECTS;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <section
       aria-labelledby="urban-projects-title"
@@ -62,9 +94,15 @@ export default function RelatedProjects() {
                 id="urban-projects-title"
                 className="mt-4 max-w-[16ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                Sites in
-                <br />
-                preparation.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <a
@@ -77,20 +115,22 @@ export default function RelatedProjects() {
           </div>
 
           <ul className="mt-[clamp(26px,4vw,44px)] border-t border-foreground/15">
-            {PROJECTS.map((project) => (
+            {projects.map((project) => (
               <li key={project.id} className="border-b border-foreground/15">
                 <a
                   href="/projects/development-pipeline"
                   className="group grid grid-cols-[clamp(80px,13vw,160px)_1fr_auto] items-center gap-[clamp(14px,2.4vw,30px)] py-[clamp(14px,2vw,22px)]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-foreground/10">
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      fill
-                      sizes="(min-width: 1024px) 160px, 80px"
-                      className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.05] motion-reduce:transform-none"
-                    />
+                    {project.image ? (
+                      <div
+                        role={project.alt ? "img" : undefined}
+                        aria-label={project.alt || undefined}
+                        aria-hidden={project.alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.05] motion-reduce:transform-none"
+                        style={{ backgroundImage: `url(${project.image})` }}
+                      />
+                    ) : null}
                   </div>
 
                   <div>

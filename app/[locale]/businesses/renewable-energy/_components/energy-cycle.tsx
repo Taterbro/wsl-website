@@ -1,33 +1,78 @@
-import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import type {
+  RenewableEnergyEnergyCycle,
+  RenewableEnergyEnergyCycleStages,
+} from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "The sun sets.\nThe load does not.";
+
+const FALLBACK_DESCRIPTION =
+  "Renewable supply only becomes infrastructure when generation, storage and dispatch are designed together — and operated as one asset.";
+
+const FALLBACK_IMAGE_ALT = "Renewable energy system stage";
+
+type Stage = {
+  no: string;
+  title: string;
+  copy: string;
+  image: string | null;
+  alt: string;
+};
 
 // PLACEHOLDER — imagery and stage descriptions are illustrative until approved
-// sector photography and content are supplied.
-const STAGES = [
+// sector photography and content are supplied. Media has no value fallback;
+// images render only from the CMS.
+const FALLBACK_STAGES: Stage[] = [
   {
     no: "01",
     title: "Generate",
     copy: "Solar arrays sized to site, irradiance and load — not a generic kit.",
-    image: "/placeholders/group-sector-energy.png",
+    image: null,
     alt: "Solar array generating power at sunset (placeholder image)",
   },
   {
     no: "02",
     title: "Store",
     copy: "Battery systems that firm output and carry critical load after sunset.",
-    image: "/placeholders/industry-facilities.png",
+    image: null,
     alt: "Industrial facility with energy storage infrastructure (placeholder image)",
   },
   {
     no: "03",
     title: "Dispatch",
     copy: "Hybrid distribution into industry, infrastructure and communities.",
-    image: "/placeholders/district-sustainable.png",
+    image: null,
     alt: "Sustainable district receiving distributed power (placeholder image)",
   },
 ];
 
-export default function EnergyCycle() {
+function toStage(
+  stage: RenewableEnergyEnergyCycleStages,
+  index: number
+): Stage {
+  const fallback = FALLBACK_STAGES[index];
+  const image = stage.image?.url ?? null;
+
+  return {
+    no: stage.no || fallback?.no || String(index + 1).padStart(2, "0"),
+    title: stage.title || fallback?.title || "",
+    copy: stage.copy || fallback?.copy || "",
+    image,
+    alt: image
+      ? stage.image?.alt || stage.image_alt || FALLBACK_IMAGE_ALT
+      : "",
+  };
+}
+
+export default function EnergyCycle({
+  data,
+}: {
+  data: RenewableEnergyEnergyCycle;
+}) {
+  const stages = data.stages.length ? data.stages.map(toStage) : FALLBACK_STAGES;
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -48,16 +93,20 @@ export default function EnergyCycle() {
                 id="energy-cycle-title"
                 className="max-w-[16ch] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                The sun sets.
-                <br />
-                The load does not.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <div>
               <p className="max-w-[48ch] text-[clamp(0.98rem,1.3vw,1.12rem)] leading-[1.6] text-muted/75">
-                Renewable supply only becomes infrastructure when generation,
-                storage and dispatch are designed together — and operated as one
-                asset.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
               <a
                 href="/investments/project-development"
@@ -70,16 +119,21 @@ export default function EnergyCycle() {
           </div>
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid gap-px border border-accent/20 bg-accent/20 md:grid-cols-3">
-            {STAGES.map((stage) => (
-              <article key={stage.no} className="group relative overflow-hidden bg-sidebar">
+            {stages.map((stage) => (
+              <article
+                key={stage.no}
+                className="group relative overflow-hidden bg-sidebar"
+              >
                 <div className="relative aspect-[4/5] overflow-hidden max-[640px]:aspect-[4/3]">
-                  <Image
-                    src={stage.image}
-                    alt={stage.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
-                  />
+                  {stage.image ? (
+                    <div
+                      role={stage.alt ? "img" : undefined}
+                      aria-label={stage.alt || undefined}
+                      aria-hidden={stage.alt ? undefined : true}
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
+                      style={{ backgroundImage: `url(${stage.image})` }}
+                    />
+                  ) : null}
                   <div
                     aria-hidden="true"
                     className="absolute inset-0 bg-linear-to-t from-sidebar via-sidebar/20 to-sidebar/55"

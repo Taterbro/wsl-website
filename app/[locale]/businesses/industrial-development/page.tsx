@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getIndustrialDevelopmentPage } from "@/lib/cms/generated";
+
 import SectorHero from "./_components/sector-hero";
 import CapabilityLine from "./_components/capability-line";
 import ProofStrip from "./_components/proof-strip";
@@ -13,16 +15,18 @@ export const metadata: Metadata = {
     "Manufacturing, processing and localisation that move value creation closer to demand. Explore Waterlight Group's industrial facilities, equipment and partnership capabilities.",
 };
 
-export default function IndustrialDevelopmentPage() {
+export default async function IndustrialDevelopmentPage() {
+  const data = await getIndustrialDevelopmentPage();
+
   return (
     <main>
-      <SectorHero />
-      <CapabilityLine />
-      <ProofStrip />
-      <Localisation />
-      <RelatedSectors />
-      <RelatedProjects />
-      <SectorConversion />
+      <SectorHero data={data.sector_hero} />
+      <CapabilityLine data={data.capability_line} />
+      <ProofStrip data={data.proof_strip} />
+      <Localisation data={data.localisation} />
+      <RelatedSectors data={data.related_sectors} />
+      <RelatedProjects data={data.related_projects} />
+      <SectorConversion data={data.sector_conversion} />
     </main>
   );
 }

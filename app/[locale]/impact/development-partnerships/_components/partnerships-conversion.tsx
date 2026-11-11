@@ -1,10 +1,18 @@
 import Link from "next/link";
 import Reveal from "../../../(home)/_components/reveal";
+import type { DevelopmentPartnershipsPartnershipsConversion } from "@/lib/cms/generated";
 
 const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
-const STEPS: { no: string; title: string; copy: string }[] = [
+const FALLBACK_HEADING = "Start with\nthe category.";
+
+const FALLBACK_DESCRIPTION =
+  "Choose the route that matches your institution. The form adapts to your role, and the enquiry goes to the team that owns that relationship.";
+
+// PLACEHOLDER — routing steps are illustrative until approved partnership
+// guidance is supplied.
+const FALLBACK_STEPS: { no: string; title: string; copy: string }[] = [
   {
     no: "01",
     title: "Pick a route",
@@ -22,7 +30,15 @@ const STEPS: { no: string; title: string; copy: string }[] = [
   },
 ];
 
-export default function PartnershipsConversion() {
+export default function PartnershipsConversion({
+  data,
+}: {
+  data: DevelopmentPartnershipsPartnershipsConversion;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const steps = data.steps.length ? data.steps : FALLBACK_STEPS;
+
   return (
     <Reveal>
       <section
@@ -47,14 +63,18 @@ export default function PartnershipsConversion() {
               id="partnerships-conversion-title"
               className="font-sans text-[clamp(2.1rem,5.6vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Start with
-              <br />
-              the category.
+              {headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[54ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted/80">
-              Choose the route that matches your institution. The form adapts to
-              your role, and the enquiry goes to the team that owns that
-              relationship.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
               <Link
@@ -73,9 +93,9 @@ export default function PartnershipsConversion() {
           </div>
 
           <ol className="mt-[clamp(34px,5vw,58px)] grid list-none grid-cols-1 gap-px border border-accent/20 bg-accent/20 p-0 md:grid-cols-3">
-            {STEPS.map((step) => (
+            {steps.map((step, index) => (
               <li
-                key={step.no}
+                key={`${index}-${step.no}`}
                 className="flex flex-col bg-sidebar p-[clamp(16px,2.3vw,26px)]"
               >
                 <span className="font-sans text-[0.62rem] font-extrabold tracking-[0.16em] text-accent tabular-nums [font-stretch:112%]">
