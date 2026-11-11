@@ -1,6 +1,7 @@
+import type { InvestmentsJointVenturesJvApproach } from "@/lib/cms/generated/pages/investments-joint-ventures";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const APPROACH = [
+const FALLBACK_APPROACH = [
   {
     title: "Originate together",
     body: "We co-develop opportunities where local insight, site access or demand meets Waterlight's platform capabilities.",
@@ -18,8 +19,19 @@ const APPROACH = [
     body: "Proven JV models can be expanded into adjacent opportunities and new markets.",
   },
 ];
+const FALLBACK_HEADING = "JV as a delivery model";
+const FALLBACK_DESCRIPTION =
+  "JVs are how we combine complementary strengths — technology, offtake, land/site access, execution capability or capital — to deliver projects that would be harder alone.";
 
-export default function JvApproach() {
+interface JvApproachProps {
+  data?: InvestmentsJointVenturesJvApproach;
+}
+
+export default function JvApproach({ data }: JvApproachProps) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const items = data?.items.length ? data.items : FALLBACK_APPROACH;
+
   return (
     <section
       aria-labelledby="jv-approach-title"
@@ -35,12 +47,10 @@ export default function JvApproach() {
               id="jv-approach-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              JV as a delivery model
+              {heading}
             </h2>
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-              JVs are how we combine complementary strengths — technology, offtake,
-              land/site access, execution capability or capital — to deliver projects
-              that would be harder alone.
+              {description}
             </p>
             <p className="mt-4 text-[0.98rem] leading-[1.7] text-muted-foreground">
               {/* PLACEHOLDER: no named JV partners or deal terms published. */}
@@ -48,7 +58,7 @@ export default function JvApproach() {
             </p>
           </Reveal>
           <div className="grid gap-4 sm:grid-cols-2">
-            {APPROACH.map((item) => (
+            {items.map((item) => (
               <Reveal
                 key={item.title}
                 className="relative flex h-full flex-col rounded-[2px] border border-border bg-card/40 p-[clamp(22px,3.6vw,30px)] transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40"

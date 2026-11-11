@@ -1,6 +1,7 @@
+import type { InvestmentsJointVenturesJvPartners } from "@/lib/cms/generated/pages/investments-joint-ventures";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const PARTNERS = [
+const FALLBACK_PARTNERS = [
   {
     role: "Project Owners",
     focus: "Sites, offtake, permits or existing assets with a path to scale",
@@ -18,8 +19,19 @@ const PARTNERS = [
     focus: "Capabilities that strengthen execution across water, energy, food, industry or digital",
   },
 ];
+const FALLBACK_HEADING = "Complementary strengths";
+const FALLBACK_DESCRIPTION =
+  "We look for partners whose strengths fill gaps and whose incentives align with long-term delivery.";
 
-export default function JvPartners() {
+interface JvPartnersProps {
+  data?: InvestmentsJointVenturesJvPartners;
+}
+
+export default function JvPartners({ data }: JvPartnersProps) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const partners = data?.partners.length ? data.partners : FALLBACK_PARTNERS;
+
   return (
     <section
       aria-labelledby="jv-partners-title"
@@ -34,15 +46,14 @@ export default function JvPartners() {
             id="jv-partners-title"
             className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            Complementary strengths
+            {heading}
           </h2>
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted/80">
-            We look for partners whose strengths fill gaps and whose incentives align
-            with long-term delivery.
+            {description}
           </p>
         </Reveal>
         <div className="mt-[clamp(30px,5vw,56px)] grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {PARTNERS.map((partner) => (
+          {partners.map((partner) => (
             <Reveal
               key={partner.role}
               className="relative flex h-full flex-col rounded-[2px] border border-white/10 bg-white/5 p-[clamp(22px,3.6vw,32px)] backdrop-blur-sm transition-all duration-(--transition-normal) ease-(--ease-standard) hover:border-accent/60"

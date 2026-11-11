@@ -1,22 +1,29 @@
 import Link from "next/link";
-import Image from "next/image";
+import type { ProjectDevelopmentProjectDevelopmentHero } from "@/lib/cms/generated/pages/project-development";
 
-export default function ProjectDevelopmentHero() {
+const FALLBACK_HEADING = "Project Development";
+const FALLBACK_DESCRIPTION =
+  "From origination to execution readiness — shaping opportunities into bankable projects through structure, partners and disciplined delivery.";
+
+export default function ProjectDevelopmentHero({
+  data,
+}: {
+  data: ProjectDevelopmentProjectDevelopmentHero;
+}) {
   return (
     <section
       aria-labelledby="pd-hero-title"
       className="relative overflow-hidden bg-sidebar text-muted"
     >
-      <div className="absolute inset-0">
-        <Image
-          src="/placeholders/investments-project-dev-hero.png"
-          alt="Project development and construction planning (placeholder image)"
-          fill
-          priority
-          className="object-cover object-center opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-sidebar via-sidebar/90 to-sidebar/70" />
-      </div>
+      {data.image ? (
+        <div className="absolute inset-0" aria-hidden>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{ backgroundImage: `url("${data.image.url}")` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-sidebar via-sidebar/90 to-sidebar/70" />
+        </div>
+      ) : null}
       <div className="relative mx-auto max-w-[1440px] px-[clamp(20px,5vw,72px)] py-[clamp(80px,12vw,150px)]">
         <div className="max-w-[72ch]">
           <p className="text-[0.8rem] font-semibold tracking-[0.12em] text-accent uppercase">
@@ -26,11 +33,10 @@ export default function ProjectDevelopmentHero() {
             id="pd-hero-title"
             className="mt-4 font-sans text-[clamp(2.6rem,7vw,6rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            Project Development
+            {data.heading || FALLBACK_HEADING}
           </h1>
           <p className="mt-6 max-w-[58ch] text-[clamp(1.05rem,1.6vw,1.35rem)] leading-[1.6] text-muted/80">
-            From origination to execution readiness — shaping opportunities into
-            bankable projects through structure, partners and disciplined delivery.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link

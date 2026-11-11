@@ -1,6 +1,18 @@
 import Link from "next/link";
+import type { NewsNewsClosing } from "@/lib/cms/generated/pages/news";
 
-export default function NewsClosing() {
+const FALLBACK_LABEL = "Media enquiries.";
+const FALLBACK_DESCRIPTION =
+  "For press and media questions about the group, contact the communications team.";
+
+interface NewsClosingProps {
+  data?: NewsNewsClosing;
+}
+
+export default function NewsClosing({ data }: NewsClosingProps) {
+  const label = data?.label || FALLBACK_LABEL;
+  const description = data?.description || FALLBACK_DESCRIPTION;
+
   return (
     <section
       aria-labelledby="news-closing-title"
@@ -17,14 +29,13 @@ export default function NewsClosing() {
               id="news-closing-title"
               className="mt-3 font-sans text-[clamp(2rem,4.6vw,3.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Media enquiries.
+              {label}
             </h2>
             <p className="mt-4 text-[clamp(0.94rem,1.2vw,1.04rem)] leading-[1.6] text-muted/65">
-              For press and media questions about the group, contact the
-              communications team.
+              {description}
             </p>
             <p className="mt-3 text-[0.6rem] leading-[1.5] text-muted/40">
-              PLACEHOLDER — confirm media contact details before launch.
+              PLACEHOLDER - confirm media contact details before launch.
             </p>
           </div>
 
@@ -33,7 +44,7 @@ export default function NewsClosing() {
             className="inline-flex w-fit items-center justify-center gap-[9px] rounded-[2px] border border-accent bg-accent px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.78rem] font-semibold tracking-[0.06em] text-accent-foreground uppercase transition duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-px hover:bg-[#7de4f2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transform-none"
           >
             Contact the group
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">�+-</span>
           </Link>
         </div>
       </div>

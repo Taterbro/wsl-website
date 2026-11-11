@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getStrategyPage } from "@/lib/cms/generated/pages/strategy";
 import StrategyHero from "./_components/strategy-hero";
 import Lifecycle from "./_components/lifecycle";
 import Principles from "./_components/principles";
@@ -11,14 +12,16 @@ export const metadata: Metadata = {
     "Waterlight's investment strategy: a full-lifecycle platform identifying, structuring, mobilizing, building and scaling bankable infrastructure and industrial opportunities across Africa and global markets.",
 };
 
-export default function InvestmentStrategyPage() {
+export default async function InvestmentStrategyPage() {
+  const data = await getStrategyPage();
+
   return (
     <main>
-      <StrategyHero />
-      <Lifecycle />
-      <Principles />
-      <CorridorModule />
-      <StrategyCta />
+      <StrategyHero data={data.strategy_hero} />
+      <Lifecycle data={data.lifecycle} />
+      <Principles data={data.principles} />
+      <CorridorModule data={data.corridor_module} />
+      <StrategyCta data={data.strategy_cta} />
     </main>
   );
 }

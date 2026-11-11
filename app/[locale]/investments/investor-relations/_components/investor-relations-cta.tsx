@@ -1,7 +1,21 @@
 import Link from "next/link";
+import type { InvestorRelationsInvestorRelationsCta } from "@/lib/cms/generated/pages/investor-relations";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-export default function InvestorRelationsCta() {
+const FALLBACK_HEADING = "Start a conversation";
+const FALLBACK_DESCRIPTION =
+  "Share your focus, geography and indicative interest. Our team will review and be in touch as appropriate.";
+
+interface InvestorRelationsCtaProps {
+  data?: InvestorRelationsInvestorRelationsCta;
+}
+
+export default function InvestorRelationsCta({
+  data,
+}: InvestorRelationsCtaProps) {
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const hasHeading = !!data?.heading;
+
   return (
     <section
       aria-labelledby="ir-cta-title"
@@ -13,17 +27,25 @@ export default function InvestorRelationsCta() {
             <p className="text-[0.8rem] font-semibold tracking-[0.12em] text-primary/70 uppercase">
               Build with Waterlight
             </p>
-            <h2
-              id="ir-cta-title"
-              className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
-            >
-              Start a
-              <br />
-              conversation
-            </h2>
+            {hasHeading ? (
+              <h2
+                id="ir-cta-title"
+                className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+              >
+                {data?.heading || FALLBACK_HEADING}
+              </h2>
+            ) : (
+              <h2
+                id="ir-cta-title"
+                className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+              >
+                Start a
+                <br />
+                conversation
+              </h2>
+            )}
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-              Share your focus, geography and indicative interest. Our team will
-              review and be in touch as appropriate.
+              {description}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -43,11 +65,17 @@ export default function InvestorRelationsCta() {
         </Reveal>
         <p className="mt-10 text-[0.88rem] text-muted-foreground">
           {/* PLACEHOLDER: legal sign-off required. */}
-          <Link href="/legal/investment-disclaimer" className="underline transition-colors hover:text-primary">
+          {/* <Link
+            href="/legal/investment-disclaimer"
+            className="underline transition-colors hover:text-primary"
+          >
             Investment disclaimer
-          </Link>{" "}
-          •{" "}
-          <Link href="/legal/privacy" className="underline transition-colors hover:text-primary">
+          </Link>{" "} */}
+          ·{" "}
+          <Link
+            href="/legal/privacy"
+            className="underline transition-colors hover:text-primary"
+          >
             Privacy
           </Link>
         </p>

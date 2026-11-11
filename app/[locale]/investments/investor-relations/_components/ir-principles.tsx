@@ -1,6 +1,7 @@
+import type { InvestorRelationsIrPrinciples } from "@/lib/cms/generated/pages/investor-relations";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const PRINCIPLES = [
+const FALLBACK_PRINCIPLES = [
   {
     title: "Discipline",
     body: "Essential needs first, bankability by design, governance from the outset.",
@@ -18,8 +19,21 @@ const PRINCIPLES = [
     body: "Platform capability across origination, structuring, mobilisation and build.",
   },
 ];
+const FALLBACK_HEADING = "What investors can expect";
+const FALLBACK_DESCRIPTION =
+  "A measured approach focused on structural demand and deliverable opportunities.";
 
-export default function IrPrinciples() {
+interface IrPrinciplesProps {
+  data?: InvestorRelationsIrPrinciples;
+}
+
+export default function IrPrinciples({ data }: IrPrinciplesProps) {
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const principles = data?.principles.length
+    ? data.principles
+    : FALLBACK_PRINCIPLES;
+  const hasHeading = !!data?.heading;
+
   return (
     <section
       aria-labelledby="ir-principles-title"
@@ -30,21 +44,29 @@ export default function IrPrinciples() {
           <p className="text-[0.8rem] font-semibold tracking-[0.12em] text-primary/70 uppercase">
             Approach
           </p>
-          <h2
-            id="ir-principles-title"
-            className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
-          >
-            What investors
-            <br />
-            can expect
-          </h2>
+          {hasHeading ? (
+            <h2
+              id="ir-principles-title"
+              className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+            >
+              {data?.heading || FALLBACK_HEADING}
+            </h2>
+          ) : (
+            <h2
+              id="ir-principles-title"
+              className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+            >
+              What investors
+              <br />
+              can expect
+            </h2>
+          )}
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-            A measured approach focused on structural demand and deliverable
-            opportunities.
+            {description}
           </p>
         </Reveal>
         <div className="mt-[clamp(30px,5vw,56px)] grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {PRINCIPLES.map((item) => (
+          {principles.map((item) => (
             <Reveal
               key={item.title}
               className="relative flex h-full flex-col rounded-[2px] border border-border bg-card/40 p-[clamp(22px,3.6vw,32px)] transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40"

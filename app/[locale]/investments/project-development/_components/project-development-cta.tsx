@@ -1,7 +1,23 @@
 import Link from "next/link";
+import type { ProjectDevelopmentProjectDevelopmentCta } from "@/lib/cms/generated/pages/project-development";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-export default function ProjectDevelopmentCta() {
+const FALLBACK_HEADING = (
+  <>
+    Have an opportunity
+    <br />
+    ready for development?
+  </>
+);
+
+const FALLBACK_DESCRIPTION =
+  "Share an approved summary and we will assess fit against priority sectors and our development capacity.";
+
+export default function ProjectDevelopmentCta({
+  data,
+}: {
+  data: ProjectDevelopmentProjectDevelopmentCta;
+}) {
   return (
     <section
       aria-labelledby="pd-cta-title"
@@ -17,13 +33,10 @@ export default function ProjectDevelopmentCta() {
               id="pd-cta-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Have an opportunity
-              <br />
-              ready for development?
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-              Share an approved summary and we will assess fit against priority
-              sectors and our development capacity.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -41,12 +54,6 @@ export default function ProjectDevelopmentCta() {
             </Link>
           </div>
         </Reveal>
-        <p className="mt-10 text-[0.88rem] text-muted-foreground">
-          {/* PLACEHOLDER: legal sign-off required. */}
-          <Link href="/legal/investment-disclaimer" className="underline transition-colors hover:text-primary">
-            Investment disclaimer
-          </Link>
-        </p>
       </div>
     </section>
   );

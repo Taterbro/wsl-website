@@ -1,6 +1,11 @@
+import type { ProjectDevelopmentDevelopmentCapabilities } from "@/lib/cms/generated/pages/project-development";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const CAPABILITIES = [
+const FALLBACK_HEADING = "Platform capabilities";
+const FALLBACK_DESCRIPTION =
+  "We combine project development, structuring and execution capability to move opportunities through to a deliverable state.";
+
+const FALLBACK_CAPABILITIES = [
   "Technical concept and scoping",
   "Commercial structuring and bankability",
   "Permitting and stakeholder engagement strategy",
@@ -10,7 +15,18 @@ const CAPABILITIES = [
   "Project governance and delivery oversight",
 ];
 
-export default function DevelopmentCapabilities() {
+export default function DevelopmentCapabilities({
+  data,
+}: {
+  data: ProjectDevelopmentDevelopmentCapabilities;
+}) {
+  const capabilities = data.capabilities
+    ? data.capabilities
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean)
+    : FALLBACK_CAPABILITIES;
+
   return (
     <section
       aria-labelledby="pd-capabilities-title"
@@ -26,11 +42,10 @@ export default function DevelopmentCapabilities() {
               id="pd-capabilities-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Platform capabilities
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted/80">
-              We combine project development, structuring and execution capability
-              to move opportunities through to a deliverable state.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <p className="mt-4 text-[0.98rem] leading-[1.7] text-muted/76">
               {/* PLACEHOLDER: capabilities listed are illustrative; confirm scope with delivery team. */}
@@ -38,7 +53,7 @@ export default function DevelopmentCapabilities() {
           </Reveal>
           <Reveal className="rounded-[2px] border border-white/10 bg-white/5 p-[clamp(24px,5vw,44px)] backdrop-blur-sm">
             <ul className="grid gap-3 sm:grid-cols-2">
-              {CAPABILITIES.map((item) => (
+              {capabilities.map((item) => (
                 <li
                   key={item}
                   className="flex items-start gap-3 text-[0.98rem] leading-[1.7] text-muted/80"

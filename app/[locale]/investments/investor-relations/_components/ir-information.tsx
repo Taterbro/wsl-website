@@ -1,6 +1,7 @@
+import type { InvestorRelationsIrInformation } from "@/lib/cms/generated/pages/investor-relations";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const ITEMS = [
+const FALLBACK_ITEMS = [
   {
     title: "Approved summaries",
     body: "Public pages show high-level summaries only. No confidential investment material is published.",
@@ -18,8 +19,19 @@ const ITEMS = [
     body: "This site contains no offer or solicitation. All enquiries are subject to applicable laws and Waterlight's review process.",
   },
 ];
+const FALLBACK_HEADING = "Process & scope";
+const FALLBACK_DESCRIPTION =
+  "Clear boundaries to keep the process disciplined and compliant.";
 
-export default function IrInformation() {
+interface IrInformationProps {
+  data?: InvestorRelationsIrInformation;
+}
+
+export default function IrInformation({ data }: IrInformationProps) {
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const items = data?.items.length ? data.items : FALLBACK_ITEMS;
+  const hasHeading = !!data?.heading;
+
   return (
     <section
       aria-labelledby="ir-info-title"
@@ -30,18 +42,27 @@ export default function IrInformation() {
           <p className="text-[0.8rem] font-semibold tracking-[0.12em] text-accent uppercase">
             Information
           </p>
-          <h2
-            id="ir-info-title"
-            className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
-          >
-            Process &amp; scope
-          </h2>
+          {hasHeading ? (
+            <h2
+              id="ir-info-title"
+              className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+            >
+              {data?.heading || FALLBACK_HEADING}
+            </h2>
+          ) : (
+            <h2
+              id="ir-info-title"
+              className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+            >
+              Process &amp; scope
+            </h2>
+          )}
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted/80">
-            Clear boundaries to keep the process disciplined and compliant.
+            {description}
           </p>
         </Reveal>
         <div className="mt-[clamp(30px,5vw,56px)] grid gap-4 sm:grid-cols-2">
-          {ITEMS.map((item) => (
+          {items.map((item) => (
             <Reveal
               key={item.title}
               className="relative flex h-full flex-col rounded-[2px] border border-white/10 bg-white/5 p-[clamp(22px,3.6vw,32px)] backdrop-blur-sm transition-all duration-(--transition-normal) ease-(--ease-standard) hover:border-accent/60"

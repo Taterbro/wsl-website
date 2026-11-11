@@ -1,7 +1,15 @@
 import Link from "next/link";
-import Image from "next/image";
+import type { OpportunitiesOpportunitiesHero } from "@/lib/cms/generated";
 
-export default function OpportunitiesHero() {
+const FALLBACK_HEADING = "Opportunities";
+const FALLBACK_DESCRIPTION =
+  "Approved summaries of selected opportunities. Full details are gated and made available on request following review.";
+
+export default function OpportunitiesHero({
+  data,
+}: {
+  data: OpportunitiesOpportunitiesHero;
+}) {
   return (
     <section
       aria-labelledby="opportunities-hero-title"
@@ -16,11 +24,10 @@ export default function OpportunitiesHero() {
             id="opportunities-hero-title"
             className="mt-4 font-sans text-[clamp(2.4rem,6.6vw,5.6rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            Opportunities
+            {data.heading || FALLBACK_HEADING}
           </h1>
           <p className="mt-6 max-w-[58ch] text-[clamp(1.05rem,1.6vw,1.32rem)] leading-[1.6] text-muted/80">
-            Approved summaries of selected opportunities. Full details are gated
-            and made available on request following review.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link

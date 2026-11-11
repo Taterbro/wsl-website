@@ -1,10 +1,19 @@
-import Link from "next/link";
+﻿import Link from "next/link";
+import type { NewsNewsHeader } from "@/lib/cms/generated/pages/news";
+
+const FALLBACK_LABEL = "News & Updates.";
+const FALLBACK_DESCRIPTION =
+  "Announcements, project milestones and institutional notes from across the Waterlight platform.";
 
 interface NewsHeaderProps {
   count: number;
+  data?: NewsNewsHeader;
 }
 
-export default function NewsHeader({ count }: NewsHeaderProps) {
+export default function NewsHeader({ count, data }: NewsHeaderProps) {
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const hasLabel = !!data?.label;
+
   return (
     <section
       aria-labelledby="news-title"
@@ -32,19 +41,27 @@ export default function NewsHeader({ count }: NewsHeaderProps) {
 
         <div className="mt-[clamp(26px,4vw,44px)]">
           <p className="font-sans text-[0.76rem] font-semibold tracking-[0.14em] text-primary/70 uppercase">
-            Insights · Newsroom
+            Insights A– Newsroom
           </p>
-          <h1
-            id="news-title"
-            className="mt-3 max-w-[12ch] font-sans text-[clamp(3rem,9vw,7.4rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
-          >
-            News
-            <br />
-            &amp; Updates.
-          </h1>
+          {hasLabel ? (
+            <h1
+              id="news-title"
+              className="mt-3 max-w-[12ch] font-sans text-[clamp(3rem,9vw,7.4rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
+            >
+              {data?.label || FALLBACK_LABEL}
+            </h1>
+          ) : (
+            <h1
+              id="news-title"
+              className="mt-3 max-w-[12ch] font-sans text-[clamp(3rem,9vw,7.4rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
+            >
+              News
+              <br />
+              &amp; Updates.
+            </h1>
+          )}
           <p className="mt-5 max-w-[56ch] text-[clamp(1rem,1.4vw,1.18rem)] leading-[1.6] text-muted-foreground">
-            Announcements, project milestones and institutional notes from
-            across the Waterlight platform.
+            {description}
           </p>
 
           <div className="mt-[clamp(22px,3.2vw,34px)] flex flex-wrap items-center gap-x-[clamp(16px,3vw,36px)] gap-y-2 border-t border-border pt-4 text-[0.66rem] font-semibold tracking-[0.1em] text-muted-foreground uppercase">

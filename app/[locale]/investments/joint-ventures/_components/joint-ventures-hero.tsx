@@ -1,20 +1,36 @@
 import Link from "next/link";
-import Image from "next/image";
+import type { InvestmentsJointVenturesJointVenturesHero } from "@/lib/cms/generated/pages/investments-joint-ventures";
 
-export default function JointVenturesHero() {
+const FALLBACK_HEADING = "Joint Ventures";
+const FALLBACK_DESCRIPTION =
+  "Aligned partnerships to originate, structure, build and scale bankable projects — with shared risk, clear governance and execution focus.";
+const FALLBACK_IMAGE_ALT =
+  "Strategic partners collaborating on infrastructure development (placeholder image)";
+
+interface JointVenturesHeroProps {
+  data?: InvestmentsJointVenturesJointVenturesHero;
+}
+
+export default function JointVenturesHero({ data }: JointVenturesHeroProps) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const imageUrl = data?.image?.url ?? "";
+  const imageAlt = data?.image?.alt || data?.image_alt || FALLBACK_IMAGE_ALT;
+
   return (
     <section
       aria-labelledby="jv-hero-title"
       className="relative overflow-hidden bg-sidebar text-muted"
     >
       <div className="absolute inset-0">
-        <Image
-          src="/placeholders/investments-jv-hero.png"
-          alt="Strategic partners collaborating on infrastructure development (placeholder image)"
-          fill
-          priority
-          className="object-cover object-center opacity-40"
-        />
+        {imageUrl ? (
+          <div
+            role="img"
+            aria-label={imageAlt}
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{ backgroundImage: `url("${imageUrl}")` }}
+          />
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-r from-sidebar via-sidebar/90 to-sidebar/70" />
       </div>
       <div className="relative mx-auto max-w-[1440px] px-[clamp(20px,5vw,72px)] py-[clamp(80px,12vw,150px)]">
@@ -26,11 +42,10 @@ export default function JointVenturesHero() {
             id="jv-hero-title"
             className="mt-4 font-sans text-[clamp(2.6rem,7vw,6rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            Joint Ventures
+            {heading}
           </h1>
           <p className="mt-6 max-w-[58ch] text-[clamp(1.05rem,1.6vw,1.35rem)] leading-[1.6] text-muted/80">
-            Aligned partnerships to originate, structure, build and scale bankable
-            projects — with shared risk, clear governance and execution focus.
+            {description}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link

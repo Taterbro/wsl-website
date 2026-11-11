@@ -1,20 +1,38 @@
 import Link from "next/link";
-import Image from "next/image";
+import type { InvestorRelationsInvestorRelationsHero } from "@/lib/cms/generated/pages/investor-relations";
 
-export default function InvestorRelationsHero() {
+const FALLBACK_HEADING = "Investor Relations";
+const FALLBACK_DESCRIPTION =
+  "A disciplined, Africa-rooted platform with a focus on bankable infrastructure and industrial opportunities across priority sectors.";
+const FALLBACK_IMAGE_ALT =
+  "Institutional investment and governance (placeholder image)";
+
+interface InvestorRelationsHeroProps {
+  data?: InvestorRelationsInvestorRelationsHero;
+}
+
+export default function InvestorRelationsHero({
+  data,
+}: InvestorRelationsHeroProps) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const description = data?.description || FALLBACK_DESCRIPTION;
+  const imageUrl = data?.image?.url ?? "";
+  const imageAlt = data?.image?.alt || data?.image_alt || FALLBACK_IMAGE_ALT;
+
   return (
     <section
       aria-labelledby="ir-hero-title"
       className="relative overflow-hidden bg-sidebar text-muted"
     >
       <div className="absolute inset-0">
-        <Image
-          src="/placeholders/investments-ir-hero.png"
-          alt="Institutional investment and governance (placeholder image)"
-          fill
-          priority
-          className="object-cover object-center opacity-40"
-        />
+        {imageUrl ? (
+          <div
+            role="img"
+            aria-label={imageAlt}
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{ backgroundImage: `url("${imageUrl}")` }}
+          />
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-r from-sidebar via-sidebar/90 to-sidebar/70" />
       </div>
       <div className="relative mx-auto max-w-[1440px] px-[clamp(20px,5vw,72px)] py-[clamp(80px,12vw,150px)]">
@@ -26,11 +44,10 @@ export default function InvestorRelationsHero() {
             id="ir-hero-title"
             className="mt-4 font-sans text-[clamp(2.6rem,7vw,6rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            Investor Relations
+            {heading}
           </h1>
           <p className="mt-6 max-w-[58ch] text-[clamp(1.05rem,1.6vw,1.35rem)] leading-[1.6] text-muted/80">
-            A disciplined, Africa-rooted platform with a focus on bankable
-            infrastructure and industrial opportunities across priority sectors.
+            {description}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link

@@ -1,6 +1,11 @@
+import type { StrategyPrinciples } from "@/lib/cms/generated/pages/strategy";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const PRINCIPLES = [
+const FALLBACK_HEADING = "Discipline with purpose";
+const FALLBACK_DESCRIPTION =
+  "A measured approach: credible opportunities, aligned partners, and assets built to endure.";
+
+const FALLBACK_PRINCIPLES = [
   {
     title: "Essential needs first",
     body: "We focus on sectors where demand is structural — water, energy, food, housing, industry and digital access.",
@@ -19,7 +24,11 @@ const PRINCIPLES = [
   },
 ];
 
-export default function Principles() {
+export default function Principles({ data }: { data: StrategyPrinciples }) {
+  const principles = data.principles.length
+    ? data.principles
+    : FALLBACK_PRINCIPLES;
+
   return (
     <section
       aria-labelledby="principles-title"
@@ -34,16 +43,15 @@ export default function Principles() {
             id="principles-title"
             className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            Discipline with purpose
+            {data.heading || FALLBACK_HEADING}
           </h2>
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted/80">
-            A measured approach: credible opportunities, aligned partners, and assets
-            built to endure.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </Reveal>
 
         <div className="mt-[clamp(30px,5vw,56px)] grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {PRINCIPLES.map((principle) => (
+        {principles.map((principle) => (
           <Reveal
             key={principle.title}
             className="relative flex h-full flex-col rounded-[2px] border border-white/10 bg-white/5 p-[clamp(22px,3.6vw,32px)] backdrop-blur-sm transition-all duration-(--transition-normal) ease-(--ease-standard) hover:border-accent/60"

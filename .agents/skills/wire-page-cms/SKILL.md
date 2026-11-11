@@ -5,7 +5,7 @@ description: Wire an existing App Router page.tsx (path given) to its generated 
 
 # Wire page to generated CMS API
 
-Edit only the target `page.tsx` and the components it renders. Never edit `cms/`, `lib/cms/generated/`, or legacy `lib/*`. Reference example: `app/[locale]/page.tsx` and `app/[locale]/(home)/_components/impact/impact.tsx`.
+Edit only the target `page.tsx` and the components it renders. Never edit `cms/`, `lib/cms/generated/`, or legacy `lib/*`. Reference example: `app/[locale]/page.tsx`, `app/[locale]/(home)/_components/impact/impact.tsx` and `app\[locale]\impact\development-partnerships\_components\engagement-checklist.tsx`.
 
 ## 1. Slug and preconditions
 

@@ -1,6 +1,18 @@
+import type { ProjectDevelopmentDevelopmentProcess } from "@/lib/cms/generated/pages/project-development";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const STEPS = [
+const FALLBACK_HEADING = (
+  <>
+    Disciplined from idea
+    <br />
+    to build readiness
+  </>
+);
+
+const FALLBACK_DESCRIPTION =
+  "We don't just finance — we develop. Each step reduces uncertainty and increases bankability.";
+
+const FALLBACK_STEPS = [
   {
     no: "01",
     title: "Screen & Originate",
@@ -33,7 +45,13 @@ const STEPS = [
   },
 ];
 
-export default function DevelopmentProcess() {
+export default function DevelopmentProcess({
+  data,
+}: {
+  data: ProjectDevelopmentDevelopmentProcess;
+}) {
+  const steps = data.steps.length ? data.steps : FALLBACK_STEPS;
+
   return (
     <section
       aria-labelledby="pd-process-title"
@@ -48,17 +66,14 @@ export default function DevelopmentProcess() {
             id="pd-process-title"
             className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            Disciplined from idea
-            <br />
-            to build readiness
+            {data.heading || FALLBACK_HEADING}
           </h2>
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-            We don&apos;t just finance — we develop. Each step reduces uncertainty and
-            increases bankability.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </Reveal>
         <div className="mt-[clamp(34px,6vw,72px)] grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {STEPS.map((step) => (
+          {steps.map((step) => (
             <Reveal
               key={step.no}
               className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-card/40 transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_40px_80px_-60px_rgba(18,63,90,0.9)]"

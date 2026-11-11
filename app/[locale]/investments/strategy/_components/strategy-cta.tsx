@@ -1,7 +1,18 @@
 import Link from "next/link";
+import type { StrategyStrategyCta } from "@/lib/cms/generated/pages/strategy";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-export default function StrategyCta() {
+const FALLBACK_HEADING = (
+  <>
+    Ready to structure
+    <br />a bankable opportunity?
+  </>
+);
+
+const FALLBACK_DESCRIPTION =
+  "Share a summary of your opportunity and we will review with the relevant team. Approved summaries only — no confidential material required at first contact.";
+
+export default function StrategyCta({ data }: { data: StrategyStrategyCta }) {
   return (
     <section
       aria-labelledby="strategy-cta-title"
@@ -17,14 +28,10 @@ export default function StrategyCta() {
               id="strategy-cta-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Ready to structure
-              <br />
-              a bankable opportunity?
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted/80">
-              Share a summary of your opportunity and we will review with the relevant
-              team. Approved summaries only — no confidential material required at first
-              contact.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -42,12 +49,6 @@ export default function StrategyCta() {
             </Link>
           </div>
         </Reveal>
-        <p className="mt-10 text-[0.88rem] text-muted/60">
-          {/* PLACEHOLDER: legal sign-off required for disclaimer wording and gating logic. */}
-          <Link href="/legal/investment-disclaimer" className="underline transition-colors hover:text-accent">
-            Investment disclaimer
-          </Link>
-        </p>
       </div>
     </section>
   );

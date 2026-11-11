@@ -1,6 +1,11 @@
+import type { StrategyLifecycle } from "@/lib/cms/generated/pages/strategy";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-const STAGES = [
+const FALLBACK_HEADING = "From opportunity to scale";
+const FALLBACK_DESCRIPTION =
+  "Waterlight acts as an originator, structurer and builder — not just a capital provider. Each stage is deliberate and designed to be bankable.";
+
+const FALLBACK_STAGES = [
   {
     no: "01",
     label: "Identify",
@@ -51,7 +56,21 @@ const STAGES = [
   },
 ];
 
-export default function Lifecycle() {
+function toStage(stage: StrategyLifecycle["stages"][number]) {
+  return {
+    ...stage,
+    partners: stage.partners
+      .split(",")
+      .map((partner) => partner.trim())
+      .filter(Boolean),
+  };
+}
+
+export default function Lifecycle({ data }: { data: StrategyLifecycle }) {
+  const stages = data.stages.length
+    ? data.stages.map(toStage)
+    : FALLBACK_STAGES;
+
   return (
     <section
       aria-labelledby="lifecycle-title"
@@ -66,16 +85,15 @@ export default function Lifecycle() {
             id="lifecycle-title"
             className="mt-4 font-sans text-[clamp(2.1rem,5.4vw,4.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
           >
-            From opportunity to scale
+            {data.heading || FALLBACK_HEADING}
           </h2>
           <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-            Waterlight acts as an originator, structurer and builder — not just a capital
-            provider. Each stage is deliberate and designed to be bankable.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </Reveal>
 
         <div className="mt-[clamp(34px,6vw,72px)] grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {STAGES.map((stage) => (
+          {stages.map((stage) => (
             <Reveal
               key={stage.label}
               className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-card/60 transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_40px_80px_-60px_rgba(18,63,90,0.9)]"

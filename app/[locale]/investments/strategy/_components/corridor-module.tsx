@@ -1,7 +1,37 @@
+import { Fragment } from "react";
 import Link from "next/link";
+import type { StrategyCorridorModule } from "@/lib/cms/generated/pages/strategy";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
 
-export default function CorridorModule() {
+const FALLBACK_HEADING = "Connecting capital, technology and markets";
+const FALLBACK_DESCRIPTION =
+  "Waterlight positions itself as a platform through which international partners identify and develop opportunities across Africa, and African enterprises access technology, investment and international markets.";
+
+const FALLBACK_NODES = [
+  { label: "Saudi Arabia", role: "Capital & technology" },
+  { label: "Africa", role: "Platform foundation" },
+  { label: "Global Markets", role: "Markets & partners" },
+];
+
+const FALLBACK_EXCHANGES = [
+  "Capital ↔ Opportunities",
+  "Technology ↔ Deployment",
+  "Markets ↔ Enterprises",
+];
+
+export default function CorridorModule({
+  data,
+}: {
+  data: StrategyCorridorModule;
+}) {
+  const nodes = data.nodes.length ? data.nodes : FALLBACK_NODES;
+  const exchanges = data.exchanges
+    ? data.exchanges
+        .split(",")
+        .map((exchange) => exchange.trim())
+        .filter(Boolean)
+    : FALLBACK_EXCHANGES;
+
   return (
     <section
       aria-labelledby="corridor-title"
@@ -17,12 +47,10 @@ export default function CorridorModule() {
               id="corridor-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Connecting capital, technology and markets
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <p className="mt-5 text-[clamp(1.02rem,1.4vw,1.26rem)] leading-[1.7] text-muted-foreground">
-              Waterlight positions itself as a platform through which international
-              partners identify and develop opportunities across Africa, and African
-              enterprises access technology, investment and international markets.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <p className="mt-4 text-[0.98rem] leading-[1.7] text-muted-foreground">
               {/* PLACEHOLDER: label as Target market / strategic dialogue unless confirmed operating presence or signed partnership. */}
@@ -43,37 +71,30 @@ export default function CorridorModule() {
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
               <div className="grid gap-6 p-[clamp(24px,6vw,56px)]">
                 <div className="grid items-center gap-6 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
-                  <div className="flex flex-col items-center text-center">
-                    <span className="rounded-[2px] border border-border px-4 py-2 font-sans text-[0.86rem] font-semibold tracking-[0.08em] uppercase">
-                      Saudi Arabia
-                    </span>
-                    <p className="mt-2 text-[0.9rem] text-muted-foreground">
-                      Capital &amp; technology
-                    </p>
-                  </div>
-                  <div className="hidden h-px w-16 bg-gradient-to-r from-transparent via-accent to-transparent md:block" />
-                  <div className="flex flex-col items-center text-center">
-                    <span className="rounded-[2px] border border-accent/70 px-4 py-2 font-sans text-[0.86rem] font-semibold tracking-[0.08em] uppercase">
-                      Africa
-                    </span>
-                    <p className="mt-2 text-[0.9rem] text-muted-foreground">
-                      Platform foundation
-                    </p>
-                  </div>
-                  <div className="hidden h-px w-16 bg-gradient-to-r from-transparent via-accent to-transparent md:block" />
-                  <div className="flex flex-col items-center text-center">
-                    <span className="rounded-[2px] border border-border px-4 py-2 font-sans text-[0.86rem] font-semibold tracking-[0.08em] uppercase">
-                      Global Markets
-                    </span>
-                    <p className="mt-2 text-[0.9rem] text-muted-foreground">
-                      Markets &amp; partners
-                    </p>
-                  </div>
+                  {nodes.map((node, index) => (
+                    <Fragment key={node.label}>
+                      {index > 0 ? (
+                        <div className="hidden h-px w-16 bg-gradient-to-r from-transparent via-accent to-transparent md:block" />
+                      ) : null}
+                      <div className="flex flex-col items-center text-center">
+                        <span
+                          className={`rounded-[2px] border px-4 py-2 font-sans text-[0.86rem] font-semibold tracking-[0.08em] uppercase ${
+                            index === 1 ? "border-accent/70" : "border-border"
+                          }`}
+                        >
+                          {node.label}
+                        </span>
+                        <p className="mt-2 text-[0.9rem] text-muted-foreground">
+                          {node.role}
+                        </p>
+                      </div>
+                    </Fragment>
+                  ))}
                 </div>
                 <div className="grid gap-3 text-center text-[0.9rem] text-muted-foreground md:grid-cols-3">
-                  <p>Capital ↔ Opportunities</p>
-                  <p>Technology ↔ Deployment</p>
-                  <p>Markets ↔ Enterprises</p>
+                  {exchanges.map((exchange) => (
+                    <p key={exchange}>{exchange}</p>
+                  ))}
                 </div>
                 <p className="text-center text-[0.84rem] text-muted-foreground">
                   Target market / strategic dialogue

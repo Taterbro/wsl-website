@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { BUSINESS_SECTORS } from "@/lib/businesses";
 import type { Project } from "@/lib/projects";
+import type { OpportunitiesOpportunitiesGrid } from "@/lib/cms/generated";
 import Link from "next/link";
-import Image from "next/image";
+
+const FALLBACK_HEADING = "Available opportunities";
 
 const INVESTMENT_SIZES = ["$5-15M", "$10-25M", "$15-40M", "$20-45M", "$25-50M", "$30-60M", "$50M+"];
 const STAGES = ["Concept", "Development", "Investment Ready", "Financing", "Construction", "Operational"];
@@ -17,10 +19,14 @@ const SECTOR_NAMES = Object.fromEntries(
 );
 
 interface OpportunitiesGridProps {
+  data: OpportunitiesOpportunitiesGrid;
   projects: Project[];
 }
 
-export default function OpportunitiesGrid({ projects }: OpportunitiesGridProps) {
+export default function OpportunitiesGrid({
+  data,
+  projects,
+}: OpportunitiesGridProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -80,7 +86,7 @@ export default function OpportunitiesGrid({ projects }: OpportunitiesGridProps) 
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <h2 id="opportunities-grid-title" className="font-sans text-[clamp(1.8rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]">
-              Available opportunities
+              {data.heading || FALLBACK_HEADING}
             </h2>
             <p className="mt-2 text-[0.98rem] text-muted-foreground">
               {filtered.length} result{filtered.length === 1 ? "" : "s"}
@@ -198,12 +204,13 @@ export default function OpportunitiesGrid({ projects }: OpportunitiesGridProps) 
               className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-card/40 transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_40px_80px_-60px_rgba(18,63,90,0.9)]"
             >
               <div className="relative h-[220px] w-full overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.02]"
-                />
+                {project.image ? (
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.02]"
+                    style={{ backgroundImage: `url("${project.image}")` }}
+                  />
+                ) : null}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
                 <div className="absolute left-4 top-4 flex flex-wrap gap-2">
                   <span className="rounded-[2px] border border-white/40 bg-sidebar/70 px-2.5 py-1 text-[0.74rem] font-semibold tracking-[0.08em] text-muted uppercase backdrop-blur-sm">
