@@ -116,7 +116,9 @@ export default function BoardRoster({ data }: { data: BoardBoardRoster }) {
                           aria-label={memberAlt || undefined}
                           aria-hidden={memberAlt ? undefined : true}
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transform-none group-hover:scale-[1.04]"
-                          style={{ backgroundImage: `url(${member.image.url})` }}
+                          style={{
+                            backgroundImage: `url(${member.image.url})`,
+                          }}
                         />
                       ) : null}
                       <div
@@ -173,12 +175,14 @@ export default function BoardRoster({ data }: { data: BoardBoardRoster }) {
             })}
           </ul>
 
-          <p className="mt-6 max-w-[80ch] text-[0.74rem] leading-[1.55] text-muted-foreground/80">
-            PLACEHOLDER — {BOARD_INTRO.office.toLowerCase()} shown above is
-            illustrative dummy content. Names, roles, committee memberships and
-            photographs must be replaced with the confirmed register of directors
-            and cleared portrait photography before publication.
-          </p>
+          {data.people.length === 0 && (
+            <p className="mt-6 max-w-[80ch] text-[0.74rem] leading-[1.55] text-muted-foreground/80">
+              PLACEHOLDER — {BOARD_INTRO.office.toLowerCase()} shown above is
+              illustrative dummy content. Names, roles, committee memberships
+              and photographs must be replaced with the confirmed register of
+              directors and cleared portrait photography before publication.
+            </p>
+          )}
         </div>
       </section>
     </Reveal>

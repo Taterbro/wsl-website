@@ -71,9 +71,11 @@ export default function RoleInPlatform({
               <p className="mt-2 font-sans text-[0.82rem] leading-[1.5] font-semibold tracking-[0.03em] uppercase [font-stretch:108%]">
                 {data.chain || FALLBACK_CHAIN}
               </p>
-              <p className="mt-2 text-[0.62rem] leading-[1.5] text-muted/50">
-                PLACEHOLDER — illustrative chain, not a delivery record.
-              </p>
+              {!data.chain && (
+                <p className="mt-2 text-[0.62rem] leading-[1.5] text-muted/50">
+                  PLACEHOLDER — illustrative chain, not a delivery record.
+                </p>
+              )}
             </div>
           </div>
 

@@ -71,7 +71,9 @@ const FALLBACK_DETAILS: Record<
   },
 };
 
-const FALLBACK_LABELS = getSector("real-estate-urban-infrastructure").capabilities;
+const FALLBACK_LABELS = getSector(
+  "real-estate-urban-infrastructure"
+).capabilities;
 
 const FALLBACK_ZONES: ZoneDetail[] = FALLBACK_LABELS.map((label, index) => {
   const detail = FALLBACK_DETAILS[label];
@@ -215,9 +217,7 @@ export default function CityZones({
                         aria-hidden={zone.alt ? undefined : true}
                         className={cn(
                           "absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slow) ease-(--ease-standard) motion-reduce:transform-none",
-                          isActive
-                            ? "scale-105"
-                            : "group-hover:scale-[1.04]"
+                          isActive ? "scale-105" : "group-hover:scale-[1.04]"
                         )}
                         style={{ backgroundImage: `url(${zone.image.url})` }}
                       />
@@ -324,10 +324,12 @@ export default function CityZones({
           </div>
         </div>
 
-        <p className="mt-6 text-[0.6rem] leading-[1.5] text-muted/60">
-          PLACEHOLDER — zone copy, interfaces and imagery are illustrative until
-          approved sector content and photography are supplied.
-        </p>
+        {data.zones.length === 0 && (
+          <p className="mt-6 text-[0.6rem] leading-[1.5] text-muted/60">
+            PLACEHOLDER — zone copy, interfaces and imagery are illustrative
+            until approved sector content and photography are supplied.
+          </p>
+        )}
       </div>
     </section>
   );

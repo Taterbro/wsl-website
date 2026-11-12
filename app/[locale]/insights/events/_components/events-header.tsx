@@ -91,7 +91,6 @@ export default function EventsHeader({
         </div>
 
         <div className="mt-[clamp(22px,3.2vw,34px)] flex flex-wrap items-center gap-x-[clamp(16px,3vw,36px)] gap-y-2 border-t border-muted/15 pt-4 text-[0.66rem] font-semibold tracking-[0.1em] text-muted/50 uppercase">
-          <span>Placeholder listings</span>
           <span>Newest first</span>
           <span>All entries illustrative</span>
         </div>

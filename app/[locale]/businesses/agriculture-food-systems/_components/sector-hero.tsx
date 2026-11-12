@@ -200,10 +200,12 @@ export default function SectorHero({
         </div>
       </div>
 
-      <p className="border-t border-accent/20 px-[clamp(20px,5vw,72px)] py-[clamp(10px,1.4vw,16px)] text-[0.62rem] leading-[1.5] tracking-[0.04em] text-muted/50">
-        PLACEHOLDER — hero imagery and scope descriptors are illustrative until
-        approved sector photography and content are supplied.
-      </p>
+      {data.facts.length === 0 && data.mosaic.length === 0 && (
+        <p className="border-t border-accent/20 px-[clamp(20px,5vw,72px)] py-[clamp(10px,1.4vw,16px)] text-[0.62rem] leading-[1.5] tracking-[0.04em] text-muted/50">
+          PLACEHOLDER — hero imagery and scope descriptors are illustrative until
+          approved sector photography and content are supplied.
+        </p>
+      )}
     </section>
   );
 }

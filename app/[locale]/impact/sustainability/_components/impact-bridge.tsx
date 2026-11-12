@@ -122,12 +122,6 @@ export default function ImpactBridge() {
               </div>
             </div>
           </div>
-
-          <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/55">
-            PLACEHOLDER — partner categories, framework wording and nonprofit
-            status language require owner and compliance review before launch.
-            No partner names, logos or agreements are shown.
-          </p>
         </Reveal>
       </div>
     </section>

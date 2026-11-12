@@ -147,10 +147,10 @@ export default function GovernanceSeats({
               <p className="mt-5 text-[0.8rem] font-semibold tracking-[0.08em] text-muted/60 uppercase">
                 {data.attribution || FALLBACK_ATTRIBUTION}
               </p>
-              <p className="mt-2 text-[0.76rem] leading-[1.55] text-muted/55">
+              {/* <p className="mt-2 text-[0.76rem] leading-[1.55] text-muted/55">
                 PLACEHOLDER — title and identity published once formally approved
                 and current.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

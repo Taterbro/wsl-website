@@ -1,10 +1,6 @@
 import type { GroupStructureStructureSectors } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
-import {
-  SECTOR_ROUTES,
-  entityByKey,
-  type EntityKey,
-} from "../_data/structure";
+import { SECTOR_ROUTES, entityByKey, type EntityKey } from "../_data/structure";
 
 const FALLBACK_HEADING = "Which entity\ndoes what.";
 
@@ -106,9 +102,7 @@ export default function StructureSectors({
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid grid-cols-4 gap-[clamp(12px,1.4vw,20px)] max-[1180px]:grid-cols-2 max-[680px]:grid-cols-1">
             {sectors.map((route) => {
-              const alt = route.image
-                ? route.image.alt || route.image_alt
-                : "";
+              const alt = route.image ? route.image.alt || route.image_alt : "";
 
               return (
                 <article
@@ -153,11 +147,11 @@ export default function StructureSectors({
             })}
           </div>
 
-          <p className="mt-[clamp(22px,3vw,34px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">
+          {/* <p className="mt-[clamp(22px,3vw,34px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">
             PLACEHOLDER — sector routes show the indicative group path for each
             sector. They are not an ownership map and must be confirmed against
             the approved group chart before publication.
-          </p>
+          </p> */}
         </div>
       </section>
     </Reveal>

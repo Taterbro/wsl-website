@@ -100,10 +100,10 @@ export default function GovernanceRights({
             ))}
           </div>
 
-          <p className="mt-[clamp(22px,3vw,34px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted/60">
+          {/* <p className="mt-[clamp(22px,3vw,34px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted/60">
             PLACEHOLDER — delegation of authority must be confirmed against
             formally approved documents and reviewed at least annually.
-          </p>
+          </p> */}
         </div>
       </section>
     </Reveal>

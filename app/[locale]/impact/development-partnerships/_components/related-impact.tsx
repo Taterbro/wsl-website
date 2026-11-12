@@ -108,7 +108,10 @@ export default function RelatedImpact({
 
           <ul className="mt-[clamp(28px,4vw,46px)] list-none border-t border-foreground/15 p-0">
             {items.map((item, index) => (
-              <li key={`${index}-${item.code}`} className="border-b border-foreground/15">
+              <li
+                key={`${index}-${item.code}`}
+                className="border-b border-foreground/15"
+              >
                 <Link
                   href={item.href}
                   className="group grid grid-cols-[auto_1fr_auto] items-start gap-x-[clamp(14px,2.4vw,34px)] gap-y-2 py-[clamp(18px,2.6vw,30px)] transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-muted focus-visible:bg-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
@@ -142,11 +145,11 @@ export default function RelatedImpact({
             ))}
           </ul>
 
-          <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
+          {/* <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
             PLACEHOLDER — related-page summaries and the nonprofit label require
             owner and compliance review. No partner names, logos or third-party
             marks are used.
-          </p>
+          </p> */}
         </Reveal>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { LogisticsSupplyChainsSectorConversion } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 
 const BTN_BASE_CLASS =
@@ -30,7 +31,11 @@ const ROLES: { number: string; title: string; copy: string; href: string }[] = [
   },
 ];
 
-export default function SectorConversion() {
+export default function SectorConversion({
+  data,
+}: {
+  data: LogisticsSupplyChainsSectorConversion;
+}) {
   return (
     <section
       aria-labelledby="logistics-conversion-title"
@@ -85,13 +90,23 @@ export default function SectorConversion() {
               id="logistics-conversion-title"
               className="mt-4 font-sans text-[clamp(2.1rem,4.8vw,4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Move goods through
-              <br />
-              a Waterlight corridor.
+              {data.label ? (
+                data.label.split("\n").map((w) => (
+                  <>
+                    {w}
+                    <br />
+                  </>
+                ))
+              ) : (
+                <>
+                  Move goods through
+                  <br />a Waterlight corridor.
+                </>
+              )}
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[clamp(0.95rem,1.25vw,1.05rem)] leading-[1.6] text-muted/70">
-              Bring a route, a node or a trade requirement. We will help
-              structure the corridor around it.
+              {data.description ||
+                "Bring a route, a node or a trade requirement. We will help structure the corridor around it."}
             </p>
             <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap justify-center gap-3">
               <a
@@ -140,12 +155,6 @@ export default function SectorConversion() {
               </li>
             ))}
           </ul>
-
-          <p className="mt-[clamp(28px,4vw,44px)] border-t border-accent/15 pt-5 text-center text-[0.6rem] leading-[1.5] text-muted/60">
-            PLACEHOLDER — partner roles and outbound links are indicative and
-            should be confirmed against the current investment and partnership
-            offer.
-          </p>
         </Reveal>
       </div>
     </section>

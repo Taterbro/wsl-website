@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import { LogisticsSupplyChainsCorridorStack } from "@/lib/cms/generated";
 
 // PLACEHOLDER — corridor stack copy and imagery are illustrative until approved
 // sector content is supplied.
@@ -26,18 +27,33 @@ const LAYERS: { code: string; title: string; copy: string }[] = [
   },
 ];
 
-export default function CorridorStack() {
+export default function CorridorStack({
+  data,
+}: {
+  data: LogisticsSupplyChainsCorridorStack;
+}) {
+  const title = data.heading;
+  const description =
+    data.description ||
+    "Freight only creates value when the route, the nodes, the flow and the control layer work as one system. We structure all four together.";
+
+  const layers = data.layers.length > 0 ? data.layers : LAYERS;
   return (
     <section
       aria-labelledby="logistics-stack-title"
       className="relative isolate overflow-hidden bg-sidebar text-muted"
     >
       <Image
-        src="/placeholders/logistics-corridor.png"
-        alt="Freight corridor with road, rail and inland logistics infrastructure (placeholder image)"
+        src={data.image?.url || "/placeholders/logistics-corridor.png"}
+        alt={
+          data.image_alt ||
+          "Freight corridor with road, rail and inland logistics infrastructure (placeholder image)"
+        }
         fill
         sizes="100vw"
         className="object-cover"
+        height={data.image?.height}
+        width={data.image?.width}
       />
       <div
         aria-hidden="true"
@@ -62,18 +78,27 @@ export default function CorridorStack() {
               id="logistics-stack-title"
               className="mt-4 max-w-[16ch] font-sans text-[clamp(2rem,4.2vw,3.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              One corridor.
-              <br />
-              Four layers.
+              {data.heading ? (
+                data.heading.split("\n").map((w) => (
+                  <>
+                    {w}
+                    <br />
+                  </>
+                ))
+              ) : (
+                <>
+                  One corridor.
+                  <br />
+                  Four layers.
+                </>
+              )}
             </h2>
             <p className="mt-4 max-w-[48ch] text-[clamp(0.92rem,1.2vw,1.05rem)] leading-[1.6] text-muted/70">
-              Freight only creates value when the route, the nodes, the flow and
-              the control layer work as one system. We structure all four
-              together.
+              {description}
             </p>
 
             <ol className="mt-[clamp(20px,3vw,30px)] border-t border-accent/20">
-              {LAYERS.map((layer) => (
+              {layers.map((layer) => (
                 <li
                   key={layer.code}
                   className="grid grid-cols-[auto_1fr] gap-x-[clamp(14px,2.4vw,26px)] gap-y-1 border-b border-accent/20 py-[clamp(12px,1.8vw,18px)]"
@@ -101,10 +126,12 @@ export default function CorridorStack() {
                 Supply-chain technology
                 <span aria-hidden="true">↗</span>
               </a>
-              <p className="max-w-[34ch] text-[0.56rem] leading-[1.5] text-muted/60">
-                PLACEHOLDER — corridor imagery and layer copy are illustrative
-                until approved sector content and photography are supplied.
-              </p>
+              {data.layers.length === 0 && (
+                <p className="max-w-[34ch] text-[0.56rem] leading-[1.5] text-muted/60">
+                  PLACEHOLDER — corridor imagery and layer copy are illustrative
+                  until approved sector content and photography are supplied.
+                </p>
+              )}
             </div>
           </div>
         </Reveal>

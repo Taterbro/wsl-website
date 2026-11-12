@@ -19,7 +19,7 @@ type FunctionCard = {
 
 function toFunctionCard(
   item: ExecutiveLeadershipExecutiveFunctions["functions"][number],
-  index: number,
+  index: number
 ): FunctionCard {
   return {
     key: `${index}-${item.no}`,
@@ -118,11 +118,13 @@ export default function ExecutiveFunctions({
             ))}
           </div>
 
-          <p className="mt-5 max-w-[80ch] text-[0.74rem] leading-[1.55] text-muted-foreground/80">
-            PLACEHOLDER — function structure, remits and scope are indicative and
-            must be reconciled with the approved organisation chart before
-            publication.
-          </p>
+          {data.functions.length === 0 && (
+            <p className="mt-5 max-w-[80ch] text-[0.74rem] leading-[1.55] text-muted-foreground/80">
+              PLACEHOLDER — function structure, remits and scope are indicative
+              and must be reconciled with the approved organisation chart before
+              publication.
+            </p>
+          )}
         </div>
       </section>
     </Reveal>

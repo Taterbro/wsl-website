@@ -179,11 +179,11 @@ export default function PartnerDirectory({
           </ul>
 
           <div className="mt-[clamp(20px,2.8vw,32px)] flex flex-col gap-4 border-t border-accent/20 pt-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-[72ch] text-[0.62rem] leading-[1.55] text-muted/55">
+            {/* <p className="max-w-[72ch] text-[0.62rem] leading-[1.55] text-muted/55">
               PLACEHOLDER — categories, instruments and engagement models are
               illustrative. No named partner, logo, mandate or existing
               agreement is represented here.
-            </p>
+            </p> */}
             <Link
               href="/partner-with-us"
               className="inline-flex shrink-0 items-center gap-2 self-start border-b border-accent pb-1 text-[0.68rem] font-semibold tracking-[0.08em] text-muted uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent sm:self-auto"

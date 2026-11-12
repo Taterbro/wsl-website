@@ -54,7 +54,7 @@ export default function FlagshipCta({ data, project }: FlagshipCtaProps) {
             <p className="mt-5 text-[clamp(1rem,1.4vw,1.2rem)] leading-[1.65] text-muted/75">
               {data.description || FALLBACK_DESCRIPTION}
             </p>
-            <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-muted/50 uppercase">
+            {/* <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-muted/50 uppercase">
               Access is reviewed by the project team.{" "}
               <Link
                 href="/legal/investment-disclaimer"
@@ -62,7 +62,7 @@ export default function FlagshipCta({ data, project }: FlagshipCtaProps) {
               >
                 Investment disclaimer
               </Link>
-            </p>
+            </p> */}
           </div>
 
           <div className="flex flex-wrap items-center gap-3">

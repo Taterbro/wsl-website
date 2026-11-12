@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
+import { LogisticsSupplyChainsRelatedProjects } from "@/lib/cms/generated";
+import { CmsImage } from "@/lib/cms/normalize";
 
 // PLACEHOLDER — projects, stages and geographies are illustrative concepts,
 // not a record of delivered work.
@@ -8,42 +10,46 @@ const PROJECTS: {
   title: string;
   stage: string;
   opportunity: string;
-  geography: string;
-  image: string;
-  alt: string;
+  region: string;
+  background: CmsImage;
+  background_alt: string;
 }[] = [
   {
     id: "PL-01",
     title: "Inland Port & Warehousing Hub",
     stage: "Development",
     opportunity: "JV",
-    geography: "West Africa",
-    image: "/placeholders/logistics-hub.png",
-    alt: "Inland port and warehousing hub (placeholder image)",
+    region: "West Africa",
+    background: { url: "", alt: "", width: 90, height: 90 },
+    background_alt: "Inland port and warehousing hub (placeholder image)",
   },
   {
     id: "PL-02",
     title: "Cross-Border Trade Corridor",
     stage: "Investment ready",
     opportunity: "PPP",
-    geography: "East Africa",
-    image: "/placeholders/logistics-corridor.png",
-    alt: "Cross-border trade corridor (placeholder image)",
+    background: { url: "", alt: "", width: 90, height: 90 },
+    region: "East Africa",
+    background_alt: "Cross-border trade corridor (placeholder image)",
   },
   {
     id: "PL-03",
     title: "Last-Mile Distribution Network",
     stage: "Concept",
     opportunity: "Equity",
-    geography: "Southern Africa",
-    image: "/placeholders/group-sector-logistics.png",
-    alt: "Last-mile distribution fleet and depot (placeholder image)",
+    background: { url: "", alt: "", width: 90, height: 90 },
+    region: "Southern Africa",
+    background_alt:
+      "Last-mile distribution fleet and depot (placeholder image)",
   },
 ];
 
-const BARCODE = [3, 1, 2, 1, 4, 1, 2, 3, 1, 2, 1, 3, 2, 1, 4, 1, 2];
-
-export default function RelatedProjects() {
+export default function RelatedProjects({
+  data,
+}: {
+  data: LogisticsSupplyChainsRelatedProjects;
+}) {
+  const projects = data.projects.length > 0 ? data.projects : PROJECTS;
   return (
     <section
       aria-labelledby="logistics-projects-title"
@@ -64,9 +70,20 @@ export default function RelatedProjects() {
                 id="logistics-projects-title"
                 className="mt-4 max-w-[16ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                Freight in
-                <br />
-                preparation.
+                {data.heading ? (
+                  data.heading.split("\n").map((w) => (
+                    <>
+                      {w}
+                      <br />
+                    </>
+                  ))
+                ) : (
+                  <>
+                    Freight in
+                    <br />
+                    preparation.
+                  </>
+                )}
               </h2>
             </div>
             <a
@@ -79,7 +96,7 @@ export default function RelatedProjects() {
           </div>
 
           <ul className="mt-[clamp(26px,4vw,44px)] grid gap-[clamp(16px,2.4vw,28px)] md:grid-cols-3">
-            {PROJECTS.map((project) => (
+            {projects.map((project) => (
               <li key={project.id} className="h-full">
                 <a
                   href="/projects/development-pipeline"
@@ -87,8 +104,11 @@ export default function RelatedProjects() {
                 >
                   <div className="relative aspect-[16/9] overflow-hidden bg-foreground/10">
                     <Image
-                      src={project.image}
-                      alt={project.alt}
+                      src={
+                        project.background?.url ||
+                        "/placeholders/logistics-corridor.png"
+                      }
+                      alt={project.background_alt}
                       fill
                       sizes="(min-width: 768px) 33vw, 100vw"
                       className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.04] motion-reduce:transform-none"
@@ -122,7 +142,8 @@ export default function RelatedProjects() {
                       {project.title}
                     </h3>
                     <p className="mt-1.5 text-[0.74rem] leading-[1.45] text-foreground/60">
-                      {project.geography} · PLACEHOLDER
+                      {project.region}{" "}
+                      {data.projects.length === 0 ? "· PLACEHOLDER" : null}
                     </p>
 
                     <dl className="mt-[clamp(16px,2vw,22px)] border-t border-dashed border-foreground/25 pt-3">
@@ -135,30 +156,19 @@ export default function RelatedProjects() {
                         </dd>
                       </div>
                     </dl>
-
-                    <div
-                      aria-hidden="true"
-                      className="mt-auto flex h-7 items-stretch gap-[3px] pt-4"
-                    >
-                      {BARCODE.map((width, index) => (
-                        <span
-                          key={index}
-                          className="bg-foreground/25"
-                          style={{ width: `${width}px` }}
-                        />
-                      ))}
-                    </div>
                   </div>
                 </a>
               </li>
             ))}
           </ul>
 
-          <p className="mt-6 text-[0.6rem] leading-[1.5] text-foreground/60">
-            PLACEHOLDER — these are illustrative project concepts with assumed
-            stages, structures and geographies. They are not a record of
-            delivered work.
-          </p>
+          {data.projects.length === 0 && (
+            <p className="mt-6 text-[0.6rem] leading-[1.5] text-foreground/60">
+              PLACEHOLDER — these are illustrative project concepts with assumed
+              stages, structures and geographies. They are not a record of
+              delivered work.
+            </p>
+          )}
         </Reveal>
       </div>
     </section>

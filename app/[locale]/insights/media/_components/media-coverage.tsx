@@ -61,11 +61,6 @@ export default function MediaCoverage({
               ))}
             </ul>
           </div>
-
-          <p className="mt-4 text-[0.62rem] leading-[1.5] text-muted-foreground/80">
-            PLACEHOLDER — illustrative coverage only. No outlet endorsement,
-            partnership or external link is implied.
-          </p>
         </Reveal>
       </div>
     </section>

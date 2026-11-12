@@ -206,18 +206,16 @@ export default function SectorHero({
             >
               Resilience · Circularity · Efficiency
             </p>
-            <p className="absolute right-[clamp(16px,2.4vw,30px)] bottom-[clamp(16px,2.4vw,30px)] left-[clamp(16px,2.4vw,30px)] text-[0.55rem] leading-[1.5] text-muted/65">
-              PLACEHOLDER — orbit overlay is illustrative, not a live
-              measurement.
-            </p>
           </div>
         </div>
 
-        <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
-          PLACEHOLDER — hero imagery, climate descriptors and orbit overlay are
-          illustrative until approved sector content and photography are
-          supplied.
-        </p>
+        {!data.image?.url && (
+          <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
+            PLACEHOLDER — hero imagery, climate descriptors and orbit overlay
+            are illustrative until approved sector content and photography are
+            supplied.
+          </p>
+        )}
       </div>
     </section>
   );

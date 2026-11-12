@@ -112,11 +112,11 @@ export default function ProofStrip({
             </h2>
           </div>
 
-          <p className="max-w-[44ch] text-[0.74rem] leading-[1.6] text-foreground/60 lg:text-right">
+          {/* <p className="max-w-[44ch] text-[0.74rem] leading-[1.6] text-foreground/60 lg:text-right">
             PLACEHOLDER — indicative scope figures for layout only. These are
             not a delivery record or an ESG report and must be replaced with
             verified data before publication.
-          </p>
+          </p> */}
         </div>
 
         <dl className="mt-[clamp(26px,4vw,44px)] grid grid-cols-2 gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-4">

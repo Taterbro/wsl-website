@@ -100,7 +100,9 @@ function NodeButton({
       <span
         className={cn(
           "font-sans leading-[1.12] font-extrabold uppercase [font-stretch:114%]",
-          tone === "child" ? "text-[0.98rem]" : "text-[clamp(1.05rem,1.6vw,1.3rem)]"
+          tone === "child"
+            ? "text-[0.98rem]"
+            : "text-[clamp(1.05rem,1.6vw,1.3rem)]"
         )}
       >
         {entity.shortName}
@@ -188,15 +190,15 @@ export default function StructureDiagram({
             />
             02 — Structure diagram
           </p>
-            <h2
-              id="group-diagram-title"
-              className="font-sans text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
-            >
-              {data.heading || FALLBACK_HEADING}
-            </h2>
-            <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              {data.description || FALLBACK_DESCRIPTION}
-            </p>
+          <h2
+            id="group-diagram-title"
+            className="font-sans text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
+          >
+            {data.heading || FALLBACK_HEADING}
+          </h2>
+          <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
+            {data.description || FALLBACK_DESCRIPTION}
+          </p>
         </div>
 
         <div className="mt-[clamp(34px,5vw,58px)] grid grid-cols-[1.32fr_0.68fr] items-start gap-[clamp(26px,4vw,54px)] max-[1080px]:grid-cols-1">
@@ -344,11 +346,11 @@ export default function StructureDiagram({
           </div>
         </div>
 
-        <p className="mt-[clamp(24px,3.4vw,36px)] max-w-[76ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">
+        {/* <p className="mt-[clamp(24px,3.4vw,36px)] max-w-[76ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">
           PLACEHOLDER — the diagram describes digital roles and mandates only.
           Registered entity names, ownership and control relationships must be
           confirmed against the approved group chart before publication.
-        </p>
+        </p> */}
       </div>
     </section>
   );

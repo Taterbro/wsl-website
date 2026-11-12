@@ -35,10 +35,7 @@ export default function SectorHero({
     : "";
 
   return (
-    <section
-      aria-labelledby="urban-hero-title"
-      className="bg-background"
-    >
+    <section aria-labelledby="urban-hero-title" className="bg-background">
       <div className="mx-auto w-full max-w-[1440px] px-[clamp(20px,5vw,72px)] pt-[clamp(96px,11vw,142px)] pb-[clamp(40px,5vw,64px)]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <nav
@@ -164,11 +161,13 @@ export default function SectorHero({
           </div>
         </div>
 
-        <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
-          PLACEHOLDER — hero imagery, key facts and scope descriptors are
-          illustrative until approved sector content and photography are
-          supplied.
-        </p>
+        {!data.image && (
+          <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
+            PLACEHOLDER — hero imagery, key facts and scope descriptors are
+            illustrative until approved sector content and photography are
+            supplied.
+          </p>
+        )}
       </div>
     </section>
   );

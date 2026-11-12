@@ -28,10 +28,10 @@ const ENTITIES: { heading: string; copy: string }[] = [
     heading: "Corporate entities",
     copy: "Waterlight Group · Waterlight Africa Investments Ltd · Waterlight Industries Limited · Waterlight iHEAL Global Limited · Waterlight Limited. Legal descriptions subject to verification.",
   },
-  {
-    heading: "Global offices",
-    copy: "Africa · GCC · Europe · North America · Asia-Pacific. Addresses shown only where a verified presence exists.",
-  },
+  // {
+  //   heading: "Global offices",
+  //   copy: "Africa · GCC · Europe · North America · Asia-Pacific. Addresses shown only where a verified presence exists.",
+  // },
   {
     heading: "Governance",
     copy: "Leadership, board and committee details are published only once formally approved and current.",
@@ -133,7 +133,7 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-between gap-[18px] border-t border-accent/20 pt-[22px] pb-[34px] text-[0.76rem] text-muted/50">
           <span>© 2026 Waterlight Group. All rights reserved.</span>
-          <nav aria-label="Legal" className="flex flex-wrap gap-[18px]">
+          {/* <nav aria-label="Legal" className="flex flex-wrap gap-[18px]">
             {LEGAL_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -143,7 +143,7 @@ export default function Footer() {
                 {link.label}
               </a>
             ))}
-          </nav>
+          </nav> */}
         </div>
         <p className="max-w-[100ch] border-t border-accent/20 py-5 text-[0.72rem] leading-[1.6] text-muted/42">
           This website is for information only and does not constitute an offer,

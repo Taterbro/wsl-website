@@ -183,11 +183,13 @@ export default function RelatedProjects({
           })}
         </div>
 
-        <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.72rem] leading-[1.6] text-muted-foreground/70">
-          PLACEHOLDER — project names, geographies, development stages and
-          opportunity types are illustrative. They are not a portfolio record or
-          an offer of investment.
-        </p>
+        {data.projects.length === 0 && (
+          <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.72rem] leading-[1.6] text-muted-foreground/70">
+            PLACEHOLDER — project names, geographies, development stages and
+            opportunity types are illustrative. They are not a portfolio record or
+            an offer of investment.
+          </p>
+        )}
       </div>
     </section>
   );

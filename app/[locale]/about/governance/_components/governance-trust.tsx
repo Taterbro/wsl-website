@@ -90,11 +90,11 @@ export default function GovernanceTrust({
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-[0.76rem] leading-[1.55] text-muted-foreground/80">
+              {/* <p className="mt-3 text-[0.76rem] leading-[1.55] text-muted-foreground/80">
                 PLACEHOLDER — the matrix reflects the Trust Centre standard.
                 Owners and routing must be assigned inside the business before
                 launch.
-              </p>
+              </p> */}
             </div>
 
             <div className="flex flex-col">
@@ -122,7 +122,10 @@ export default function GovernanceTrust({
                 </p>
                 <ul className="mt-[clamp(20px,2.8vw,28px)] list-none p-0">
                   {GOVERNANCE_ROLES.map((role) => (
-                    <li key={role.role} className="border-t border-[rgba(9,29,42,0.16)]">
+                    <li
+                      key={role.role}
+                      className="border-t border-[rgba(9,29,42,0.16)]"
+                    >
                       <a
                         href={role.href}
                         className="group flex items-start gap-[clamp(12px,1.6vw,20px)] py-[clamp(14px,2vw,22px)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"

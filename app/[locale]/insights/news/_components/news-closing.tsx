@@ -34,9 +34,9 @@ export default function NewsClosing({ data }: NewsClosingProps) {
             <p className="mt-4 text-[clamp(0.94rem,1.2vw,1.04rem)] leading-[1.6] text-muted/65">
               {description}
             </p>
-            <p className="mt-3 text-[0.6rem] leading-[1.5] text-muted/40">
+            {/* <p className="mt-3 text-[0.6rem] leading-[1.5] text-muted/40">
               PLACEHOLDER - confirm media contact details before launch.
-            </p>
+            </p> */}
           </div>
 
           <Link
@@ -44,7 +44,6 @@ export default function NewsClosing({ data }: NewsClosingProps) {
             className="inline-flex w-fit items-center justify-center gap-[9px] rounded-[2px] border border-accent bg-accent px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.78rem] font-semibold tracking-[0.06em] text-accent-foreground uppercase transition duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-px hover:bg-[#7de4f2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transform-none"
           >
             Contact the group
-            <span aria-hidden="true">�+-</span>
           </Link>
         </div>
       </div>

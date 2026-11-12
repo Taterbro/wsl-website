@@ -95,11 +95,11 @@ export default function VisionCommitments({
             ))}
           </ol>
 
-          <p className="mt-5 max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted-foreground">
+          {/* <p className="mt-5 max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted-foreground">
             PLACEHOLDER — the commitments above are working copy pending
             approval by the group secretariat, and are published here ahead of
             their final wording.
-          </p>
+          </p> */}
         </div>
       </section>
     </Reveal>

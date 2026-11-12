@@ -154,11 +154,13 @@ export default function EnergyCycle({
             ))}
           </div>
 
-          <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.72rem] leading-[1.6] text-muted/45">
-            PLACEHOLDER — imagery and stage descriptions are illustrative.
-            Generation, storage and dispatch are scope areas, not claims of
-            delivered capacity.
-          </p>
+          {data.stages.length === 0 && (
+            <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.72rem] leading-[1.6] text-muted/45">
+              PLACEHOLDER — imagery and stage descriptions are illustrative.
+              Generation, storage and dispatch are scope areas, not claims of
+              delivered capacity.
+            </p>
+          )}
         </div>
       </section>
     </Reveal>

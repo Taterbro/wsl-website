@@ -131,12 +131,6 @@ export default function SectorConversion({
               ))}
             </ul>
           </div>
-
-          <p className="mt-[clamp(28px,4vw,44px)] border-t border-accent/20 pt-5 text-[0.6rem] leading-[1.5] text-muted/60">
-            PLACEHOLDER — partner roles and outbound links are indicative and
-            should be confirmed against the current investment and partnership
-            offer.
-          </p>
         </Reveal>
       </div>
     </section>

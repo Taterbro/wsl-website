@@ -9,7 +9,8 @@ const FALLBACK_HEADING = "Where the stack\nmeets the asset.";
 const FALLBACK_DESCRIPTION =
   "Illustrative concepts show how monitoring, automation and data platforms become structured digital-infrastructure opportunities.";
 
-const FALLBACK_IMAGE_ALT = "Illustrative digital infrastructure project concept";
+const FALLBACK_IMAGE_ALT =
+  "Illustrative digital infrastructure project concept";
 
 type ProjectCard = {
   id: number | string;
@@ -61,7 +62,8 @@ function toProjectCard(project: Project): ProjectCard {
     stage: project.stage || project.investment_status,
     opportunity: project.opportunity,
     image: project.background?.url ?? null,
-    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+    alt:
+      project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
   };
 }
 
@@ -191,11 +193,13 @@ export default function RelatedProjects({
           ))}
         </div>
 
-        <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.72rem] leading-[1.6] text-muted-foreground/70">
-          PLACEHOLDER — project names, geographies, development stages and
-          opportunity types are illustrative. They are not a portfolio record or
-          an offer of investment.
-        </p>
+        {data.projects.length === 0 && (
+          <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.72rem] leading-[1.6] text-muted-foreground/70">
+            PLACEHOLDER — project names, geographies, development stages and
+            opportunity types are illustrative. They are not a portfolio record
+            or an offer of investment.
+          </p>
+        )}
       </div>
     </section>
   );

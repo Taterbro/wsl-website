@@ -1,7 +1,4 @@
-import type {
-  HomeAfrica,
-  HomeAfricaIndicators,
-} from "@/lib/cms/generated";
+import type { HomeAfrica, HomeAfricaIndicators } from "@/lib/cms/generated";
 
 import Reveal from "./reveal";
 
@@ -82,12 +79,12 @@ export default function Africa({ data }: { data: HomeAfrica }) {
                 </div>
               ))}
             </dl>
-            <p className="mt-3.5 max-w-[52ch] text-[0.72rem] leading-[1.5] text-muted-foreground">
+            {/* <p className="mt-3.5 max-w-[52ch] text-[0.72rem] leading-[1.5] text-muted-foreground">
               Every figure on this site carries an internal source owner,
               methodology and review date. Indicators shown here are
               placeholders pending verification, in line with our publishing
               governance.
-            </p>
+            </p> */}
           </div>
         </div>
       </section>

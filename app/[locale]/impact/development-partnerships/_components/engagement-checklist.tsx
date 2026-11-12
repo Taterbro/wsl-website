@@ -130,10 +130,10 @@ export default function EngagementChecklist({
             </Link>
           </div>
 
-          <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
+          {/* <p className="mt-5 max-w-[78ch] text-[0.6rem] leading-[1.55] text-foreground/50">
             PLACEHOLDER — readiness criteria and routing language are
             illustrative until approved partnership guidance is supplied.
-          </p>
+          </p> */}
         </Reveal>
       </div>
     </section>

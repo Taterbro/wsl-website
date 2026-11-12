@@ -123,9 +123,7 @@ export default function SectorHero({
                     ) : (
                       <>
                         <span className="block">Industrial</span>
-                        <span className="block text-accent">
-                          Development.
-                        </span>
+                        <span className="block text-accent">Development.</span>
                       </>
                     )}
                   </h1>
@@ -172,10 +170,12 @@ export default function SectorHero({
           </div>
         </div>
 
-        <p className="mt-[clamp(10px,1.4vw,16px)] text-[0.62rem] leading-[1.5] tracking-[0.04em] text-muted/60">
-          PLACEHOLDER — hero imagery and scope descriptors are illustrative
-          until approved sector photography and content are supplied.
-        </p>
+        {!data.image && (
+          <p className="mt-[clamp(10px,1.4vw,16px)] text-[0.62rem] leading-[1.5] tracking-[0.04em] text-muted/60">
+            PLACEHOLDER — hero imagery and scope descriptors are illustrative
+            until approved sector photography and content are supplied.
+          </p>
+        )}
       </div>
     </section>
   );

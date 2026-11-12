@@ -119,7 +119,13 @@ function toNodes(data: ClimateEsgSolutionsCircularLoop): Node[] {
         label,
         detail:
           FALLBACK_DETAILS[index] ??
-          ({ copy: "", chips: [], connection: "", image: null, alt: "" } as Detail),
+          ({
+            copy: "",
+            chips: [],
+            connection: "",
+            image: null,
+            alt: "",
+          } as Detail),
       }));
 
   const step = 360 / base.length;
@@ -417,11 +423,13 @@ export default function CircularLoop({
           </div>
         </div>
 
-        <p className="mt-6 text-[0.6rem] leading-[1.5] text-muted/60">
-          PLACEHOLDER — loop copy, node positions and imagery are illustrative
-          until approved sector content and photography are supplied. The
-          diagram is not a live measurement or reporting system.
-        </p>
+        {data.capabilities.length === 0 && (
+          <p className="mt-6 text-[0.6rem] leading-[1.5] text-muted/60">
+            PLACEHOLDER — loop copy, node positions and imagery are illustrative
+            until approved sector content and photography are supplied. The
+            diagram is not a live measurement or reporting system.
+          </p>
+        )}
       </div>
     </section>
   );

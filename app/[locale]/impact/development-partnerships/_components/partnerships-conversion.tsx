@@ -110,11 +110,11 @@ export default function PartnershipsConversion({
               </li>
             ))}
           </ol>
-
+          {/* 
           <p className="mt-[clamp(22px,3vw,34px)] max-w-[78ch] text-[0.64rem] leading-[1.55] text-muted/45">
             PLACEHOLDER — routing language requires owner approval. Nothing
             confidential is shared through the public forms.
-          </p>
+          </p> */}
         </div>
       </section>
     </Reveal>

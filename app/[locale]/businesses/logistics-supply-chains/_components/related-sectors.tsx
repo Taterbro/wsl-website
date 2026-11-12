@@ -1,16 +1,17 @@
 import Image from "next/image";
 import Reveal from "../../../(home)/_components/reveal";
 import { getSector } from "@/lib/businesses";
+import {
+  LogisticsSupplyChainsPage,
+  LogisticsSupplyChainsRelatedSectors,
+} from "@/lib/cms/generated";
 
 const CONNECTIONS: Record<string, string> = {
-  "industrial-development":
-    "Manufacturing output and equipment production",
-  "agriculture-food-systems":
-    "Cold chain, processing and harvest flows",
+  "industrial-development": "Manufacturing output and equipment production",
+  "agriculture-food-systems": "Cold chain, processing and harvest flows",
   "technology-digital-infrastructure":
     "Tracking, data and the digital control layer",
-  "climate-esg-solutions":
-    "Lower-emission routes and resilient trade assets",
+  "climate-esg-solutions": "Lower-emission routes and resilient trade assets",
 };
 
 const RELATED_SLUGS = [
@@ -25,7 +26,11 @@ const RELATED = RELATED_SLUGS.map((slug) => ({
   connection: CONNECTIONS[slug],
 }));
 
-export default function RelatedSectors() {
+export default function RelatedSectors({
+  data,
+}: {
+  data: LogisticsSupplyChainsRelatedSectors;
+}) {
   return (
     <section
       aria-labelledby="logistics-related-title"
@@ -46,9 +51,20 @@ export default function RelatedSectors() {
                 id="logistics-related-title"
                 className="mt-4 max-w-[18ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                A corridor
-                <br />
-                connects more.
+                {data.heading ? (
+                  data.heading.split("\n").map((w) => (
+                    <>
+                      {w}
+                      <br />
+                    </>
+                  ))
+                ) : (
+                  <>
+                    A corridor
+                    <br />
+                    connects more.
+                  </>
+                )}
               </h2>
             </div>
             <a
@@ -61,16 +77,19 @@ export default function RelatedSectors() {
           </div>
 
           <div className="mt-[clamp(28px,4vw,48px)] grid gap-[clamp(16px,2.4vw,28px)] md:grid-cols-2">
-            {RELATED.map((sector, index) => (
-              <a
+            {data.businesses.map((sector, index) => (
+              <div
                 key={sector.slug}
-                href={`/businesses/${sector.slug}`}
+                // href={`/businesses/${sector.slug}`}
                 className="group grid overflow-hidden border border-foreground/15 bg-background transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:border-foreground/30 sm:grid-cols-[0.82fr_1.18fr]"
               >
                 <div className="relative min-h-[190px] overflow-hidden bg-foreground/10 sm:min-h-[240px]">
                   <Image
-                    src={sector.image}
-                    alt={sector.alt}
+                    src={
+                      sector.image?.url ||
+                      "/placeholders/logistics-corridor.png"
+                    }
+                    alt={sector.image_alt || ""}
                     fill
                     sizes="(min-width: 768px) 20vw, 100vw"
                     className="object-cover transition-transform duration-(--transition-slow) ease-(--ease-standard) group-hover:scale-[1.04] motion-reduce:transform-none"
@@ -94,22 +113,22 @@ export default function RelatedSectors() {
                       </span>
                     </div>
                     <h3 className="mt-3 font-sans text-[clamp(1rem,1.6vw,1.3rem)] leading-[1.12] font-extrabold tracking-[0.005em] uppercase [font-stretch:110%]">
-                      {sector.name}
+                      {sector.title}
                     </h3>
                     <p className="mt-2 max-w-[34ch] text-[0.78rem] leading-[1.55] text-foreground/65">
-                      {sector.valueProp}
+                      {sector.description}
                     </p>
                   </div>
 
-                  <p className="mt-[clamp(16px,2vw,22px)] border-t border-foreground/15 pt-3 text-[0.62rem] leading-[1.5] text-foreground/60">
+                  {/* <p className="mt-[clamp(16px,2vw,22px)] border-t border-foreground/15 pt-3 text-[0.62rem] leading-[1.5] text-foreground/60">
                     Connects through{" "}
                     <span className="font-semibold text-foreground/80">
-                      {sector.connection}
+                      {sector.}
                     </span>
                     .
-                  </p>
+                  </p> */}
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </Reveal>

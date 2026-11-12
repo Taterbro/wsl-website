@@ -6,11 +6,7 @@ const FALLBACK_LABEL = "Media enquiries.";
 const FALLBACK_DESCRIPTION =
   "For interviews, comment, imagery or resource requests, contact the group communications team.";
 
-export default function MediaContact({
-  data,
-}: {
-  data: MediaMediaContact;
-}) {
+export default function MediaContact({ data }: { data: MediaMediaContact }) {
   return (
     <section
       id="media-contact"
@@ -33,10 +29,6 @@ export default function MediaContact({
               </h2>
               <p className="mt-4 text-[clamp(0.94rem,1.2vw,1.04rem)] leading-[1.6] text-muted-foreground">
                 {data.description || FALLBACK_DESCRIPTION}
-              </p>
-              <p className="mt-3 text-[0.6rem] leading-[1.5] text-muted-foreground/70">
-                PLACEHOLDER — confirm the media contact route and response
-                expectations before launch.
               </p>
             </div>
 

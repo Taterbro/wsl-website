@@ -64,11 +64,6 @@ export default function MediaResources({
               </div>
             ))}
           </div>
-
-          <p className="mt-4 text-[0.62rem] leading-[1.5] text-muted-foreground/80">
-            PLACEHOLDER — resource descriptions are illustrative. Confirm asset
-            availability, usage rights and approval status before release.
-          </p>
         </Reveal>
       </div>
     </section>

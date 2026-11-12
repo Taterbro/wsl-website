@@ -168,11 +168,11 @@ export default function AssetLifecycle({
                 Impact &amp; sustainability
                 <span aria-hidden="true">↗</span>
               </a>
-              <p className="mt-4 border-t border-accent/15 pt-3 text-[0.56rem] leading-[1.5] text-muted/55">
+              {/* <p className="mt-4 border-t border-accent/15 pt-3 text-[0.56rem] leading-[1.5] text-muted/55">
                 PLACEHOLDER — lifecycle copy and bridge imagery are
                 illustrative. The Waterlight Save Initiative is a separate
                 nonprofit, not a commercial subsidiary.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

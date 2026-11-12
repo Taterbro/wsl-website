@@ -103,11 +103,6 @@ export default function MediaHeader({
             </a>
           ))}
         </div>
-
-        <p className="mt-4 text-[0.6rem] leading-[1.5] text-muted-foreground/80">
-          PLACEHOLDER — coverage, resource entries and contact details are
-          illustrative until approved media content is supplied.
-        </p>
       </div>
     </section>
   );

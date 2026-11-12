@@ -118,7 +118,11 @@ export default function SectorHero({
             <p
               aria-hidden="true"
               className="hidden text-[0.62rem] font-semibold tracking-[0.34em] text-accent/70 uppercase [writing-mode:vertical-rl] lg:block"
-              style={{ position: "absolute", right: "clamp(20px,3vw,40px)", top: "50%" }}
+              style={{
+                position: "absolute",
+                right: "clamp(20px,3vw,40px)",
+                top: "50%",
+              }}
             >
               AI · Data · Platforms · Automation
             </p>
@@ -169,10 +173,12 @@ export default function SectorHero({
             </dl>
           </div>
 
-          <p className="mt-[clamp(18px,2.4vw,26px)] text-[0.62rem] leading-[1.5] text-muted/45">
-            PLACEHOLDER — scope descriptors are illustrative until approved
-            sector content is supplied.
-          </p>
+          {data.facts.length === 0 && (
+            <p className="mt-[clamp(18px,2.4vw,26px)] text-[0.62rem] leading-[1.5] text-muted/45">
+              PLACEHOLDER — scope descriptors are illustrative until approved
+              sector content is supplied.
+            </p>
+          )}
         </aside>
       </div>
     </section>

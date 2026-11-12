@@ -120,12 +120,6 @@ export default function SustainabilityConversion({
               </ul>
             </nav>
           </div>
-
-          <p className="mt-[clamp(26px,3.4vw,40px)] max-w-[78ch] text-[0.66rem] leading-[1.55] text-muted/45">
-            PLACEHOLDER — conversion copy and evidence-standard wording require
-            owner approval. Confidential investment material is never published
-            on this website.
-          </p>
         </div>
       </section>
     </Reveal>

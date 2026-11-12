@@ -15,11 +15,7 @@ const FALLBACK_FACTS: { label: string; value: string }[] = [
   { label: "Use", value: "A lens, not a service" },
 ];
 
-export default function IhealHero({
-  data,
-}: {
-  data: IhealFrameworkIhealHero;
-}) {
+export default function IhealHero({ data }: { data: IhealFrameworkIhealHero }) {
   const facts = data.facts.length ? data.facts : FALLBACK_FACTS;
   const headingLines = data.heading ? data.heading.split("\n") : [];
   return (
@@ -62,8 +58,8 @@ export default function IhealHero({
           <div className="flex flex-col justify-between">
             <div>
               <p className="flex items-center gap-3 text-[0.62rem] font-semibold tracking-[0.16em] text-accent uppercase">
-                <span aria-hidden="true" className="h-px w-8 bg-accent" />
-                A shared philosophy
+                <span aria-hidden="true" className="h-px w-8 bg-accent" />A
+                shared philosophy
               </p>
 
               <h1
@@ -82,8 +78,7 @@ export default function IhealHero({
                   )
                 ) : (
                   <>
-                    The{" "}
-                    <span className="normal-case text-accent">iHEAL</span>
+                    The <span className="normal-case text-accent">iHEAL</span>
                     <br />
                     Framework.
                   </>
@@ -170,11 +165,11 @@ export default function IhealHero({
               </svg>
             </div>
 
-            <figcaption className="border-t border-muted/15 pt-3 text-[0.62rem] leading-[1.5] text-muted/55">
+            {/* <figcaption className="border-t border-muted/15 pt-3 text-[0.62rem] leading-[1.5] text-muted/55">
               Five pillars. No order, no hierarchy, no delivery sequence.
               PLACEHOLDER diagram — replace with approved framework artwork if
               supplied.
-            </figcaption>
+            </figcaption> */}
           </figure>
         </div>
 
@@ -185,9 +180,9 @@ export default function IhealHero({
           <p className="mt-2 max-w-[74ch] text-[clamp(1rem,1.5vw,1.28rem)] leading-[1.5] text-muted/85">
             {data.framing || IHEAL_FRAMING}
           </p>
-          <p className="mt-2 text-[0.58rem] leading-[1.5] text-muted/40">
+          {/* <p className="mt-2 text-[0.58rem] leading-[1.5] text-muted/40">
             PLACEHOLDER — wording to be approved by the owner before launch.
-          </p>
+          </p> */}
         </div>
       </div>
     </section>

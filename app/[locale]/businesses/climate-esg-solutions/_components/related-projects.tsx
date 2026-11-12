@@ -59,7 +59,8 @@ function toProjectCard(project: Project): ProjectCard {
     opportunity: project.opportunity,
     geography: project.location || project.country || project.region,
     image: project.background?.url ?? null,
-    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+    alt:
+      project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
   };
 }
 
@@ -123,9 +124,7 @@ export default function RelatedProjects({
               >
                 {FEATURED.image ? (
                   <div
-                    role={
-                      FEATURED.alt ? "img" : undefined
-                    }
+                    role={FEATURED.alt ? "img" : undefined}
                     aria-label={FEATURED.alt || undefined}
                     aria-hidden={FEATURED.alt ? undefined : true}
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transform-none"
@@ -155,7 +154,8 @@ export default function RelatedProjects({
                   </h3>
                   <div className="mt-[clamp(14px,2vw,20px)] flex flex-wrap items-center justify-between gap-4 border-t border-accent/25 pt-3">
                     <p className="text-[0.66rem] leading-[1.5] tracking-[0.06em] text-muted/70 uppercase">
-                      {FEATURED.geography} · {FEATURED.opportunity} · PLACEHOLDER
+                      {FEATURED.geography} · {FEATURED.opportunity} ·
+                      PLACEHOLDER
                     </p>
                     <span
                       aria-hidden="true"
@@ -216,12 +216,6 @@ export default function RelatedProjects({
               </li>
             ))}
           </ul>
-
-          <p className="mt-6 text-[0.6rem] leading-[1.5] text-foreground/60">
-            PLACEHOLDER — these are illustrative project concepts with assumed
-            stages, structures and geographies. They are not a record of
-            delivered work.
-          </p>
         </Reveal>
       </div>
     </section>

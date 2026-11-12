@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { GovernanceGovernanceMap } from "@/lib/cms/generated";
-import {
-  GOVERNANCE_BODIES,
-  type GovernanceBody,
-} from "../_data/governance";
+import { GOVERNANCE_BODIES, type GovernanceBody } from "../_data/governance";
 
 const FALLBACK_HEADING = "Who decides\nwhat.";
 
@@ -92,7 +89,13 @@ function BodyCard({
           active && "text-primary-foreground"
         )}
       >
-        {body.tier === "committee" ? "Committee" : body.tier === "board" ? "Board" : body.tier === "executive" ? "Management" : "Assurance"}
+        {body.tier === "committee"
+          ? "Committee"
+          : body.tier === "board"
+            ? "Board"
+            : body.tier === "executive"
+              ? "Management"
+              : "Assurance"}
       </span>
     </button>
   );
@@ -270,17 +273,19 @@ export default function GovernanceMap({
               ))}
             </ul>
             <p className="mt-5 border-t border-[rgba(9,29,42,0.16)] pt-4 text-[0.76rem] leading-[1.55] text-muted-foreground">
-              <span className="font-semibold text-foreground">Publication status: </span>
+              <span className="font-semibold text-foreground">
+                Publication status:{" "}
+              </span>
               {body.status}
             </p>
           </div>
         </div>
 
-        <p className="mt-[clamp(18px,2.6vw,28px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">
+        {/* <p className="mt-[clamp(18px,2.6vw,28px)] max-w-[78ch] text-[0.76rem] leading-[1.6] text-muted-foreground/80">
           PLACEHOLDER — this map describes the intended governance framework.
           Committee mandates, membership, titles and affiliations must be
           validated and formally approved before publication.
-        </p>
+        </p> */}
       </div>
     </section>
   );

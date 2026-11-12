@@ -198,7 +198,7 @@ export default function MapIndex({ data, projects }: MapIndexProps) {
           </table>
         </div>
 
-        <p className="mt-5 max-w-[80ch] text-[0.78rem] leading-[1.55] text-muted-foreground/80">
+        {/* <p className="mt-5 max-w-[80ch] text-[0.78rem] leading-[1.55] text-muted-foreground/80">
           PLACEHOLDER: locations, target markets and project records are
           illustrative pending approval. A marker never represents an office,
           site or completed investment. See the{" "}
@@ -209,7 +209,7 @@ export default function MapIndex({ data, projects }: MapIndexProps) {
             investment disclaimer
           </Link>
           .
-        </p>
+        </p> */}
       </div>
     </section>
   );

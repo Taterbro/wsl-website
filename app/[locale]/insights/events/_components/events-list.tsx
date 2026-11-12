@@ -4,11 +4,7 @@ import { useState } from "react";
 import type { EventsEventsList } from "@/lib/cms/generated";
 import { cn } from "@/lib/utils";
 import Reveal from "../../../(home)/_components/reveal";
-import {
-  EVENT_FILTERS,
-  type EventItem,
-  type EventStatus,
-} from "./events-data";
+import { EVENT_FILTERS, type EventItem, type EventStatus } from "./events-data";
 
 const FALLBACK_HEADING = "Upcoming & recent.";
 
@@ -180,12 +176,6 @@ export default function EventsList({
               </button>
             </div>
           ) : null}
-
-          <p className="mt-5 text-[0.62rem] leading-[1.5] text-muted-foreground/80">
-            PLACEHOLDER — event titles, dates, locations, formats and summaries
-            are illustrative. Event detail pages are not yet built, so rows are
-            not linked.
-          </p>
         </Reveal>
       </div>
     </section>

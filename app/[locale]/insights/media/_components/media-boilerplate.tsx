@@ -33,10 +33,6 @@ export default function MediaBoilerplate({
                 “{data.body || FALLBACK_BODY}”
               </p>
             </blockquote>
-            <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[56ch] text-[0.76rem] leading-[1.55] text-muted/45">
-              PLACEHOLDER — for media use. Confirm current wording and any
-              descriptor before publication.
-            </p>
           </div>
         </Reveal>
       </div>

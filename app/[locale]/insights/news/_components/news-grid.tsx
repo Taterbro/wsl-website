@@ -4,11 +4,7 @@ import { useState } from "react";
 import type { NewsNewsGrid } from "@/lib/cms/generated/pages/news";
 import { cn } from "@/lib/utils";
 import Reveal from "../../../(home)/_components/reveal";
-import {
-  NEWS_CATEGORIES,
-  NEWS_ITEMS,
-  type NewsCategory,
-} from "./news-data";
+import { NEWS_CATEGORIES, NEWS_ITEMS, type NewsCategory } from "./news-data";
 
 export type NewsGridItem = {
   id: string;
@@ -53,7 +49,9 @@ export default function NewsGrid({ data, items }: NewsGridProps) {
   const filtered =
     active === "All"
       ? sourceItems
-      : sourceItems.filter((item) => item.category === (active as NewsCategory));
+      : sourceItems.filter(
+          (item) => item.category === (active as NewsCategory)
+        );
 
   return (
     <section
@@ -112,7 +110,9 @@ export default function NewsGrid({ data, items }: NewsGridProps) {
                   <span
                     className={cn(
                       "text-[0.58rem] tabular-nums",
-                      isActive ? "text-primary-foreground/60" : "text-muted-foreground/60"
+                      isActive
+                        ? "text-primary-foreground/60"
+                        : "text-muted-foreground/60"
                     )}
                   >
                     {countFor(category).toString().padStart(2, "0")}
@@ -187,12 +187,6 @@ export default function NewsGrid({ data, items }: NewsGridProps) {
               </button>
             </div>
           ) : null}
-
-          <p className="mt-5 text-[0.62rem] leading-[1.5] text-muted-foreground/80">
-            PLACEHOLDER — illustrative newsroom entries. Titles, dates, imagery
-            and excerpts require approval. Article detail pages are not yet
-            built, so cards are not linked.
-          </p>
         </Reveal>
       </div>
     </section>

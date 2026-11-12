@@ -119,11 +119,13 @@ export default function ProofStrip({
               {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
-          <p className="max-w-[52ch] text-[0.72rem] leading-[1.6] text-primary-foreground/60">
-            PLACEHOLDER — indicative scope figures for layout only. These are
-            not a delivery record and must be replaced with verified data before
-            publication.
-          </p>
+          {data.stats.length === 0 && (
+            <p className="max-w-[52ch] text-[0.72rem] leading-[1.6] text-primary-foreground/60">
+              PLACEHOLDER — indicative scope figures for layout only. These are
+              not a delivery record and must be replaced with verified data before
+              publication.
+            </p>
+          )}
         </div>
 
         <dl className="mt-[clamp(24px,3.4vw,40px)] grid grid-cols-4 gap-px border border-primary-foreground/20 bg-primary-foreground/20 max-[900px]:grid-cols-2">

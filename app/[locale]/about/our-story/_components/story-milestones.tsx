@@ -127,10 +127,10 @@ export default function StoryMilestones({
         sectors={milestones}
         label="Scrollable list of group milestones"
       />
-      <p className="mx-auto mt-5 max-w-[1440px] px-[clamp(20px,5vw,72px)] text-[0.72rem] leading-[1.5] text-muted/55">
+      {/* <p className="mx-auto mt-5 max-w-[1440px] px-[clamp(20px,5vw,72px)] text-[0.72rem] leading-[1.5] text-muted/55">
         PLACEHOLDER — milestone dates and narrative are working copy and are
         released only once approved by the group secretariat.
-      </p>
+      </p> */}
     </section>
   );
 }

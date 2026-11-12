@@ -200,10 +200,10 @@ export default function FlagshipShowcase({ flagships }: FlagshipShowcaseProps) {
           </div>
         ) : null}
 
-        <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-muted-foreground/75 uppercase">
+        {/* <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-muted-foreground/75 uppercase">
           PLACEHOLDER · records, imagery and ranges are illustrative pending
           approval.
-        </p>
+        </p> */}
       </div>
     </section>
   );

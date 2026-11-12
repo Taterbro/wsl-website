@@ -153,11 +153,11 @@ export default function SectorConversion({
             </ul>
           </div>
 
-          <p className="mt-[clamp(30px,4vw,48px)] border-t border-accent/15 pt-5 text-[0.62rem] leading-[1.5] text-muted/60">
+          {/* {<p className="mt-[clamp(30px,4vw,48px)] border-t border-accent/15 pt-5 text-[0.62rem] leading-[1.5] text-muted/60">
             PLACEHOLDER — partner roles and outbound links are indicative and
             should be confirmed against the current investment and partnership
             offer.
-          </p>
+          </p>} */}
         </Reveal>
       </div>
     </section>

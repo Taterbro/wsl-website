@@ -97,11 +97,7 @@ function toCapability(
     copy: capability.copy || legacy?.copy || "",
     chips: chips.length ? chips : (legacy?.chips ?? []),
     image: capability.image,
-    alt:
-      capability.image?.alt ||
-      capability.image_alt ||
-      legacy?.alt ||
-      "",
+    alt: capability.image?.alt || capability.image_alt || legacy?.alt || "",
   };
 }
 
@@ -187,9 +183,7 @@ export default function CapabilityLine({
         >
           <ol className="mt-4 flex w-max snap-x snap-mandatory gap-[clamp(12px,2vw,20px)]">
             {capabilities.map((capability, index) => {
-              const alt = capability.image
-                ? capability.alt
-                : "";
+              const alt = capability.image ? capability.alt : "";
 
               return (
                 <li
@@ -249,10 +243,12 @@ export default function CapabilityLine({
           </ol>
         </div>
 
-        <p className="mt-5 text-[0.62rem] leading-[1.5] text-foreground/60">
-          PLACEHOLDER — capability copy and station imagery are illustrative
-          until approved sector content and photography are supplied.
-        </p>
+        {data.capabilities.length === 0 && (
+          <p className="mt-5 text-[0.62rem] leading-[1.5] text-foreground/60">
+            PLACEHOLDER — capability copy and station imagery are illustrative
+            until approved sector content and photography are supplied.
+          </p>
+        )}
       </div>
     </section>
   );

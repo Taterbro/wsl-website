@@ -79,10 +79,10 @@ export default function AdvisoryFlow({
             ))}
           </ol>
 
-          <p className="mt-5 max-w-[80ch] text-[0.74rem] leading-[1.55] text-muted-foreground/80">
+          {/* <p className="mt-5 max-w-[80ch] text-[0.74rem] leading-[1.55] text-muted-foreground/80">
             PLACEHOLDER — the route from advice to decision is structural and must
             be confirmed against the approved governance framework.
-          </p>
+          </p> */}
         </div>
       </section>
     </Reveal>

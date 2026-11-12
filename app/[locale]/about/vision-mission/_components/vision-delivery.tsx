@@ -161,11 +161,11 @@ export default function VisionDelivery({
           </ol>
         </div>
 
-        <p className="mt-[clamp(26px,3.4vw,40px)] max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted/55">
+        {/* <p className="mt-[clamp(26px,3.4vw,40px)] max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted/55">
           PLACEHOLDER — stage-level outcome metrics are not yet published. Each
           will be released with a stated method, a reporting period and a named
           owner; none are shown here in advance.
-        </p>
+        </p> */}
       </div>
     </section>
   );

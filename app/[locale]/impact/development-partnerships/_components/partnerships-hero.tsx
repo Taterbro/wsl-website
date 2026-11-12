@@ -208,11 +208,11 @@ export default function PartnershipsHero({
           </div>
         </div>
 
-        <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
+        {/* <p className="mt-[clamp(12px,1.6vw,18px)] text-[0.6rem] leading-[1.5] tracking-[0.04em] text-foreground/60">
           PLACEHOLDER — category descriptions and index labels are illustrative
           until approved partnership content is supplied. No partner names,
           logos or agreements are shown.
-        </p>
+        </p> */}
       </div>
     </section>
   );

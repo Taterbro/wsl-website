@@ -123,11 +123,13 @@ export default function ProofStrip({
               heading
             )}
           </h2>
-          <p className="mt-4 max-w-[44ch] text-[0.72rem] leading-[1.6] text-muted-foreground">
-            PLACEHOLDER — indicative scope figures for layout only. These are
-            not a delivery record and must be replaced with verified data before
-            publication.
-          </p>
+          {data.stats.length === 0 && (
+            <p className="mt-4 max-w-[44ch] text-[0.72rem] leading-[1.6] text-muted-foreground">
+              PLACEHOLDER — indicative scope figures for layout only. These are
+              not a delivery record and must be replaced with verified data
+              before publication.
+            </p>
+          )}
         </div>
 
         <dl className="grid grid-cols-4 gap-px border border-foreground/15 bg-foreground/15 max-[900px]:grid-cols-2">

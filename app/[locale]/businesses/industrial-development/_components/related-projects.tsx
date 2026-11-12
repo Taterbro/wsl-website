@@ -59,7 +59,8 @@ function toProjectCard(project: Project): ProjectCard {
     opportunity: project.opportunity,
     geography: project.location || project.country || project.region,
     image: project.background?.url ?? null,
-    alt: project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
+    alt:
+      project.background?.alt || project.background_alt || FALLBACK_IMAGE_ALT,
   };
 }
 
@@ -202,11 +203,13 @@ export default function RelatedProjects({
             })}
           </div>
 
-          <p className="mt-6 text-[0.62rem] leading-[1.5] text-foreground/60">
-            PLACEHOLDER — these are illustrative project concepts with assumed
-            stages, structures and geographies. They are not a record of
-            delivered work.
-          </p>
+          {data.projects.length === 0 && (
+            <p className="mt-6 text-[0.62rem] leading-[1.5] text-foreground/60">
+              PLACEHOLDER — these are illustrative project concepts with assumed
+              stages, structures and geographies. They are not a record of
+              delivered work.
+            </p>
+          )}
         </Reveal>
       </div>
     </section>
