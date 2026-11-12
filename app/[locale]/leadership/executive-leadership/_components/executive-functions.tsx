@@ -1,8 +1,51 @@
+import type { ExecutiveLeadershipExecutiveFunctions } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow } from "./executive-shared";
-import { EXEC_FUNCTIONS } from "../_data/executive";
+import { EXEC_FUNCTIONS as FALLBACK_FUNCTIONS } from "../_data/executive";
 
-export default function ExecutiveFunctions() {
+const FALLBACK_HEADING = "Six functions,\none chain\nof delivery.";
+
+const FALLBACK_DESCRIPTION =
+  "The executive is organised by function, not by job title. Each function owns a defined part of the chain from origination to operations, and reports into the same operating standard.";
+
+type FunctionCard = {
+  key: string;
+  no: string;
+  title: string;
+  copy: string;
+  scope: string[];
+};
+
+function toFunctionCard(
+  item: ExecutiveLeadershipExecutiveFunctions["functions"][number],
+  index: number,
+): FunctionCard {
+  return {
+    key: `${index}-${item.no}`,
+    no: item.no,
+    title: item.title,
+    copy: item.copy,
+    scope: item.scope
+      ? item.scope
+          .split(",")
+          .map((entry) => entry.trim())
+          .filter(Boolean)
+      : [],
+  };
+}
+
+export default function ExecutiveFunctions({
+  data,
+}: {
+  data: ExecutiveLeadershipExecutiveFunctions;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const functions = data.functions.length
+    ? data.functions.map(toFunctionCard)
+    : FALLBACK_FUNCTIONS;
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -18,16 +61,20 @@ export default function ExecutiveFunctions() {
                 id="executive-functions-title"
                 className="mt-[clamp(20px,2.8vw,30px)] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Six functions,
-                <br />
-                one chain
-                <br />
-                of delivery.
+                {headingLines.length === 3 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                    <br />
+                    {headingLines[2]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-                The executive is organised by function, not by job title. Each
-                function owns a defined part of the chain from origination to
-                operations, and reports into the same operating standard.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
             <span className="rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[14px] py-[9px] text-[0.7rem] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
@@ -36,7 +83,7 @@ export default function ExecutiveFunctions() {
           </div>
 
           <div className="mt-[clamp(30px,4.4vw,52px)] grid grid-cols-3 gap-px bg-[rgba(9,29,42,0.16)] max-[980px]:grid-cols-2 max-[600px]:grid-cols-1">
-            {EXEC_FUNCTIONS.map((fn) => (
+            {functions.map((fn) => (
               <article
                 key={fn.key}
                 className="group flex flex-col gap-[clamp(14px,1.8vw,20px)] bg-background p-[clamp(22px,3vw,36px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-muted"

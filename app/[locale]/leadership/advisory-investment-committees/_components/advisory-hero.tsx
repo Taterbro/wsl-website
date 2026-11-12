@@ -1,10 +1,34 @@
-import Image from "next/image";
+import type { AdvisoryInvestmentCommitteesAdvisoryHero } from "@/lib/cms/generated";
+
 import { Btn, WRAP_CLASS } from "./advisory-shared";
 import { ADVISORY_INTRO } from "../_data/advisory";
 
-const CHIPS: string[] = ["Non-executive", "Formally constituted", "Independent of management", "Advise, never decide"];
+const FALLBACK_HEADING = "Outside\nexpertise.\nStructured challenge.";
 
-export default function AdvisoryHero() {
+const FALLBACK_DESCRIPTION = ADVISORY_INTRO.summary;
+
+const FALLBACK_CHIPS: { label: string }[] = [
+  { label: "Non-executive" },
+  { label: "Formally constituted" },
+  { label: "Independent of management" },
+  { label: "Advise, never decide" },
+];
+
+const FALLBACK_IMAGE_ALT =
+  "Placeholder artwork standing in for photography of an advisory committee convened around a table";
+
+export default function AdvisoryHero({
+  data,
+}: {
+  data: AdvisoryInvestmentCommitteesAdvisoryHero;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const chips = data.chips.length ? data.chips : FALLBACK_CHIPS;
+  const imageAlt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="advisory-hero-title"
@@ -48,26 +72,32 @@ export default function AdvisoryHero() {
           id="advisory-hero-title"
           className="max-w-[16ch] font-sans text-[clamp(2.4rem,7vw,6rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
         >
-          Outside
-          <br />
-          expertise.
-          <br />
-          <span className="text-accent">Structured challenge.</span>
+          {headingLines.length === 3 ? (
+            <>
+              {headingLines[0]}
+              <br />
+              {headingLines[1]}
+              <br />
+              <span className="text-accent">{headingLines[2]}</span>
+            </>
+          ) : (
+            heading
+          )}
         </h1>
 
         <div className="mt-[clamp(28px,4vw,48px)] grid grid-cols-[1.1fr_0.9fr] items-end gap-[clamp(24px,4vw,64px)] max-[980px]:grid-cols-1">
           <div>
             <p className="max-w-[54ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.6] text-muted/85">
-              {ADVISORY_INTRO.summary}
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
 
             <ul className="mt-[clamp(22px,3vw,32px)] flex flex-wrap gap-2">
-              {CHIPS.map((chip) => (
+              {chips.map((chip) => (
                 <li
-                  key={chip}
+                  key={chip.label}
                   className="rounded-[2px] border border-accent/30 px-[12px] py-[7px] text-[0.68rem] font-semibold tracking-[0.08em] text-muted/80 uppercase"
                 >
-                  {chip}
+                  {chip.label}
                 </li>
               ))}
             </ul>
@@ -84,19 +114,22 @@ export default function AdvisoryHero() {
 
           <figure>
             <div className="relative aspect-[16/10] overflow-hidden border border-accent/20">
-              <Image
-                src="/placeholders/advisory-hero.png"
-                alt="Placeholder artwork standing in for photography of an advisory committee convened around a table"
-                fill
-                preload
-                sizes="(max-width: 980px) 100vw, 44vw"
-                className="object-cover"
-              />
+              {data.image ? (
+                <div
+                  role={imageAlt ? "img" : undefined}
+                  aria-label={imageAlt || undefined}
+                  aria-hidden={imageAlt ? undefined : true}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${data.image.url})` }}
+                />
+              ) : null}
             </div>
-            <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-              PLACEHOLDER — approved photography slot. No committee member is
-              identifiable. Replace with an image cleared for publication.
-            </figcaption>
+            {data.image ? (
+              <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+                PLACEHOLDER — approved photography slot. No committee member is
+                identifiable. Replace with an image cleared for publication.
+              </figcaption>
+            ) : null}
           </figure>
         </div>
       </div>

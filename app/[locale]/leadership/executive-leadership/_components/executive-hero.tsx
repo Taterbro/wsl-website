@@ -1,15 +1,34 @@
-import Image from "next/image";
+import type { ExecutiveLeadershipExecutiveHero } from "@/lib/cms/generated";
+
 import { Btn, WRAP_CLASS } from "./executive-shared";
 import { EXEC_INTRO } from "../_data/executive";
 
-const STATS: { value: string; label: string }[] = [
+const FALLBACK_HEADING = "The team\nthat turns the\nmandate into delivery.";
+
+const FALLBACK_DESCRIPTION = EXEC_INTRO.summary;
+
+const FALLBACK_IMAGE_ALT =
+  "Placeholder artwork standing in for photography of the executive team at work";
+
+const FALLBACK_STATS: { value: string; label: string }[] = [
   { value: "6", label: "Executive functions" },
   { value: "4", label: "Operating companies" },
   { value: "1", label: "Accountable lead per outcome" },
   { value: "Fixed", label: "Board reporting cycle" },
 ];
 
-export default function ExecutiveHero() {
+export default function ExecutiveHero({
+  data,
+}: {
+  data: ExecutiveLeadershipExecutiveHero;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const stats = data.stats.length ? data.stats : FALLBACK_STATS;
+  const imageAlt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="executive-hero-title"
@@ -54,15 +73,21 @@ export default function ExecutiveHero() {
             id="executive-hero-title"
             className="font-sans text-[clamp(2.4rem,6.4vw,5.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            The team
-            <br />
-            that turns the
-            <br />
-            <span className="text-accent">mandate into delivery.</span>
+            {headingLines.length === 3 ? (
+              <>
+                {headingLines[0]}
+                <br />
+                {headingLines[1]}
+                <br />
+                <span className="text-accent">{headingLines[2]}</span>
+              </>
+            ) : (
+              heading
+            )}
           </h1>
 
           <p className="mt-[clamp(20px,2.8vw,30px)] max-w-[54ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.6] text-muted/85">
-            {EXEC_INTRO.summary}
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
 
           <div className="mt-[clamp(24px,3.4vw,36px)] flex flex-wrap items-center gap-3">
@@ -78,23 +103,26 @@ export default function ExecutiveHero() {
         <div>
           <figure>
             <div className="relative aspect-[16/10] overflow-hidden border border-accent/20">
-              <Image
-                src="/placeholders/executive-hero.png"
-                alt="Placeholder artwork standing in for photography of the executive team at work"
-                fill
-                preload
-                sizes="(max-width: 980px) 100vw, 46vw"
-                className="object-cover"
-              />
+              {data.image ? (
+                <div
+                  role={imageAlt ? "img" : undefined}
+                  aria-label={imageAlt || undefined}
+                  aria-hidden={imageAlt ? undefined : true}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${data.image.url})` }}
+                />
+              ) : null}
             </div>
-            <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-              PLACEHOLDER — approved photography slot. No individual is
-              identifiable. Replace with an image cleared for publication.
-            </figcaption>
+            {data.image ? (
+              <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+                PLACEHOLDER — approved photography slot. No individual is
+                identifiable. Replace with an image cleared for publication.
+              </figcaption>
+            ) : null}
           </figure>
 
           <dl className="mt-[clamp(16px,2.2vw,24px)] grid grid-cols-4 gap-px bg-accent/20 max-[680px]:grid-cols-2">
-            {STATS.map((stat) => (
+            {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="bg-sidebar px-[clamp(10px,1.5vw,18px)] py-[clamp(12px,1.6vw,18px)]"

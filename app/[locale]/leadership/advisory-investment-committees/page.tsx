@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getAdvisoryInvestmentCommitteesPage } from "@/lib/cms/generated";
 import AdvisoryHero from "./_components/advisory-hero";
 import AdvisoryCharters from "./_components/advisory-charters";
 import AdvisoryConstitution from "./_components/advisory-constitution";
@@ -12,15 +13,17 @@ export const metadata: Metadata = {
     "The advisory and investment committees of Waterlight Group: formally constituted, non-executive bodies appointed to challenge, test and advise — their mandates, constitution and how their advice reaches decision.",
 };
 
-export default function AdvisoryInvestmentCommitteesPage() {
+export default async function AdvisoryInvestmentCommitteesPage() {
+  const data = await getAdvisoryInvestmentCommitteesPage();
+
   return (
     <main>
-      <AdvisoryHero />
-      <AdvisoryCharters />
-      <AdvisoryConstitution />
-      <AdvisoryFlow />
-      <AdvisoryChallenge />
-      <AdvisoryConversion />
+      <AdvisoryHero data={data.advisory_hero} />
+      <AdvisoryCharters data={data.advisory_charters} />
+      <AdvisoryConstitution data={data.advisory_constitution} />
+      <AdvisoryFlow data={data.advisory_flow} />
+      <AdvisoryChallenge data={data.advisory_challenge} />
+      <AdvisoryConversion data={data.advisory_conversion} />
     </main>
   );
 }

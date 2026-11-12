@@ -1,8 +1,20 @@
+import type { FounderGroupCeoFounderNext } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { Btn, Eyebrow, WRAP_CLASS } from "./founder-shared";
 import { RELATED } from "../_data/founder";
 
-export default function FounderNext() {
+const FALLBACK_HEADING = (
+  <>
+    The office within
+    <br />
+    the <span className="text-primary">structure.</span>
+  </>
+);
+
+export default function FounderNext({ data }: { data: FounderGroupCeoFounderNext }) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = data.label ? data.label.split("\n") : [];
+
   return (
     <section
       aria-labelledby="founder-next-title"
@@ -17,9 +29,15 @@ export default function FounderNext() {
                 id="founder-next-title"
                 className="mt-[clamp(16px,2.2vw,24px)] max-w-[14ch] font-sans text-[clamp(1.9rem,3.8vw,3.3rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                The office within
-                <br />
-                the <span className="text-primary">structure.</span>
+                {data.label && headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
 

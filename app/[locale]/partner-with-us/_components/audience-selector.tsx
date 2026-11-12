@@ -1,8 +1,18 @@
 import Link from "next/link";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
+import type { PartnerWithUsAudienceSelector } from "@/lib/cms/generated";
 import { ENQUIRY_ROUTES } from "@/lib/enquiry-routes";
 
-export default function AudienceSelector() {
+const FALLBACK_HEADING = "Who are you?";
+
+const FALLBACK_DESCRIPTION =
+  "Each route opens a form built around your role. A few qualifying questions now means a more useful first conversation later.";
+
+export default function AudienceSelector({
+  data,
+}: {
+  data: PartnerWithUsAudienceSelector;
+}) {
   return (
     <section
       id="routes"
@@ -20,12 +30,11 @@ export default function AudienceSelector() {
               id="routes-title"
               className="max-w-[16ch] font-sans text-[clamp(2.1rem,5.4vw,4.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Who are you?
+              {data.label || FALLBACK_HEADING}
             </h2>
           </div>
           <p className="max-w-[48ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.65] text-muted-foreground lg:pb-2">
-            Each route opens a form built around your role. A few qualifying
-            questions now means a more useful first conversation later.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </Reveal>
 

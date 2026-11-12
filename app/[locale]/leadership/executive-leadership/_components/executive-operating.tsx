@@ -1,9 +1,26 @@
-import Image from "next/image";
+import type { ExecutiveLeadershipExecutiveOperating } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow } from "./executive-shared";
-import { EXEC_OPERATING } from "../_data/executive";
+import { EXEC_OPERATING as FALLBACK_STEPS } from "../_data/executive";
 
-export default function ExecutiveOperating() {
+const FALLBACK_HEADING = "From mandate\nto outcome.";
+
+const FALLBACK_IMAGE_ALT =
+  "Placeholder artwork standing in for photography of an executive operating review";
+
+export default function ExecutiveOperating({
+  data,
+}: {
+  data: ExecutiveLeadershipExecutiveOperating;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const steps = data.steps.length ? data.steps : FALLBACK_STEPS;
+  const imageAlt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -15,17 +32,21 @@ export default function ExecutiveOperating() {
             <div className="order-2 max-[980px]:order-1">
               <figure>
                 <div className="relative aspect-[4/3] overflow-hidden border border-accent/20">
-                  <Image
-                    src="/placeholders/executive-operating.png"
-                    alt="Placeholder artwork standing in for photography of an executive operating review"
-                    fill
-                    sizes="(max-width: 980px) 100vw, 46vw"
-                    className="object-cover"
-                  />
+                  {data.image ? (
+                    <div
+                      role={imageAlt ? "img" : undefined}
+                      aria-label={imageAlt || undefined}
+                      aria-hidden={imageAlt ? undefined : true}
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${data.image.url})` }}
+                    />
+                  ) : null}
                 </div>
-                <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-                  PLACEHOLDER — approved photography slot.
-                </figcaption>
+                {data.image ? (
+                  <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+                    PLACEHOLDER — approved photography slot.
+                  </figcaption>
+                ) : null}
               </figure>
             </div>
 
@@ -35,13 +56,19 @@ export default function ExecutiveOperating() {
                 id="executive-operating-title"
                 className="mt-[clamp(20px,2.8vw,30px)] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                From mandate
-                <br />
-                to outcome.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
 
               <ol className="mt-[clamp(24px,3.4vw,38px)] flex flex-col">
-                {EXEC_OPERATING.map((step, i) => (
+                {steps.map((step, i) => (
                   <li
                     key={step.stage}
                     className="grid grid-cols-[auto_1fr] gap-x-[clamp(16px,2.4vw,28px)] border-t border-muted/15 py-[clamp(16px,2.2vw,24px)] last:border-b last:border-muted/15"

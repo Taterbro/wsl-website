@@ -1,8 +1,22 @@
+import type { BoardBoardConversion } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Btn } from "./board-shared";
 import { BOARD_ROUTES } from "../_data/board";
 
-export default function BoardConversion() {
+const FALLBACK_HEADING = "Bring the board\na real problem.";
+
+const FALLBACK_DESCRIPTION =
+  "Capital, partners and delivery are decided at Board level. Tell us where you want to build, and we will tell you honestly what it takes.";
+
+export default function BoardConversion({
+  data,
+}: {
+  data: BoardBoardConversion;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -29,14 +43,18 @@ export default function BoardConversion() {
                 id="board-conversion-title"
                 className="font-sans text-[clamp(2rem,5.4vw,4.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Bring the board
-                <br />
-                a real problem.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.6] text-muted/80">
-                Capital, partners and delivery are decided at Board level. Tell
-                us where you want to build, and we will tell you honestly what
-                it takes.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
 

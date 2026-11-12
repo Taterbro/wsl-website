@@ -1,12 +1,29 @@
 import Link from "next/link";
+import type { ProjectMapMapIndex } from "@/lib/cms/generated";
 import type { Project } from "@/lib/projects";
 import { STATUS_INFO, TARGET_MARKETS } from "../_data";
 
+const FALLBACK_HEADING = "Markets in view";
+
+const FALLBACK_DESCRIPTION =
+  "The text view of the map. Project markets are drawn from approved project records; target markets are strategic and carry no implied presence.";
+
 interface MapIndexProps {
+  data: ProjectMapMapIndex;
   projects: Project[];
 }
 
-export default function MapIndex({ projects }: MapIndexProps) {
+export default function MapIndex({ data, projects }: MapIndexProps) {
+  const targetMarkets = data.target_markets.length
+    ? data.target_markets.map((market, index) => ({
+        id: market.name
+          ? market.name.toLowerCase().replace(/\s+/g, "-")
+          : `target-${index}`,
+        name: market.name,
+        note: market.note,
+      }))
+    : TARGET_MARKETS;
+
   const groups = new Map<string, Project[]>();
   for (const project of projects) {
     const list = groups.get(project.country) ?? [];
@@ -29,7 +46,7 @@ export default function MapIndex({ projects }: MapIndexProps) {
     { label: "Operations", value: 0 },
     { label: "Partnerships", value: 0 },
     { label: "Project markets", value: projectMarkets.length },
-    { label: "Target markets", value: TARGET_MARKETS.length },
+    { label: "Target markets", value: targetMarkets.length },
   ];
 
   return (
@@ -47,13 +64,11 @@ export default function MapIndex({ projects }: MapIndexProps) {
               id="map-index-title"
               className="mt-3 font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Markets in view
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
           <p className="max-w-[48ch] text-[0.9rem] leading-[1.6] text-muted-foreground">
-            The text view of the map. Project markets are drawn from approved
-            project records; target markets are strategic and carry no implied
-            presence.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </div>
 
@@ -146,7 +161,7 @@ export default function MapIndex({ projects }: MapIndexProps) {
                 </tr>
               ))}
 
-              {TARGET_MARKETS.map((market) => (
+              {targetMarkets.map((market) => (
                 <tr
                   key={market.id}
                   className="bg-background transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-card/40"

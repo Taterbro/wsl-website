@@ -1,8 +1,10 @@
 import Link from "next/link";
+import type { DevelopmentPipelinePipelineGeography } from "@/lib/cms/generated";
 import type { Project, ProjectStage } from "@/lib/projects";
 import { PIPELINE_STAGES } from "../_data";
 
 interface PipelineGeographyProps {
+  data: DevelopmentPipelinePipelineGeography;
   projects: Project[];
 }
 
@@ -15,7 +17,13 @@ const STAGE_POSITION: Record<ProjectStage, number> = {
   Operational: 5,
 };
 
+const FALLBACK_HEADING = "Where the pipeline is forming";
+
+const FALLBACK_DESCRIPTION =
+  "Markets with projects currently between concept and financing. This is not a statement of operating presence.";
+
 export default function PipelineGeography({
+  data,
   projects,
 }: PipelineGeographyProps) {
   const groups = new Map<string, Project[]>();
@@ -53,12 +61,11 @@ export default function PipelineGeography({
               id="pipeline-geography-title"
               className="mt-3 max-w-[22ch] font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Where the pipeline is forming
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
           <p className="max-w-[42ch] text-[0.86rem] leading-[1.6] text-muted-foreground">
-            Markets with projects currently between concept and financing. This
-            is not a statement of operating presence.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </div>
 

@@ -1,8 +1,20 @@
+import type { AdvisoryInvestmentCommitteesAdvisoryChallenge } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow } from "./advisory-shared";
-import { CHALLENGE } from "../_data/advisory";
+import { CHALLENGE as FALLBACK_CHALLENGE } from "../_data/advisory";
 
-export default function AdvisoryChallenge() {
+const FALLBACK_HEADING = "Challenge\nthat cannot\nbe waved away.";
+
+export default function AdvisoryChallenge({
+  data,
+}: {
+  data: AdvisoryInvestmentCommitteesAdvisoryChallenge;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const challenge = data.challenge.length ? data.challenge : FALLBACK_CHALLENGE;
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -17,16 +29,22 @@ export default function AdvisoryChallenge() {
                 id="advisory-challenge-title"
                 className="mt-[clamp(20px,2.8vw,30px)] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Challenge
-                <br />
-                that cannot
-                <br />
-                be waved away.
+                {headingLines.length === 3 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                    <br />
+                    {headingLines[2]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
 
             <div className="grid grid-cols-2 gap-px bg-[rgba(9,29,42,0.16)] max-[680px]:grid-cols-1">
-              {CHALLENGE.map((item) => (
+              {challenge.map((item) => (
                 <div
                   key={item.title}
                   className="flex flex-col gap-[clamp(10px,1.4vw,16px)] bg-muted p-[clamp(20px,2.6vw,32px)]"

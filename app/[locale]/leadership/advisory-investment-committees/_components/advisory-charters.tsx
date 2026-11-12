@@ -1,8 +1,22 @@
+import type { AdvisoryInvestmentCommitteesAdvisoryCharters } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow } from "./advisory-shared";
 import { CHARTERS } from "../_data/advisory";
 
-export default function AdvisoryCharters() {
+const FALLBACK_HEADING = "One advises.\nOne tests.";
+
+const FALLBACK_DESCRIPTION =
+  "The two committees do different jobs and are measured against different things. Neither holds executive authority — each strengthens a decision the Board still owns.";
+
+export default function AdvisoryCharters({
+  data,
+}: {
+  data: AdvisoryInvestmentCommitteesAdvisoryCharters;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -18,14 +32,18 @@ export default function AdvisoryCharters() {
                 id="advisory-charters-title"
                 className="mt-[clamp(20px,2.8vw,30px)] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                One advises.
-                <br />
-                One tests.
+                {headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-                The two committees do different jobs and are measured against
-                different things. Neither holds executive authority — each
-                strengthens a decision the Board still owns.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
             <span className="rounded-[2px] border border-[rgba(9,29,42,0.16)] px-[14px] py-[9px] text-[0.7rem] font-semibold tracking-[0.1em] text-muted-foreground uppercase">

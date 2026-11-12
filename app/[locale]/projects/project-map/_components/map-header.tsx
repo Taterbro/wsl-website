@@ -1,6 +1,14 @@
 import Link from "next/link";
+import type { ProjectMapMapHeader } from "@/lib/cms/generated";
 
-const READING_RULES = [
+const FALLBACK_HEADING = "Project Map";
+
+const FALLBACK_DESCRIPTION =
+  "Where approved project activity and strategic target markets sit today. The map separates each layer so presence is never overstated.";
+
+const FALLBACK_READING_RULES_HEADING = "How to read this map";
+
+const FALLBACK_READING_RULES = [
   {
     index: "01",
     title: "Country level only",
@@ -19,7 +27,11 @@ const READING_RULES = [
   },
 ];
 
-export default function MapHeader() {
+export default function MapHeader({ data }: { data: ProjectMapMapHeader }) {
+  const readingRules = data.reading_rules.length
+    ? data.reading_rules
+    : FALLBACK_READING_RULES;
+
   return (
     <section
       aria-labelledby="project-map-title"
@@ -54,12 +66,10 @@ export default function MapHeader() {
               id="project-map-title"
               className="mt-4 font-sans text-[clamp(3rem,8vw,6.6rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
             >
-              Project Map
+              {data.heading || FALLBACK_HEADING}
             </h1>
             <p className="mt-6 max-w-[62ch] text-[clamp(1rem,1.5vw,1.22rem)] leading-[1.65] text-muted-foreground">
-              Where approved project activity and strategic target markets sit
-              today. The map separates each layer so presence is never
-              overstated.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <p className="mt-4 text-[0.7rem] tracking-[0.06em] text-muted-foreground/75 uppercase">
               Illustrative view · placeholder locations · country-level only
@@ -68,10 +78,10 @@ export default function MapHeader() {
 
           <aside className="border-l-2 border-accent pl-[clamp(18px,2.5vw,28px)]">
             <h2 className="font-sans text-[0.74rem] font-semibold tracking-[0.14em] text-primary uppercase">
-              How to read this map
+              {data.reading_rules_heading || FALLBACK_READING_RULES_HEADING}
             </h2>
             <ol className="mt-4 space-y-3.5">
-              {READING_RULES.map((rule) => (
+              {readingRules.map((rule) => (
                 <li key={rule.index} className="flex gap-3">
                   <span className="mt-0.5 font-sans text-[0.66rem] font-semibold tracking-[0.08em] text-accent-foreground/60">
                     {rule.index}

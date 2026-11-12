@@ -1,8 +1,27 @@
+import type { FounderGroupCeoFounderStructure } from "@/lib/cms/generated";
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow, WRAP_CLASS } from "./founder-shared";
 import { STRUCTURES } from "../_data/founder";
 
-export default function FounderStructure() {
+const FALLBACK_HEADING = (
+  <>
+    One office.
+    <br />
+    <span className="text-accent">Formal structures.</span>
+  </>
+);
+
+const FALLBACK_DESCRIPTION =
+  "The Founder & Group CEO works inside a constituted governance structure. Each body holds a distinct decision and a defined line of accountability.";
+
+export default function FounderStructure({
+  data,
+}: {
+  data: FounderGroupCeoFounderStructure;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = data.label ? data.label.split("\n") : [];
+
   return (
     <section
       id="founder-structure"
@@ -23,15 +42,19 @@ export default function FounderStructure() {
                 id="founder-structure-title"
                 className="mt-[clamp(16px,2.2vw,24px)] font-sans text-[clamp(1.9rem,4vw,3.5rem)] leading-[0.98] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
               >
-                One office.
-                <br />
-                <span className="text-accent">Formal structures.</span>
+                {data.label && headingLines.length === 2 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    <span className="text-accent">{headingLines[1]}</span>
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
             </div>
             <p className="max-w-[54ch] text-[clamp(0.94rem,1.15vw,1.04rem)] leading-[1.6] text-muted/75 max-[900px]:max-w-[62ch]">
-              The Founder &amp; Group CEO works inside a constituted
-              governance structure. Each body holds a distinct decision and a
-              defined line of accountability.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 

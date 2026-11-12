@@ -1,8 +1,22 @@
+import type { AdvisoryInvestmentCommitteesAdvisoryConversion } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Btn } from "./advisory-shared";
 import { ADVISORY_INTRO, ADVISORY_ROLES } from "../_data/advisory";
 
-export default function AdvisoryConversion() {
+const FALLBACK_HEADING = "Engage the\npeople who\ntest the work.";
+
+const FALLBACK_DESCRIPTION =
+  "Whether you would serve on a committee or need to understand how its advice reaches decision, the route starts here.";
+
+export default function AdvisoryConversion({
+  data,
+}: {
+  data: AdvisoryInvestmentCommitteesAdvisoryConversion;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -29,15 +43,20 @@ export default function AdvisoryConversion() {
                 id="advisory-conversion-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Engage the
-                <br />
-                people who
-                <br />
-                test the work.
+                {headingLines.length === 3 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                    <br />
+                    {headingLines[2]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-                Whether you would serve on a committee or need to understand how
-                its advice reaches decision, the route starts here.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">

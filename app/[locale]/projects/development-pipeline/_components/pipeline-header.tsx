@@ -1,13 +1,19 @@
 import Link from "next/link";
+import type { DevelopmentPipelinePipelineHeader } from "@/lib/cms/generated";
 import type { Project } from "@/lib/projects";
 
 interface PipelineHeaderProps {
+  data: DevelopmentPipelinePipelineHeader;
   projects: Project[];
 }
 
-export default function PipelineHeader({ projects }: PipelineHeaderProps) {
+const FALLBACK_DESCRIPTION =
+  "Projects in preparation, ordered by development stage. Construction and operational assets sit in the portfolio, not on this board.";
+
+export default function PipelineHeader({ data, projects }: PipelineHeaderProps) {
   const markets = new Set(projects.map((project) => project.country));
   const activeStages = new Set(projects.map((project) => project.stage));
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   const stats = [
     { label: "Projects in preparation", value: projects.length },
@@ -49,13 +55,24 @@ export default function PipelineHeader({ projects }: PipelineHeaderProps) {
               id="pipeline-title"
               className="font-sans text-[clamp(2.8rem,8vw,6.8rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
             >
-              Development
-              <br />
-              Pipeline
+              {data.heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                data.heading || (
+                  <>
+                    Development
+                    <br />
+                    Pipeline
+                  </>
+                )
+              )}
             </h1>
             <p className="max-w-[46ch] text-[clamp(0.98rem,1.4vw,1.16rem)] leading-[1.65] text-muted-foreground lg:pb-2">
-              Projects in preparation, ordered by development stage. Construction
-              and operational assets sit in the portfolio, not on this board.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
         </div>

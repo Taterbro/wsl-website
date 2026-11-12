@@ -1,10 +1,17 @@
 import Link from "next/link";
+import type { FlagshipProjectsFlagshipHeader } from "@/lib/cms/generated";
 
 interface FlagshipHeaderProps {
+  data: FlagshipProjectsFlagshipHeader;
   count: number;
 }
 
-export default function FlagshipHeader({ count }: FlagshipHeaderProps) {
+const FALLBACK_DESCRIPTION =
+  "The projects that best express the platform in practice: defined infrastructure, a clear development path and a partner need. Published only after internal approval.";
+
+export default function FlagshipHeader({ data, count }: FlagshipHeaderProps) {
+  const headingLines = data.heading ? data.heading.split("\n") : [];
+
   return (
     <section
       aria-labelledby="flagship-title"
@@ -39,14 +46,24 @@ export default function FlagshipHeader({ count }: FlagshipHeaderProps) {
               id="flagship-title"
               className="mt-4 font-sans text-[clamp(2.8rem,8vw,6.8rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
             >
-              Flagship
-              <br />
-              Projects
+              {data.heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                data.heading || (
+                  <>
+                    Flagship
+                    <br />
+                    Projects
+                  </>
+                )
+              )}
             </h1>
             <p className="mt-6 max-w-[60ch] text-[clamp(1rem,1.5vw,1.22rem)] leading-[1.65] text-muted-foreground">
-              The projects that best express the platform in practice: defined
-              infrastructure, a clear development path and a partner need.
-              Published only after internal approval.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 

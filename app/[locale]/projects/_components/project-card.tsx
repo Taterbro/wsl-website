@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 
@@ -11,17 +10,21 @@ export default function ProjectCard({ project, sectorName }: ProjectCardProps) {
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-background transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_40px_80px_-64px_rgba(6,21,34,0.9)]">
       <div className="relative aspect-16/11 overflow-hidden bg-secondary">
-        <Image
-          src={project.image}
-          alt={project.alt}
-          fill
-          sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03]"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-sidebar/70 via-sidebar/10 to-transparent"
-        />
+        {project.image ? (
+          <>
+            <div
+              role={project.alt ? "img" : undefined}
+              aria-label={project.alt || undefined}
+              aria-hidden={project.alt ? undefined : true}
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03]"
+              style={{ backgroundImage: `url(${project.image})` }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-sidebar/70 via-sidebar/10 to-transparent"
+            />
+          </>
+        ) : null}
         <div className="absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-2 p-4">
           <span className="rounded-[2px] border border-accent/50 bg-sidebar/80 px-2.5 py-1 font-sans text-[0.68rem] font-semibold tracking-[0.1em] text-accent uppercase backdrop-blur-sm">
             {project.stage}

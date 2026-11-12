@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
+import type { PartnerWithUsNextSteps } from "@/lib/cms/generated";
 
 const STEPS: { title: string; copy: string }[] = [
   {
@@ -21,7 +22,14 @@ const SECONDARY_LINKS: { label: string; href: string }[] = [
   { label: "Contact & global offices", href: "/contact" },
 ];
 
-export default function NextSteps() {
+const FALLBACK_DESCRIPTION =
+  "No automated access, no promises. Just a direct route to the team that can say yes, ask better questions, or point you elsewhere.";
+
+export default function NextSteps({ data }: { data: PartnerWithUsNextSteps }) {
+  const heading = data.label || null;
+  const headingLines = data.label ? data.label.split("\n") : [];
+  const steps = data.steps.length ? data.steps : STEPS;
+
   return (
     <section
       aria-labelledby="next-steps-title"
@@ -41,18 +49,29 @@ export default function NextSteps() {
               id="next-steps-title"
               className="max-w-[13ch] font-sans text-[clamp(2.1rem,5.4vw,4.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              A short,
-              <br />
-              honest path.
+              {heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading || (
+                  <>
+                    A short,
+                    <br />
+                    honest path.
+                  </>
+                )
+              )}
             </h2>
             <p className="mt-6 max-w-[42ch] text-[clamp(0.98rem,1.3vw,1.12rem)] leading-[1.65] text-muted-foreground">
-              No automated access, no promises. Just a direct route to the team
-              that can say yes, ask better questions, or point you elsewhere.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <ol className="list-none p-0">
-            {STEPS.map((step, index) => (
+            {steps.map((step, index) => (
               <li
                 key={step.title}
                 className="grid grid-cols-[auto_1fr] gap-[clamp(16px,2.4vw,28px)] border-t border-border py-[clamp(20px,2.8vw,32px)] last:border-b"

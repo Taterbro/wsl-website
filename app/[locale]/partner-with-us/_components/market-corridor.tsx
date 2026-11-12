@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
+import type { PartnerWithUsMarketCorridor } from "@/lib/cms/generated";
 import { CORRIDOR_ROUTES, MARKET_ENTRY_HREF } from "@/lib/enquiry-routes";
 
 const DETAILS: Record<"africa" | "gcc", string[]> = {
@@ -7,7 +8,17 @@ const DETAILS: Record<"africa" | "gcc", string[]> = {
   gcc: ["Target market", "Sector", "Local partnership"],
 };
 
-export default function MarketCorridor() {
+const FALLBACK_DESCRIPTION =
+  "Entering an African market, or bringing African capability into the Gulf? Pick the direction and we will pick up from there.";
+
+export default function MarketCorridor({
+  data,
+}: {
+  data: PartnerWithUsMarketCorridor;
+}) {
+  const heading = data.label || null;
+  const headingLines = data.label ? data.label.split("\n") : [];
+
   return (
     <section
       id="corridor"
@@ -30,14 +41,25 @@ export default function MarketCorridor() {
               id="corridor-title"
               className="max-w-[15ch] font-sans text-[clamp(2.1rem,5.4vw,4.4rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Market entry,
-              <br />
-              both ways.
+              {heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                heading || (
+                  <>
+                    Market entry,
+                    <br />
+                    both ways.
+                  </>
+                )
+              )}
             </h2>
           </div>
           <p className="max-w-[46ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.65] text-muted/75 lg:pb-2">
-            Entering an African market, or bringing African capability into the
-            Gulf? Pick the direction and we will pick up from there.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </Reveal>
 

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import { getSectorName } from "@/lib/projects";
@@ -35,6 +34,8 @@ export default function FlagshipShowcase({ flagships }: FlagshipShowcaseProps) {
 
   if (!lead) return null;
 
+  const leadAlt = lead.alt;
+
   return (
     <section
       aria-labelledby="flagship-showcase-title"
@@ -48,18 +49,21 @@ export default function FlagshipShowcase({ flagships }: FlagshipShowcaseProps) {
         <article className="overflow-hidden rounded-[2px] border border-border bg-background">
           <div className="grid lg:grid-cols-[1.12fr_0.88fr]">
             <div className="relative min-h-[320px] overflow-hidden bg-secondary sm:min-h-[420px]">
-              <Image
-                src={lead.image}
-                alt={lead.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 56vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-sidebar/75 via-sidebar/5 to-transparent"
-              />
+              {lead.image ? (
+                <>
+                  <div
+                    role={leadAlt ? "img" : undefined}
+                    aria-label={leadAlt || undefined}
+                    aria-hidden={leadAlt ? undefined : true}
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${lead.image})` }}
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-sidebar/75 via-sidebar/5 to-transparent"
+                  />
+                </>
+              ) : null}
               <div className="absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-2 p-[clamp(16px,2.4vw,24px)]">
                 <span className="rounded-[2px] border border-accent/50 bg-sidebar/80 px-3 py-1.5 font-sans text-[0.68rem] font-semibold tracking-[0.1em] text-accent uppercase backdrop-blur-sm">
                   Flagship 01 · Lead
@@ -145,17 +149,21 @@ export default function FlagshipShowcase({ flagships }: FlagshipShowcaseProps) {
                 className="group flex flex-col overflow-hidden rounded-[2px] border border-border bg-background transition-all duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_40px_80px_-64px_rgba(6,21,34,0.8)]"
               >
                 <div className="relative aspect-16/10 overflow-hidden bg-secondary">
-                  <Image
-                    src={project.image}
-                    alt={project.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03]"
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-sidebar/60 via-transparent to-transparent"
-                  />
+                  {project.image ? (
+                    <>
+                      <div
+                        role={project.alt ? "img" : undefined}
+                        aria-label={project.alt || undefined}
+                        aria-hidden={project.alt ? undefined : true}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-(--transition-slower) ease-(--ease-standard) group-hover:scale-[1.03]"
+                        style={{ backgroundImage: `url(${project.image})` }}
+                      />
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 bg-gradient-to-t from-sidebar/60 via-transparent to-transparent"
+                      />
+                    </>
+                  ) : null}
                   <span className="absolute top-4 left-4 rounded-[2px] border border-accent/50 bg-sidebar/80 px-2.5 py-1 font-sans text-[0.64rem] font-semibold tracking-[0.1em] text-accent uppercase backdrop-blur-sm">
                     Flagship {(index + 2).toString().padStart(2, "0")}
                   </span>

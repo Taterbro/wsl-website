@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { PortfolioPortfolioHeader } from "@/lib/cms/generated";
 import type { Project, ProjectStage } from "@/lib/projects";
 
 const STAGE_ORDER: ProjectStage[] = [
@@ -11,10 +12,17 @@ const STAGE_ORDER: ProjectStage[] = [
 ];
 
 interface PortfolioHeaderProps {
+  data: PortfolioPortfolioHeader;
   projects: Project[];
 }
 
-export default function PortfolioHeader({ projects }: PortfolioHeaderProps) {
+const FALLBACK_DESCRIPTION =
+  "Selected projects from across the Waterlight platform. Browse by sector, market, stage and opportunity type; restricted detail is released on request.";
+
+export default function PortfolioHeader({
+  data,
+  projects,
+}: PortfolioHeaderProps) {
   const countries = new Set(projects.map((project) => project.country)).size;
   const sectors = new Set(projects.map((project) => project.sectorSlug)).size;
   const stageCounts = STAGE_ORDER.map((stage) => ({
@@ -61,12 +69,10 @@ export default function PortfolioHeader({ projects }: PortfolioHeaderProps) {
               id="portfolio-title"
               className="mt-4 font-sans text-[clamp(3rem,8.5vw,7rem)] leading-[0.86] font-extrabold tracking-[-0.015em] uppercase [font-stretch:120%]"
             >
-              Portfolio
+              {data.heading || "Portfolio"}
             </h1>
             <p className="mt-6 max-w-[56ch] text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.65] text-muted-foreground">
-              Selected projects from across the Waterlight platform. Browse by
-              sector, market, stage and opportunity type; restricted detail is
-              released on request.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a

@@ -1,6 +1,16 @@
 import Link from "next/link";
+import type { ProjectMapMapCta } from "@/lib/cms/generated";
 
-export default function MapCta() {
+const FALLBACK_HEADING = "A market\nin mind?";
+
+const FALLBACK_DESCRIPTION =
+  "Tell us which country or corridor you are evaluating. We will route the enquiry to the project team and share approved detail where it exists.";
+
+export default function MapCta({ data }: { data: ProjectMapMapCta }) {
+  const [headingLine1, headingLine2] = (
+    data.heading || FALLBACK_HEADING
+  ).split("\n");
+
   return (
     <section
       aria-labelledby="map-cta-title"
@@ -16,14 +26,16 @@ export default function MapCta() {
               id="map-cta-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              A market
-              <br />
-              in mind?
+              {headingLine1}
+              {headingLine2 ? (
+                <>
+                  <br />
+                  {headingLine2}
+                </>
+              ) : null}
             </h2>
             <p className="mt-5 max-w-[52ch] text-[clamp(0.98rem,1.4vw,1.16rem)] leading-[1.6] text-sidebar/75">
-              Tell us which country or corridor you are evaluating. We will route
-              the enquiry to the project team and share approved detail where it
-              exists.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 

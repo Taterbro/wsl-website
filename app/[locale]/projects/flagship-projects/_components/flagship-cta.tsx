@@ -1,14 +1,20 @@
 import Link from "next/link";
+import type { FlagshipProjectsFlagshipCta } from "@/lib/cms/generated";
 import type { Project } from "@/lib/projects";
 
 interface FlagshipCtaProps {
+  data: FlagshipProjectsFlagshipCta;
   project?: Project;
 }
 
-export default function FlagshipCta({ project }: FlagshipCtaProps) {
+const FALLBACK_DESCRIPTION =
+  "Request the approved project summary or introduce a capability, market or capital partnership.";
+
+export default function FlagshipCta({ data, project }: FlagshipCtaProps) {
   const href = project
     ? `/partner-with-us/investors?source=flagship&project=${project.slug}`
     : "/partner-with-us/investors?source=flagship";
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   return (
     <section
@@ -29,13 +35,24 @@ export default function FlagshipCta({ project }: FlagshipCtaProps) {
               id="flagship-cta-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              Build with
-              <br />
-              Waterlight
+              {data.heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                data.heading || (
+                  <>
+                    Build with
+                    <br />
+                    Waterlight
+                  </>
+                )
+              )}
             </h2>
             <p className="mt-5 text-[clamp(1rem,1.4vw,1.2rem)] leading-[1.65] text-muted/75">
-              Request the approved project summary or introduce a capability,
-              market or capital partnership.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-muted/50 uppercase">
               Access is reviewed by the project team.{" "}

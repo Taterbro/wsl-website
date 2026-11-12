@@ -1,7 +1,17 @@
 import Link from "next/link";
 import Reveal from "@/app/[locale]/(home)/_components/reveal";
+import type { PortfolioPortfolioCta } from "@/lib/cms/generated";
 
-export default function PortfolioCta() {
+const FALLBACK_HEADING = "Request the\nfull brief";
+
+const FALLBACK_DESCRIPTION =
+  "Public summaries are deliberately brief. Tell us what you are evaluating and we will route the request to the project team.";
+
+export default function PortfolioCta({ data }: { data: PortfolioPortfolioCta }) {
+  const [headingLine1, headingLine2] = (
+    data.heading || FALLBACK_HEADING
+  ).split("\n");
+
   return (
     <section
       aria-labelledby="portfolio-cta-title"
@@ -21,13 +31,16 @@ export default function PortfolioCta() {
               id="portfolio-cta-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              Request the
-              <br />
-              full brief
+              {headingLine1}
+              {headingLine2 ? (
+                <>
+                  <br />
+                  {headingLine2}
+                </>
+              ) : null}
             </h2>
             <p className="mt-5 text-[clamp(1rem,1.4vw,1.2rem)] leading-[1.65] text-muted/75">
-              Public summaries are deliberately brief. Tell us what you are
-              evaluating and we will route the request to the project team.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[0.74rem] tracking-[0.04em] uppercase">
               <Link

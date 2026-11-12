@@ -1,6 +1,16 @@
 import Link from "next/link";
+import type { DevelopmentPipelinePipelineCta } from "@/lib/cms/generated";
 
-export default function PipelineCta() {
+const FALLBACK_DESCRIPTION =
+  "Project owners can introduce an opportunity for development. Investors and partners can request the approved summary for any pipeline entry.";
+
+export default function PipelineCta({
+  data,
+}: {
+  data: DevelopmentPipelinePipelineCta;
+}) {
+  const headingLines = data.heading ? data.heading.split("\n") : [];
+
   return (
     <section
       aria-labelledby="pipeline-cta-title"
@@ -16,14 +26,24 @@ export default function PipelineCta() {
               id="pipeline-cta-title"
               className="mt-4 font-sans text-[clamp(2.1rem,5vw,4.2rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              Bring a project
-              <br />
-              into the pipeline
+              {data.heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                data.heading || (
+                  <>
+                    Bring a project
+                    <br />
+                    into the pipeline
+                  </>
+                )
+              )}
             </h2>
             <p className="mt-5 max-w-[54ch] text-[clamp(1rem,1.4vw,1.18rem)] leading-[1.6] text-primary-foreground/75">
-              Project owners can introduce an opportunity for development.
-              Investors and partners can request the approved summary for any
-              pipeline entry.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
             <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-primary-foreground/50 uppercase">
               Public summaries only.{" "}

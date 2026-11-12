@@ -1,8 +1,22 @@
+import type { AdvisoryInvestmentCommitteesAdvisoryFlow } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow } from "./advisory-shared";
 import { FLOW } from "../_data/advisory";
 
-export default function AdvisoryFlow() {
+const FALLBACK_HEADING = "Advice that\nreaches the\ndecision.";
+
+const FALLBACK_DESCRIPTION =
+  "Committee input is only useful if it arrives intact and attributable. Five steps keep the reasoning attached to the outcome — and keep the decision where it belongs.";
+
+export default function AdvisoryFlow({
+  data,
+}: {
+  data: AdvisoryInvestmentCommitteesAdvisoryFlow;
+}) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -17,16 +31,20 @@ export default function AdvisoryFlow() {
                 id="advisory-flow-title"
                 className="mt-[clamp(20px,2.8vw,30px)] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Advice that
-                <br />
-                reaches the
-                <br />
-                decision.
+                {headingLines.length === 3 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                    <br />
+                    {headingLines[2]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[56ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-                Committee input is only useful if it arrives intact and
-                attributable. Five steps keep the reasoning attached to the
-                outcome — and keep the decision where it belongs.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
           </div>

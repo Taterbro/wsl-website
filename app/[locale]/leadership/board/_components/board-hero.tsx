@@ -1,8 +1,26 @@
-import Image from "next/image";
-import { Btn, Eyebrow, WRAP_CLASS } from "./board-shared";
-import { BOARD_INTRO, BOARD_STATS } from "../_data/board";
+import type { BoardBoardHero } from "@/lib/cms/generated";
 
-export default function BoardHero() {
+import { Btn, Eyebrow, WRAP_CLASS } from "./board-shared";
+import {
+  BOARD_INTRO,
+  BOARD_STATS as FALLBACK_STATS,
+} from "../_data/board";
+
+const FALLBACK_HEADING = "The board that\nanswers for\nthe work.";
+
+const FALLBACK_DESCRIPTION = BOARD_INTRO.summary;
+
+const FALLBACK_IMAGE_ALT =
+  "Placeholder artwork standing in for photography of the board of directors seated in session";
+
+export default function BoardHero({ data }: { data: BoardBoardHero }) {
+  const heading = data.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const stats = data.stats.length ? data.stats : FALLBACK_STATS;
+  const imageAlt = data.image
+    ? data.image.alt || data.image_alt || FALLBACK_IMAGE_ALT
+    : "";
+
   return (
     <section
       aria-labelledby="board-hero-title"
@@ -41,15 +59,21 @@ export default function BoardHero() {
             id="board-hero-title"
             className="mt-[clamp(18px,2.6vw,26px)] font-sans text-[clamp(2.4rem,6.6vw,5.6rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
           >
-            The board that
-            <br />
-            answers for
-            <br />
-            <span className="text-accent">the work.</span>
+            {headingLines.length === 3 ? (
+              <>
+                {headingLines[0]}
+                <br />
+                {headingLines[1]}
+                <br />
+                <span className="text-accent">{headingLines[2]}</span>
+              </>
+            ) : (
+              heading
+            )}
           </h1>
 
           <p className="mt-[clamp(20px,2.8vw,30px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.14rem)] leading-[1.6] text-muted/85">
-            {BOARD_INTRO.summary}
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
 
           <div className="mt-[clamp(24px,3.4vw,36px)] flex flex-wrap items-center gap-3">
@@ -65,23 +89,26 @@ export default function BoardHero() {
         <div>
           <figure>
             <div className="relative aspect-[16/10] overflow-hidden border border-accent/20">
-              <Image
-                src="/placeholders/board-hero.png"
-                alt="Placeholder artwork standing in for photography of the board of directors seated in session"
-                fill
-                preload
-                sizes="(max-width: 980px) 100vw, 46vw"
-                className="object-cover"
-              />
+              {data.image ? (
+                <div
+                  role={imageAlt ? "img" : undefined}
+                  aria-label={imageAlt || undefined}
+                  aria-hidden={imageAlt ? undefined : true}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${data.image.url})` }}
+                />
+              ) : null}
             </div>
-            <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
-              PLACEHOLDER — approved photography slot. No director is
-              identifiable. Replace with an image cleared for publication.
-            </figcaption>
+            {data.image ? (
+              <figcaption className="mt-3 text-[0.72rem] leading-[1.5] text-muted/55">
+                PLACEHOLDER — approved photography slot. No director is
+                identifiable. Replace with an image cleared for publication.
+              </figcaption>
+            ) : null}
           </figure>
 
           <dl className="mt-[clamp(16px,2.2vw,24px)] grid grid-cols-4 gap-px bg-accent/20 max-[680px]:grid-cols-2">
-            {BOARD_STATS.map((stat) => (
+            {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="bg-sidebar px-[clamp(10px,1.5vw,18px)] py-[clamp(12px,1.6vw,18px)]"

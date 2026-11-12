@@ -1,14 +1,29 @@
 import Link from "next/link";
+import type { DevelopmentPipelinePipelineBoard } from "@/lib/cms/generated";
 import type { Project } from "@/lib/projects";
 import { getSectorName } from "@/lib/projects";
 import { PIPELINE_STAGES } from "../_data";
 
 interface PipelineBoardProps {
+  data: DevelopmentPipelinePipelineBoard;
   projects: Project[];
 }
 
-export default function PipelineBoard({ projects }: PipelineBoardProps) {
-  const columns = PIPELINE_STAGES.map((definition, index) => ({
+interface StageDefinition {
+  stage: string;
+  description: string;
+}
+
+const FALLBACK_STAGES: StageDefinition[] = PIPELINE_STAGES;
+
+const FALLBACK_HEADING = "From concept to financing";
+
+const FALLBACK_DESCRIPTION =
+  "Each column is a stage gate. A project moves forward only when the evidence for the next stage is in place.";
+
+export default function PipelineBoard({ data, projects }: PipelineBoardProps) {
+  const stages = data.stages.length ? data.stages : FALLBACK_STAGES;
+  const columns = stages.map((definition, index) => ({
     ...definition,
     index,
     projects: projects.filter((project) => project.stage === definition.stage),
@@ -29,12 +44,11 @@ export default function PipelineBoard({ projects }: PipelineBoardProps) {
               id="pipeline-board-title"
               className="mt-3 font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              From concept to financing
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
           <p className="max-w-[40ch] text-[0.8rem] leading-[1.55] text-muted/60">
-            Each column is a stage gate. A project moves forward only when the
-            evidence for the next stage is in place.
+            {data.description || FALLBACK_DESCRIPTION}
           </p>
         </div>
 

@@ -1,8 +1,22 @@
+import type { ExecutiveLeadershipExecutiveConversion } from "@/lib/cms/generated";
+
 import Reveal from "../../../(home)/_components/reveal";
 import { Btn } from "./executive-shared";
 import { EXEC_INTRO, EXEC_ROLES } from "../_data/executive";
 
-export default function ExecutiveConversion() {
+const FALLBACK_HEADING = "Bring a problem\nto the people who\nbuild.";
+
+const FALLBACK_DESCRIPTION =
+  "If you need to reach the team that originates, structures and delivers, start here — the route is organised by who you are.";
+
+export default function ExecutiveConversion({
+  data,
+}: {
+  data: ExecutiveLeadershipExecutiveConversion;
+}) {
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
       <section
@@ -29,15 +43,20 @@ export default function ExecutiveConversion() {
                 id="executive-conversion-title"
                 className="font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
               >
-                Bring a problem
-                <br />
-                to the people who
-                <br />
-                build.
+                {headingLines.length === 3 ? (
+                  <>
+                    {headingLines[0]}
+                    <br />
+                    {headingLines[1]}
+                    <br />
+                    {headingLines[2]}
+                  </>
+                ) : (
+                  heading
+                )}
               </h2>
               <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[52ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted/80">
-                If you need to reach the team that originates, structures and
-                delivers, start here — the route is organised by who you are.
+                {data.description || FALLBACK_DESCRIPTION}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">

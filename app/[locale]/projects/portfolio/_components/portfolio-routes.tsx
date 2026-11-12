@@ -1,4 +1,7 @@
 import Link from "next/link";
+import type { PortfolioPortfolioRoutes } from "@/lib/cms/generated";
+
+const FALLBACK_HEADING = "See the portfolio differently";
 
 const ROUTES = [
   {
@@ -21,7 +24,11 @@ const ROUTES = [
   },
 ];
 
-export default function PortfolioRoutes() {
+export default function PortfolioRoutes({
+  data,
+}: {
+  data: PortfolioPortfolioRoutes;
+}) {
   return (
     <section
       aria-labelledby="portfolio-routes-title"
@@ -37,7 +44,7 @@ export default function PortfolioRoutes() {
               id="portfolio-routes-title"
               className="mt-3 max-w-[16ch] font-sans text-[clamp(1.8rem,3.6vw,2.9rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:114%]"
             >
-              See the portfolio differently
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
 

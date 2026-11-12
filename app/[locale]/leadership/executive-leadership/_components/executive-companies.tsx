@@ -1,13 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import type { ExecutiveLeadershipExecutiveCompanies } from "@/lib/cms/generated";
+import type { Company } from "../_data/executive";
 import Reveal from "../../../(home)/_components/reveal";
 import { Eyebrow } from "./executive-shared";
-import { COMPANY_LEADS } from "../_data/executive";
 
-export default function ExecutiveCompanies() {
+const FALLBACK_HEADING = "Each company,\na defined\nmandate.";
+
+const FALLBACK_DESCRIPTION =
+  "Operating companies carry part of the group's mandate. Each is led by a management team working to the same standard and reporting into the group executive.";
+
+export default function ExecutiveCompanies({
+  data,
+  companies,
+}: {
+  data: ExecutiveLeadershipExecutiveCompanies;
+  companies: Company[];
+}) {
   const [active, setActive] = useState(0);
-  const current = COMPANY_LEADS[active];
+  const current = companies[active];
+  const heading = data.label || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
 
   return (
     <Reveal className="motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
@@ -22,21 +36,25 @@ export default function ExecutiveCompanies() {
               id="executive-companies-title"
               className="mt-[clamp(20px,2.8vw,30px)] font-sans text-[clamp(2rem,5.2vw,4.3rem)] leading-[0.96] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Each company,
-              <br />
-              a defined
-              <br />
-              mandate.
+              {headingLines.length === 3 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                  <br />
+                  {headingLines[2]}
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <p className="mt-[clamp(18px,2.4vw,26px)] max-w-[58ch] text-[clamp(1rem,1.3vw,1.12rem)] leading-[1.6] text-muted-foreground">
-              Operating companies carry part of the group&apos;s mandate. Each is
-              led by a management team working to the same standard and reporting
-              into the group executive.
+              {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
 
           <div className="mt-[clamp(28px,4vw,48px)] flex flex-wrap gap-2">
-            {COMPANY_LEADS.map((company, i) => {
+            {companies.map((company, i) => {
               const selected = i === active;
               return (
                 <button

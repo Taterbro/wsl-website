@@ -1,16 +1,20 @@
+import type { FlagshipProjectsFlagshipDossier } from "@/lib/cms/generated";
 import type { Project } from "@/lib/projects";
 import { SDG_LABELS, STAGE_ORDER } from "../_data";
 
 interface FlagshipDossierProps {
+  data: FlagshipProjectsFlagshipDossier;
   project: Project;
   sectorName: string;
 }
 
 export default function FlagshipDossier({
+  data,
   project,
   sectorName,
 }: FlagshipDossierProps) {
   const currentStage = STAGE_ORDER.indexOf(project.stage);
+  const headingLines = data.heading ? data.heading.split("\n") : [];
 
   return (
     <section
@@ -27,9 +31,21 @@ export default function FlagshipDossier({
               id="flagship-dossier-title"
               className="mt-3 max-w-[24ch] font-sans text-[clamp(2rem,4.6vw,3.8rem)] leading-[0.92] font-extrabold tracking-[-0.01em] uppercase [font-stretch:118%]"
             >
-              Inside the
-              <br />
-              lead project
+              {data.heading && headingLines.length === 2 ? (
+                <>
+                  {headingLines[0]}
+                  <br />
+                  {headingLines[1]}
+                </>
+              ) : (
+                data.heading || (
+                  <>
+                    Inside the
+                    <br />
+                    lead project
+                  </>
+                )
+              )}
             </h2>
           </div>
           <p className="max-w-[40ch] text-[0.84rem] leading-[1.6] text-muted/60">

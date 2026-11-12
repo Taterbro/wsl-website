@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import type { PortfolioPortfolioGrid } from "@/lib/cms/generated";
 import { BUSINESS_SECTORS } from "@/lib/businesses";
 import type {
   OpportunityType,
@@ -9,6 +10,8 @@ import type {
   ProjectStage,
 } from "@/lib/projects";
 import ProjectCard from "../../_components/project-card";
+
+const FALLBACK_HEADING = "Find a project";
 
 const STAGES: ProjectStage[] = [
   "Concept",
@@ -50,10 +53,11 @@ const FILTER_LABELS: Record<FilterKey, string> = {
 };
 
 interface PortfolioGridProps {
+  data: PortfolioPortfolioGrid;
   projects: Project[];
 }
 
-export default function PortfolioGrid({ projects }: PortfolioGridProps) {
+export default function PortfolioGrid({ data, projects }: PortfolioGridProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -142,7 +146,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
               id="project-directory-title"
               className="mt-3 font-sans text-[clamp(1.9rem,4vw,3.2rem)] leading-[0.94] font-extrabold tracking-[-0.01em] uppercase [font-stretch:116%]"
             >
-              Find a project
+              {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
           <p
