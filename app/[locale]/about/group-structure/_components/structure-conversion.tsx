@@ -23,17 +23,17 @@ const ROLES: { role: string; copy: string; href: string }[] = [
   {
     role: "Governments & sponsors",
     copy: "Public agencies and project sponsors that need private-sector delivery for water, energy and urban infrastructure.",
-    href: "/contact",
+    href: "/partner-with-us/governments",
   },
   {
     role: "Financial institutions",
     copy: "Banks, DFIs and credit partners covering project debt and structured finance.",
-    href: "/contact",
+    href: "/partner-with-us/financial-institutions",
   },
   {
     role: "Technology partners",
     copy: "Technology owners looking for deployment, localisation and industrial partnerships.",
-    href: "/innovation/technology-partnerships",
+    href: "/partner-with-us/technology-partners",
   },
 ];
 

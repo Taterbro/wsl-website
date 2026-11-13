@@ -123,8 +123,8 @@ export default function SectorConversion({
             <ul className="border-t border-accent/20">
               {roles.map((role) => (
                 <li key={`${role.number}-${role.title}`}>
-                  <a
-                    href={role.href}
+                  <div
+                    // href={role.href}
                     className="group grid grid-cols-[auto_1fr_auto] items-center gap-[clamp(14px,2.4vw,28px)] border-b border-accent/15 py-[clamp(16px,2.2vw,24px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary/5"
                   >
                     <span
@@ -141,13 +141,13 @@ export default function SectorConversion({
                         {role.copy}
                       </span>
                     </span>
-                    <span
+                    {/* <span
                       aria-hidden="true"
                       className="text-muted/60 transition-colors duration-(--transition-normal) ease-(--ease-standard) group-hover:text-accent"
                     >
                       ↗
-                    </span>
-                  </a>
+                    </span> */}
+                  </div>
                 </li>
               ))}
             </ul>

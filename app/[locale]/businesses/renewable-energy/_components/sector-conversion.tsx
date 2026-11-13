@@ -136,7 +136,7 @@ export default function SectorConversion({
               {roles.map((role) => (
                 <li key={role.number} className="bg-sidebar-accent/60">
                   <a
-                    href={role.href}
+                    // href={role.href}
                     className="group flex h-full flex-col gap-3 p-[clamp(18px,2.6vw,30px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-sidebar-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
                   >
                     <span className="font-sans text-[clamp(0.98rem,1.5vw,1.18rem)] leading-[1.15] font-extrabold uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) group-hover:text-accent [font-stretch:114%]">
@@ -145,7 +145,7 @@ export default function SectorConversion({
                     <span className="flex-1 text-[0.88rem] leading-[1.55] text-muted/70">
                       {role.copy}
                     </span>
-                    <span className="inline-flex items-center gap-2 text-[0.74rem] font-semibold tracking-[0.06em] text-accent uppercase">
+                    {/* <span className="inline-flex items-center gap-2 text-[0.74rem] font-semibold tracking-[0.06em] text-accent uppercase">
                       Route me
                       <span
                         aria-hidden="true"
@@ -153,7 +153,7 @@ export default function SectorConversion({
                       >
                         →
                       </span>
-                    </span>
+                    </span> */}
                   </a>
                 </li>
               ))}

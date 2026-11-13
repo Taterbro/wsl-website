@@ -82,7 +82,7 @@ const FALLBACK_FIELDS: OriginField[] = [
       "Placeholder artwork standing in for photography of an industrial processing and manufacturing plant",
     sector: "Industrial development",
     title: "From projects to operating companies",
-    href: "/businesses/industry",
+    href: "/businesses/industrial-development",
   },
   {
     image: null,
@@ -90,7 +90,7 @@ const FALLBACK_FIELDS: OriginField[] = [
       "Placeholder artwork standing in for photography of a digital monitoring and control room",
     sector: "Technology & digital infrastructure",
     title: "Data as an operating asset",
-    href: "/businesses/technology-ai",
+    href: "/businesses/technology-digital-infrastructure",
   },
 ];
 

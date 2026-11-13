@@ -11,7 +11,11 @@ const FALLBACK_HEADING = (
   </>
 );
 
-export default function FounderNext({ data }: { data: FounderGroupCeoFounderNext }) {
+export default function FounderNext({
+  data,
+}: {
+  data: FounderGroupCeoFounderNext;
+}) {
   const heading = data.label || FALLBACK_HEADING;
   const headingLines = data.label ? data.label.split("\n") : [];
 
@@ -72,7 +76,7 @@ export default function FounderNext({ data }: { data: FounderGroupCeoFounderNext
               For investor, government or partnership enquiries, contact the
               group directly.
             </p>
-            <Btn href="/contact">Contact the group</Btn>
+            <Btn href="/partner-with-us">Contact the group</Btn>
           </div>
         </Reveal>
       </div>

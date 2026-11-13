@@ -113,7 +113,7 @@ export default function RelatedImpact({
                 className="border-b border-foreground/15"
               >
                 <Link
-                  href={item.href}
+                  href={item.href || "#"}
                   className="group grid grid-cols-[auto_1fr_auto] items-start gap-x-[clamp(14px,2.4vw,34px)] gap-y-2 py-[clamp(18px,2.6vw,30px)] transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:bg-muted focus-visible:bg-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
                 >
                   <span className="pt-1 font-sans text-[0.6rem] font-extrabold tracking-[0.16em] text-chart-4 tabular-nums [font-stretch:112%]">

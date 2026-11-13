@@ -60,9 +60,6 @@ export default function AdvisoryConversion({
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Btn href="/contact" variant="glow">
-                Contact the group
-              </Btn>
               <Btn href="/about/governance" variant="ghost">
                 Governance framework
               </Btn>
@@ -97,8 +94,8 @@ export default function AdvisoryConversion({
 
           <div className="mt-6 flex flex-col gap-2">
             <p className="max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted/55">
-              {ADVISORY_INTRO.office}. Committee mandates, membership, chairs and
-              appointments are published only once formally constituted and
+              {ADVISORY_INTRO.office}. Committee mandates, membership, chairs
+              and appointments are published only once formally constituted and
               approved.
             </p>
             <p className="max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted/55">

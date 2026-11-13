@@ -19,7 +19,7 @@ const STEPS: { title: string; copy: string }[] = [
 
 const SECONDARY_LINKS: { label: string; href: string }[] = [
   { label: "Newsroom", href: "/insights/media" },
-  { label: "Contact & global offices", href: "/contact" },
+  { label: "Build with Waterlight", href: "/partner-with-us" },
 ];
 
 const FALLBACK_DESCRIPTION =

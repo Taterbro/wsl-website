@@ -210,8 +210,14 @@ export interface StructureRow {
 // PLACEHOLDER — the reporting structure below is indicative and must be
 // confirmed against the approved governance framework.
 export const BOARD_STRUCTURE: StructureRow[] = [
-  { label: "Board", value: "Sets strategy, approves capital, holds the executive" },
-  { label: "Committees", value: "Audit & Risk · Investment & Capital · Remuneration" },
+  {
+    label: "Board",
+    value: "Sets strategy, approves capital, holds the executive",
+  },
+  {
+    label: "Committees",
+    value: "Audit & Risk · Investment & Capital · Remuneration",
+  },
   { label: "Executive", value: "Runs the group inside a delegated mandate" },
 ];
 
@@ -219,21 +225,21 @@ export const BOARD_ROUTES: { role: string; copy: string; href: string }[] = [
   {
     role: "Investors",
     copy: "Institutions and funds assessing the board that signs for capital allocation.",
-    href: "/investments/investor-relations",
+    href: "/partner-with-us/investors",
   },
   {
     role: "Governments",
     copy: "Public agencies checking who stands behind delivery and guarantees.",
-    href: "/contact",
+    href: "/partner-with-us/governments",
   },
   {
     role: "Financial institutions",
     copy: "Banks, DFIs and lenders assessing governance before they commit.",
-    href: "/contact",
+    href: "/partner-with-us/financial-institutions",
   },
   {
     role: "Technology partners",
     copy: "Technology owners seeking a board that understands deployment and scale.",
-    href: "/innovation/technology-partnerships",
+    href: "/partner-with-us/technology-partners",
   },
 ];

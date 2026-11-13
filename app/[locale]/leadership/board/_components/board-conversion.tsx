@@ -59,11 +59,8 @@ export default function BoardConversion({
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Btn href="/contact" variant="glow">
+              <Btn href="/partner-with-us" variant="glow">
                 Partner with us
-              </Btn>
-              <Btn href="/careers" variant="ghost">
-                Careers
               </Btn>
             </div>
           </div>

@@ -4,11 +4,6 @@ import { IhealFrameworkIhealClosing } from "@/lib/cms/generated";
 
 const LINKS: { label: string; href: string; note: string }[] = [
   {
-    label: "Impact overview",
-    href: "/impact",
-    note: "The four Impact routes",
-  },
-  {
     label: "Sustainability",
     href: "/impact/sustainability",
     note: "Operating discipline",

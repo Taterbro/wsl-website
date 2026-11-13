@@ -125,13 +125,15 @@ export default function DecisionGates({
                   </span>
                   {gate.evidence}
                 </p>
-                <a
-                  href={gate.href}
-                  className="mt-4 inline-flex items-center gap-1.5 self-start border-b border-primary/45 pb-0.5 text-[0.62rem] font-semibold tracking-[0.08em] uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
-                >
-                  {gate.link}
-                  <span aria-hidden="true">↗</span>
-                </a>
+                {gate.href && (
+                  <a
+                    href={gate.href}
+                    className="mt-4 inline-flex items-center gap-1.5 self-start border-b border-primary/45 pb-0.5 text-[0.62rem] font-semibold tracking-[0.08em] uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
+                  >
+                    {gate.link}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </li>
             ))}
           </ol>

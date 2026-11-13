@@ -6,7 +6,6 @@ const BTN_BASE_CLASS =
 
 const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
   { label: "Explore the stack", href: "#capabilities", variant: "glow" },
-  { label: "WSWIS platform", href: "/innovation/wswis", variant: "ghost" },
 ];
 
 // PLACEHOLDER — scope descriptors, not a record of delivered projects.

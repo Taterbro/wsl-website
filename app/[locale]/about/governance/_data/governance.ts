@@ -15,7 +15,8 @@ export const GOVERNANCE_BODIES: GovernanceBody[] = [
     key: "board",
     name: "Board of Directors",
     tier: "board",
-    remit: "Holds the group to its mandate: strategy, capital allocation between platforms, major commitments, risk appetite and the appointment of the Group CEO.",
+    remit:
+      "Holds the group to its mandate: strategy, capital allocation between platforms, major commitments, risk appetite and the appointment of the Group CEO.",
     status: "Constituted — composition published once approved and current",
     scope: [
       "Group strategy and mandate",
@@ -29,7 +30,8 @@ export const GOVERNANCE_BODIES: GovernanceBody[] = [
     key: "investment-committee",
     name: "Investment Committee",
     tier: "committee",
-    remit: "Reviews and approves investment cases, structuring approaches and capital commitments within the mandate set by the Board.",
+    remit:
+      "Reviews and approves investment cases, structuring approaches and capital commitments within the mandate set by the Board.",
     status: "Published only as formally constituted",
     scope: [
       "Investment case review and approval",
@@ -42,7 +44,8 @@ export const GOVERNANCE_BODIES: GovernanceBody[] = [
     key: "audit-risk-committee",
     name: "Audit & Risk Committee",
     tier: "committee",
-    remit: "Oversees risk, internal control, external audit and the integrity of reporting across the group and its platforms.",
+    remit:
+      "Oversees risk, internal control, external audit and the integrity of reporting across the group and its platforms.",
     status: "Published only as formally constituted",
     scope: [
       "Enterprise risk framework",
@@ -55,7 +58,8 @@ export const GOVERNANCE_BODIES: GovernanceBody[] = [
     key: "governance-committee",
     name: "Governance & Nominations Committee",
     tier: "committee",
-    remit: "Directs board composition, succession, policy architecture and the governance framework the group operates under.",
+    remit:
+      "Directs board composition, succession, policy architecture and the governance framework the group operates under.",
     status: "Published only as formally constituted",
     scope: [
       "Board composition and skills matrix",
@@ -68,7 +72,8 @@ export const GOVERNANCE_BODIES: GovernanceBody[] = [
     key: "executive",
     name: "Executive Leadership",
     tier: "executive",
-    remit: "Runs the group day to day: origination, structuring, financing, delivery and operations across the platforms.",
+    remit:
+      "Runs the group day to day: origination, structuring, financing, delivery and operations across the platforms.",
     status: "Operating management — biographies published once confirmed",
     scope: [
       "Origination and project development",
@@ -81,7 +86,8 @@ export const GOVERNANCE_BODIES: GovernanceBody[] = [
     key: "assurance",
     name: "Independent Assurance",
     tier: "assurance",
-    remit: "External audit, independent assurance and specialist advisers appointed independently of management, with reporting lines into the Audit & Risk Committee.",
+    remit:
+      "External audit, independent assurance and specialist advisers appointed independently of management, with reporting lines into the Audit & Risk Committee.",
     status: "Providers named only with permission",
     scope: [
       "External financial audit",
@@ -142,45 +148,49 @@ export const DECISION_RIGHTS: {
 
 // PLACEHOLDER — seat placeholders only. Names, titles, affiliations and
 // portraits are published once formally approved and current.
-export const SEATS: { seat: string; body: string; image: string; alt: string }[] =
-  [
-    {
-      seat: "Board seat",
-      body: "Board of Directors",
-      image: "/placeholders/governance-seat-1.png",
-      alt: "Placeholder portrait artwork for an unnamed board member",
-    },
-    {
-      seat: "Independent seat",
-      body: "Board of Directors",
-      image: "/placeholders/governance-seat-2.png",
-      alt: "Placeholder portrait artwork for an unnamed independent director",
-    },
-    {
-      seat: "Committee chair",
-      body: "Audit & Risk Committee",
-      image: "/placeholders/governance-seat-3.png",
-      alt: "Placeholder portrait artwork for an unnamed audit and risk committee chair",
-    },
-    {
-      seat: "Committee chair",
-      body: "Investment Committee",
-      image: "/placeholders/governance-seat-4.png",
-      alt: "Placeholder portrait artwork for an unnamed investment committee chair",
-    },
-    {
-      seat: "Committee member",
-      body: "Governance & Nominations Committee",
-      image: "/placeholders/governance-seat-5.png",
-      alt: "Placeholder portrait artwork for an unnamed governance committee member",
-    },
-    {
-      seat: "Group executive seat",
-      body: "Executive Leadership",
-      image: "/placeholders/governance-seat-6.png",
-      alt: "Placeholder portrait artwork for an unnamed group executive",
-    },
-  ];
+export const SEATS: {
+  seat: string;
+  body: string;
+  image: string;
+  alt: string;
+}[] = [
+  {
+    seat: "Board seat",
+    body: "Board of Directors",
+    image: "/placeholders/governance-seat-1.png",
+    alt: "Placeholder portrait artwork for an unnamed board member",
+  },
+  {
+    seat: "Independent seat",
+    body: "Board of Directors",
+    image: "/placeholders/governance-seat-2.png",
+    alt: "Placeholder portrait artwork for an unnamed independent director",
+  },
+  {
+    seat: "Committee chair",
+    body: "Audit & Risk Committee",
+    image: "/placeholders/governance-seat-3.png",
+    alt: "Placeholder portrait artwork for an unnamed audit and risk committee chair",
+  },
+  {
+    seat: "Committee chair",
+    body: "Investment Committee",
+    image: "/placeholders/governance-seat-4.png",
+    alt: "Placeholder portrait artwork for an unnamed investment committee chair",
+  },
+  {
+    seat: "Committee member",
+    body: "Governance & Nominations Committee",
+    image: "/placeholders/governance-seat-5.png",
+    alt: "Placeholder portrait artwork for an unnamed governance committee member",
+  },
+  {
+    seat: "Group executive seat",
+    body: "Executive Leadership",
+    image: "/placeholders/governance-seat-6.png",
+    alt: "Placeholder portrait artwork for an unnamed group executive",
+  },
+];
 
 // Approval matrix for material claims published on this website, per the
 // internal trust and publishing governance standard.
@@ -199,7 +209,8 @@ export const CLAIM_MATRIX: { claim: string; approval: string }[] = [
   },
   {
     claim: "Country presence",
-    approval: "Evidence of presence, or clearly labelled as target or opportunity",
+    approval:
+      "Evidence of presence, or clearly labelled as target or opportunity",
   },
   {
     claim: "Government relationship",
@@ -219,25 +230,26 @@ export const CLAIM_MATRIX: { claim: string; approval: string }[] = [
   },
 ];
 
-export const GOVERNANCE_ROLES: { role: string; copy: string; href: string }[] = [
-  {
-    role: "Institutional investors",
-    copy: "Partners assessing governance, reporting standards and disclosure discipline before committing capital.",
-    href: "/investments/investor-relations",
-  },
-  {
-    role: "Banks & development institutions",
-    copy: "Financiers who need to know who approves what, and how risk is escalated and recorded.",
-    href: "/contact",
-  },
-  {
-    role: "Auditors & assurance providers",
-    copy: "Independent firms and advisers seeking a governed counterparty and a documented approval route.",
-    href: "/contact",
-  },
-  {
-    role: "Media & regulators",
-    copy: "Journalists, regulators and public bodies requiring verified, on-record information.",
-    href: "/insights/media",
-  },
-];
+export const GOVERNANCE_ROLES: { role: string; copy: string; href: string }[] =
+  [
+    {
+      role: "Institutional investors",
+      copy: "Partners assessing governance, reporting standards and disclosure discipline before committing capital.",
+      href: "/partner-with-us/investors",
+    },
+    {
+      role: "Banks & development institutions",
+      copy: "Financiers who need to know who approves what, and how risk is escalated and recorded.",
+      href: "#",
+    },
+    {
+      role: "Auditors & assurance providers",
+      copy: "Independent firms and advisers seeking a governed counterparty and a documented approval route.",
+      href: "#",
+    },
+    {
+      role: "Media & regulators",
+      copy: "Journalists, regulators and public bodies requiring verified, on-record information.",
+      href: "/insights/media",
+    },
+  ];

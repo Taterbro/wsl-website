@@ -27,17 +27,12 @@ const FALLBACK_ROLES: { role: string; copy: string; href: string }[] = [
   {
     role: "Project owners",
     copy: "Sponsors with land, production or offtake that need structuring and delivery capability.",
-    href: "/projects",
+    href: "/partner-with-us/project-owners",
   },
   {
     role: "Governments & institutions",
     copy: "Public agencies and institutions strengthening food security and market access.",
-    href: "/contact",
-  },
-  {
-    role: "Industry & communities",
-    copy: "Processors, distributors and communities seeking reliable supply and lower loss.",
-    href: "/contact",
+    href: "/partner-with-us/governments",
   },
 ];
 
@@ -126,7 +121,10 @@ export default function SectorConversion({
 
             <ul className="grid list-none grid-cols-2 gap-x-[clamp(20px,3.4vw,48px)] p-0 max-[760px]:grid-cols-1">
               {roles.map((role, index) => (
-                <li key={role.role || index} className="border-t border-accent/20">
+                <li
+                  key={role.role || index}
+                  className="border-t border-accent/20"
+                >
                   <a
                     href={role.href}
                     className="group flex items-start gap-[clamp(10px,1.4vw,16px)] py-[clamp(16px,2.2vw,24px)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"

@@ -102,8 +102,8 @@ export default function SectorConversion({
           <ul className="mt-[clamp(34px,5vw,64px)] grid gap-px border border-accent/20 bg-accent/20 sm:grid-cols-2 lg:grid-cols-4">
             {ROLES.map((role) => (
               <li key={role.number} className="bg-sidebar">
-                <a
-                  href={role.href}
+                <div
+                  // href={role.href}
                   className="group flex h-full flex-col p-[clamp(18px,2.4vw,28px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary/5"
                 >
                   <div className="flex items-center justify-between gap-3">
@@ -126,7 +126,7 @@ export default function SectorConversion({
                   <p className="mt-2 text-[0.8rem] leading-[1.55] text-muted/65">
                     {role.copy}
                   </p>
-                </a>
+                </div>
               </li>
             ))}
           </ul>

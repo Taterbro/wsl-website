@@ -128,7 +128,7 @@ export default function SectorConversion({
             {ROLES.map((role) => (
               <li key={role.number} className="bg-sidebar">
                 <a
-                  href={role.href}
+                  // href={role.href}
                   className="group flex h-full flex-col p-[clamp(18px,2.4vw,28px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-secondary/5"
                 >
                   <div className="flex items-center justify-between gap-3">

@@ -39,18 +39,18 @@ const SECTORS: { label: string; href: string }[] = [
   { label: "Agriculture & Food Systems", href: "/businesses/agriculture" },
   {
     label: "Technology, AI & Digital Infrastructure",
-    href: "/businesses/technology-ai",
+    href: "/businesses/technology-digital-infrastructure",
   },
   {
     label: "Industrial Development & Manufacturing",
-    href: "/businesses/industry",
+    href: "/businesses/industrial development",
   },
   {
     label: "Real Estate & Urban Infrastructure",
     href: "/businesses/real-estate-urban-infrastructure",
   },
   { label: "Logistics & Supply Chains", href: "/businesses/logistics" },
-  { label: "Climate & ESG", href: "/businesses/climate-esg" },
+  { label: "Climate & ESG", href: "/businesses/climate-esg-solutions" },
 ];
 
 export default function VisionMission({

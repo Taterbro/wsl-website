@@ -60,39 +60,10 @@ export default function ExecutiveConversion({
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Btn href="/partner-with-us/project-owners" variant="glow">
+              <Btn href="/partner-with-us" variant="glow">
                 Build with Waterlight
               </Btn>
-              <Btn href="/contact" variant="ghost">
-                Contact the group
-              </Btn>
             </div>
-          </div>
-
-          <div className="mt-[clamp(34px,5vw,58px)] grid grid-cols-4 gap-px bg-accent/20 max-[980px]:grid-cols-2 max-[560px]:grid-cols-1">
-            {EXEC_ROLES.map((item) => (
-              <a
-                key={item.role}
-                href={item.href}
-                className="group flex flex-col gap-3 bg-sidebar-accent/50 p-[clamp(18px,2.6vw,30px)] transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-sidebar-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
-              >
-                <span className="text-[0.66rem] font-semibold tracking-[0.14em] text-accent uppercase">
-                  For
-                </span>
-                <span className="font-sans text-[clamp(1rem,1.6vw,1.3rem)] leading-[1.12] font-extrabold uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) group-hover:text-accent [font-stretch:114%]">
-                  {item.role}
-                </span>
-                <span className="flex-1 text-[0.88rem] leading-[1.55] text-muted/70">
-                  {item.copy}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="text-accent transition-transform duration-(--transition-normal) ease-(--ease-standard) motion-reduce:transition-none group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </a>
-            ))}
           </div>
 
           <p className="mt-6 max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted/55">

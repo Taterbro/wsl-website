@@ -163,7 +163,7 @@ export const ADVISORY_ROLES: { role: string; copy: string; href: string }[] = [
   {
     role: "Senior advisers",
     copy: "Practitioners considering whether to serve on a formally constituted, non-executive committee.",
-    href: "/careers",
+    href: "#",
   },
   {
     role: "Institutional investors",

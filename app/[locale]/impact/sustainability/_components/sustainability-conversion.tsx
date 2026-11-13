@@ -14,7 +14,6 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
 ];
 
 const LINKS: { label: string; href: string }[] = [
-  { label: "Impact overview", href: "/impact" },
   {
     label: "Development partnerships",
     href: "/impact/development-partnerships",
