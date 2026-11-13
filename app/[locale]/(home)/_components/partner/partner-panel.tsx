@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface Role {
   role: string;
   label: string;
   desc: string;
   lead: string;
+  href: string;
 }
 
 const ROLES: Role[] = [
@@ -16,53 +18,51 @@ const ROLES: Role[] = [
     label: "Investor",
     desc: "Capital, funds & family offices",
     lead: "Tell us about your interest as an investor — focus, geography, ticket range and sectors.",
+    href: "/partner-with-us/investors",
   },
   {
     role: "Government",
     label: "Government",
     desc: "Public agencies & PPP delivery",
     lead: "Tell us about the agency, country and priority, and any interest in PPP or joint delivery.",
+    href: "/partner-with-us/governments",
   },
   {
     role: "Financial institution",
     label: "Financial institution",
     desc: "Banks, DFIs & financing",
     lead: "Tell us about the financing type, sectors and geography you cover, and your project criteria.",
+    href: "/partner-with-us/financial-institutions",
   },
   {
     role: "Technology partner",
     label: "Technology partner",
     desc: "Deployment & localisation",
     lead: "Tell us about your technology, deployment model, certifications and target markets.",
+    href: "/partner-with-us/technology-partners",
   },
   {
     role: "Project owner",
     label: "Project owner",
     desc: "Submit an opportunity",
     lead: "Tell us about the project, country, stage, capital need, approvals and ownership.",
+    href: "/partner-with-us/project-owners",
   },
   {
     role: "Joint venture",
     label: "Joint venture",
     desc: "Structure a shared vehicle",
     lead: "Tell us about the sector, your contribution, the market and the structure you have in mind.",
+    href: "/partner-with-us/joint-ventures",
   },
   {
     role: "Africa market entry",
     label: "Africa market entry",
     desc: "Enter a country or sector",
     lead: "Tell us your target country and sector, product or service, and the support you need.",
-  },
-  {
-    role: "GCC market entry",
-    label: "GCC market entry",
-    desc: "Two-way corridor support",
-    lead: "Tell us your target market, sector and any local partnership requirement.",
+    href: "/partner-with-us/market-entry",
   },
 ];
-
-const FIELD_CLASS =
-  "w-full rounded-[2px] border border-accent/20 bg-sidebar/60 px-[14px] py-3 font-sans text-[0.95rem] text-muted transition-colors duration-(--transition-fast) ease-(--ease-standard) focus:border-accent focus:outline-none";
 
 interface PartnerPanelProps {
   heading: React.ReactNode;
@@ -71,72 +71,41 @@ interface PartnerPanelProps {
 
 export default function PartnerPanel({ heading, lede }: PartnerPanelProps) {
   const [role, setRole] = useState<string>(ROLES[0].role);
-  const [name, setName] = useState("");
-  const [org, setOrg] = useState("");
-  const [email, setEmail] = useState("");
-  const [detail, setDetail] = useState("");
-  const [done, setDone] = useState(false);
-  const doneRef = useRef<HTMLDivElement>(null);
 
   const activeRole = ROLES.find((r) => r.role === role) ?? ROLES[0];
-
-  useEffect(() => {
-    if (!done) return;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    doneRef.current?.scrollIntoView({
-      block: "center",
-      behavior: reduce ? "auto" : "smooth",
-    });
-  }, [done]);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    setDone(true);
-    setName("");
-    setOrg("");
-    setEmail("");
-    setDetail("");
-  };
 
   return (
     <>
       <div>
         {heading}
         {lede}
-        <div
-          role="tablist"
-          aria-label="Choose how you want to work with Waterlight"
-          className="grid grid-cols-2 gap-px border border-accent/20 bg-accent/20 max-[760px]:grid-cols-1"
-        >
-          {ROLES.map((item) => (
-            <button
-              key={item.role}
-              type="button"
-              role="tab"
-              aria-selected={role === item.role}
-              tabIndex={role === item.role ? 0 : -1}
-              onClick={() => setRole(item.role)}
-              onFocus={() => setRole(item.role)}
-              className="group flex flex-col gap-1.5 border-0 bg-transparent px-[18px] py-[18px] text-left text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-[rgba(95,227,198,0.08)] aria-selected:bg-accent aria-selected:text-sidebar"
-            >
-              <b className="font-sans text-[0.86rem] font-bold tracking-[0.03em] uppercase [font-stretch:110%]">
-                {item.label}
-              </b>
-              <span className="text-[0.76rem] leading-[1.4] opacity-72 group-aria-selected:opacity-85">
-                {item.desc}
-              </span>
-            </button>
-          ))}
-        </div>
       </div>
-      <div>
+
+      <div
+        aria-label="Choose how you want to work with Waterlight"
+        className="grid grid-cols-2 gap-px border border-accent/20 bg-accent/20 max-[760px]:grid-cols-1"
+      >
+        {ROLES.map((item) => (
+          <Link
+            href={item.href}
+            key={item.role}
+            role="tab"
+            aria-selected={role === item.role}
+            tabIndex={role === item.role ? 0 : -1}
+
+            onFocus={() => setRole(item.role)}
+            className="group flex flex-col gap-1.5 border-0 bg-transparent px-[18px] py-[18px] text-left text-muted transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:bg-[rgba(95,227,198,0.08)] aria-selected:bg-accent aria-selected:text-sidebar"
+          >
+            <b className="font-sans text-[0.86rem] font-bold tracking-[0.03em] uppercase [font-stretch:110%]">
+              {item.label}
+            </b>
+            <span className="text-[0.76rem] leading-[1.4] opacity-72 group-aria-selected:opacity-85">
+              {item.desc}
+            </span>
+          </Link>
+        ))}
+      </div>
+      {/* <div>
         <form
           noValidate
           onSubmit={handleSubmit}
@@ -261,7 +230,7 @@ export default function PartnerPanel({ heading, lede }: PartnerPanelProps) {
             Send enquiry
           </button>
         </form>
-      </div>
+      </div> */}
     </>
   );
 }
