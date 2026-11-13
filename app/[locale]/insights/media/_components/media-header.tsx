@@ -76,7 +76,7 @@ export default function MediaHeader({
           </p>
         </div>
 
-        <div className="mt-[clamp(26px,4vw,44px)] grid grid-cols-1 border-y border-border sm:grid-cols-3">
+        {/* <div className="mt-[clamp(26px,4vw,44px)] grid grid-cols-1 border-y border-border sm:grid-cols-3">
           {pressDesk.map((item, index) => (
             <a
               key={item.href}
@@ -102,7 +102,7 @@ export default function MediaHeader({
               </span>
             </a>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

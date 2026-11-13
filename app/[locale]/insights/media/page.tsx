@@ -58,7 +58,7 @@ export default async function MediaPage() {
         resourceCount={resources.length}
       />
       <MediaCoverage data={data.media_coverage} mentions={mentions} />
-      <MediaResources data={data.media_resources} resources={resources} />
+      {/* <MediaResources data={data.media_resources} resources={resources} /> */}
       <MediaBoilerplate data={data.media_boilerplate} />
       <MediaContact data={data.media_contact} />
     </main>

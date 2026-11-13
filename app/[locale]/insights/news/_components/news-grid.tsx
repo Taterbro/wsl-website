@@ -72,7 +72,7 @@ export default function NewsGrid({ data, items }: NewsGridProps) {
                 {heading}
               </h2>
             </div>
-            <p
+            {/* <p
               aria-live="polite"
               className="text-[0.82rem] text-muted-foreground"
             >
@@ -81,10 +81,10 @@ export default function NewsGrid({ data, items }: NewsGridProps) {
                 {filtered.length}
               </span>{" "}
               of {sourceItems.length} illustrative entries
-            </p>
+            </p> */}
           </div>
 
-          <div
+          {/* <div
             role="group"
             aria-label="Filter news by category"
             className="mt-7 flex flex-wrap gap-2"
@@ -120,7 +120,7 @@ export default function NewsGrid({ data, items }: NewsGridProps) {
                 </button>
               );
             })}
-          </div>
+          </div> */}
 
           <div
             id="news-grid"

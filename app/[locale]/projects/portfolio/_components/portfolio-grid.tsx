@@ -4,11 +4,7 @@ import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { PortfolioPortfolioGrid } from "@/lib/cms/generated";
 import { BUSINESS_SECTORS } from "@/lib/businesses";
-import type {
-  OpportunityType,
-  Project,
-  ProjectStage,
-} from "@/lib/projects";
+import type { OpportunityType, Project, ProjectStage } from "@/lib/projects";
 import ProjectCard from "../../_components/project-card";
 
 const FALLBACK_HEADING = "Find a project";
@@ -32,13 +28,7 @@ const OPPORTUNITY_TYPES: OpportunityType[] = [
   "Strategic Partner",
 ];
 
-const FILTER_KEYS = [
-  "sector",
-  "country",
-  "stage",
-  "type",
-  "impact",
-] as const;
+const FILTER_KEYS = ["sector", "country", "stage", "type", "impact"] as const;
 
 type FilterKey = (typeof FILTER_KEYS)[number];
 
@@ -104,7 +94,8 @@ export default function PortfolioGrid({ data, projects }: PortfolioGridProps) {
       projects.filter((project) => {
         if (filters.sector && project.sectorSlug !== filters.sector)
           return false;
-        if (filters.country && project.country !== filters.country) return false;
+        if (filters.country && project.country !== filters.country)
+          return false;
         if (filters.stage && project.stage !== filters.stage) return false;
         if (filters.type && project.opportunityType !== filters.type)
           return false;
@@ -149,10 +140,7 @@ export default function PortfolioGrid({ data, projects }: PortfolioGridProps) {
               {data.heading || FALLBACK_HEADING}
             </h2>
           </div>
-          <p
-            aria-live="polite"
-            className="text-[0.9rem] text-muted-foreground"
-          >
+          {/* <p aria-live="polite" className="text-[0.9rem] text-muted-foreground">
             <span className="font-semibold text-foreground">
               {filtered.length}
             </span>{" "}
@@ -160,10 +148,10 @@ export default function PortfolioGrid({ data, projects }: PortfolioGridProps) {
             {activeCount > 0
               ? ` · ${activeCount} filter${activeCount === 1 ? "" : "s"} active`
               : ""}
-          </p>
+          </p> */}
         </div>
 
-        <div
+        {/* <div
           id="project-filters"
           className="mt-8 scroll-mt-24 rounded-[2px] border border-border bg-card/40"
         >
@@ -265,7 +253,7 @@ export default function PortfolioGrid({ data, projects }: PortfolioGridProps) {
               })}
             </div>
           ) : null}
-        </div>
+        </div> */}
 
         <div
           key={resultKey}

@@ -48,7 +48,7 @@ export default function EventsList({
                 {data.heading || FALLBACK_HEADING}
               </h2>
             </div>
-            <p
+            {/* <p
               aria-live="polite"
               className="text-[0.82rem] text-muted-foreground"
             >
@@ -57,10 +57,10 @@ export default function EventsList({
                 {filtered.length}
               </span>{" "}
               of {events.length} illustrative entries
-            </p>
+            </p> */}
           </div>
 
-          <div
+          {/* <div
             role="group"
             aria-label="Filter events by status"
             className="mt-7 flex flex-wrap gap-2"
@@ -96,7 +96,7 @@ export default function EventsList({
                 </button>
               );
             })}
-          </div>
+          </div> */}
 
           <ul
             id="events-directory"

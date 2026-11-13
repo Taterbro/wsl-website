@@ -33,13 +33,13 @@ export default function MediaContact({ data }: { data: MediaMediaContact }) {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Link
+              {/* <Link
                 href="/contact"
                 className="inline-flex w-fit items-center justify-center gap-[9px] rounded-[2px] border border-primary bg-primary px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.78rem] font-semibold tracking-[0.06em] text-primary-foreground uppercase transition duration-(--transition-normal) ease-(--ease-standard) hover:-translate-y-px hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transform-none"
               >
                 Contact the group
                 <span aria-hidden="true">↗</span>
-              </Link>
+              </Link> */}
               <Link
                 href="/insights/news"
                 className="inline-flex w-fit items-center justify-center gap-[9px] rounded-[2px] border border-foreground/25 px-[clamp(18px,2.6vw,26px)] py-[clamp(11px,1.2vw,14px)] font-sans text-[0.78rem] font-semibold tracking-[0.06em] text-foreground uppercase transition duration-(--transition-normal) ease-(--ease-standard) hover:bg-foreground hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"

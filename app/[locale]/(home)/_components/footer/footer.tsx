@@ -8,19 +8,12 @@ const GROUP_LINKS: { label: string; href: string }[] = [
   { label: "Our story", href: "/about/our-story" },
   { label: "Vision & mission", href: "/about/vision-mission" },
   { label: "Group structure", href: "/about/group-structure" },
-  { label: "Business platforms", href: "#businesses" },
-  { label: "Innovation & WSWIS", href: "#innovation" },
-  { label: "Impact & sustainability", href: "#impact" },
 ];
 
 const WORK_LINKS: { label: string; href: string }[] = [
-  { label: "Investment opportunities", href: "#investments" },
-  { label: "Project portfolio", href: "#projects" },
+  { label: "Investment opportunities", href: "/investments/opportunities" },
+  { label: "Project portfolio", href: "/projects/project-portfolio" },
   { label: "Partner with us", href: "/partner-with-us" },
-  { label: "Global markets", href: "#markets" },
-  { label: "Insights & newsroom", href: "#insights" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact & global offices", href: "/contact" },
 ];
 
 const ENTITIES: { heading: string; copy: string }[] = [
@@ -107,7 +100,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h4 className="mb-4 font-sans text-[0.76rem] font-bold tracking-[0.06em] text-muted uppercase [font-stretch:110%]">
               Stay informed
             </h4>
@@ -115,7 +108,7 @@ export default function Footer() {
               Research, project news and insights for decision-makers.
             </p>
             <NewsletterForm />
-          </div>
+          </div> */}
         </div>
 
         <div className="grid grid-cols-3 gap-6 border-t border-accent/20 py-7 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
