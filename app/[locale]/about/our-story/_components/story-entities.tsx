@@ -2,44 +2,44 @@ const ENTITIES: {
   name: string;
   role: string;
   copy: string;
-  href: string;
+  href?: string;
   badge?: string;
 }[] = [
   {
     name: "Waterlight Group",
     role: "Master brand",
     copy: "The corporate and global-facing identity of the group.",
-    href: "/about/group-structure",
+    // href: "/about/group-structure",
   },
   {
     name: "Waterlight Africa Investments Ltd",
     role: "Investment & project development",
     copy: "The capital platform for origination, project development and strategic partnerships.",
-    href: "/companies/waterlight-africa-investments",
+    // href: "/companies/waterlight-africa-investments",
   },
   {
     name: "Waterlight Industries Limited",
     role: "Industrial development & manufacturing",
     copy: "Industrial development, processing and production platform.",
-    href: "/companies/waterlight-industries",
+    // href: "/companies/waterlight-industries",
   },
   {
     name: "Waterlight iHEAL Global Limited",
     role: "Human capital & impact enterprise",
     copy: "Innovation, entrepreneurship, human capital and impact-oriented enterprise platform.",
-    href: "/companies/waterlight-iheal-global",
+    // href: "/companies/waterlight-iheal-global",
   },
   {
     name: "Waterlight Limited",
     role: "Corporate & strategic ventures",
     copy: "Ventures carried out strictly under its legally approved mandate.",
-    href: "/companies/waterlight-limited",
+    // href: "/companies/waterlight-limited",
   },
   {
     name: "Waterlight Save Initiative",
     role: "Independent nonprofit",
     copy: "A separate nonprofit development organisation — never presented as a commercial subsidiary.",
-    href: "/impact/waterlight-save-initiative",
+    // href: "/impact/waterlight-save-initiative",
     badge: "Independent nonprofit",
   },
 ];
@@ -93,15 +93,19 @@ export default function StoryEntities() {
                 {entity.copy}
               </p>
               <div className="border-t border-[rgba(9,29,42,0.16)] pt-3">
-                <a
-                  href={entity.href}
-                  className="text-[0.78rem] font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
-                >
-                  Read more
-                  <span aria-hidden="true" className="ml-1.5">
-                    →
-                  </span>
-                </a>
+                {entity.href && (
+                  <a
+                    href={entity.href}
+                    target="_blank"
+
+                    className="text-[0.78rem] font-semibold text-foreground transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
+                  >
+                    View
+                    <span aria-hidden="true" className="ml-1.5">
+                      →
+                    </span>
+                  </a>
+                )}
               </div>
             </article>
           ))}

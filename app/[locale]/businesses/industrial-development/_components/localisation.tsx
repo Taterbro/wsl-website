@@ -113,13 +113,13 @@ export default function Localisation({
                 ))}
               </ol>
 
-              <a
+              {/* <a
                 href="/innovation/technology-partnerships"
                 className="mt-[clamp(20px,2.6vw,30px)] inline-flex items-center gap-2 border-b border-accent pb-1 text-[0.72rem] font-semibold tracking-[0.1em] text-foreground uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:text-accent"
               >
                 Discuss a localisation partnership
                 <span aria-hidden="true">↗</span>
-              </a>
+              </a> */}
             </div>
 
             <div className="relative min-h-[clamp(320px,46vw,620px)] overflow-hidden border border-foreground/15">
@@ -151,8 +151,8 @@ export default function Localisation({
               <div className="absolute right-4 bottom-4 left-4 flex flex-wrap items-end justify-between gap-3">
                 {data.image ? (
                   <p className="max-w-[30ch] text-[0.72rem] leading-[1.5] text-muted/75">
-                    PLACEHOLDER — localisation photography and stage detail to be
-                    supplied.
+                    PLACEHOLDER — localisation photography and stage detail to
+                    be supplied.
                   </p>
                 ) : (
                   <span aria-hidden="true" />

@@ -7,10 +7,14 @@ const FALLBACK_HEADING = "Request the\nfull brief";
 const FALLBACK_DESCRIPTION =
   "Public summaries are deliberately brief. Tell us what you are evaluating and we will route the request to the project team.";
 
-export default function PortfolioCta({ data }: { data: PortfolioPortfolioCta }) {
-  const [headingLine1, headingLine2] = (
-    data.heading || FALLBACK_HEADING
-  ).split("\n");
+export default function PortfolioCta({
+  data,
+}: {
+  data: PortfolioPortfolioCta;
+}) {
+  const [headingLine1, headingLine2] = (data.heading || FALLBACK_HEADING).split(
+    "\n"
+  );
 
   return (
     <section
@@ -49,12 +53,12 @@ export default function PortfolioCta({ data }: { data: PortfolioPortfolioCta }) 
               >
                 Investment opportunities
               </Link>
-              <Link
+              {/* <Link
                 href="/legal/investment-disclaimer"
                 className="text-muted/70 underline decoration-muted/25 underline-offset-4 transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-accent hover:decoration-accent"
               >
                 Investment disclaimer
-              </Link>
+              </Link> */}
             </p>
           </div>
 

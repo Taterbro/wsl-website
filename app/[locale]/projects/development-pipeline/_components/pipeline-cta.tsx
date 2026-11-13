@@ -47,12 +47,12 @@ export default function PipelineCta({
             </p>
             <p className="mt-5 text-[0.72rem] tracking-[0.04em] text-primary-foreground/50 uppercase">
               Public summaries only.{" "}
-              <Link
+              {/* <Link
                 href="/legal/investment-disclaimer"
                 className="underline decoration-primary-foreground/25 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
               >
                 Investment disclaimer
-              </Link>
+              </Link> */}
             </p>
           </div>
 

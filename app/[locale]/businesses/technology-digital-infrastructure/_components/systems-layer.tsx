@@ -107,13 +107,13 @@ export default function SystemsLayer({
               ))}
             </ol>
 
-            <a
+            {/* <a
               href="/innovation/wswis"
               className="mt-[clamp(22px,3vw,32px)] inline-flex items-center gap-2 text-[0.78rem] font-semibold tracking-[0.08em] text-accent uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               Explore the WSWIS platform
               <span aria-hidden="true">→</span>
-            </a>
+            </a> */}
           </div>
 
           <div className="relative min-h-[clamp(340px,48vw,680px)] overflow-hidden border border-accent/20 bg-sidebar-accent">

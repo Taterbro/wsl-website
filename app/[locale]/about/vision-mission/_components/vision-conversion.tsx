@@ -18,37 +18,37 @@ const LEGACY_ROLES: Role[] = [
   {
     role: "Investors",
     copy: "Capital, funds and family offices looking for structured, essential-need exposure.",
-    href: "/investments",
+    href: "/partner-with-us/investors",
     link: "Investment opportunities",
   },
   {
     role: "Governments",
     copy: "Public agencies seeking private-sector delivery for water, energy and urban infrastructure.",
-    href: "/contact",
+    href: "/partner-with-us/governments",
     link: "Start a conversation",
   },
   {
     role: "Financial institutions",
     copy: "Banks, DFIs and financing partners covering project debt and structured credit.",
-    href: "/contact",
+    href: "/partner-with-us/financial-institutions",
     link: "Discuss financing",
   },
   {
     role: "Technology partners",
     copy: "Technology owners seeking deployment, localisation and industrial partnerships.",
-    href: "/innovation/technology-partnerships",
+    href: "/partner-with-us/technology-partners",
     link: "Technology partnerships",
   },
   {
     role: "Project owners",
     copy: "Sponsors with a project that needs capital, structuring and delivery capability.",
-    href: "/projects",
+    href: "/partner-with-us/project-owners",
     link: "View the portfolio",
   },
   {
     role: "Market entry",
     copy: "Companies and institutions entering an African market or corridor.",
-    href: "/global-markets",
+    href: "/partner-with-us/market-entry",
     link: "Global markets",
   },
 ];
@@ -56,16 +56,15 @@ const LEGACY_ROLES: Role[] = [
 const FALLBACK_ROLES = LEGACY_ROLES;
 
 const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
-  { label: "Partner with us", href: "/contact", variant: "glow" },
-  { label: "Careers", href: "/careers", variant: "ghost" },
+  { label: "Partner with us", href: "/partner-with-us", variant: "glow" },
 ];
 
 function toRole(
   role: VisionConversionData["roles"][number],
   index: number
 ): Role {
-  const legacy = LEGACY_ROLES.find((item) => item.role === role.role) ??
-    LEGACY_ROLES[index];
+  const legacy =
+    LEGACY_ROLES.find((item) => item.role === role.role) ?? LEGACY_ROLES[index];
 
   return {
     role: role.role || legacy?.role || "",
@@ -170,9 +169,9 @@ export default function VisionConversion({
           </ul>
 
           <p className="mt-6 max-w-[78ch] text-[0.74rem] leading-[1.55] text-muted/55">
-            Confidential investment material is never published on this
-            website. Approved summaries are shown here, with full documentation
-            released only through an authenticated process.
+            Confidential investment material is never published on this website.
+            Approved summaries are shown here, with full documentation released
+            only through an authenticated process.
           </p>
         </div>
       </section>

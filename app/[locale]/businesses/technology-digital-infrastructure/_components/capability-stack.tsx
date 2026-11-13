@@ -156,13 +156,13 @@ export default function CapabilityStack({
               {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
-          <a
+          {/* <a
             href="/innovation/wswis"
             className="inline-flex items-center gap-2 border-b border-primary/30 pb-1 text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
             The WSWIS platform
             <span aria-hidden="true">→</span>
-          </a>
+          </a> */}
         </div>
 
         <div className="mt-[clamp(30px,4.4vw,52px)] grid gap-[clamp(20px,3.4vw,44px)] lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
@@ -247,7 +247,9 @@ export default function CapabilityStack({
                     aria-label={
                       active === index && layer.alt ? layer.alt : undefined
                     }
-                    aria-hidden={active === index && layer.alt ? undefined : true}
+                    aria-hidden={
+                      active === index && layer.alt ? undefined : true
+                    }
                     className={cn(
                       "absolute inset-0 bg-cover bg-center transition-opacity duration-(--transition-slower) ease-(--ease-standard) motion-reduce:transition-none",
                       active === index ? "opacity-100" : "opacity-0"
@@ -272,7 +274,10 @@ export default function CapabilityStack({
                   </p>
                 </div>
 
-                <div key={active} className="motion-safe:animate-slide-in motion-reduce:animate-none">
+                <div
+                  key={active}
+                  className="motion-safe:animate-slide-in motion-reduce:animate-none"
+                >
                   <p className="text-[0.6rem] font-semibold tracking-[0.2em] text-accent uppercase">
                     Capability
                   </p>

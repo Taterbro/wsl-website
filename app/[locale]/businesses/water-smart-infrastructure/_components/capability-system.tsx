@@ -129,7 +129,10 @@ export default function CapabilitySystem({
         <div className="flex flex-wrap items-end justify-between gap-[clamp(18px,3vw,40px)]">
           <div className="max-w-[58ch]">
             <p className="mb-6 flex items-center gap-3 text-[0.78rem] font-semibold tracking-[0.1em] text-primary uppercase">
-              <span aria-hidden="true" className="h-px w-[clamp(24px,4vw,56px)] bg-primary/45" />
+              <span
+                aria-hidden="true"
+                className="h-px w-[clamp(24px,4vw,56px)] bg-primary/45"
+              />
               02 — System capabilities
             </p>
             <h2
@@ -150,13 +153,13 @@ export default function CapabilitySystem({
               {data.description || FALLBACK_DESCRIPTION}
             </p>
           </div>
-          <a
+          {/* <a
             href="/innovation/wswis"
             className="inline-flex items-center gap-2 border-b border-primary/30 pb-1 text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
             The WSWIS flow
             <span aria-hidden="true">→</span>
-          </a>
+          </a> */}
         </div>
 
         <div className="mt-[clamp(30px,4.4vw,52px)] grid gap-px border border-accent/20 bg-accent/20 lg:grid-cols-[1.55fr_0.45fr]">
@@ -354,17 +357,17 @@ export default function CapabilitySystem({
                 ))}
               </ul>
             </div>
-            <a
+            {/* <a
               href="/innovation/wswis"
               className="mt-10 inline-flex items-center gap-2 text-[0.74rem] font-semibold tracking-[0.08em] text-accent uppercase transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               How the system runs
               <span aria-hidden="true">→</span>
-            </a>
+            </a> */}
           </div>
         </div>
 
-        <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.74rem] leading-[1.6] text-muted-foreground/75">
+        {/* <p className="mt-[clamp(16px,2.2vw,24px)] max-w-[82ch] text-[0.74rem] leading-[1.6] text-muted-foreground/75">
           Scope capabilities, not a record of delivered projects. The WSWIS flow
           — solar, treatment, smart storage, intelligent distribution, digital
           monitoring, predictive maintenance and reliable access — is described
@@ -376,7 +379,7 @@ export default function CapabilitySystem({
             WSWIS page
           </a>
           .
-        </p>
+        </p> */}
       </div>
     </section>
   );

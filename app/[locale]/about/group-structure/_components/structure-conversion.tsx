@@ -5,8 +5,8 @@ const BTN_BASE_CLASS =
   "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-transparent px-[26px] py-[15px] font-sans text-[0.8rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard)";
 
 const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
-  { label: "Partner with us", href: "/contact", variant: "glow" },
-  { label: "Careers", href: "/careers", variant: "ghost" },
+  { label: "Partner with us", href: "/partner-with-us", variant: "glow" },
+  // { label: "Careers", href: "/careers", variant: "ghost" },
 ];
 
 const FALLBACK_HEADING = "Start with the\nright entity.";

@@ -54,16 +54,16 @@ export default function CorridorModule({
             </p>
             <p className="mt-4 text-[0.98rem] leading-[1.7] text-muted-foreground">
               {/* PLACEHOLDER: label as Target market / strategic dialogue unless confirmed operating presence or signed partnership. */}
-              Shown here as positioning — no agreements, named partners, entities or
-              capital commitments are implied.
+              Shown here as positioning — no agreements, named partners,
+              entities or capital commitments are implied.
             </p>
             <div className="mt-8">
-              <Link
+              {/* <Link
                 href="/global-markets/gcc"
                 className="inline-flex items-center gap-2 rounded-[2px] border border-primary/40 px-[clamp(18px,3vw,26px)] py-[clamp(10px,1.2vw,12px)] font-sans text-[0.8rem] font-semibold tracking-[0.06em] text-primary uppercase transition-all duration-(--transition-normal) ease-(--ease-standard) hover:border-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 Explore GCC Markets
-              </Link>
+              </Link> */}
             </div>
           </Reveal>
           <Reveal className="relative">

@@ -91,7 +91,7 @@ export default function StructureHero({
             <p className="mt-[clamp(20px,3vw,30px)] max-w-[54ch] text-[clamp(1rem,1.35vw,1.18rem)] leading-[1.55] text-muted/85">
               {data.description || FALLBACK_DESCRIPTION}
             </p>
-            <div className="mt-[clamp(26px,3.5vw,38px)] flex flex-wrap items-center gap-3">
+            {/* <div className="mt-[clamp(26px,3.5vw,38px)] flex flex-wrap items-center gap-3">
               {CTAS.map((cta) => (
                 <a
                   key={cta.href}
@@ -105,7 +105,7 @@ export default function StructureHero({
                   {cta.label}
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           <figure className="relative">

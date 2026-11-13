@@ -155,13 +155,13 @@ export default function CapabilityLine({
             <p className="text-[clamp(0.95rem,1.2vw,1.05rem)] leading-[1.6] text-foreground/70">
               {data.description || FALLBACK_DESCRIPTION}
             </p>
-            <a
+            {/* <a
               href="/innovation/technology-partnerships"
               className="mt-5 inline-flex items-center gap-2 border-b border-accent pb-1 text-[0.72rem] font-semibold tracking-[0.1em] text-foreground uppercase transition-colors duration-(--transition-normal) ease-(--ease-standard) hover:text-accent"
             >
               Technology partnerships
               <span aria-hidden="true">↗</span>
-            </a>
+            </a> */}
           </div>
         </div>
 

@@ -47,10 +47,12 @@ export default function RelatedCompany({
               </div>
 
               <Link
-                href="/companies/waterlight-iheal-global"
+                href="https://waterlightsave.africa/i-heal/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex w-fit items-center justify-center gap-[9px] whitespace-nowrap rounded-[2px] border border-foreground/25 px-[clamp(16px,2.2vw,22px)] py-[clamp(10px,1.1vw,13px)] font-sans text-[0.72rem] font-semibold tracking-[0.06em] uppercase transition duration-(--transition-normal) ease-(--ease-standard) hover:bg-foreground hover:text-background lg:justify-self-end"
               >
-                Company page
+                Learn more
                 <span aria-hidden="true">↗</span>
               </Link>
             </div>

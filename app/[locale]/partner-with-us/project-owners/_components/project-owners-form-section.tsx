@@ -12,7 +12,10 @@ export default function ProjectOwnersFormSection() {
       <div className="mx-auto w-full max-w-[980px] px-[clamp(20px,5vw,72px)]">
         <header className="max-w-[62ch]">
           <p className="mb-5 flex items-center gap-3 text-[0.78rem] font-semibold tracking-[0.1em] text-primary uppercase">
-            <span aria-hidden="true" className="h-px w-[clamp(24px,4vw,56px)] bg-primary" />
+            <span
+              aria-hidden="true"
+              className="h-px w-[clamp(24px,4vw,56px)] bg-primary"
+            />
             Enquiry
           </p>
           <h2
@@ -27,11 +30,14 @@ export default function ProjectOwnersFormSection() {
         </header>
 
         <div className="mt-[clamp(26px,3.6vw,40px)]">
-          <EnquiryForm config={config} sourcePage="/partner-with-us/project-owners" />
+          <EnquiryForm
+            config={config}
+            sourcePage="/partner-with-us/project-owners"
+          />
         </div>
 
-        <p className="mt-6 text-[0.76rem] leading-[1.6] text-muted-foreground">
-          {/* PLACEHOLDER: legal sign-off required. */}
+        {/* <p className="mt-6 text-[0.76rem] leading-[1.6] text-muted-foreground">
+         
           By submitting, you agree to our{" "}
           <a
             href={config.privacyHref}
@@ -47,7 +53,7 @@ export default function ProjectOwnersFormSection() {
             Investment Disclaimer
           </a>
           .
-        </p>
+        </p> */}
       </div>
     </section>
   );

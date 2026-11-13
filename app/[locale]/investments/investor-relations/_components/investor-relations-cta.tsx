@@ -72,12 +72,12 @@ export default function InvestorRelationsCta({
             Investment disclaimer
           </Link>{" "} */}
           ·{" "}
-          <Link
+          {/* <Link
             href="/legal/privacy"
             className="underline transition-colors hover:text-primary"
           >
             Privacy
-          </Link>
+          </Link> */}
         </p>
       </div>
     </section>

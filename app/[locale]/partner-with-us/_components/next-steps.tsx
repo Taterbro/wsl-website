@@ -108,12 +108,12 @@ export default function NextSteps({ data }: { data: PartnerWithUsNextSteps }) {
           <p className="max-w-[56ch] text-[0.74rem] leading-[1.55] text-muted-foreground">
             {/* PLACEHOLDER: legal review required for consent and cross-border data. */}
             Nothing confidential is shared through these forms.{" "}
-            <Link
+            {/* <Link
               href="/legal/investment-disclaimer"
               className="underline decoration-border underline-offset-4 transition-colors duration-(--transition-fast) ease-(--ease-standard) hover:text-primary"
             >
               Investment disclaimer
-            </Link>
+            </Link> */}
             .
           </p>
         </div>

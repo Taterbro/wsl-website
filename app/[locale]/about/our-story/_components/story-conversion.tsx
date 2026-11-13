@@ -1,7 +1,7 @@
 import type { OurStoryStoryConversion } from "@/lib/cms/generated";
 
 type Role = OurStoryStoryConversion["roles"][number] & {
-  href: string;
+  href?: string;
   cta: string;
 };
 
@@ -14,37 +14,31 @@ const LEGACY_ROLES: Role[] = [
   {
     role: "Investors",
     copy: "Capital, funds and family offices looking for structured, essential-need exposure.",
-    href: "/investments",
     cta: "Investment opportunities",
   },
   {
     role: "Governments",
     copy: "Public agencies seeking public-private delivery for water, energy and urban infrastructure.",
-    href: "/contact",
     cta: "Start a conversation",
   },
   {
     role: "Financial institutions",
     copy: "Banks, DFIs and financing partners covering project debt and structured credit.",
-    href: "/contact",
     cta: "Discuss financing",
   },
   {
     role: "Technology partners",
     copy: "Technology owners seeking deployment, localisation and industrial partnerships.",
-    href: "/innovation/technology-partnerships",
     cta: "Technology partnerships",
   },
   {
     role: "Project owners",
     copy: "Sponsors with a project that needs capital, structuring and delivery capability.",
-    href: "/projects",
     cta: "View the portfolio",
   },
   {
     role: "Market entry",
     copy: "Companies and institutions entering an African market or corridor.",
-    href: "/global-markets",
     cta: "Global markets",
   },
 ];
@@ -60,8 +54,8 @@ function toRole(
   role: OurStoryStoryConversion["roles"][number],
   index: number
 ): Role {
-  const legacy = LEGACY_ROLES.find((item) => item.role === role.role) ??
-    LEGACY_ROLES[index];
+  const legacy =
+    LEGACY_ROLES.find((item) => item.role === role.role) ?? LEGACY_ROLES[index];
 
   return {
     role: role.role || legacy?.role || "",
@@ -115,7 +109,7 @@ export default function StoryConversion({
             <p className="max-w-[54ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-normal text-muted/80">
               {data.description || FALLBACK_DESCRIPTION}
             </p>
-            <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
+            {/* <div className="mt-[clamp(22px,3vw,32px)] flex flex-wrap items-center gap-3">
               {CTAS.map((cta) => (
                 <a
                   key={cta.href}
@@ -129,7 +123,7 @@ export default function StoryConversion({
                   {cta.label}
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 

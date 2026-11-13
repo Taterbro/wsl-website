@@ -11,7 +11,7 @@ const CTAS: { label: string; href: string; variant: "glow" | "ghost" }[] = [
     href: "/about/group-structure",
     variant: "glow",
   },
-  { label: "Start a conversation", href: "/contact", variant: "ghost" },
+  // { label: "Start a conversation", href: "/contact", variant: "ghost" },
 ];
 
 const FALLBACK_DESCRIPTION =
