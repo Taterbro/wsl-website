@@ -99,7 +99,9 @@ function toGridProject(project: Project): GridProject {
 }
 
 export default function ProjectGrid({ projects }: { projects: Project[] }) {
-  const items = projects.length ? projects.map(toGridProject) : FALLBACK_PROJECTS;
+  const items = projects.length
+    ? projects.map(toGridProject)
+    : FALLBACK_PROJECTS;
 
   const sectors: string[] = [];
   for (const project of items) {
@@ -120,7 +122,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
         aria-label="Filter projects by sector"
         className="mt-[clamp(26px,4vw,40px)] mb-[34px] flex flex-wrap gap-2"
       >
-        {["all", ...sectors].map((sector) => (
+        {/* {["all", ...sectors].map((sector) => (
           <button
             key={sector}
             type="button"
@@ -130,7 +132,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
           >
             {sector === "all" ? "All" : sector}
           </button>
-        ))}
+        ))} */}
       </div>
       <div className="grid grid-cols-3 gap-px border border-[rgba(9,29,42,0.16)] bg-[rgba(9,29,42,0.16)] max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
         {visible.map((project) => (
