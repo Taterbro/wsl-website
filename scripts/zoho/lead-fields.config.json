@@ -1,0 +1,227 @@
+﻿{
+  "module": "Leads",
+  "fields": [
+    {
+      "formField": "sectorInterest",
+      "field_label": "Sector Interest",
+      "data_type": "picklist",
+      "pick_list_values": [
+        {
+          "display_value": "Water & Smart Infrastructure",
+          "actual_value": "Water & Smart Infrastructure"
+        },
+        {
+          "display_value": "Renewable Energy",
+          "actual_value": "Renewable Energy"
+        },
+        {
+          "display_value": "Agriculture & Food Systems",
+          "actual_value": "Agriculture & Food Systems"
+        },
+        {
+          "display_value": "Technology & Digital Infrastructure",
+          "actual_value": "Technology & Digital Infrastructure"
+        },
+        {
+          "display_value": "Industrial Development",
+          "actual_value": "Industrial Development"
+        },
+        {
+          "display_value": "Real Estate & Urban Infrastructure",
+          "actual_value": "Real Estate & Urban Infrastructure"
+        },
+        {
+          "display_value": "Logistics & Supply Chains",
+          "actual_value": "Logistics & Supply Chains"
+        },
+        {
+          "display_value": "Climate & ESG Solutions",
+          "actual_value": "Climate & ESG Solutions"
+        }
+      ]
+    },
+    {
+      "formField": "ticketRange",
+      "field_label": "Indicative Ticket Size",
+      "data_type": "picklist",
+      "pick_list_values": [
+        { "display_value": "$250k - $1M", "actual_value": "$250k - $1M" },
+        { "display_value": "$1M - $5M", "actual_value": "$1M - $5M" },
+        { "display_value": "$5M - $10M", "actual_value": "$5M - $10M" },
+        { "display_value": "$10M - $25M", "actual_value": "$10M - $25M" },
+        { "display_value": "$25M - $50M", "actual_value": "$25M - $50M" },
+        { "display_value": "$50M+", "actual_value": "$50M+" },
+        { "display_value": "Undisclosed", "actual_value": "Undisclosed" }
+      ]
+    },
+    {
+      "formField": "projectPriority",
+      "field_label": "Project Priority",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "pppInterest",
+      "field_label": "PPP Interest",
+      "data_type": "picklist",
+      "pick_list_values": [
+        { "display_value": "Yes", "actual_value": "Yes" },
+        { "display_value": "Maybe", "actual_value": "Maybe" },
+        { "display_value": "No", "actual_value": "No" }
+      ]
+    },
+    {
+      "formField": "financingType",
+      "field_label": "Financing Type",
+      "data_type": "picklist",
+      "pick_list_values": [
+        { "display_value": "Debt", "actual_value": "Debt" },
+        { "display_value": "Mezzanine", "actual_value": "Mezzanine" },
+        { "display_value": "Blended", "actual_value": "Blended" },
+        { "display_value": "Guarantee", "actual_value": "Guarantee" },
+        { "display_value": "Other", "actual_value": "Other" }
+      ]
+    },
+    {
+      "formField": "geography",
+      "field_label": "Geography Focus",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "technology",
+      "field_label": "Technology",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "deploymentModel",
+      "field_label": "Deployment Model",
+      "data_type": "picklist",
+      "pick_list_values": [
+        { "display_value": "Licence", "actual_value": "Licence" },
+        { "display_value": "JV", "actual_value": "JV" },
+        { "display_value": "Distribution", "actual_value": "Distribution" },
+        { "display_value": "OEM", "actual_value": "OEM" },
+        { "display_value": "Other", "actual_value": "Other" }
+      ]
+    },
+    {
+      "formField": "targetMarkets",
+      "field_label": "Target Markets",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "stage",
+      "field_label": "Project Stage",
+      "data_type": "picklist",
+      "pick_list_values": [
+        { "display_value": "Concept", "actual_value": "Concept" },
+        { "display_value": "Development", "actual_value": "Development" },
+        {
+          "display_value": "Investment Ready",
+          "actual_value": "Investment Ready"
+        },
+        { "display_value": "Financing", "actual_value": "Financing" },
+        {
+          "display_value": "Under Construction",
+          "actual_value": "Under Construction"
+        },
+        { "display_value": "Operational", "actual_value": "Operational" }
+      ]
+    },
+    {
+      "formField": "capitalNeed",
+      "field_label": "Capital Need",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "approvals",
+      "field_label": "Approvals Status",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "ownership",
+      "field_label": "Ownership Structure",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "contribution",
+      "field_label": "Contribution",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "market",
+      "field_label": "Market Geography",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "proposedStructure",
+      "field_label": "Proposed Structure",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "entryMarket",
+      "field_label": "Entry Market",
+      "data_type": "picklist",
+      "pick_list_values": [
+        { "display_value": "Africa", "actual_value": "Africa" },
+        { "display_value": "GCC", "actual_value": "GCC" }
+      ]
+    },
+    {
+      "formField": "targetCountry",
+      "field_label": "Target Country",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "productService",
+      "field_label": "Product Service",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "desiredSupport",
+      "field_label": "Desired Support",
+      "data_type": "textarea",
+      "textarea": { "type": "small" }
+    },
+    {
+      "formField": "consent",
+      "field_label": "Privacy Consent",
+      "data_type": "boolean"
+    },
+    {
+      "formField": "route",
+      "field_label": "Enquiry Route",
+      "data_type": "text",
+      "length": 120
+    },
+    {
+      "formField": "sourcePage",
+      "field_label": "Source Page",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "projectSlug",
+      "field_label": "Project Slug",
+      "data_type": "text",
+      "length": 255
+    },
+    {
+      "formField": "submittedAt",
+      "field_label": "Submitted At",
+      "data_type": "text",
+      "length": 40
+    }
+  ]
+}
