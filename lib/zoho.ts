@@ -27,16 +27,39 @@ async function getAccessToken() {
   return result.access_token as string;
 }
 
-type Lead = {
-  firstName?: string;
+export type Lead = {
+  firstName: string;
   lastName: string;
-  email?: string;
-  phone?: string;
+  workEmail: string;
+  organisation?: string;
+  roleTitle?: string;
+  country?: string;
   message?: string;
+  [key: string]: string | undefined;
 };
 
 export async function createLead(lead: Lead) {
   const accessToken = await getAccessToken();
+
+  const {
+    firstName,
+    lastName,
+    workEmail,
+    organisation,
+    roleTitle,
+    country,
+    message,
+    ...otherFields
+  } = lead;
+
+  const additionalDetails = Object.entries(otherFields)
+    .filter(([, value]) => typeof value === "string" && value.trim())
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("\n");
+
+  const description = [message, additionalDetails]
+    .filter(Boolean)
+    .join("\n\n");
 
   const response = await fetch(`${API_DOMAIN}/crm/v8/Leads`, {
     method: "POST",
@@ -47,11 +70,13 @@ export async function createLead(lead: Lead) {
     body: JSON.stringify({
       data: [
         {
-          First_Name: lead.firstName,
-          Last_Name: lead.lastName,
-          Email: lead.email,
-          Phone: lead.phone,
-          Description: lead.message,
+          First_Name: firstName,
+          Last_Name: lastName,
+          Email: workEmail,
+          Company: organisation,
+          Designation: roleTitle,
+          Country: country,
+          Description: description,
         },
       ],
     }),

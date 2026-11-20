@@ -1,5 +1,5 @@
 // Canonical audience routes for /partner-with-us ("Build with Waterlight").
-// Form fields, validation, labels and HubSpot mapping are added here as each
+// Form fields, validation, labels and Zoho mapping are added here as each
 // child route is built. Do not define route slugs or labels inline.
 
 export interface EnquiryRoute {

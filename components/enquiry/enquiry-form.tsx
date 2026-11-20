@@ -104,12 +104,20 @@ export default function EnquiryForm({
       sourcePage: sourcePage ?? window.location.pathname,
       projectSlug: projectSlug ?? null,
       submittedAt: new Date().toISOString(),
+      _hp: honeypotRef.current?.value ?? "",
       ...values,
     };
     try {
-      // PLACEHOLDER: confirm HubSpot form fields and property names with whoever owns the HubSpot account.
-      // Submit via a Next.js server action or route handler. Never call HubSpot from the client with a private token.
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Enquiry submission failed");
+      }
+
       onSubmitted?.(payload);
       setStatus("success");
       const reset: Record<string, string> = {};
@@ -353,7 +361,6 @@ export default function EnquiryForm({
       </div>
 
       <p className="mt-6 text-[0.76rem] leading-[1.6] text-muted-foreground">
-        {/* PLACEHOLDER: confirm HubSpot form fields and property names with whoever owns the HubSpot account. */}
         No confidential documents are shared through this form. Materials are
         released only through an approved, authenticated process.
       </p>

@@ -25,7 +25,7 @@ export interface EnquiryRouteConfig {
   successCopy: string;
   privacyHref: string;
   disclaimerHref?: string;
-  mapToHubspot?: boolean;
+  mapToZoho?: boolean;
 }
 
 import { BUSINESS_SECTORS } from "@/lib/businesses";
@@ -68,14 +68,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
     disclaimerHref: "/legal/investment-disclaimer",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
@@ -144,14 +151,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
     successCopy:
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
@@ -217,14 +231,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
     successCopy:
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
@@ -297,14 +318,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
     successCopy:
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
@@ -378,14 +406,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
     disclaimerHref: "/legal/investment-disclaimer",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
@@ -479,14 +514,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
     successCopy:
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
@@ -565,14 +607,21 @@ export const ENQUIRY_ROUTE_CONFIGS: Record<string, EnquiryRouteConfig> = {
     successCopy:
       "Thanks. Your enquiry has been received. Our team will review it and be in touch.",
     privacyHref: "/legal/privacy",
-    mapToHubspot: true,
+    mapToZoho: true,
     fields: [
       {
-        name: "fullName",
-        label: "Full name",
+        name: "firstName",
+        label: "First name",
         type: "text",
         required: true,
-        autocomplete: "name",
+        autocomplete: "given-name",
+      },
+      {
+        name: "lastName",
+        label: "Last name",
+        type: "text",
+        required: true,
+        autocomplete: "family-name",
       },
       {
         name: "workEmail",
