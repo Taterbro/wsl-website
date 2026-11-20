@@ -1,6 +1,358 @@
 {
   "module": "Leads",
-  "generatedAt": null,
-  "mapping": {},
-  "results": []
+  "generatedAt": "2026-11-20T00:50:18.825Z",
+  "mapping": {
+    "sectorInterest": {
+      "api_name": "Sector_Interest",
+      "field_label": "Sector Interest",
+      "id": "7666666000000726002",
+      "data_type": "picklist"
+    },
+    "ticketRange": {
+      "api_name": "Indicative_Ticket_Size",
+      "field_label": "Indicative Ticket Size",
+      "id": "7666666000000726019",
+      "data_type": "picklist"
+    },
+    "projectPriority": {
+      "api_name": "Project_Priority",
+      "field_label": "Project Priority",
+      "id": "7666666000000726034",
+      "data_type": "text"
+    },
+    "pppInterest": {
+      "api_name": "PPP_Interest",
+      "field_label": "PPP Interest",
+      "id": "7666666000000726043",
+      "data_type": "picklist"
+    },
+    "financingType": {
+      "api_name": "Financing_Type",
+      "field_label": "Financing Type",
+      "id": "7666666000000726055",
+      "data_type": "picklist"
+    },
+    "geography": {
+      "api_name": "Geography_Focus",
+      "field_label": "Geography Focus",
+      "id": "7666666000000727001",
+      "data_type": "text"
+    },
+    "technology": {
+      "api_name": "Technology",
+      "field_label": "Technology",
+      "id": "7666666000000727009",
+      "data_type": "text"
+    },
+    "deploymentModel": {
+      "api_name": "Deployment_Model",
+      "field_label": "Deployment Model",
+      "id": "7666666000000727018",
+      "data_type": "picklist"
+    },
+    "targetMarkets": {
+      "api_name": "Target_Markets",
+      "field_label": "Target Markets",
+      "id": "7666666000000727031",
+      "data_type": "text"
+    },
+    "stage": {
+      "api_name": "Project_Stage",
+      "field_label": "Project Stage",
+      "id": "7666666000000727040",
+      "data_type": "picklist"
+    },
+    "capitalNeed": {
+      "api_name": "Capital_Need",
+      "field_label": "Capital Need",
+      "id": "7666666000000728001",
+      "data_type": "text"
+    },
+    "approvals": {
+      "api_name": "Approvals_Status",
+      "field_label": "Approvals Status",
+      "id": "7666666000000728009",
+      "data_type": "text"
+    },
+    "ownership": {
+      "api_name": "Ownership_Structure",
+      "field_label": "Ownership Structure",
+      "id": "7666666000000728017",
+      "data_type": "text"
+    },
+    "contribution": {
+      "api_name": "Contribution",
+      "field_label": "Contribution",
+      "id": "7666666000000728025",
+      "data_type": "text"
+    },
+    "market": {
+      "api_name": "Market_Geography",
+      "field_label": "Market Geography",
+      "id": "7666666000000728033",
+      "data_type": "text"
+    },
+    "proposedStructure": {
+      "api_name": "Proposed_Structure",
+      "field_label": "Proposed Structure",
+      "id": "7666666000000729001",
+      "data_type": "text"
+    },
+    "entryMarket": {
+      "api_name": "Entry_Market",
+      "field_label": "Entry Market",
+      "id": "7666666000000729010",
+      "data_type": "picklist"
+    },
+    "targetCountry": {
+      "api_name": "Target_Country",
+      "field_label": "Target Country",
+      "id": "7666666000000729020",
+      "data_type": "text"
+    },
+    "productService": {
+      "api_name": "Product_Service",
+      "field_label": "Product Service",
+      "id": "7666666000000729028",
+      "data_type": "text"
+    },
+    "desiredSupport": {
+      "api_name": "Desired_Support",
+      "field_label": "Desired Support",
+      "id": "7666666000000729036",
+      "data_type": "textarea"
+    },
+    "consent": {
+      "api_name": "Privacy_Consent",
+      "field_label": "Privacy Consent",
+      "id": "7666666000000730001",
+      "data_type": "boolean"
+    },
+    "route": {
+      "api_name": "Enquiry_Route",
+      "field_label": "Enquiry Route",
+      "id": "7666666000000730009",
+      "data_type": "text"
+    },
+    "sourcePage": {
+      "api_name": "Source_Page",
+      "field_label": "Source Page",
+      "id": "7666666000000730017",
+      "data_type": "text"
+    },
+    "projectSlug": {
+      "api_name": "Project_Slug",
+      "field_label": "Project Slug",
+      "id": "7666666000000730025",
+      "data_type": "text"
+    },
+    "submittedAt": {
+      "api_name": "Submitted_At",
+      "field_label": "Submitted At",
+      "id": "7666666000000730033",
+      "data_type": "text"
+    }
+  },
+  "results": [
+    {
+      "formField": "sectorInterest",
+      "field_label": "Sector Interest",
+      "status": "created",
+      "api_name": "Sector_Interest",
+      "id": "7666666000000726002",
+      "message": "field created"
+    },
+    {
+      "formField": "ticketRange",
+      "field_label": "Indicative Ticket Size",
+      "status": "created",
+      "api_name": "Indicative_Ticket_Size",
+      "id": "7666666000000726019",
+      "message": "field created"
+    },
+    {
+      "formField": "projectPriority",
+      "field_label": "Project Priority",
+      "status": "created",
+      "api_name": "Project_Priority",
+      "id": "7666666000000726034",
+      "message": "field created"
+    },
+    {
+      "formField": "pppInterest",
+      "field_label": "PPP Interest",
+      "status": "created",
+      "api_name": "PPP_Interest",
+      "id": "7666666000000726043",
+      "message": "field created"
+    },
+    {
+      "formField": "financingType",
+      "field_label": "Financing Type",
+      "status": "created",
+      "api_name": "Financing_Type",
+      "id": "7666666000000726055",
+      "message": "field created"
+    },
+    {
+      "formField": "geography",
+      "field_label": "Geography Focus",
+      "status": "created",
+      "api_name": "Geography_Focus",
+      "id": "7666666000000727001",
+      "message": "field created"
+    },
+    {
+      "formField": "technology",
+      "field_label": "Technology",
+      "status": "created",
+      "api_name": "Technology",
+      "id": "7666666000000727009",
+      "message": "field created"
+    },
+    {
+      "formField": "deploymentModel",
+      "field_label": "Deployment Model",
+      "status": "created",
+      "api_name": "Deployment_Model",
+      "id": "7666666000000727018",
+      "message": "field created"
+    },
+    {
+      "formField": "targetMarkets",
+      "field_label": "Target Markets",
+      "status": "created",
+      "api_name": "Target_Markets",
+      "id": "7666666000000727031",
+      "message": "field created"
+    },
+    {
+      "formField": "stage",
+      "field_label": "Project Stage",
+      "status": "created",
+      "api_name": "Project_Stage",
+      "id": "7666666000000727040",
+      "message": "field created"
+    },
+    {
+      "formField": "capitalNeed",
+      "field_label": "Capital Need",
+      "status": "created",
+      "api_name": "Capital_Need",
+      "id": "7666666000000728001",
+      "message": "field created"
+    },
+    {
+      "formField": "approvals",
+      "field_label": "Approvals Status",
+      "status": "created",
+      "api_name": "Approvals_Status",
+      "id": "7666666000000728009",
+      "message": "field created"
+    },
+    {
+      "formField": "ownership",
+      "field_label": "Ownership Structure",
+      "status": "created",
+      "api_name": "Ownership_Structure",
+      "id": "7666666000000728017",
+      "message": "field created"
+    },
+    {
+      "formField": "contribution",
+      "field_label": "Contribution",
+      "status": "created",
+      "api_name": "Contribution",
+      "id": "7666666000000728025",
+      "message": "field created"
+    },
+    {
+      "formField": "market",
+      "field_label": "Market Geography",
+      "status": "created",
+      "api_name": "Market_Geography",
+      "id": "7666666000000728033",
+      "message": "field created"
+    },
+    {
+      "formField": "proposedStructure",
+      "field_label": "Proposed Structure",
+      "status": "created",
+      "api_name": "Proposed_Structure",
+      "id": "7666666000000729001",
+      "message": "field created"
+    },
+    {
+      "formField": "entryMarket",
+      "field_label": "Entry Market",
+      "status": "created",
+      "api_name": "Entry_Market",
+      "id": "7666666000000729010",
+      "message": "field created"
+    },
+    {
+      "formField": "targetCountry",
+      "field_label": "Target Country",
+      "status": "created",
+      "api_name": "Target_Country",
+      "id": "7666666000000729020",
+      "message": "field created"
+    },
+    {
+      "formField": "productService",
+      "field_label": "Product Service",
+      "status": "created",
+      "api_name": "Product_Service",
+      "id": "7666666000000729028",
+      "message": "field created"
+    },
+    {
+      "formField": "desiredSupport",
+      "field_label": "Desired Support",
+      "status": "created",
+      "api_name": "Desired_Support",
+      "id": "7666666000000729036",
+      "message": "field created"
+    },
+    {
+      "formField": "consent",
+      "field_label": "Privacy Consent",
+      "status": "created",
+      "api_name": "Privacy_Consent",
+      "id": "7666666000000730001",
+      "message": "field created"
+    },
+    {
+      "formField": "route",
+      "field_label": "Enquiry Route",
+      "status": "created",
+      "api_name": "Enquiry_Route",
+      "id": "7666666000000730009",
+      "message": "field created"
+    },
+    {
+      "formField": "sourcePage",
+      "field_label": "Source Page",
+      "status": "created",
+      "api_name": "Source_Page",
+      "id": "7666666000000730017",
+      "message": "field created"
+    },
+    {
+      "formField": "projectSlug",
+      "field_label": "Project Slug",
+      "status": "created",
+      "api_name": "Project_Slug",
+      "id": "7666666000000730025",
+      "message": "field created"
+    },
+    {
+      "formField": "submittedAt",
+      "field_label": "Submitted At",
+      "status": "created",
+      "api_name": "Submitted_At",
+      "id": "7666666000000730033",
+      "message": "field created"
+    }
+  ]
 }

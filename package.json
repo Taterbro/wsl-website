@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "cms:generate": "tsx scripts/generate-wp.ts",
-    "cms:pages": "tsx --env-file=.env scripts/create-wp-pages.ts"
+    "cms:pages": "tsx --env-file=.env scripts/create-wp-pages.ts",
+    "zoho:create-lead-fields": "tsx --env-file=.env scripts/zoho/create-zoho-lead-fields.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

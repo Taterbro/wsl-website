@@ -6,38 +6,14 @@
       "field_label": "Sector Interest",
       "data_type": "picklist",
       "pick_list_values": [
-        {
-          "display_value": "Water & Smart Infrastructure",
-          "actual_value": "Water & Smart Infrastructure"
-        },
-        {
-          "display_value": "Renewable Energy",
-          "actual_value": "Renewable Energy"
-        },
-        {
-          "display_value": "Agriculture & Food Systems",
-          "actual_value": "Agriculture & Food Systems"
-        },
-        {
-          "display_value": "Technology & Digital Infrastructure",
-          "actual_value": "Technology & Digital Infrastructure"
-        },
-        {
-          "display_value": "Industrial Development",
-          "actual_value": "Industrial Development"
-        },
-        {
-          "display_value": "Real Estate & Urban Infrastructure",
-          "actual_value": "Real Estate & Urban Infrastructure"
-        },
-        {
-          "display_value": "Logistics & Supply Chains",
-          "actual_value": "Logistics & Supply Chains"
-        },
-        {
-          "display_value": "Climate & ESG Solutions",
-          "actual_value": "Climate & ESG Solutions"
-        }
+        { "display_value": "Water & Smart Infrastructure", "actual_value": "Water & Smart Infrastructure" },
+        { "display_value": "Renewable Energy", "actual_value": "Renewable Energy" },
+        { "display_value": "Agriculture & Food Systems", "actual_value": "Agriculture & Food Systems" },
+        { "display_value": "Technology & Digital Infrastructure", "actual_value": "Technology & Digital Infrastructure" },
+        { "display_value": "Industrial Development", "actual_value": "Industrial Development" },
+        { "display_value": "Real Estate & Urban Infrastructure", "actual_value": "Real Estate & Urban Infrastructure" },
+        { "display_value": "Logistics & Supply Chains", "actual_value": "Logistics & Supply Chains" },
+        { "display_value": "Climate & ESG Solutions", "actual_value": "Climate & ESG Solutions" }
       ]
     },
     {
@@ -119,15 +95,9 @@
       "pick_list_values": [
         { "display_value": "Concept", "actual_value": "Concept" },
         { "display_value": "Development", "actual_value": "Development" },
-        {
-          "display_value": "Investment Ready",
-          "actual_value": "Investment Ready"
-        },
+        { "display_value": "Investment Ready", "actual_value": "Investment Ready" },
         { "display_value": "Financing", "actual_value": "Financing" },
-        {
-          "display_value": "Under Construction",
-          "actual_value": "Under Construction"
-        },
+        { "display_value": "Under Construction", "actual_value": "Under Construction" },
         { "display_value": "Operational", "actual_value": "Operational" }
       ]
     },

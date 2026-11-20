@@ -37,10 +37,35 @@ type FieldResult = {
 const CONFIG_PATH = path.resolve("scripts/zoho/lead-fields.config.json");
 const OUTPUT_PATH = path.resolve("lib/zoho-lead-field-map.generated.json");
 
+async function loadEnvFile(file = ".env") {
+  try {
+    const content = await fs.readFile(path.resolve(file), "utf8");
+    for (const line of content.replace(/^\uFEFF/, "").split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const eq = trimmed.indexOf("=");
+      if (eq === -1) continue;
+      const key = trimmed.slice(0, eq).trim();
+      let val = trimmed.slice(eq + 1).trim();
+      if (
+        (val.startsWith('"') && val.endsWith('"')) ||
+        (val.startsWith("'") && val.endsWith("'"))
+      ) {
+        val = val.slice(1, -1);
+      }
+      if (!(key in process.env) && key) process.env[key] = val;
+    }
+  } catch {
+    // ignore missing/unreadable env file
+  }
+}
+
 function getEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new Error(
+      `Missing required environment variable: ${name}. Ensure it is set in your environment or .env file.`,
+    );
   }
   return value;
 }
@@ -167,8 +192,9 @@ async function createBatch(
 }
 
 async function main() {
+  await loadEnvFile(".env");
   const raw = await fs.readFile(CONFIG_PATH, "utf8");
-  const config = JSON.parse(raw) as Config;
+  const config = JSON.parse(raw.replace(/^\uFEFF/, "")) as Config;
   const moduleName = config.module || "Leads";
   const apiDomain = getEnv("ZOHO_API_DOMAIN").replace(/\/$/, "");
   const token = await getAccessToken();
